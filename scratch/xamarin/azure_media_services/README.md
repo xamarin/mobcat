@@ -1,7 +1,7 @@
 # Introduction 
 This prototype demonstrates the ability to natively stream, download and play offline video protected by [Apple FairPlay](https://developer.apple.com/streaming/fps/) using [Azure Media Services](https://docs.microsoft.com/en-gb/azure/media-services/) and [Xamarin.iOS](https://docs.microsoft.com/en-us/xamarin/ios/).   
 
-The Xamarin project is a like-for-like port of the Swift-based HLSCatalog sample, provided by Apple, as part of the the [FairPlay Streaming Server SDK](). It has been adapted to work with Azure Media Services using the steps described in the [Offline FairPlay Streaming for iOS](https://docs.microsoft.com/en-gb/azure/media-services/previous/media-services-protect-hls-with-offline-fairplay#sample-ios-player) article. The intent was to keep it as conceptually close as possible to the original Swift sample to aid in familiarization and comparison.   
+The Xamarin project is a like-for-like port of the Swift-based HLSCatalog sample, provided by Apple, as part of the [FairPlay Streaming Server SDK](). It has been adapted to work with Azure Media Services using the steps described in the [Offline FairPlay Streaming for iOS](https://docs.microsoft.com/en-gb/azure/media-services/previous/media-services-protect-hls-with-offline-fairplay#sample-ios-player) article. The intent was to keep it as conceptually close as possible to the original Swift sample to aid in familiarization and comparison.   
 
 In addition to the Swift-based sample, the [FairPlay SDK](https://developer.apple.com/services-account/download?path=/Developer_Tools/FairPlay_Streaming_Server_SDK/FairPlay_Streaming_Server_SDK_v4.2.0.zip) contains a programming guide and read me explaining the concepts and supporting components in greater depth.
 
