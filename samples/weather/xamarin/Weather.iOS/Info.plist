@@ -36,8 +36,8 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>WeatherIcons</string>
-		<string>OpenSans-Regular</string>
+		<string>WeatherIcons.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

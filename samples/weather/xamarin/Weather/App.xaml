@@ -4,12 +4,17 @@
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="WeatherIcons">
                 <On Platform="Android" Value="WeatherIcons.ttf#Weather Icons" />
-                <On Platform="iOS" Value="WeatherIcons.ttf" />
+                <On Platform="iOS" Value="Weather Icons" />
             </OnPlatform>
             <OnPlatform x:TypeArguments="x:String" x:Key="OpenSansRegular">
-                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
-                <On Platform="iOS" Value="OpenSans-Regular.ttf" />
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans"/>
+                <On Platform="iOS" Value="Open Sans" />
             </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BadWeatherDemo">
+                <On Platform="Android" Value="BadWeatherDemo.ttf#Open Sans"/>
+                <On Platform="iOS" Value="The Bad Weather Demo" />
+            </OnPlatform>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\WeatherIcons.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Regular.ttf" />
   </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
