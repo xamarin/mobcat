@@ -3,8 +3,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="WeatherIcons">
-                <On Platform="Android" Value="weathericons.ttf#Weather Icons" />
-                <On Platform="iOS" Value="weathericons.ttf" />
+                <On Platform="Android" Value="WeatherIcons.ttf#Weather Icons" />
+                <On Platform="iOS" Value="WeatherIcons.ttf" />
             </OnPlatform>
             <OnPlatform x:TypeArguments="x:String" x:Key="OpenSansRegular">
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />

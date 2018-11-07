@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Weather" x:Class="Weather.MainPage">
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-        <Label Text="&#xf00d;" FontSize="Large" FontFamily="{StaticResource WeatherIcons}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
-    </StackLayout>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Weather" x:Class="Weather.MainPage" BackgroundColor="Black">
+    <Grid RowSpacing="0" ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15" />
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Image x:Name="WeatherImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.RowSpan="6" Grid.ColumnSpan="3">
+        </Image>
+        <StackLayout Grid.Row="1" Grid.Column="1">
+            <Label x:Name="CityName"  TextColor="White" FontSize="50" HorizontalOptions="FillAndExpand" FontFamily="OpenSans-Regular.ttf"  HorizontalTextAlignment="Center" Text="London" />
+            <Label x:Name="Time" Grid.Row="1" Grid.Column="1" TextColor="White" FontSize="25" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="2:35"/>
+         </StackLayout>
+        <Label x:Name="DescriptionLabel" TextColor="White" FontSize="25" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="1" Text="Cloudy" />
+        <Label x:Name="CurrentTemperatureLabel" TextColor="White" FontSize="80" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <Label x:Name="HighAndLowTemperatureLabel" TextColor="White" FontFamily="{StaticResource WeatherIcons}" FontSize="25" HorizontalOptions="StartAndExpand" Grid.Row="4" Grid.Column="1" Text="&#xf00d;" />
+    </Grid>
 </ContentPage>
