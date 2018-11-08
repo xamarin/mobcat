@@ -15,6 +15,8 @@ done
 echo "Build number '$BUILD_NUMBER'"
 echo "Environment '$APP_ENVIRONMENT'"
 
+echo "PWD '$PWD'"
+
 # Variables
 APP_ENVIRONMENT=$(echo $APP_ENVIRONMENT | tr '[:upper:]' '[:lower:]' | sed "s/_/./g")
 MANIFEST_FILE=$PWD/../Weather.Android/Properties/AndroidManifest.xml
