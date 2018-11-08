@@ -15,14 +15,12 @@ done
 echo "Build number '$BUILD_NUMBER'"
 echo "Environment '$APP_ENVIRONMENT'"
 
-echo "PWD '$PWD'"
-
 # Variables
 APP_ENVIRONMENT=$(echo $APP_ENVIRONMENT | tr '[:upper:]' '[:lower:]' | sed "s/_/./g")
-MANIFEST_FILE=$PWD/../Weather.Android/Properties/AndroidManifest.xml
-INFO_PLIST=$PWD/../Weather.iOS/Info.plist
-IOS_ICONS=$PWD/../Weather.iOS/Assets.xcassets/AppIcon.appiconset/
-ANDROID_ICONS=$PWD/../Weather.Android/Resources/
+MANIFEST_FILE=$PWD/samples/weather/xamarin/Weather.Android/Properties/AndroidManifest.xml
+INFO_PLIST=$PWD/samples/weather/xamarin/Weather.iOS/Info.plist
+IOS_ICONS=$PWD/samples/weather/xamarin/Weather.iOS/Assets.xcassets/AppIcon.appiconset/
+ANDROID_ICONS=$PWD/samples/weather/xamarin/Weather.Android/Resources/
 TARGET_ANDROID_ICONS=$PWD/Android/$APP_ENVIRONMENT/.
 TARGET_IOS_ICONS=$PWD/iOS/$APP_ENVIRONMENT/AppIcon.appiconset/.
 
