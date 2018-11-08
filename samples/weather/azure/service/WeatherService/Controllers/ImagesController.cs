@@ -47,7 +47,7 @@ namespace WeatherService.Controllers
             else
                 weather = weather.ToLower();
 
-            string serializedResponse = string.Empty;
+            object responseObject = null;
 
             try
             {
@@ -74,15 +74,13 @@ namespace WeatherService.Controllers
                         Content = "no images found..."
                     };
 
-                var responseObject = new
+                responseObject = new
                 {
-                    ImageUrl = imageResult.Value<string>("contentUrl"),
-                    Name = imageResult.Value<string>("name"),
-                    Width = imageResult.Value<string>("width"),
-                    Height = imageResult.Value<string>("height")
+                    imageUrl = imageResult.Value<string>("contentUrl"),
+                    name = imageResult.Value<string>("name"),
+                    width = imageResult.Value<string>("width"),
+                    height = imageResult.Value<string>("height")
                 };
-
-                serializedResponse = JsonConvert.SerializeObject(responseObject);
             }
             catch (Exception ex)
             {
@@ -90,7 +88,7 @@ namespace WeatherService.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }            
 
-            return new JsonResult(serializedResponse);
+            return new JsonResult(responseObject);
         }
     }
 }

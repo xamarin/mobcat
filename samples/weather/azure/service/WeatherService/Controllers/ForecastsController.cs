@@ -62,7 +62,7 @@ namespace WeatherService.Controllers
                 };
             }                
 
-            string serializedResponse = string.Empty;
+            object responseObject = null;
 
             try
             {
@@ -80,18 +80,16 @@ namespace WeatherService.Controllers
 
                 var jo = JObject.Parse(json);
 
-                var responseObject = new
+                responseObject = new
                 {
-                    Name = jo.Value<string>("name"),
-                    CurrentTemperature = jo["main"].Value<string>("temp"),
-                    MinTemperature = jo["main"].Value<string>("temp_min"),
-                    MaxTemperature = jo["main"].Value<string>("temp_max"),
-                    Id = jo.Value<string>("id"),
-                    Description = ((JArray)jo["weather"])[0].Value<string>("description"),
-                    Overview = ((JArray)jo["weather"])[0].Value<string>("main")
+                    name = jo.Value<string>("name"),
+                    currentTemperature = jo["main"].Value<string>("temp"),
+                    minTemperature = jo["main"].Value<string>("temp_min"),
+                    maxTemperature = jo["main"].Value<string>("temp_max"),
+                    id = jo.Value<string>("id"),
+                    description = ((JArray)jo["weather"])[0].Value<string>("description"),
+                    overview = ((JArray)jo["weather"])[0].Value<string>("main")
                 };
-
-                serializedResponse = JsonConvert.SerializeObject(responseObject);
             }
             catch (Exception ex)
             {
@@ -99,7 +97,7 @@ namespace WeatherService.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }            
 
-            return new JsonResult(serializedResponse);
+            return new JsonResult(responseObject);
         }
 
         private string ResolveAppId()
