@@ -17,7 +17,7 @@ namespace Weather.Services
             var searchWeather = weather.Replace(" ", "+");
             var remoteImage = await GetAsync<CityWeatherImage>($"images/{city}?weather={searchWeather}", cancellationToken, SetApiKeyHeader).ConfigureAwait(false);
 
-            return remoteImage.ImageUrl;
+            return await WebImageCache.RetrieveImage(remoteImage.ImageUrl, $"{city}-{searchWeather}");
         }
     }
 }

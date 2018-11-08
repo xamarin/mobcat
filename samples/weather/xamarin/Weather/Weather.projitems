@@ -31,6 +31,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NewtonsoftJsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Keys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WebImageCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IFileStorageSystemService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OutputStreamMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
