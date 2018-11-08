@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.MobCat;
 using Weather.Services.Abstractions;
+using Weather.ViewModels;
 using Xamarin.Forms;
 
 namespace Weather
@@ -14,6 +15,10 @@ namespace Weather
         public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = new WeatherViewModel();
+
+
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
         }
