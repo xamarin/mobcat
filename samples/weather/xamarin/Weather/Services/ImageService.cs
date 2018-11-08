@@ -8,8 +8,8 @@ namespace Weather.Services
     public class ImageService
         : BaseWeatherService, IImageService
     {
-        public ImageService(string apiKey)
-            : base(apiKey)
+        public ImageService(string apiBaseAddress, string apiKey)
+            : base(apiBaseAddress, apiKey)
         { }
 
         public async Task<string> GetImageAsync(string city, string weather, CancellationToken cancellationToken = default(CancellationToken))

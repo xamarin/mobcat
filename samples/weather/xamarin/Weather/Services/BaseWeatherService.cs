@@ -8,8 +8,8 @@ namespace Weather.Services
     {
         readonly string _apiKey;
 
-        public BaseWeatherService(string apiKey, HttpMessageHandler handler = null) 
-            : base(ServiceConstants.WeatherServiceBaseAddress, handler)
+        public BaseWeatherService(string apiBaseAddress, string apiKey, HttpMessageHandler handler = null) 
+            : base(apiBaseAddress, handler)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentException(nameof(apiKey));

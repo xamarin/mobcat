@@ -10,10 +10,10 @@ namespace Weather
     /// Ignore local updates using: > git update-index --assume-unchanged <file>
     /// Reference: https://docs.microsoft.com/en-us/azure/devops/repos/git/ignore-files?view=vsts&tabs=visual-studio
     /// </summary>
-    public static class Keys
+    public static class ServiceConfig
     {
-        public static string AppCenterKey = "APP_CENTER_KEY";
-        public static string WeatherServiceApiKey = "WEATHER_SERVICE_API_KEY";
-        public static string WeatherServiceUrl = "WEATHER_SERVICE_URL";
+        public const string AppCenterKey = "APP_CENTER_KEY";
+        public const string WeatherServiceApiKey = "WEATHER_SERVICE_API_KEY";
+        public const string WeatherServiceUrl = "WEATHER_SERVICE_URL";
     }
 }

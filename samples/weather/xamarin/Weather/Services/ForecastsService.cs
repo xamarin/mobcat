@@ -9,8 +9,8 @@ namespace Weather.Services
     public class ForecastsService
         : BaseWeatherService, IForecastsService
     {
-        public ForecastsService(string apiKey)
-            : base(apiKey)
+        public ForecastsService(string apiBaseAddress, string apiKey)
+            : base(apiBaseAddress, apiKey)
         { }
 
         public Task<Forecast> GetForecastAsync(string city, TemperatureUnit unit = TemperatureUnit.Metric, CancellationToken cancellationToken = default(CancellationToken))
