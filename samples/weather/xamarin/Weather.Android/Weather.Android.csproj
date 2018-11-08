@@ -46,6 +46,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
@@ -97,7 +98,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\weathericons.ttf" />
+    <AndroidAsset Include="Assets\WeatherIcons.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Regular.ttf" />
   </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

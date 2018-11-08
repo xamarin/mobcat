@@ -1,0 +1,27 @@
+﻿using System;
+using System.Net.Http;
+using Microsoft.MobCat.Services;
+
+namespace Weather.Services
+{
+	public class BaseWeatherService : BaseHttpService
+    {
+        readonly string _apiKey;
+
+        public BaseWeatherService(string apiKey, HttpMessageHandler handler = null) 
+            : base(ServiceConstants.WeatherServiceBaseAddress, handler)
+        {
+            if (string.IsNullOrWhiteSpace(apiKey))
+                throw new ArgumentException(nameof(apiKey));
+
+            _apiKey = apiKey;
+
+            Serializer = new NewtonsoftJsonSerializer();
+        }
+
+        internal void SetApiKeyHeader(HttpRequestMessage request)
+        {
+            request.Headers.Add(ServiceConstants.ApiKeyHeaderName, _apiKey);
+        }
+    }
+}
