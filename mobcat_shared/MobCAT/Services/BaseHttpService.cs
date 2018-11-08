@@ -48,7 +48,7 @@ namespace Microsoft.MobCat.Services
         {
             return Policy
                 .Handle<Exception>()
-                .WaitAndRetry(5, retryAttempt =>
+                .WaitAndRetryAsync(5, retryAttempt =>
                     TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
         }
 
@@ -312,7 +312,7 @@ namespace Microsoft.MobCat.Services
                         var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                         if (!string.IsNullOrWhiteSpace(responseString))
-                            result = deserializeResponse ? (T)Convert.ChangeType(responseString, typeof(T)) : Serializer.Deserialize<T>(responseString);
+                            result = deserializeResponse ? Serializer.Deserialize<T>(responseString) : (T)Convert.ChangeType(responseString, typeof(T));
                     }
                 }
             }

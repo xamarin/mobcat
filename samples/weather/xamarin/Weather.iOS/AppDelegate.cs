@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace Weather.iOS
@@ -23,6 +19,12 @@ namespace Weather.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            Bootstrap.Begin(() =>
+            {
+                // Pending registratio nof placeform-specific dependencies
+            });
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
