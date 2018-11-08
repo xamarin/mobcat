@@ -10,8 +10,7 @@ namespace Weather
         public static void Begin(
             Action platformSpecificBegin)
         {
-            // TODO: Pending secrets handling mechanism
-            var weatherServiceApiKey = string.Empty;
+            var weatherServiceApiKey = Keys.WeatherServiceApiKey;
 
             if (string.IsNullOrWhiteSpace(weatherServiceApiKey))
                 throw new Exception("No API key set. Pending implementation of secrets handling mechanism, set this manually in Bootstrap.cs line 14");
