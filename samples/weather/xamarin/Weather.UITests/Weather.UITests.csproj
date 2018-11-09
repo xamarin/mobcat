@@ -40,6 +40,5 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
