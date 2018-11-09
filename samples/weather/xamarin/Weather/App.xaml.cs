@@ -1,4 +1,7 @@
 ﻿using System;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +20,9 @@ namespace Weather
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start($"{ServiceConfig.AndroidAppCenterSecret};" +
+                  $"{ServiceConfig.iOSAppCenterSecret}",
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
