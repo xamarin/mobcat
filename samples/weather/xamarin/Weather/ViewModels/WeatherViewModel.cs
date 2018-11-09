@@ -20,9 +20,9 @@ namespace Weather.ViewModels
         string _lowTemp;
         bool _isCelsius;
 
-        IForecastsService forecastsService; 
+        IForecastsService forecastsService;
         IImageService imageService;
- 
+
         public WeatherViewModel()
         {
             CityName = "London";
@@ -108,7 +108,7 @@ namespace Weather.ViewModels
             get { return DateTime.Now.ToShortTimeString(); }
         }
 
-        
+
 
         public async override Task InitAsync()
         {
@@ -117,19 +117,28 @@ namespace Weather.ViewModels
 
             try
             {
-                // Use last known location for quicker resonse
+#if UNITTEST
+                var location = new Location();
+#else
+                // Use last known location for quicker response
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 if (location == null)
                 {
                     location = await Geolocation.GetLocationAsync();
                 }
+#endif
 
                 if (location != null)
                 {
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+
+#if UNITTEST
+                    var city = default(string);
+#else
                     var place = await Geocoding.GetPlacemarksAsync(location);
-                    string city = place.FirstOrDefault()?.Locality;
+                    var city = place.FirstOrDefault()?.Locality;
                     CityName = city;
+#endif
                     var londonForecast = await forecastsService.GetForecastAsync(city);
 
                     if (londonForecast != null)
