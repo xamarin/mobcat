@@ -16,23 +16,22 @@
             <Label TextColor="White" FontSize="30" HorizontalOptions="StartAndExpand" >
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d; " FontSize="Large"/>
-                        <Span Text="{Binding WeatherDescription}"/>
+                        <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d; " FontSize="25"/>
+                        <Span Text="{Binding WeatherDescription, Mode=OneWay}"/>
                    </FormattedString>
                 </Label.FormattedText>
             </Label>
                     
-           
             <Label TextColor="White" FontSize="25">       
                 <Label.FormattedText>
                     <FormattedString>
                         <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf058;" FontSize="23" />
                         <Span Text=" " FontSize="3"/>
-                        <Span Text="{Binding HighTemp}"/>
+                        <Span Text="{Binding HighTemp, Mode=OneWay}"/>
                         <Span Text="{Binding TempSymbol}"/>
                         <Span FontFamily="{StaticResource WeatherIcons}" Text=" &#xf044;"  FontSize="23"/>
                         <Span Text=" " FontSize="3"/>
-                        <Span Text="{Binding LowTemp}"/>
+                        <Span Text="{Binding LowTemp, Mode=OneWay}"/>
                         <Span Text="{Binding TempSymbol}"/>
                     </FormattedString>
                 </Label.FormattedText>
@@ -41,7 +40,7 @@
             <Label x:Name="CurrentTemperatureLabel" TextColor="White" FontSize="80" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{Binding CurrentTemp}"/>
+                        <Span Text="{Binding CurrentTemp, Mode=OneWay}"/>
                         <Span Text="{Binding TempSymbol}"/>
                     </FormattedString>
                 </Label.FormattedText>

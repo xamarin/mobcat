@@ -19,7 +19,7 @@ namespace Weather
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            (BindingContext as WeatherViewModel).InitAsync().ConfigureAwait(false);
+            (BindingContext as WeatherViewModel).InitAsync();
         }
     }
 }
