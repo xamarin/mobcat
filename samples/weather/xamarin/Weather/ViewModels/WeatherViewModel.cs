@@ -9,6 +9,15 @@ using System.Linq;
 using System.Threading;
 using Weather.Models;
 
+#if UNITTEST
+using Geolocation = Weather.UnitTests.MockServices.Geolocation;
+using Geocoding = Weather.UnitTests.MockServices.Geocoding;
+#else
+using Geolocation = Xamarin.Essentials.Geolocation;
+using Geocoding = Xamarin.Essentials.Geocoding;
+#endif
+
+
 namespace Weather.ViewModels
 {
     public class WeatherViewModel : BaseViewModel
@@ -23,7 +32,7 @@ namespace Weather.ViewModels
         string _weatherIcon;
         bool _isCelsius;
 
-        IForecastsService forecastsService; 
+        IForecastsService forecastsService;
         IImageService imageService;
         Timer _timer;
 
@@ -144,7 +153,7 @@ namespace Weather.ViewModels
 
             try
             {
-                // Use last known location for quicker resonse
+                // Use last known location for quicker response
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 if (location == null)
                 {
@@ -154,6 +163,7 @@ namespace Weather.ViewModels
                 if (location != null)
                 {
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+
                     var place = await Geocoding.GetPlacemarksAsync(location);
                     string city = place.FirstOrDefault()?.Locality;
                     if (string.IsNullOrEmpty(city))
@@ -161,6 +171,7 @@ namespace Weather.ViewModels
                        city = place.FirstOrDefault()?.FeatureName;
                     }
                     CityName = city;
+
                     var forecast = await forecastsService.GetForecastAsync(city);
 
                     if (forecast != null)
@@ -189,6 +200,7 @@ namespace Weather.ViewModels
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 // Unable to get location
             }
         }
