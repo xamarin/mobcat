@@ -7,6 +7,14 @@ using Weather.Services.Abstractions;
 using Xamarin.Essentials;
 using System.Linq;
 
+#if UNITTEST
+using Geolocation = Weather.UnitTests.MockServices.Geolocation;
+using Geocoding = Weather.UnitTests.MockServices.Geocoding;
+#else
+using Geolocation = Xamarin.Essentials.Geolocation;
+using Geocoding = Xamarin.Essentials.Geocoding;
+#endif
+
 
 namespace Weather.ViewModels
 {
@@ -117,28 +125,21 @@ namespace Weather.ViewModels
 
             try
             {
-#if UNITTEST
-                var location = new Location();
-#else
                 // Use last known location for quicker response
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 if (location == null)
                 {
                     location = await Geolocation.GetLocationAsync();
                 }
-#endif
 
                 if (location != null)
                 {
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
 
-#if UNITTEST
-                    var city = default(string);
-#else
                     var place = await Geocoding.GetPlacemarksAsync(location);
                     var city = place.FirstOrDefault()?.Locality;
                     CityName = city;
-#endif
+
                     var forecast = await forecastsService.GetForecastAsync(city);
 
                     if (forecast != null)
@@ -166,6 +167,7 @@ namespace Weather.ViewModels
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 // Unable to get location
             }
         }
