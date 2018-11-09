@@ -6,6 +6,8 @@ using Microsoft.MobCat.MVVM;
 using Weather.Services.Abstractions;
 using Xamarin.Essentials;
 using System.Linq;
+using System.Threading;
+using Weather.Models;
 
 #if UNITTEST
 using Geolocation = Weather.UnitTests.MockServices.Geolocation;
@@ -26,10 +28,13 @@ namespace Weather.ViewModels
         string _currentTemp;
         string _highTemp;
         string _lowTemp;
+        string _time;
+        string _weatherIcon;
         bool _isCelsius;
 
         IForecastsService forecastsService;
         IImageService imageService;
+        Timer _timer;
 
         public WeatherViewModel()
         {
@@ -40,7 +45,17 @@ namespace Weather.ViewModels
             HighTemp = "20";
             LowTemp = "10";
             BackgroundImage = $"https://upload.wikimedia.org/wikipedia/commons/8/82/London_Big_Ben_Phone_box.jpg";
+
+            // Timer to update time
+            _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), null, 100, 10000);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _timer.Dispose();
+        }
+
 
         public string CityName
         {
@@ -113,7 +128,20 @@ namespace Weather.ViewModels
 
         public string Time
         {
-            get { return DateTime.Now.ToShortTimeString(); }
+            get { return _time; }
+            set
+            {
+                RaiseAndUpdate(ref _time, value);
+            }
+        }
+
+        public string WeatherIcon
+        {
+            get { return _weatherIcon; }
+            set
+            {
+                RaiseAndUpdate(ref _weatherIcon, value);
+            }
         }
 
 
@@ -137,7 +165,11 @@ namespace Weather.ViewModels
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
 
                     var place = await Geocoding.GetPlacemarksAsync(location);
-                    var city = place.FirstOrDefault()?.Locality;
+                    string city = place.FirstOrDefault()?.Locality;
+                    if (string.IsNullOrEmpty(city))
+                    {
+                       city = place.FirstOrDefault()?.FeatureName;
+                    }
                     CityName = city;
 
                     var forecast = await forecastsService.GetForecastAsync(city);
@@ -148,6 +180,7 @@ namespace Weather.ViewModels
                         Debug.WriteLine($"{forecast.Name}: {forecast.CurrentTemperature}, {forecast.Overview}");
                         Debug.WriteLine(londonCityWeatherImage);
                         WeatherDescription = forecast.Overview;
+                        WeatherIcon = WeatherIcons.Lookup(WeatherDescription);
                         CurrentTemp = forecast.CurrentTemperature;
                         HighTemp = forecast.MaxTemperature;
                         LowTemp = forecast.MinTemperature;

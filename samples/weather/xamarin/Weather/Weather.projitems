@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\OutputStreamMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\EssentialsFileStorageService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherIcons.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
@@ -44,5 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Models\WeatherIcons.xml" />
   </ItemGroup>
 </Project>
