@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <BundleAssemblies>true</BundleAssemblies>
+    <AotAssemblies>true</AotAssemblies>
+    <EnableLLVM>true</EnableLLVM>
+    <EnableProguard>true</EnableProguard>
+    <AndroidLinkSkip>Weather.Android;MobCAT;MobCAT.Android;</AndroidLinkSkip>
+    <AndroidLinkMode>Full</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -106,6 +112,9 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\WeatherIcons.ttf" />
     <AndroidAsset Include="Assets\OpenSans-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProguardConfiguration Include="proguard.cfg" />
   </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
