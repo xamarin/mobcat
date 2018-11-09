@@ -56,7 +56,7 @@ token="$(az account get-access-token --output tsv)"
 if [ -z "$token" ]
 then
     echo "Logging into the Azure CLI"
-    az login --tenant $targetTenant 1> /dev/null
+    az login --tenant $TARGET_TENANT 1> /dev/null
 fi
 
 token="$(az account get-access-token --output tsv)"
