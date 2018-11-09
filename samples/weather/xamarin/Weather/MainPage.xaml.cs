@@ -14,6 +14,7 @@ namespace Weather
             InitializeComponent();
 
             BindingContext = new WeatherViewModel();
+            (BindingContext as WeatherViewModel).InitAsync().ConfigureAwait(false);
         }
     }
 }

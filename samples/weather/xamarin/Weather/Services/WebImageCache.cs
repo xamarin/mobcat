@@ -19,7 +19,7 @@ namespace Weather.Services
             if (cacheStorage == null)
                 return imageUrl;
 
-            if (!cacheStorage.FileExists(imageUrl))
+            if (!cacheStorage.FileExists(storedFilename))
             {
                 imageBytes = await downloadClient.GetByteArrayAsync(new Uri(imageUrl));
 
