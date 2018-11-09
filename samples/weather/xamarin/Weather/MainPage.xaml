@@ -13,23 +13,25 @@
             <Label x:Name="Txime" Grid.Row="1" Grid.Column="1" TextColor="White" FontSize="25" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Path=Time}"/>
          </StackLayout>
         <StackLayout Grid.Row="2" Margin="20">
-            <Label TextColor="White" FontSize="25" HorizontalOptions="StartAndExpand" >
+            <Label TextColor="White" FontSize="30" HorizontalOptions="StartAndExpand" >
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d;"/>
+                        <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d; " FontSize="Large"/>
                         <Span Text="{Binding WeatherDescription}"/>
                    </FormattedString>
                 </Label.FormattedText>
             </Label>
                     
            
-            <Label TextColor="White">       
+            <Label TextColor="White" FontSize="25">       
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf058;"/>
+                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf058;" FontSize="23" />
+                        <Span Text=" " FontSize="3"/>
                         <Span Text="{Binding HighTemp}"/>
                         <Span Text="{Binding TempSymbol}"/>
-                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf044;"/>
+                        <Span FontFamily="{StaticResource WeatherIcons}" Text=" &#xf044;"  FontSize="23"/>
+                        <Span Text=" " FontSize="3"/>
                         <Span Text="{Binding LowTemp}"/>
                         <Span Text="{Binding TempSymbol}"/>
                     </FormattedString>

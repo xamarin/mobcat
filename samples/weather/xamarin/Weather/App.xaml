@@ -10,11 +10,6 @@
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans"/>
                 <On Platform="iOS" Value="Open Sans" />
             </OnPlatform>
-            <OnPlatform x:TypeArguments="x:String" x:Key="BadWeatherDemo">
-                <On Platform="Android" Value="BadWeatherDemo.ttf#Open Sans"/>
-                <On Platform="iOS" Value="The Bad Weather Demo" />
-            </OnPlatform>
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
