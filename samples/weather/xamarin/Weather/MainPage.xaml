@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Weather" x:Class="Weather.MainPage" BackgroundColor="Black">
-    <Grid RowSpacing="0" Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image x:Name="WeatherImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.RowSpan="3"/>
-        <StackLayout Grid.Row="0">
-            <Label x:Name="CityName"  TextColor="White" FontSize="50" HorizontalOptions="FillAndExpand" FontFamily="OpenSans-Regular.ttf"  HorizontalTextAlignment="Center" Text="{Binding Path=CityName}" />
-            <Label x:Name="Time" Grid.Row="1" Grid.Column="1" TextColor="White" FontSize="25" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Path=Time}"/>
+        <Image x:Name="WeatherImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.RowSpan="3" Source="{Binding BackgroundImage}"/>
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.RowSpan="3" Color="Gray" Opacity="0.2"/>
+        <StackLayout Grid.Row="0" Margin="30">
+            <Label x:Name="CityName"  TextColor="White" FontSize="50" HorizontalOptions="FillAndExpand" FontFamily="OpenSans-Regular.ttf"  HorizontalTextAlignment="Center" Text="{Binding Path=CityName}"/>
+            <Label x:Name="Txime" Grid.Row="1" Grid.Column="1" TextColor="White" FontSize="25" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Path=Time}"/>
          </StackLayout>
-        <StackLayout Grid.Row="2">
-            <Label x:Name="DescriptionLabel" TextColor="White" FontSize="25" HorizontalOptions="StartAndExpand" Text="Cloudy" />
+        <StackLayout Grid.Row="2" Margin="20">
+            <Label TextColor="White" FontSize="25" HorizontalOptions="StartAndExpand" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d;"/>
+                        <Span Text="{Binding WeatherDescription}"/>
+                   </FormattedString>
+                </Label.FormattedText>
+            </Label>
+                    
            
             <Label TextColor="White">       
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf00d;"/>
-                        <Span  FontFamily="Times" Text="{Binding Time}"/>
+                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf058;"/>
+                        <Span Text="{Binding HighTemp}"/>
+                        <Span Text="{Binding TempSymbol}"/>
+                        <Span  FontFamily="{StaticResource WeatherIcons}" Text="&#xf044;"/>
+                        <Span Text="{Binding LowTemp}"/>
+                        <Span Text="{Binding TempSymbol}"/>
                     </FormattedString>
                 </Label.FormattedText>
       
             </Label>
-            <Label x:Name="CurrentTemperatureLabel" TextColor="White" FontSize="80" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1" Text="15°C"/>
+            <Label x:Name="CurrentTemperatureLabel" TextColor="White" FontSize="80" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding CurrentTemp}"/>
+                        <Span Text="{Binding TempSymbol}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </StackLayout>
     </Grid>
 </ContentPage>

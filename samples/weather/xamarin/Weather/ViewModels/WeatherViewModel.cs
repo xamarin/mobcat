@@ -10,16 +10,25 @@ namespace Weather.ViewModels
     public class WeatherViewModel : BaseViewModel
     {
         string _cityName;
+        string _weatherDescription;
+        string _backgroundImage;
+        int _currentTemp;
+        int _highTemp;
+        int _lowTemp;
+        bool _isCelsius;
 
-        IForecastsService forecastsService = ServiceContainer.Resolve<IForecastsService>();
-        IImageService imageService = ServiceContainer.Resolve<IImageService>();
+        IForecastsService forecastsService; 
+        IImageService imageService;
  
         public WeatherViewModel()
         {
             CityName = "London";
-
-            forecastsService = ServiceContainer.Resolve<IForecastsService>();
-            imageService = ServiceContainer.Resolve<IImageService>();
+            IsCelsius = true;
+            WeatherDescription = "Cloudy";
+            CurrentTemp = 17;
+            HighTemp = 20;
+            LowTemp = 10;
+            BackgroundImage = $"https://upload.wikimedia.org/wikipedia/commons/8/82/London_Big_Ben_Phone_box.jpg";
         }
 
         public string CityName
@@ -32,13 +41,76 @@ namespace Weather.ViewModels
             }
         }
 
+        public int CurrentTemp
+        {
+            get { return _currentTemp; }
+            set
+            {
+                RaiseAndUpdate(ref _currentTemp, value);
+            }
+        }
+
+        public int HighTemp
+        {
+            get { return _highTemp; }
+            set
+            {
+                RaiseAndUpdate(ref _highTemp, value);
+            }
+        }
+
+        public int LowTemp
+        {
+            get { return _lowTemp; }
+            set
+            {
+                RaiseAndUpdate(ref _lowTemp, value);
+            }
+        }
+
+        public string WeatherDescription
+        {
+            get { return _weatherDescription; }
+            set
+            {
+                RaiseAndUpdate(ref _weatherDescription, value);
+            }
+        }
+
+        public string BackgroundImage
+        {
+            get { return _backgroundImage; }
+            set
+            {
+                RaiseAndUpdate(ref _backgroundImage, value);
+            }
+        }
+
+        public bool IsCelsius
+        {
+            get { return _isCelsius; }
+            set
+            {
+                RaiseAndUpdate(ref _isCelsius, value);
+            }
+        }
+
+        public string TempSymbol
+        {
+            get { return IsCelsius ? "°C" : "°F"; }
+        }
+
         public string Time
         {
             get { return DateTime.Now.ToShortTimeString(); }
         }
 
+        
+
         public override Task InitAsync()
         {
+            forecastsService = ServiceContainer.Resolve<IForecastsService>();
+            imageService = ServiceContainer.Resolve<IImageService>();
             return TestServices();
         }
 
