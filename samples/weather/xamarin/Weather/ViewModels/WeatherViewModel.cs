@@ -156,6 +156,10 @@ namespace Weather.ViewModels
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     var place = await Geocoding.GetPlacemarksAsync(location);
                     string city = place.FirstOrDefault()?.Locality;
+                    if (string.IsNullOrEmpty(city))
+                    {
+                       city = place.FirstOrDefault()?.FeatureName;
+                    }
                     CityName = city;
                     var forecast = await forecastsService.GetForecastAsync(city);
 
