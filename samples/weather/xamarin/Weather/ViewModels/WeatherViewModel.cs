@@ -146,6 +146,7 @@ namespace Weather.ViewModels
                         var londonCityWeatherImage = await imageService.GetImageAsync(londonForecast.Name, londonForecast.Overview);
                         Debug.WriteLine($"{londonForecast.Name}: {londonForecast.CurrentTemperature}, {londonForecast.Overview}");
                         Debug.WriteLine(londonCityWeatherImage);
+                        BackgroundImage = londonCityWeatherImage;
                         WeatherDescription = londonForecast.Overview;
                         CurrentTemp = londonForecast.CurrentTemperature;
                         HighTemp = londonForecast.MaxTemperature;
