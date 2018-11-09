@@ -139,18 +139,18 @@ namespace Weather.ViewModels
                     var city = place.FirstOrDefault()?.Locality;
                     CityName = city;
 #endif
-                    var londonForecast = await forecastsService.GetForecastAsync(city);
+                    var forecast = await forecastsService.GetForecastAsync(city);
 
-                    if (londonForecast != null)
+                    if (forecast != null)
                     {
-                        var londonCityWeatherImage = await imageService.GetImageAsync(londonForecast.Name, londonForecast.Overview);
-                        Debug.WriteLine($"{londonForecast.Name}: {londonForecast.CurrentTemperature}, {londonForecast.Overview}");
+                        var londonCityWeatherImage = await imageService.GetImageAsync(forecast.Name, forecast.Overview);
+                        Debug.WriteLine($"{forecast.Name}: {forecast.CurrentTemperature}, {forecast.Overview}");
                         Debug.WriteLine(londonCityWeatherImage);
-                        BackgroundImage = londonCityWeatherImage;
-                        WeatherDescription = londonForecast.Overview;
-                        CurrentTemp = londonForecast.CurrentTemperature;
-                        HighTemp = londonForecast.MaxTemperature;
-                        LowTemp = londonForecast.MinTemperature;
+                        WeatherDescription = forecast.Overview;
+                        CurrentTemp = forecast.CurrentTemperature;
+                        HighTemp = forecast.MaxTemperature;
+                        LowTemp = forecast.MinTemperature;
+                        BackgroundImage = await imageService.GetImageAsync(city, forecast.Overview);
                     }
                 }
             }

@@ -38,27 +38,33 @@ namespace WeatherService.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> BackgroundByCityAndWeather(string name, [FromQuery]string weather = default(string))
+        public async Task<IActionResult> BackgroundByCityAndWeather(string name, [FromQuery]string country = default(string),[FromQuery]string weather = default(string))
         {
-            name = name.ToLower();
+            name = name.ToLower().Trim();
 
             if (string.IsNullOrWhiteSpace(weather))
                 weather = SearchImageDefaultWeather;
             else
-                weather = weather.ToLower();
+                weather = weather.ToLower().Trim();
+
+            if (!string.IsNullOrWhiteSpace(country))
+                country = country.ToUpper().Trim();
+
+            var searchName = !string.IsNullOrWhiteSpace(country) ? $"{name},{country}" : name;
 
             object responseObject = null;
 
             try
             {
                 string json = string.Empty;
-                var cacheKey = $"{ServiceConstants.CachePrefixImages}-{name}-{weather}";
+                var cacheName = !string.IsNullOrWhiteSpace(country) ? $"{name}-{country}" : name;
+                var cacheKey = $"{ServiceConstants.CachePrefixImages}-{cacheName}-{weather}";
                 var cachedResponse = await _cache.GetStringAsync(cacheKey);
 
                 if (!string.IsNullOrWhiteSpace(cachedResponse))
                     json = cachedResponse;
                 else
-                    json = await BingImagesSearchHttpClient.GetStringAsync($"?q={name}+{weather}+weather&count=1&size=large&market=en-us");
+                    json = await BingImagesSearchHttpClient.GetStringAsync($"?q={searchName}+{weather}+weather&count=1&size=large&market=en-us");
 
                 if (string.IsNullOrWhiteSpace(cachedResponse) && !string.IsNullOrWhiteSpace(json))
                     await _cache.SetStringAsync(cacheKey, json, new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24) });

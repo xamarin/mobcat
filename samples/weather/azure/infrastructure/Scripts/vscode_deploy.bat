@@ -47,3 +47,14 @@ if not defined API_KEY (
     echo ^The TARGET_TENANT variable is not defined
     exit 1
 )
+
+set token=
+for /f "usebackq" %%i in ( `az account get-access-token --output tsv` ) do set token=%%i
+
+if not defined token (
+    echo ^Logging into the Azure CLI
+    az login --tenant %TARGET_TENANT% >nul 2>&1
+)
+
+cd Scripts
+call weather_deploy.bat --tenant %TARGET_TENANT% --subscription %TARGET_SUBSCRIPTION% --admin %ADMIN_UPN_OR_OBJECT_ID% --openweathermap-appid %OPEN_WEATHER_MAP_APP_ID% --api-key %API_KEY%

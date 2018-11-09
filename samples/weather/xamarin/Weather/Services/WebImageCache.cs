@@ -21,14 +21,22 @@ namespace Weather.Services
 
             if (!cacheStorage.FileExists(storedFilename))
             {
-                imageBytes = await downloadClient.GetByteArrayAsync(new Uri(imageUrl));
 
-                using (var stream = cacheStorage.CreateOutputStream(storedFilename))
+                try
                 {
-                    await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
-                    await stream.FlushAsync();
+                    imageBytes = await downloadClient.GetByteArrayAsync(new Uri(imageUrl));
 
-                    stream.Dispose();
+                    using (var stream = cacheStorage.CreateOutputStream(storedFilename))
+                    {
+                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
+                        await stream.FlushAsync();
+
+                        stream.Dispose();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
 
