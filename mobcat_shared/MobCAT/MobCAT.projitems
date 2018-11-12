@@ -27,5 +27,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WebImageCache.cs" />
   </ItemGroup>
 </Project>

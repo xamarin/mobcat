@@ -10,7 +10,6 @@ namespace Weather
         public static void Begin(
             Action platformSpecificBegin)
         {
-            ServiceContainer.Register<IFileStorageService>(() => new EssentialsFileStorageService());
             ServiceContainer.Register<IForecastsService>(() => new ForecastsService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
             ServiceContainer.Register<IImageService>(() => new ImageService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
 

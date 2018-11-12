@@ -1,10 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.MobCat;
-using Weather.Services.Abstractions;
 
-namespace Weather.Services
+namespace Microsoft.MobCAT.Services
 {
     public static class WebImageCache
     {
@@ -14,19 +13,16 @@ namespace Weather.Services
         {
             byte[] imageBytes;
             var storedFilename = string.IsNullOrEmpty(fileName) ? imageUrl : fileName;
-            var cacheStorage = ServiceContainer.Resolve<IFileStorageService>(true);
+            var storedFilepath = GetAbsolutePath(storedFilename);
 
-            if (cacheStorage == null)
-                return imageUrl;
-
-            if (!cacheStorage.FileExists(storedFilename))
+            if (!File.Exists(storedFilepath))
             {
 
                 try
                 {
                     imageBytes = await downloadClient.GetByteArrayAsync(new Uri(imageUrl));
 
-                    using (var stream = cacheStorage.CreateOutputStream(storedFilename))
+                    using (var stream = new FileStream(storedFilepath, FileMode.Create, FileAccess.Write))
                     {
                         await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
                         await stream.FlushAsync();
@@ -40,7 +36,17 @@ namespace Weather.Services
                 }
             }
 
-            return $"{cacheStorage.BasePath}/{storedFilename}";
+            return storedFilepath;
+        }
+
+        public static string GetAbsolutePath(string path)
+        {
+            var cacheDirectory = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
+
+            if (!path.StartsWith(cacheDirectory, StringComparison.Ordinal))
+                return Path.Combine(cacheDirectory, path);
+
+            return path;
         }
     }
 }
