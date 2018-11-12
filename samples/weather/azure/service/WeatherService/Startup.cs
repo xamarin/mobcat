@@ -75,6 +75,12 @@ namespace WeatherService
 
             services.AddApplicationInsightsTelemetry(appInsightsInstrumentationKey);
 
+            services.AddHttpClient(ServiceConstants.GeneralHttpClientIdentifier)
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+                .AddPolicyHandler(ServicePolicies.ExponentialRetryPolicyWithJitter())
+                .AddPolicyHandler(ServicePolicies.CircuitBreakerPolicy())
+                .AddPolicyHandler(ServicePolicies.FallbackPolicy(ResetService));
+
             services.AddHttpClient(ServiceConstants.OpenWeatherMapHttpClientIdentifier, client =>
             {
                 client.BaseAddress = new Uri(ServiceConstants.OpenWeatherMapApiBaseAddress);

@@ -13,6 +13,7 @@
         internal const string OpenWeatherMapApiBaseAddress = "http://api.openweathermap.org/data/2.5/weather";
         internal const string BingImagesSearchHttpClientIdentifier = "BingImages";
         internal const string BingImagesSearchApiBaseAddress = "https://api.cognitive.microsoft.com/bing/v7.0/images/search";
+        internal const string GeneralHttpClientIdentifier = "GeneralHttpClient";
         internal const string BingImagesSearchApiKeyHeaderName = "Ocp-Apim-Subscription-Key";
         internal const string CachePrefixForecasts = "forecasts";
         internal const string CachePrefixImages = "images";
