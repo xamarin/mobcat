@@ -17,7 +17,6 @@ namespace Microsoft.MobCAT.Services
 
             if (!File.Exists(storedFilepath))
             {
-
                 try
                 {
                     imageBytes = await downloadClient.GetByteArrayAsync(new Uri(imageUrl));

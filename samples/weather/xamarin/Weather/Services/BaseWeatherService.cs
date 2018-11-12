@@ -8,6 +8,8 @@ namespace Weather.Services
     {
         readonly string _apiKey;
 
+        protected string ApiKey => _apiKey;
+
         public BaseWeatherService(string apiBaseAddress, string apiKey, HttpMessageHandler handler = null) 
             : base(apiBaseAddress, handler)
         {
