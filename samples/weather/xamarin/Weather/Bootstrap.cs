@@ -12,6 +12,8 @@ namespace Weather
         {
             ServiceContainer.Register<IForecastsService>(() => new ForecastsService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
             ServiceContainer.Register<IImageService>(() => new ImageService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
+            ServiceContainer.Register<IGeolocationService>(() => new GeolocationService());
+            ServiceContainer.Register<IGeocodingService>(() => new GeocodingService());
 
             platformSpecificBegin();
         }

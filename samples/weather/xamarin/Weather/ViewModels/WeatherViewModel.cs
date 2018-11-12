@@ -9,15 +9,6 @@ using System.Linq;
 using System.Threading;
 using Weather.Models;
 
-#if UNITTEST
-using Geolocation = Weather.UnitTests.MockServices.Geolocation;
-using Geocoding = Weather.UnitTests.MockServices.Geocoding;
-#else
-using Geolocation = Xamarin.Essentials.Geolocation;
-using Geocoding = Xamarin.Essentials.Geocoding;
-#endif
-
-
 namespace Weather.ViewModels
 {
     public class WeatherViewModel : BaseViewModel
@@ -34,6 +25,8 @@ namespace Weather.ViewModels
 
         IForecastsService forecastsService;
         IImageService imageService;
+        IGeolocationService geolocationService;
+        IGeocodingService geocodingService;
         Timer _timer;
 
         public WeatherViewModel()
@@ -150,26 +143,25 @@ namespace Weather.ViewModels
         {
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
+            geolocationService = ServiceContainer.Resolve<IGeolocationService>();
+            geocodingService = ServiceContainer.Resolve<IGeocodingService>();
 
             try
             {
                 // Use last known location for quicker response
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                var location = await geolocationService.GetLastKnownLocationAsync();
                 if (location == null)
                 {
-                    location = await Geolocation.GetLocationAsync();
+                    location = await geolocationService.GetLocationAsync();
                 }
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
 
-                    var place = await Geocoding.GetPlacemarksAsync(location);
-                    string city = place.FirstOrDefault()?.Locality;
-                    if (string.IsNullOrEmpty(city))
-                    {
-                       city = place.FirstOrDefault()?.FeatureName;
-                    }
+                    var place = await geocodingService.GetPlacesAsync(location);
+                    string city = place.FirstOrDefault()?.CityName;
+                   
                     CityName = city;
 
                     var forecast = await forecastsService.GetForecastAsync(city);

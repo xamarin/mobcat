@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MockServices\" />
+    <Compile Remove="MockServices\Geocoding.cs" />
   </ItemGroup>
   <Import Project="..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems')" />
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />

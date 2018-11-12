@@ -33,6 +33,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\OutputStreamMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherIcons.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IGeolocationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IGeocodingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Coordinates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Place.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GeolocationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GeocodingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
