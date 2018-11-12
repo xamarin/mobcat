@@ -167,7 +167,7 @@ az monitor diagnostic-settings create \
  --logs '[{ "category": "AuditEvent", "enabled": true, "retentionPolicy": { "days": 0, "enabled": true } }]' \
  1> /dev/null
 
-echo Creating Cognitive Services Bing Search
+echo "Creating Cognitive Services Bing Search"
 az group deployment create \
     --name CognitiveServicesBingDeployment \
     --resource-group $resourceGroupName \
@@ -246,8 +246,6 @@ az webapp config appsettings set \
     --name $apiAppName \
     --settings $keyVaultEndpointSettingKey=$keyVaultEndpoint \
     1> /dev/null
-
-# # Review: configuring a failure alert rule for application insights
 
 echo "Creating API App: Configuring Managed Service Identity"
 msiPrincipalId=$(az webapp identity assign \
