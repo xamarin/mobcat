@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Microsoft.MobCat.Converters
+namespace Microsoft.MobCAT.Converters
 {
     /// <summary>
     /// System.Runtime.Serialization.Json string serializer.

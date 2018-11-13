@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Microsoft.MobCat
+namespace Microsoft.MobCAT
 {
     public static class ServiceContainer
     {

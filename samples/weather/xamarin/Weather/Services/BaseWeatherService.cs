@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using Microsoft.MobCat.Services;
+using Microsoft.MobCAT.Services;
 
 namespace Weather.Services
 {

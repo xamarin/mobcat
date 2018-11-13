@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Microsoft.MobCat.Services
+namespace Microsoft.MobCAT.Services
 {
     public class HttpServiceException : Exception
     {

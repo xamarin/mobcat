@@ -12,8 +12,8 @@ namespace Weather
     /// </summary>
     public static class ServiceConfig
     {
-        public const string WeatherServiceApiKey = "WEATHER_SERVICE_API_KEY";
-        public const string WeatherServiceUrl = "WEATHER_SERVICE_URL";
+        public const string WeatherServiceApiKey = "B50996A0-9D60-44AF-BF08-81029CE2B8C7";
+        public const string WeatherServiceUrl = "https://asapikjy6zobfbf6xe.azurewebsites.net/api/";
 
         public const string AndroidAppCenterSecret = "ANDROID_APP_CENTER_SECRET";
         public const string iOSAppCenterSecret = "iOS_APP_CENTER_SECRET";

@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.AppCenter;
+﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Weather.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,8 +13,7 @@ namespace Weather
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainPage = new MainPage { ViewModel = new WeatherViewModel() };
         }
 
         protected override void OnStart()

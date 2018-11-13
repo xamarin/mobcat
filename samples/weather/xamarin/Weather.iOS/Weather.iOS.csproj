@@ -28,6 +28,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <AssemblyName>Weather</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -41,6 +42,7 @@
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchExtraArgs>--linkskip=Weather.iOS --linkskip=MobCAT --linkskip=MobCAT.iOS;</MtouchExtraArgs>
+    <AssemblyName>Weather</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -174,6 +176,10 @@
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj">
       <Project>{50857753-7921-4573-A414-2854F797B6B0}</Project>
       <Name>MobCAT.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj">
+      <Project>{BBF1EDBF-20D2-4F1D-971B-CF5BA34B5E76}</Project>
+      <Name>MobCAT.Forms.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Microsoft.MobCat.MVVM.Abstractions
+namespace Microsoft.MobCAT.MVVM.Abstractions
 {
     public interface IValueConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace Microsoft.MobCat.Services
+﻿namespace Microsoft.MobCAT.Services
 {
     /// <summary>
     /// Application state enum, mapped to UIApplicationState

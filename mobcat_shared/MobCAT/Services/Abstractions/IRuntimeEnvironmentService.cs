@@ -1,4 +1,4 @@
-﻿namespace Microsoft.MobCat.Services
+﻿namespace Microsoft.MobCAT.Services
 {
     public interface IRuntimeEnvironmentService
     {

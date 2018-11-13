@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Microsoft.MobCat.MVVM
+namespace Microsoft.MobCAT.MVVM
 {
     public sealed class Command<T> : Command
     {

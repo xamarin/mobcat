@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Microsoft.MobCat.Converters
+namespace Microsoft.MobCAT.Converters
 {
     /// <summary>
     /// Serializer constract to and from streams

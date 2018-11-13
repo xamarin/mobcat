@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Microsoft.MobCat.Services
+namespace Microsoft.MobCAT.Services
 {
      public class ConsoleLoggingService : ILoggingService
     {

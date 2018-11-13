@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace Microsoft.MobCat.MVVM
+namespace Microsoft.MobCAT.MVVM
 {
     public abstract class BaseCollectionViewModel<T> : BaseViewModel where T : BaseNotifyPropertyChanged
     {

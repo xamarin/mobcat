@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Weather" x:Class="Weather.MainPage" BackgroundColor="Black">
+<base:BaseContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Weather" 
+    xmlns:base="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=Microsoft.MobCAT.Forms"
+    xmlns:vm="clr-namespace:Weather.ViewModels"
+    x:TypeArguments="vm:WeatherViewModel"
+    x:Class="Weather.MainPage" 
+    BackgroundColor="Black">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -47,4 +55,4 @@
             </Label>
         </StackLayout>
     </Grid>
-</ContentPage>
+</base:BaseContentPage>

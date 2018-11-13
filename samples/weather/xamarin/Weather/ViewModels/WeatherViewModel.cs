@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.MobCat;
-using Microsoft.MobCat.MVVM;
+using Microsoft.MobCAT;
+using Microsoft.MobCAT.MVVM;
 using Weather.Services.Abstractions;
 using Xamarin.Essentials;
 using System.Linq;
@@ -20,7 +20,7 @@ using Geocoding = Xamarin.Essentials.Geocoding;
 
 namespace Weather.ViewModels
 {
-    public class WeatherViewModel : BaseViewModel
+    public class WeatherViewModel : BaseNavigationViewModel
     {
         string _cityName;
         string _weatherDescription;

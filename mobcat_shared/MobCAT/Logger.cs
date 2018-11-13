@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.MobCat.Services;
+using Microsoft.MobCAT.Services;
 
-namespace Microsoft.MobCat
+namespace Microsoft.MobCAT
 {
     public static class Logger
     {
