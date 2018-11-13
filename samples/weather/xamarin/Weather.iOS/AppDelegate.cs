@@ -20,6 +20,10 @@ namespace Weather.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
+#if ENABLE_TEST_CLOUD
+                Xamarin.Calabash.Start();
+#endif
+
             Bootstrap.Begin(() =>
             {
                 // Pending registratio nof placeform-specific dependencies
