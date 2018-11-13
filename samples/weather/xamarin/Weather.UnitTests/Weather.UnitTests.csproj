@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="MockServices\" />
   </ItemGroup>
+  <Import Project="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems')" />
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
 </Project>
