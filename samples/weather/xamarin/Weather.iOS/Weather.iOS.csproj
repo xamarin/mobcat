@@ -33,12 +33,12 @@
       <CustomCommands>
         <Command>
           <type>BeforeBuild</type>
-          <command>../build/secrets.sh</command>
+          <command>../build/secrets.sh -setup</command>
           <externalConsole>True</externalConsole>
         </Command>
         <Command>
           <type>AfterBuild</type>
-          <command>../build/secrets-cleanup.sh</command>
+          <command>../build/secrets.sh -cleanup</command>
           <externalConsole>True</externalConsole>
         </Command>
       </CustomCommands>
@@ -75,12 +75,12 @@
       <CustomCommands>
         <Command>
           <type>BeforeBuild</type>
-          <command>../build/secrets.sh</command>
+          <command>../build/secrets.sh -setup</command>
           <externalConsole>True</externalConsole>
         </Command>
         <Command>
           <type>AfterBuild</type>
-          <command>../build/secrets-cleanup.sh</command>
+          <command>../build/secrets.sh -cleanup</command>
           <externalConsole>True</externalConsole>
         </Command>
       </CustomCommands>
