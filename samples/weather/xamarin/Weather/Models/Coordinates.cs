@@ -7,15 +7,5 @@ namespace Weather.Models
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-
-        public Coordinates()
-        {
-        }
-
-        public Coordinates(Location location)
-        {
-            Latitude = location.Latitude;
-            Longitude = location.Longitude;
-        }
     }
 }

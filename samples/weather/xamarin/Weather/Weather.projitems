@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Place.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GeolocationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GeocodingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PlaceValueResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
