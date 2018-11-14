@@ -173,7 +173,7 @@ for /f "usebackq" %%i in ( `az cognitiveservices account keys list --name %searc
 for /f "usebackq" %%i in ( `az resource show --name %appInsightsName% --resource-group %resourceGroupName% --resource-type "Microsoft.Insights/components" --query "properties.InstrumentationKey" --output tsv` ) do set appInsightsInstrumentationKey=%%i
 for /f "usebackq" %%i in ( `az redis list-keys --name %cacheName% --resource-group %resourceGroupName% --query "primaryKey" --output tsv` ) do set cachePrimaryKey=%%i
 
-set cacheConnectionString=%cacheName%.redis.cache.windows.net,abortConnect=false,ssl=true,password=$cachePrimaryKey
+set cacheConnectionString=%cacheName%.redis.cache.windows.net,abortConnect=false,ssl=true,password=%cachePrimaryKey%
 
 echo ^Configuring KeyVault: Writing secrets
 call az keyvault secret set --vault-name %keyVaultName% --name %searchAccountInstrumentationKeyName% --value %searchAccountInstrumentationKey% >nul 2>&1
