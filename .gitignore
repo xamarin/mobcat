@@ -337,3 +337,5 @@ samples/weather/xamarin/Weather/ServiceConfig\.cs
 samples/weather/azure/infrastructure/Scripts/parameters\.bat
 
 samples/weather/azure/infrastructure/Scripts/parameters\.sh
+
+samples/weather/xamarin/build/secrets\.sh
