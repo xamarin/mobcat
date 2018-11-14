@@ -114,6 +114,12 @@ az account set --subscription $targetSubscription 1> /dev/null
 # Resolve adminId from user principal name or objectId
 adminId=$(az ad user show --upn $adminUpnOrObjectId --query "objectId" --output tsv)
 
+echo "Creating or updating resource group"
+az group create \
+    --name $resourceGroupName \
+    --location $resourceGroupLocation \
+    1> /dev/null
+
 echo "Preparing globally unique resource names"
 
 uniquePostfix=$(az group deployment create \
@@ -131,10 +137,12 @@ apiAppName=$apiAppName$uniquePostfix
 appInsightsName=$appInsightsName$uniquePostfix
 cacheName=$cacheName$uniquePostfix
 
-echo "Creating or updating resource group"
-az group create \
-    --name $resourceGroupName \
-    --location $resourceGroupLocation \
+echo "Creating Application Insights"
+az group deployment create \
+    --name AppInsightsDeployment \
+    --resource-group $resourceGroupName \
+    --template-file ../Templates/appinsights.json \
+    --parameters appInsightsName=$appInsightsName \
     1> /dev/null
 
 echo "Creating Storage for KeyVault Audit"
@@ -173,14 +181,6 @@ az group deployment create \
     --resource-group $resourceGroupName \
     --template-file ../Templates/cognitiveservicesbingsearch.json \
     --parameters searchAccountName=$searchAccountName \
-    1> /dev/null
-
-echo "Creating Application Insights"
-az group deployment create \
-    --name AppInsightsDeployment \
-    --resource-group $resourceGroupName \
-    --template-file ../Templates/appinsights.json \
-    --parameters appInsightsName=$appInsightsName \
     1> /dev/null
 
 echo "Creating Redis Cache (can take upwards of 20 minutes)"
@@ -313,6 +313,28 @@ az keyvault secret set \
     --vault-name $keyVaultName \
     --name $openWeatherMapAppIdKeyName \
     --value $openWeatherMapAppId \
+    1> /dev/null
+
+echo "Publishing API App"
+
+cd ..
+cd ..
+cd service
+cd WeatherService
+
+echo "Publishing API App: Creating self-contained application"
+dotnet publish -c release -r win-x86 --self-contained 1> /dev/null
+
+echo "Publishing API App: Packaging application files"
+zip -r bin/Release/netcoreapp2.1/win-x86/weather_deploy.zip \
+    bin/Release/netcoreapp2.1/win-x86/publish \
+    1> /dev/null
+
+echo "Publishing API App: Deploying application package"
+az webapp deployment source config-zip \
+    --resource-group $resourceGroupName \
+    --name $apiAppName \
+    --src bin/Release/netcoreapp2.1/win-x86/weather_deploy.zip \
     1> /dev/null
 
 echo ""

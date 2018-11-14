@@ -1,25 +1,13 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.MobCat;
-using Weather.Services.Abstractions;
+﻿using Microsoft.MobCAT.Forms.Pages;
 using Weather.ViewModels;
-using Xamarin.Forms;
 
 namespace Weather
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : BaseContentPage<WeatherViewModel>
     {
         public MainPage()
         {
             InitializeComponent();
-
-            BindingContext = new WeatherViewModel();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            (BindingContext as WeatherViewModel).InitAsync();
         }
     }
 }

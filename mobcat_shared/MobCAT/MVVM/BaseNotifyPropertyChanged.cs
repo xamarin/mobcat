@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Microsoft.MobCat.MVVM
+namespace Microsoft.MobCAT.MVVM
 {
     public class BaseNotifyPropertyChanged : INotifyPropertyChanged
     {

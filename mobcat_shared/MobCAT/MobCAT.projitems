@@ -28,5 +28,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebImageCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseNavigationViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\Abstractions\INavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseWatcherViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IPropertyStoreService.cs" />
   </ItemGroup>
 </Project>

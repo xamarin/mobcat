@@ -2,13 +2,13 @@
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.MobCat.Converters;
+using Microsoft.MobCAT.Converters;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net;
 using Polly;
 
-namespace Microsoft.MobCat.Services
+namespace Microsoft.MobCAT.Services
 {
     // TODO: 
     // 1. Handle retry - basic starting point added

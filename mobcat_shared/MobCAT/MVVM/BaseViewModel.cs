@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.MobCat.MVVM
+namespace Microsoft.MobCAT.MVVM
 {
     public abstract class BaseViewModel : BaseNotifyPropertyChanged, IDisposable
     {
@@ -13,7 +13,10 @@ namespace Microsoft.MobCat.MVVM
         /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
         public bool IsBusy
         {
-            get { return _isBusy; }
+            get 
+            { 
+                return _isBusy; 
+            }
             set
             {
                 if (RaiseAndUpdate(ref _isBusy, value))

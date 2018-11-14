@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Microsoft.MobCat.MVVM
+namespace Microsoft.MobCAT.MVVM
 {
     public class AsyncCommand : ICommand
     {

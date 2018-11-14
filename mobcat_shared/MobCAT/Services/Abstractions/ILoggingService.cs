@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.MobCat.Services
+namespace Microsoft.MobCAT.Services
 {
     public enum LogType
     {

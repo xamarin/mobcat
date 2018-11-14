@@ -111,6 +111,9 @@ call az account set --subscription %targetSubscription% >nul 2>&1
 rem Resolve adminId from user principal name or objectId
 for /f "usebackq" %%i in ( `az ad user show --upn %adminUpnOrObjectId% --query "objectId" --output tsv` ) do set adminId=%%i
 
+echo ^Creating or updating resource group
+call az group create --name %resourceGroupName% --location %resourceGroupLocation% >nul 2>&1
+
 echo ^Preparing globally unique resource names
 for /f "usebackq" %%i in ( `az group deployment create --name GloballyUniqueNameDeployment --resource-group %resourceGroupName% --template-file ../Templates/globallyuniquename.json --query "properties.outputs.uniqueValue.value" --output tsv` ) do set uniquePostfix=%%i
 
@@ -122,34 +125,62 @@ set apiAppName=%apiAppName%%uniquePostfix%
 set appInsightsName=%appInsightsName%%uniquePostfix%
 set cacheName=%cacheName%%uniquePostfix%
 
-echo ^Creating or updating resource group
-call az group create --name %resourceGroupName% --location %resourceGroupLocation% >nul 2>&1
+echo ^Creating Application Insights
+call az group deployment create --name AppInsightsDeployment --resource-group %resourceGroupName% --template-file ../Templates/appinsights.json --parameters appInsightsName=%appInsightsName% >nul 2>&1
 
 echo ^Creating Storage for KeyVault Audit
+call az group deployment create --name KvStorageAccountDeployment --resource-group %resourceGroupName% --template-file ../Templates/storageaccount.json --parameters storageAccountName=%keyVaultAuditStorageAccountName% >nul 2>&1
 
 echo ^Creating KeyVault
+call az group deployment create --name KvDeployment --resource-group %resourceGroupName% --template-file ../Templates/keyvault.json --parameters keyVaultName=%keyVaultName% tenantId=%targetTenant% objectId=%adminId% >nul 2>&1
 
 echo ^Creating KeyVault: Configuring diagnostic settings
+for /f "usebackq" %%i in ( `az keyvault list --resource-group %resourceGroupName% --query "[?name=='%keyVaultName%'].id" --output tsv` ) do set keyVaultResourceId=%%i
+
+call az monitor diagnostic-settings create --name KeyVaultAuditDiagnosticSettings --resource %keyVaultResourceId% --resource-group %resourceGroupName% --storage-account %keyVaultAuditStorageAccountName% --logs "[{ ""category"": ""AuditEvent"", ""enabled"": true, ""retentionPolicy"": { ""days"": 0, ""enabled"": true } }]" >nul 2>&1
 
 echo ^Creating Cognitive Services Bing Search
-
-echo ^Creating Application Insights
+call az group deployment create --name CognitiveServicesBingDeployment --resource-group %resourceGroupName% --template-file ../Templates/cognitiveservicesbingsearch.json --parameters searchAccountName=%searchAccountName% >nul 2>&1
 
 echo ^Creating Redis Cache (can take upwards of 20 minutes)
+call az group deployment create --name RedisCacheDeployment --resource-group %resourceGroupName% --template-file ../Templates/rediscache.json --parameters cacheName=%cacheName% >nul 2>&1
 
 echo ^Creating App Service Plan
+call az group deployment create --name AppServicePlanDeployment --resource-group %resourceGroupName% --template-file ../Templates/appserviceplan.json --parameters servicePlanName=%appServicePlanName% >nul 2>&1
 
 echo ^Creating API App
+call az group deployment create --name ApiAppDeployment --resource-group %resourceGroupName% --template-file ../Templates/apiapp.json --parameters  appName=%apiAppName% servicePlanName=%appServicePlanName% >nul 2>&1
 
 echo ^Creating API App: Configuring App Settings
 
+set keyVaultEndpoint="https://%keyVaultName%.vault.azure.net"
+
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %searchAccountInstrumentationKeyNameSettingKey%=%searchAccountInstrumentationKeyName% >nul 2>&1
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %appInsightsInstrumentationKeyNameSettingKey%=%appInsightsInstrumentationKeyName% >nul 2>&1
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %openWeatherMapAppIdKeyNameSettingKey%=%openWeatherMapAppIdKeyName% >nul 2>&1
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %apiKeyNameSettingKey%=%apiKeyName% >nul 2>&1
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %cacheConnectionStringKeyNameSettingKey%=%cacheConnectionStringKeyName% >nul 2>&1
+call az webapp config appsettings set --resource-group %resourceGroupName% --name %apiAppName% --settings %keyVaultEndpointSettingKey%=%keyVaultEndpoint% >nul 2>&1
+
 echo ^Creating API App: Configuring Managed Service Identity
+for /f "usebackq" %%i in ( `az webapp identity assign --name %apiAppName% --resource-group %resourceGroupName% --query "principalId" --output tsv` ) do set msiPrincipalId=%%i
 
 echo ^Creating API App: Configuring Acess Policy on KeyVault
+call az keyvault set-policy --name %keyVaultName% --object-id %msiPrincipalId% --secret-permissions get list >nul 2>&1
 
 echo ^Configuring KeyVault: Retrieving secrets from resources
+for /f "usebackq" %%i in ( `az cognitiveservices account keys list --name %searchAccountName% --resource-group %resourceGroupName% --query "key1" --output tsv` ) do set searchAccountInstrumentationKey=%%i
+for /f "usebackq" %%i in ( `az resource show --name %appInsightsName% --resource-group %resourceGroupName% --resource-type "Microsoft.Insights/components" --query "properties.InstrumentationKey" --output tsv` ) do set appInsightsInstrumentationKey=%%i
+for /f "usebackq" %%i in ( `az redis list-keys --name %cacheName% --resource-group %resourceGroupName% --query "primaryKey" --output tsv` ) do set cachePrimaryKey=%%i
+
+set cacheConnectionString=%cacheName%.redis.cache.windows.net,abortConnect=false,ssl=true,password=%cachePrimaryKey%
 
 echo ^Configuring KeyVault: Writing secrets
+call az keyvault secret set --vault-name %keyVaultName% --name %searchAccountInstrumentationKeyName% --value %searchAccountInstrumentationKey% >nul 2>&1
+call az keyvault secret set --vault-name %keyVaultName% --name %appInsightsInstrumentationKeyName% --value %appInsightsInstrumentationKey% >nul 2>&1
+call az keyvault secret set --vault-name %keyVaultName% --name %cacheConnectionStringKeyName% --value %cacheConnectionString% >nul 2>&1
+call az keyvault secret set --vault-name %keyVaultName% --name %apiKeyName% --value %apiKey% >nul 2>&1
+call az keyvault secret set --vault-name %keyVaultName% --name %openWeatherMapAppIdKeyName% --value %openWeatherMapAppId% >nul 2>&1
 
 echo.
 echo ^========== WeatherSample Provisioning completed ==========
