@@ -333,3 +333,7 @@ ASALocalRun/
 samples/weather/xamarin/Weather\.Android/Resources/Resource\.designer\.cs
 
 samples/weather/xamarin/Weather/ServiceConfig\.cs
+
+samples/weather/azure/infrastructure/Scripts/parameters\.bat
+
+samples/weather/azure/infrastructure/Scripts/parameters\.sh
