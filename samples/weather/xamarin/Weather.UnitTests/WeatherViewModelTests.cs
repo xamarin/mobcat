@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.MobCAT;
@@ -41,6 +43,23 @@ namespace Weather.UnitTests
 
             ServiceContainer.Register<IImageService>(mockImageService.Object);
 
+            //Mock geolocation
+            var mockGeolocationService = new Mock<IGeolocationService>();
+            mockGeolocationService.Setup(a => a.GetLastKnownLocationAsync())
+                .Returns(Task.FromResult(new Coordinates()));
+            mockGeolocationService.Setup(a => a.GetLocationAsync())
+                .Returns(Task.FromResult(new Coordinates()));
+
+            ServiceContainer.Register<IGeolocationService>(mockGeolocationService.Object);
+
+            //Mock geocoding service
+            var mockGeocodingService = new Mock<IGeocodingService>();
+            mockGeocodingService.Setup(a => a.GetPlacesAsync(It.IsAny<Coordinates>()))
+                .Returns(Task.FromResult(new List<Place>{ new Place {
+                CityName = "MobCAT City"
+                }}.AsEnumerable()));
+
+            ServiceContainer.Register<IGeocodingService>(mockGeocodingService.Object);
 
             //Init the VM
             var weatherViewModel = new WeatherViewModel();
@@ -49,6 +68,8 @@ namespace Weather.UnitTests
             //Get expecteds for asserts
             var expectedImage = await mockImageService.Object.GetImageAsync(default(string), default(String), default(CancellationToken));
             var expectedForecast = await mockForecastService.Object.GetForecastAsync(default(string), default(TemperatureUnit), default(CancellationToken));
+            var expectedPlaces = await mockGeocodingService.Object.GetPlacesAsync(default(Coordinates));
+            var expectedPlaceName = expectedPlaces?.FirstOrDefault()?.CityName;
 
             //Assert
             Assert.Equal(expectedForecast.Overview, weatherViewModel.WeatherDescription);
@@ -56,6 +77,7 @@ namespace Weather.UnitTests
             Assert.Equal(expectedForecast.MaxTemperature, weatherViewModel.HighTemp);
             Assert.Equal(expectedForecast.MinTemperature, weatherViewModel.LowTemp);
             Assert.Equal(expectedImage, weatherViewModel.BackgroundImage);
+            Assert.Equal(expectedPlaceName, weatherViewModel.CityName);
         }
     }
 }

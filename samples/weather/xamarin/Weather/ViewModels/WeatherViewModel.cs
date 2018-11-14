@@ -9,15 +9,6 @@ using System.Linq;
 using System.Threading;
 using Weather.Models;
 
-#if UNITTEST
-using Geolocation = Weather.UnitTests.MockServices.Geolocation;
-using Geocoding = Weather.UnitTests.MockServices.Geocoding;
-#else
-using Geolocation = Xamarin.Essentials.Geolocation;
-using Geocoding = Xamarin.Essentials.Geocoding;
-#endif
-
-
 namespace Weather.ViewModels
 {
     public class WeatherViewModel : BaseNavigationViewModel
@@ -34,6 +25,8 @@ namespace Weather.ViewModels
 
         IForecastsService forecastsService;
         IImageService imageService;
+        IGeolocationService geolocationService;
+        IGeocodingService geocodingService;
         Timer _timer;
 
         public WeatherViewModel()
@@ -144,51 +137,29 @@ namespace Weather.ViewModels
             }
         }
 
-        private Task<T> RunOnMainThreadAsync<T>(Func<Task<T>> func)
-        {
-            var tcs = new TaskCompletionSource<T>();
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    var result = await func.Invoke();
-                    tcs.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    tcs.SetException(ex);
-                }
-            });
-            return tcs.Task;
-        }
-
         public async override Task InitAsync()
         {
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
+            geolocationService = ServiceContainer.Resolve<IGeolocationService>();
+            geocodingService = ServiceContainer.Resolve<IGeocodingService>();
 
             try
             {
                 // Use last known location for quicker response
-                Location location = null;
-
-                location = await RunOnMainThreadAsync(Geolocation.GetLastKnownLocationAsync);
-
+                var location = await geolocationService.GetLastKnownLocationAsync();
                 if (location == null)
                 {
-                    location = await RunOnMainThreadAsync<Location>(() => Geolocation.GetLocationAsync());
+                    location = await geolocationService.GetLocationAsync();
                 }
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
 
-                    var place = await Geocoding.GetPlacemarksAsync(location);
-                    string city = place.FirstOrDefault()?.Locality;
-                    if (string.IsNullOrEmpty(city))
-                    {
-                       city = place.FirstOrDefault()?.FeatureName;
-                    }
+                    var place = await geocodingService.GetPlacesAsync(location);
+                    string city = place.FirstOrDefault()?.CityName;
+                   
                     CityName = city;
 
                     var forecast = await forecastsService.GetForecastAsync(city);
