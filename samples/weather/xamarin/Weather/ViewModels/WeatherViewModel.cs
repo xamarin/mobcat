@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.MobCAT;
@@ -144,7 +144,23 @@ namespace Weather.ViewModels
             }
         }
 
-
+        private Task<T> RunOnMainThreadAsync<T>(Func<Task<T>> func)
+        {
+            var tcs = new TaskCompletionSource<T>();
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    var result = await func.Invoke();
+                    tcs.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                }
+            });
+            return tcs.Task;
+        }
 
         public async override Task InitAsync()
         {
@@ -154,10 +170,13 @@ namespace Weather.ViewModels
             try
             {
                 // Use last known location for quicker response
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                Location location = null;
+
+                location = await RunOnMainThreadAsync(Geolocation.GetLastKnownLocationAsync);
+
                 if (location == null)
                 {
-                    location = await Geolocation.GetLocationAsync();
+                    location = await RunOnMainThreadAsync<Location>(() => Geolocation.GetLocationAsync());
                 }
 
                 if (location != null)
