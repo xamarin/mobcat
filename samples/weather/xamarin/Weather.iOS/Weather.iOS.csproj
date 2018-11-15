@@ -41,6 +41,18 @@
           <command>../build/secrets.sh -cleanup</command>
           <externalConsole>True</externalConsole>
         </Command>
+        <Command>
+          <type>Custom</type>
+          <name>Populate Secrets</name>
+          <command>../build/secrets.sh -setup</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+        <Command>
+          <type>Custom</type>
+          <name>Clean Up Secrets</name>
+          <command>../build/secrets.sh -cleanup</command>
+          <externalConsole>True</externalConsole>
+        </Command>
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>

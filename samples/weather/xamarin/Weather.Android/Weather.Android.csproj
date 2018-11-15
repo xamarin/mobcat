@@ -34,10 +34,23 @@
         <Command>
           <type>BeforeBuild</type>
           <command>../build/secrets.sh -setup</command>
+          <workingdir></workingdir>
           <externalConsole>True</externalConsole>
         </Command>
         <Command>
           <type>AfterBuild</type>
+          <command>../build/secrets.sh -cleanup</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+        <Command>
+          <type>Custom</type>
+          <name>Populate Secrets</name>
+          <command>../build/secrets.sh -setup</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+        <Command>
+          <type>Custom</type>
+          <name>Clean Up Secrets</name>
           <command>../build/secrets.sh -cleanup</command>
           <externalConsole>True</externalConsole>
         </Command>
