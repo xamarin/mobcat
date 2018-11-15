@@ -1,3 +1,4 @@
+@echo off
 rem Script for provisioning the weather sample backend via Azure CLI
 
 echo.
@@ -40,27 +41,27 @@ if not "%1"=="" (
 rem Verify all parameters have values
 if not defined targetTenant (
     echo ^Missing --tenant parameter
-    exit 1
+    exit /B 1
 )
 
 if not defined targetSubscription (
     echo ^Missing --subscription parameter
-    exit 1
+    exit /B 1
 )
 
 if not defined adminUpnOrObjectId (
     echo ^Missing --admin parameter
-    exit 1
+    exit /B 1
 )
 
 if not defined apiKey (
     echo ^Missing --api-key parameter
-    exit 1
+    exit /B 1
 )
 
 if not defined openWeatherMapAppId (
     echo ^Missing --openweathermap-appid parameter
-    exit 1
+    exit /B 1
 )
 
 echo ^Account:
@@ -103,7 +104,7 @@ for /f "usebackq" %%i in ( `az account get-access-token --output tsv` ) do set t
 
 if not defined token (
     echo ^Login required. Aborting
-    exit 1
+    exit /B 1
 )
 
 call az account set --subscription %targetSubscription% >nul 2>&1
