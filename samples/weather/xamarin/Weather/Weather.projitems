@@ -42,8 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\PlaceValueResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\MainThreadAsyncService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IMainThreadAsyncService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\LabelTextFadeInBehavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ImageFadeInBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FadeInOnPropertyChangedBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IEnumerableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\TimeOfDayImageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\ITimeOfDayImageService.cs" />

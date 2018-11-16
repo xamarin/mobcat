@@ -28,23 +28,27 @@ namespace Weather.ViewModels
         IImageService imageService;
         IGeolocationService geolocationService;
         IGeocodingService geocodingService;
-        ITimeOfDayImageService timeOfDayImageService;
+        readonly Lazy<ITimeOfDayImageService> timeOfDayImageService = new Lazy<ITimeOfDayImageService>(() =>
+        {
+            try
+            {
+                return ServiceContainer.Resolve<ITimeOfDayImageService>();
+            }
+            catch (Exception ex)
+            {
+                //Previewer or unregistered
+            }
+            return null;
+        });
+
         Timer _timer;
 
         public WeatherViewModel()
         {
-            timeOfDayImageService = ServiceContainer.Resolve<ITimeOfDayImageService>();
-
             IsCelsius = true;
-            CityName = "";
-            WeatherDescription = "";
-            CurrentTemp = "";
-            HighTemp = "";
-            LowTemp = "";
-            BackgroundImage = timeOfDayImageService.GetImageForDateTime(DateTime.Now);
 
             // Timer to update time
-            _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), null, 100, 10000);
+            _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), state: null, dueTime: 100, period: 10000);
         }
 
         protected override void Dispose(bool disposing)
@@ -59,7 +63,6 @@ namespace Weather.ViewModels
             get { return _cityName; }
             set
             {
-
                 RaiseAndUpdate(ref _cityName, value);
             }
         }
@@ -100,14 +103,7 @@ namespace Weather.ViewModels
             }
         }
 
-        public string BackgroundImage
-        {
-            get { return _backgroundImage; }
-            set
-            {
-                RaiseAndUpdate(ref _backgroundImage, value);
-            }
-        }
+        public string BackgroundImage => timeOfDayImageService.Value?.GetImageForDateTime(DateTime.Now);
 
         public string WeatherImage
         {

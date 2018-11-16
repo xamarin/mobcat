@@ -13,8 +13,7 @@ namespace Weather
 {
     public static class Bootstrap
     {
-        public static void Begin(
-            Action platformSpecificBegin = null)
+        public static void Begin(Action platformSpecificBegin = null)
         {
             Mapper.Initialize(cfg =>
             {

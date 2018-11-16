@@ -18,13 +18,13 @@
         <Image x:Name="BackgroundImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" 
                Grid.RowSpan="3" Source="{Binding BackgroundImage}" Opacity="0">
             <Image.Behaviors>
-                <behaviors:ImageFadeInBehavior Duration="500"/>
+                <behaviors:FadeInOnPropertyChangedBehavior Duration="500" PropertyName="Source"/>
             </Image.Behaviors>
         </Image>
         <Image x:Name="WeatherImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" 
                Grid.RowSpan="3" Source="{Binding WeatherImage}" Opacity="0">
             <Image.Behaviors>
-                <behaviors:ImageFadeInBehavior Duration="1750"/>
+                <behaviors:FadeInOnPropertyChangedBehavior Duration="1750" PropertyName="Source"/>
             </Image.Behaviors>
         </Image>
         <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.RowSpan="3" Color="Gray" Opacity="0.2"/>
@@ -33,13 +33,13 @@
                    HorizontalTextAlignment="Center" Text="{Binding Path=CityName}"
                    Opacity="0">
                    <Label.Behaviors>
-                    <behaviors:LabelTextFadeInBehavior/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
                 </Label.Behaviors>
             </Label>
             <Label x:Name="Time" Grid.Row="1" Grid.Column="1" TextColor="White" FontSize="25" FontFamily="{StaticResource OpenSansRegular}"
                    HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Path=Time}">
                    <Label.Behaviors>
-                    <behaviors:LabelTextFadeInBehavior/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
                 </Label.Behaviors>
             </Label>
          </StackLayout>
@@ -52,7 +52,7 @@
                    </FormattedString>
                 </Label.FormattedText> 
                 <Label.Behaviors>
-                    <behaviors:LabelTextFadeInBehavior/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
                 </Label.Behaviors>
             </Label>
                     
@@ -70,7 +70,7 @@
                     </FormattedString>
                 </Label.FormattedText> 
                 <Label.Behaviors>
-                    <behaviors:LabelTextFadeInBehavior/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
                 </Label.Behaviors>
             </Label>
             
@@ -82,7 +82,7 @@
                     </FormattedString>
                 </Label.FormattedText>
                  <Label.Behaviors>
-                    <behaviors:LabelTextFadeInBehavior/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
                 </Label.Behaviors>
             </Label>
         </StackLayout>

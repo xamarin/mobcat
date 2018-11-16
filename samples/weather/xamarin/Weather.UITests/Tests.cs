@@ -30,5 +30,11 @@ namespace Weather.UITests
         {
             app.Screenshot("First screen.");
         }
+
+        [Test]
+        public void SetLocation()
+        {
+            //app.Device.SetLocation() //TODO: This test
+        }
     }
 }
