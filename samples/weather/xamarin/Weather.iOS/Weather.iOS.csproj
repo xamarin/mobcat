@@ -195,6 +195,46 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\sunrise1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\sunrise1.imageset\sunrise1.jpg" />
+    <ImageAsset Include="Assets.xcassets\sunrise2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\sunrise2.imageset\sunrise2.jpg" />
+    <ImageAsset Include="Assets.xcassets\sunrise3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\sunrise3.imageset\sunrise3.jpg" />
+    <ImageAsset Include="Assets.xcassets\sunrise4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\sunrise4.imageset\sunrise4.jpg" />
+    <ImageAsset Include="Assets.xcassets\earth1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\earth1.imageset\earth1.jpg" />
+    <ImageAsset Include="Assets.xcassets\earth2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\earth2.imageset\earth2.jpg" />
+    <ImageAsset Include="Assets.xcassets\earth3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\earth3.imageset\earth3.jpg" />
+    <ImageAsset Include="Assets.xcassets\earth4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\earth4.imageset\earth4.jpg" />
+    <ImageAsset Include="Assets.xcassets\evening1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\evening1.imageset\evening1.jpg" />
+    <ImageAsset Include="Assets.xcassets\evening2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\evening2.imageset\evening2.jpg" />
+    <ImageAsset Include="Assets.xcassets\evening3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\evening3.imageset\evening3.jpg" />
+    <ImageAsset Include="Assets.xcassets\evening4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\evening4.imageset\evening4.jpg" />
+    <ImageAsset Include="Assets.xcassets\night1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\night1.imageset\night1.jpg" />
+    <ImageAsset Include="Assets.xcassets\night2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\night2.imageset\night2.jpg" />
+    <ImageAsset Include="Assets.xcassets\night3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\night3.imageset\night3.jpg" />
+    <ImageAsset Include="Assets.xcassets\night4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\night4.imageset\night4.jpg" />
+    <ImageAsset Include="Assets.xcassets\midday1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\midday1.imageset\midday1.jpg" />
+    <ImageAsset Include="Assets.xcassets\midday2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\midday2.imageset\midday2.jpg" />
+    <ImageAsset Include="Assets.xcassets\midday3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\midday3.imageset\midday3.jpg" />
+    <ImageAsset Include="Assets.xcassets\midday4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\midday4.imageset\midday4.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -241,6 +281,28 @@
     <BundleResource Include="Resources\WeatherIcons.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\sunrise1.imageset\" />
+    <Folder Include="Assets.xcassets\sunrise2.imageset\" />
+    <Folder Include="Assets.xcassets\sunrise3.imageset\" />
+    <Folder Include="Assets.xcassets\sunrise4.imageset\" />
+    <Folder Include="Assets.xcassets\earth1.imageset\" />
+    <Folder Include="Assets.xcassets\earth2.imageset\" />
+    <Folder Include="Assets.xcassets\earth3.imageset\" />
+    <Folder Include="Assets.xcassets\earth4.imageset\" />
+    <Folder Include="Assets.xcassets\evening1.imageset\" />
+    <Folder Include="Assets.xcassets\evening2.imageset\" />
+    <Folder Include="Assets.xcassets\evening3.imageset\" />
+    <Folder Include="Assets.xcassets\evening4.imageset\" />
+    <Folder Include="Assets.xcassets\night1.imageset\" />
+    <Folder Include="Assets.xcassets\night2.imageset\" />
+    <Folder Include="Assets.xcassets\night3.imageset\" />
+    <Folder Include="Assets.xcassets\night4.imageset\" />
+    <Folder Include="Assets.xcassets\midday1.imageset\" />
+    <Folder Include="Assets.xcassets\midday2.imageset\" />
+    <Folder Include="Assets.xcassets\midday3.imageset\" />
+    <Folder Include="Assets.xcassets\midday4.imageset\" />
   </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

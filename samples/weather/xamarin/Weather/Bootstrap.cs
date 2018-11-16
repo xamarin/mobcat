@@ -32,6 +32,7 @@ namespace Weather
             ServiceContainer.Register<IMainThreadAsyncService>(() => new MainThreadAsyncService());
             ServiceContainer.Register<IGeolocationService>(() => new GeolocationService());
             ServiceContainer.Register<IGeocodingService>(() => new GeocodingService());
+            ServiceContainer.Register<ITimeOfDayImageService>(() => new TimeOfDayImageService());
 
             platformSpecificBegin?.Invoke();
         }

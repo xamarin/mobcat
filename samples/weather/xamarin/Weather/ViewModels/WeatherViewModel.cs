@@ -16,6 +16,7 @@ namespace Weather.ViewModels
         string _cityName;
         string _weatherDescription;
         string _backgroundImage;
+        string _weatherImage;
         string _currentTemp;
         string _highTemp;
         string _lowTemp;
@@ -27,17 +28,20 @@ namespace Weather.ViewModels
         IImageService imageService;
         IGeolocationService geolocationService;
         IGeocodingService geocodingService;
+        ITimeOfDayImageService timeOfDayImageService;
         Timer _timer;
 
         public WeatherViewModel()
         {
-            CityName = "London";
+            timeOfDayImageService = ServiceContainer.Resolve<ITimeOfDayImageService>();
+
             IsCelsius = true;
-            WeatherDescription = "Cloudy";
-            CurrentTemp = "17";
-            HighTemp = "20";
-            LowTemp = "10";
-            BackgroundImage = $"https://upload.wikimedia.org/wikipedia/commons/8/82/London_Big_Ben_Phone_box.jpg";
+            CityName = "";
+            WeatherDescription = "";
+            CurrentTemp = "";
+            HighTemp = "";
+            LowTemp = "";
+            BackgroundImage = timeOfDayImageService.GetImageForDateTime(DateTime.Now);
 
             // Timer to update time
             _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), null, 100, 10000);
@@ -105,6 +109,12 @@ namespace Weather.ViewModels
             }
         }
 
+        public string WeatherImage
+        {
+            get => _weatherImage;
+            set => RaiseAndUpdate(ref _weatherImage, value);
+        }
+
         public bool IsCelsius
         {
             get { return _isCelsius; }
@@ -159,7 +169,7 @@ namespace Weather.ViewModels
 
                     var place = await geocodingService.GetPlacesAsync(location);
                     string city = place.FirstOrDefault()?.CityName;
-                   
+
                     CityName = city;
 
                     var forecast = await forecastsService.GetForecastAsync(city);
@@ -174,7 +184,7 @@ namespace Weather.ViewModels
                         CurrentTemp = forecast.CurrentTemperature;
                         HighTemp = forecast.MaxTemperature;
                         LowTemp = forecast.MinTemperature;
-                        BackgroundImage = await imageService.GetImageAsync(city, forecast.Overview);
+                        WeatherImage = await imageService.GetImageAsync(city, forecast.Overview);
                     }
                 }
             }

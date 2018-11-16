@@ -131,6 +131,26 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable\earth1.jpg" />
+    <AndroidResource Include="Resources\drawable\earth2.jpg" />
+    <AndroidResource Include="Resources\drawable\earth3.jpg" />
+    <AndroidResource Include="Resources\drawable\earth4.jpg" />
+    <AndroidResource Include="Resources\drawable\evening1.jpg" />
+    <AndroidResource Include="Resources\drawable\evening2.jpg" />
+    <AndroidResource Include="Resources\drawable\evening3.jpg" />
+    <AndroidResource Include="Resources\drawable\evening4.jpg" />
+    <AndroidResource Include="Resources\drawable\midday1.jpg" />
+    <AndroidResource Include="Resources\drawable\midday2.jpg" />
+    <AndroidResource Include="Resources\drawable\midday3.jpg" />
+    <AndroidResource Include="Resources\drawable\midday4.jpg" />
+    <AndroidResource Include="Resources\drawable\night1.jpg" />
+    <AndroidResource Include="Resources\drawable\night2.jpg" />
+    <AndroidResource Include="Resources\drawable\night3.jpg" />
+    <AndroidResource Include="Resources\drawable\night4.jpg" />
+    <AndroidResource Include="Resources\drawable\sunrise1.jpg" />
+    <AndroidResource Include="Resources\drawable\sunrise2.jpg" />
+    <AndroidResource Include="Resources\drawable\sunrise3.jpg" />
+    <AndroidResource Include="Resources\drawable\sunrise4.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
