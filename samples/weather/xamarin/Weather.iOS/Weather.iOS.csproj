@@ -275,9 +275,7 @@
     <BundleResource Include="Resources\OpenSans-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\WeatherIcons.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
+    <BundleResource Include="Resources\WeatherIcons.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\sunrise1.imageset\" />

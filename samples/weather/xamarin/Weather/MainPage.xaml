@@ -47,7 +47,7 @@
             <Label TextColor="White" FontSize="30" HorizontalOptions="StartAndExpand" >
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="{StaticResource WeatherIcons}" Text="{Binding Path=WeatherIcon} " FontSize="25"/>
+                        <Span FontFamily="{StaticResource WeatherIcons}" Text="{Binding Path=WeatherIcon, Mode=OneWay} " FontSize="25"/>
                         <Span Text="{Binding WeatherDescription, Mode=OneWay}"/>
                    </FormattedString>
                 </Label.FormattedText> 
