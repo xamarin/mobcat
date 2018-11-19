@@ -76,7 +76,7 @@ namespace Weather.UnitTests
             Assert.Equal(expectedForecast.CurrentTemperature, weatherViewModel.CurrentTemp);
             Assert.Equal(expectedForecast.MaxTemperature, weatherViewModel.HighTemp);
             Assert.Equal(expectedForecast.MinTemperature, weatherViewModel.LowTemp);
-            Assert.Equal(expectedImage, weatherViewModel.BackgroundImage);
+            Assert.Equal(expectedImage, weatherViewModel.WeatherImage);
             Assert.Equal(expectedPlaceName, weatherViewModel.CityName);
         }
     }

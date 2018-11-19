@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Weather.Models;
 using Weather.Services.Abstractions;
 using Xamarin.Essentials;
@@ -20,7 +19,22 @@ namespace Weather.Services
                 return null;
             }
 
-            return placemarks.Select(a => Mapper.Map<Placemark, Place>(a));
+            return placemarks.Select(PlacemarkToPlace);
+        }
+
+        private Place PlacemarkToPlace(Placemark placemark)
+        {
+            var cityName = default(string);
+            if (!string.IsNullOrEmpty(placemark.Locality))
+            {
+                cityName = placemark.Locality;
+            }
+            else
+            {
+                cityName = placemark.FeatureName;
+            }
+
+            return new Place { CityName = cityName };
         }
     }
 }

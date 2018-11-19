@@ -19,11 +19,11 @@
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
-    <PackageReference Include="AutoMapper" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="MockServices\Geocoding.cs" />
+    <Compile Remove="MappingTests.cs" />
   </ItemGroup>
   <Import Project="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems')" />

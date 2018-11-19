@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.MobCAT;
 using Weather.Models;
 using Weather.Services.Abstractions;
@@ -15,13 +14,22 @@ namespace Weather.Services
         public async Task<Coordinates> GetLastKnownLocationAsync()
         {
             var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(Geolocation.GetLastKnownLocationAsync);
-            return location == null ? null : Mapper.Map<Location, Coordinates>(location);
+            return location == null ? null : LocationToCoordinates(location);
         }
 
         public async Task<Coordinates> GetLocationAsync()
         {
             var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(Geolocation.GetLocationAsync);
-            return location == null ? null : Mapper.Map<Location, Coordinates>(location);
+            return location == null ? null : LocationToCoordinates(location);
+        }
+
+        private Coordinates LocationToCoordinates(Location location)
+        {
+            return new Coordinates
+            {
+                Latitude = location.Latitude,
+                Longitude = location.Longitude
+            };
         }
     }
 }

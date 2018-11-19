@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using AutoMapper;
 using Microsoft.MobCAT;
 using Microsoft.MobCAT.Forms.Services;
 using Microsoft.MobCAT.MVVM.Abstractions;
@@ -15,13 +14,6 @@ namespace Weather
     {
         public static void Begin(Action platformSpecificBegin = null)
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Location, Coordinates>();
-                cfg.CreateMap<Placemark, Place>()
-                .ForMember(dest => dest.CityName, opt => opt.ResolveUsing<PlaceValueResolver>());
-            });
-
             var navigationService = new NavigationService();
             navigationService.RegisterViewModels(typeof(MainPage).GetTypeInfo().Assembly);
 
