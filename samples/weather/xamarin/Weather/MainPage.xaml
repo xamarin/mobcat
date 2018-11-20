@@ -24,7 +24,7 @@
         <Image x:Name="WeatherImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" 
                Grid.RowSpan="3" Source="{Binding WeatherImage}" Opacity="0">
             <Image.Behaviors>
-                <behaviors:FadeInOnPropertyChangedBehavior Duration="1750" PropertyName="Source"/>
+                <behaviors:FadeInOnPropertyChangedBehavior Duration="1250" PropertyName="Source"/>
             </Image.Behaviors>
         </Image>
         <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.RowSpan="3" Color="Gray" Opacity="0.2"/>

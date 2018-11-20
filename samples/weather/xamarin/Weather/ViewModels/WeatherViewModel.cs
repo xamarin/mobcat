@@ -8,6 +8,7 @@ using Xamarin.Essentials;
 using System.Linq;
 using System.Threading;
 using Weather.Models;
+using Microsoft.MobCAT.Services;
 
 namespace Weather.ViewModels
 {
@@ -15,7 +16,6 @@ namespace Weather.ViewModels
     {
         string _cityName;
         string _weatherDescription;
-        string _backgroundImage;
         string _weatherImage;
         string _currentTemp;
         string _highTemp;
@@ -23,6 +23,8 @@ namespace Weather.ViewModels
         string _time;
         string _weatherIcon;
         bool _isCelsius;
+        string WeatherStateFileName = "WeatherStateFile.json";
+        WeatherState _weatherState;
 
         IForecastsService forecastsService;
         IImageService imageService;
@@ -145,6 +147,8 @@ namespace Weather.ViewModels
 
         public async override Task InitAsync()
         {
+            await LoadWeatherState(); //load the saved weather state first
+
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
             geolocationService = ServiceContainer.Resolve<IGeolocationService>();
@@ -183,6 +187,8 @@ namespace Weather.ViewModels
                         WeatherImage = await imageService.GetImageAsync(city, forecast.Overview);
                     }
                 }
+
+                await SaveWeatherState();
             }
             catch (FeatureNotSupportedException fnsEx)
             {
@@ -199,7 +205,46 @@ namespace Weather.ViewModels
                 Console.WriteLine(ex.Message);
                 // Unable to get location
             }
+            finally
+            {
+                //Use cached weather image as fallback if necessary
+                if (string.IsNullOrEmpty(WeatherImage))
+                {
+                    WeatherImage = _weatherState.WeatherImage;
+                }
+            }
         }
 
+        private Task SaveWeatherState()
+        {
+            _weatherState = new WeatherState
+            {
+                CityName = CityName,
+                CurrentTemp = CurrentTemp,
+                HighTemp = HighTemp,
+                LowTemp = LowTemp,
+                WeatherDescription = WeatherDescription,
+                WeatherImage = WeatherImage,
+                WeatherIcon = WeatherIcon,
+                IsCelsius = IsCelsius
+            };
+            return FileCache.SaveItemAsync(WeatherStateFileName, _weatherState);
+        }
+
+        private async Task LoadWeatherState()
+        {
+            _weatherState = await FileCache.LoadItemAsync<WeatherState>(WeatherStateFileName);
+            if (_weatherState != null)
+            {
+                CityName = _weatherState.CityName;
+                CurrentTemp = _weatherState.CurrentTemp;
+                HighTemp = _weatherState.HighTemp;
+                LowTemp = _weatherState.LowTemp;
+                WeatherDescription = _weatherState.WeatherDescription;
+                //WeatherImage = weatherState.WeatherImage;
+                WeatherIcon = _weatherState.WeatherIcon;
+                IsCelsius = _weatherState.IsCelsius;
+            }
+        }
     }
 }

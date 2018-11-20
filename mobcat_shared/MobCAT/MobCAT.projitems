@@ -32,5 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MVVM\Abstractions\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseWatcherViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IPropertyStoreService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\FileCache.cs" />
   </ItemGroup>
 </Project>
