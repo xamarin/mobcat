@@ -46,8 +46,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\TimeOfDayImageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\ITimeOfDayImageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Appearance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AccessibilityLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

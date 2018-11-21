@@ -23,8 +23,6 @@ namespace Weather.ViewModels
         string _time;
         string _weatherIcon;
         bool _isCelsius;
-        string WeatherStateFileName = "WeatherStateFile.json";
-        WeatherState _weatherState;
 
         IForecastsService forecastsService;
         IImageService imageService;
@@ -147,7 +145,7 @@ namespace Weather.ViewModels
 
         public async override Task InitAsync()
         {
-            await LoadWeatherState(); //load the saved weather state first
+            LoadWeatherState(); //load the saved weather state first
 
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
@@ -165,8 +163,6 @@ namespace Weather.ViewModels
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
-
                     var place = await geocodingService.GetPlacesAsync(location);
                     string city = place.FirstOrDefault()?.CityName;
 
@@ -185,7 +181,7 @@ namespace Weather.ViewModels
                     }
                 }
 
-                await SaveWeatherState();
+                SaveWeatherState();
             }
             catch (FeatureNotSupportedException fnsEx)
             {
@@ -207,40 +203,36 @@ namespace Weather.ViewModels
                 //Use cached weather image as fallback if necessary
                 if (string.IsNullOrEmpty(WeatherImage))
                 {
-                    WeatherImage = _weatherState.WeatherImage;
+                    WeatherImage = Preferences.Get(Constants.CacheKeys.WeatherImageKey, default(string));
                 }
             }
         }
 
-        private Task SaveWeatherState()
+        private void SaveWeatherState()
         {
-            _weatherState = new WeatherState
-            {
-                CityName = CityName,
-                CurrentTemp = CurrentTemp,
-                HighTemp = HighTemp,
-                LowTemp = LowTemp,
-                WeatherDescription = WeatherDescription,
-                WeatherImage = WeatherImage,
-                WeatherIcon = WeatherIcon,
-                IsCelsius = IsCelsius
-            };
-            return FileCache.SaveItemAsync(WeatherStateFileName, _weatherState);
+            Preferences.Set(Constants.CacheKeys.CacheSavedDateTimeKey, DateTime.Now);
+            Preferences.Set(Constants.CacheKeys.CityNameKey, CityName);
+            Preferences.Set(Constants.CacheKeys.CurrentTempKey, CurrentTemp);
+            Preferences.Set(Constants.CacheKeys.HighTempKey, HighTemp);
+            Preferences.Set(Constants.CacheKeys.LowTempKey, LowTemp);
+            Preferences.Set(Constants.CacheKeys.WeatherDescriptionKey, WeatherDescription);
+            Preferences.Set(Constants.CacheKeys.WeatherImageKey, WeatherImage);
+            Preferences.Set(Constants.CacheKeys.WeatherIconKey, WeatherIcon);
+            Preferences.Set(Constants.CacheKeys.IsCelsiusKey, IsCelsius);
         }
 
-        private async Task LoadWeatherState()
+        private void LoadWeatherState()
         {
-            _weatherState = await FileCache.LoadItemAsync<WeatherState>(WeatherStateFileName);
-            if (_weatherState != null)
+            var cacheSavedDateTime = Preferences.Get(Constants.CacheKeys.CacheSavedDateTimeKey, default(DateTime));
+            if ((DateTime.Now - cacheSavedDateTime).TotalDays < 1) //Only load if it's been less than a day
             {
-                CityName = _weatherState.CityName;
-                CurrentTemp = _weatherState.CurrentTemp;
-                HighTemp = _weatherState.HighTemp;
-                LowTemp = _weatherState.LowTemp;
-                WeatherDescription = _weatherState.WeatherDescription;
-                //WeatherImage = weatherState.WeatherImage;
-                WeatherIcon = _weatherState.WeatherIcon;
-                IsCelsius = _weatherState.IsCelsius;
+                CityName = Preferences.Get(Constants.CacheKeys.CityNameKey, default(string));
+                CurrentTemp = Preferences.Get(Constants.CacheKeys.CurrentTempKey, default(string));
+                HighTemp = Preferences.Get(Constants.CacheKeys.HighTempKey, default(string));
+                LowTemp = Preferences.Get(Constants.CacheKeys.LowTempKey, default(string));
+                WeatherDescription = Preferences.Get(Constants.CacheKeys.WeatherDescriptionKey, default(string));
+                WeatherIcon = Preferences.Get(Constants.CacheKeys.WeatherIconKey, default(string));
+                IsCelsius = Preferences.Get(Constants.CacheKeys.IsCelsiusKey, default(bool));
             }
         }
     }

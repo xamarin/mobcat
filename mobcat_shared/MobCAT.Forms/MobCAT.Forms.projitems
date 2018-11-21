@@ -23,6 +23,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\BaseBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IViewFor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\PropertyStoreService.cs" />
   </ItemGroup>
 </Project>
