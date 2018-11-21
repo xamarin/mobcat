@@ -176,9 +176,6 @@ namespace Weather.ViewModels
 
                     if (forecast != null)
                     {
-                        var londonCityWeatherImage = await imageService.GetImageAsync(forecast.Name, forecast.Overview);
-                        Debug.WriteLine($"{forecast.Name}: {forecast.CurrentTemperature}, {forecast.Overview}");
-                        Debug.WriteLine(londonCityWeatherImage);
                         WeatherDescription = forecast.Overview;
                         WeatherIcon = WeatherIcons.Lookup(WeatherDescription);
                         CurrentTemp = forecast.CurrentTemperature;

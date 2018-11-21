@@ -29,7 +29,7 @@ namespace Microsoft.MobCAT.Services
                         stream.Dispose();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -41,6 +41,11 @@ namespace Microsoft.MobCAT.Services
         public static string GetAbsolutePath(string path)
         {
             var cacheDirectory = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
+
+            if (string.IsNullOrEmpty(cacheDirectory))
+            {
+                cacheDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            }
 
             if (!path.StartsWith(cacheDirectory, StringComparison.Ordinal))
                 return Path.Combine(cacheDirectory, path);
