@@ -4,7 +4,10 @@
              xmlns:local="clr-namespace:Communicator"
              x:Class="Communicator.MainPage" Appearing="ContentPage_Appearing">
     <ListView ItemsSource="{Binding Messages}">
-
+     
+        <ListView.Header>
+            
+        </ListView.Header>
         <ListView.Footer>
           <StackLayout>
             <Entry Text="{Binding MessageText}"/>
@@ -12,5 +15,4 @@
           </StackLayout>
         </ListView.Footer>
     </ListView>
-    
 </ContentPage>

@@ -11,7 +11,8 @@ namespace Communicator
 
     {
         HubConnection _hubConnection;
-        public ObservableCollection<string> _messages;
+        private ObservableCollection<string> _messages;
+        private string _messageText;
 
         public MainViewModel()
         {
@@ -35,11 +36,22 @@ namespace Communicator
             }
         }
 
+        public string MessageText
+        {
+            get { return _messageText; }
+            set
+            {
+                RaiseAndUpdate(ref _messageText, value);
+            }
+        }
+
+
+
         internal void SendMessage()
         {
             _hubConnection.InvokeAsync("BroadcastMessage",
                 "BenBtgTestApp",
-                "Testing testing."
+                MessageText
                 );
         }
 
