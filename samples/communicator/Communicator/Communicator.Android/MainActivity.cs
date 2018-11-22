@@ -1,11 +1,9 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace Communicator.Droid
 {
@@ -16,7 +14,7 @@ namespace Communicator.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            AppCenter.Start("9dfafb1c-bef1-4a31-9948-793215f8a8fc", typeof(Analytics), typeof(Crashes));
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
