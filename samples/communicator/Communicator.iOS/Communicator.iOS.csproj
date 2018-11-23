@@ -5,13 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{44F1F51E-02D2-4206-A518-67EF01E94949}</ProjectGuid>
+    <ProjectGuid>{4F9B2588-CC6F-46F2-A830-6C93ECE1C1C8}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Communicator.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Communicator.iOS</AssemblyName>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -147,23 +148,25 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.4" />
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>0.11.0-preview</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>1.1.0-preview3-35497</Version>
+    </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj">
-      <Project>{bbf1edbf-20d2-4f1d-971b-cf5ba34b5e76}</Project>
-      <Name>MobCAT.Forms.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
-    <ProjectReference Include="..\Communicator\Communicator.csproj">
-      <Project>{6DA793D7-DEAE-4C46-BBBE-378258C8F3B5}</Project>
-      <Name>Communicator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj">
+    <ProjectReference Include="..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj">
       <Project>{50857753-7921-4573-A414-2854F797B6B0}</Project>
       <Name>MobCAT.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj">
+      <Project>{BBF1EDBF-20D2-4F1D-971B-CF5BA34B5E76}</Project>
+      <Name>MobCAT.Forms.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\Communicator\Communicator.projitems" Label="Shared" />
 </Project>

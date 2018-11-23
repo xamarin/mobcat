@@ -93,7 +93,7 @@ namespace Communicator.ViewModels
             string userName = Preferences.Get("UserName", DefaultUser);
             if (userName == DefaultUser)
             {
-                await Navigation.PushModalAsync(new LoginViewModel());
+                // await Navigation.PushModalAsync(new LoginViewModel());
             }
 
             try
@@ -106,17 +106,6 @@ namespace Communicator.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
-        }
-        private async void ConnectClicked(object sender, EventArgs e)
-        {
-            await ConnectToHub();
-        }
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            _hubConnection.InvokeAsync("BroadcastMessage",
-                "BenBtgTestApp",
-                "Testing testing."
-                );
         }
     }
 }

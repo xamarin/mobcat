@@ -10,13 +10,13 @@ using Xamarin.Forms;
 
 namespace Communicator
 {
-	public partial class MainPage : ContentPage
-	{
+    public partial class MainPage : ContentPage
+    {
 
         MainViewModel _viewmodel;
-		public MainPage()
-		{
-			InitializeComponent();
+        public MainPage()
+        {
+            InitializeComponent();
             this.BindingContext = _viewmodel = new MainViewModel();
 
         }
@@ -28,7 +28,7 @@ namespace Communicator
 
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
-           await _viewmodel.ConnectToHub();
+            await _viewmodel.ConnectToHub();
         }
     }
 }
