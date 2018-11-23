@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Communicator.ViewModels;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace Communicator
 		{
 			InitializeComponent();
             this.BindingContext = _viewmodel = new MainViewModel();
+
         }
 
         private void SendClicked(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace Communicator
 
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
-            await _viewmodel.ConnectToHub();
+           await _viewmodel.ConnectToHub();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Communicator
 		public App ()
 		{
 			InitializeComponent();
-
+            var test = new NavigationService();
 			MainPage = new MainPage();
 		}
 

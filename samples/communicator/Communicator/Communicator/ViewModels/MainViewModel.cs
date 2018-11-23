@@ -1,18 +1,24 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.MobCAT.MVVM;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
-namespace Communicator
+namespace Communicator.ViewModels
 {
 
     public class MainViewModel : BaseNavigationViewModel
 
     {
+        readonly string DefaultUser = "_DefaultUser_";
         HubConnection _hubConnection;
+        private string _userName;
         private ObservableCollection<string> _messages;
         private string _messageText;
+        private ObservableCollection<string> _conectedUsers;
+
 
         public MainViewModel()
         {
@@ -27,12 +33,30 @@ namespace Communicator
              });
         }
 
+        public ObservableCollection<string> ConectedUsers
+        {
+            get { return _conectedUsers; }
+            set
+            {
+                RaiseAndUpdate(ref _conectedUsers, value);
+            }
+        }
+
         public ObservableCollection<string> Messages
         {
             get { return _messages; }
             set
             {
                 RaiseAndUpdate(ref _messages, value);
+            }
+        }
+
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                RaiseAndUpdate(ref _userName, value);
             }
         }
 
@@ -65,6 +89,12 @@ namespace Communicator
         public async Task ConnectToHub()
         {
             Messages.Add("Opening connection...");
+
+            string userName = Preferences.Get("UserName", DefaultUser);
+            if (userName == DefaultUser)
+            {
+                await Navigation.PushModalAsync(new LoginViewModel());
+            }
 
             try
             {
