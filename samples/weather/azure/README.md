@@ -163,6 +163,9 @@ In the event that you choose to set **USE_KEYVAULT** to false, you will need to 
 
 **NOTE:** This has already been added to the **gitignore** file.
 
+#### Azure costs
+There is a monthly cost associated with the Azure resources that are provisioned as part of this sample. This is primarily associated with the [App Service](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-overview) and the [Redis Cache](https://azure.microsoft.com/en-gb/services/cache/) to a lesser degree. The total cost could be reduced by moving to a [lower tier](https://azure.microsoft.com/en-gb/pricing/details/app-service/plans/) (Basic or Free) and updating the service to use [in-memory cache](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-2.1) instead of the [Redis Cache](https://azure.microsoft.com/en-gb/services/cache/). 
+
 ### Deploying the service
 The script has been provided for convenience as this is not the focus of this sample. However, there are a number of ways to deploy to **App Service**. These include:
 
