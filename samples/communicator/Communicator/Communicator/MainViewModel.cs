@@ -55,10 +55,11 @@ namespace Communicator
                 );
         }
 
-        private Task _hubConnection_Closed(Exception arg)
+        private async Task _hubConnection_Closed(Exception arg)
         {
             Messages.Add("Connection closed");
-            return ConnectToHub();
+            await Task.Delay(new Random().Next(0, 5) * 1000);
+            await ConnectToHub();
         }
 
         public async Task ConnectToHub()
