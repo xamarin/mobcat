@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Polly">
-      <HintPath>..\..\samples\weather\xamarin\packages\Polly.6.1.0\lib\netstandard2.0\Polly.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Polly">
+      <HintPath>..\..\samples\communicator\packages\Polly.6.1.1\lib\netstandard2.0\Polly.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
