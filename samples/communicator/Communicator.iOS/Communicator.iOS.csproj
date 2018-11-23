@@ -149,7 +149,6 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
   </ItemGroup>
-  <Import Project="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj">
@@ -159,7 +158,7 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Communicator\Communicator.csproj">
-      <Project>{6F7A4AF6-0B22-49ED-A3AB-0C1BC1382212}</Project>
+      <Project>{6DA793D7-DEAE-4C46-BBBE-378258C8F3B5}</Project>
       <Name>Communicator</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj">

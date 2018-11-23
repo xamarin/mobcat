@@ -9,10 +9,7 @@
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Android\MobCAT.Android.csproj" />
-  </ItemGroup>
+ 
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />

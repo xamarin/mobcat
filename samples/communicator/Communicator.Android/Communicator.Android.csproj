@@ -105,7 +105,7 @@
       <Name>MobCAT.Forms.Android</Name>
     </ProjectReference>
     <ProjectReference Include="..\Communicator\Communicator.csproj">
-      <Project>{6F7A4AF6-0B22-49ED-A3AB-0C1BC1382212}</Project>
+      <Project>{6DA793D7-DEAE-4C46-BBBE-378258C8F3B5}</Project>
       <Name>Communicator</Name>
     </ProjectReference>
   </ItemGroup>
