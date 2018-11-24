@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Communicator"
+             xmlns:base="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=Microsoft.MobCAT.Forms"
+             xmlns:vm="clr-namespace:Communicator.ViewModels"
+             x:TypeArguments="vm:MainViewModel"
              x:Class="Communicator.MainPage" Appearing="ContentPage_Appearing">
     <ListView ItemsSource="{Binding Messages}">
      
@@ -15,4 +18,4 @@
           </StackLayout>
         </ListView.Footer>
     </ListView>
-</ContentPage>
+</base:BaseContentPage>

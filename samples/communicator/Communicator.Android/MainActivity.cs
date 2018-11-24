@@ -19,6 +19,12 @@ namespace Communicator.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            Bootstrap.Begin(() =>
+            {
+                // Pending registratio nof placeform-specific dependencies
+            });
+
             LoadApplication(new App());
         }
     }

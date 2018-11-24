@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Communicator.LoginPage">
+<base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                      xmlns:base="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=Microsoft.MobCAT.Forms"
+                      xmlns:vm="clr-namespace:Communicator.ViewModels"
+                      x:TypeArguments="vm:LoginViewModel"
+                      x:Class="Communicator.LoginPage">
     
     <StackLayout>
        <Label Text="UserName"/>
        <Entry Text="{Binding UserName}"/> 
         <Label Text="Password"/>
        <Entry Text="{Binding Password}"/> 
+       <Button Text="Login" Command="{Binding LoginCommand}"/>
       </StackLayout> 
-</ContentPage>
+</base:BaseContentPage>

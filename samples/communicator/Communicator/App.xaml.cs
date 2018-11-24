@@ -1,4 +1,5 @@
 ﻿using System;
+using Communicator.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace Communicator
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage { ViewModel = new MainViewModel() };
         }
 
         protected override void OnStart()

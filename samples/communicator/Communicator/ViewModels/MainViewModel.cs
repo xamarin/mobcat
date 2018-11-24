@@ -94,6 +94,7 @@ namespace Communicator.ViewModels
             if (userName == DefaultUser)
             {
                 // await Navigation.PushModalAsync(new LoginViewModel());
+            //    await Navigation.PushModalAsync(new LoginViewModel());
             }
 
             try

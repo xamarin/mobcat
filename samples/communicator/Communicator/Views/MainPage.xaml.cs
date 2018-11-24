@@ -1,5 +1,6 @@
 ﻿using Communicator.ViewModels;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.MobCAT.Forms.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,25 +11,25 @@ using Xamarin.Forms;
 
 namespace Communicator
 {
-    public partial class MainPage : ContentPage
-    {
+    public partial class MainPage : BaseContentPage<MainViewModel>
+{
 
-        MainViewModel _viewmodel;
+       // MainViewModel _viewmodel;
         public MainPage()
         {
             InitializeComponent();
-            this.BindingContext = _viewmodel = new MainViewModel();
-
+            
+           // this.BindingContext = _viewmodel = new MainViewModel();
         }
 
         private void SendClicked(object sender, EventArgs e)
         {
-            _viewmodel.SendMessage();
+            ViewModel.SendMessage();
         }
 
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
-            await _viewmodel.ConnectToHub();
+            await ViewModel.ConnectToHub();
         }
     }
 }
