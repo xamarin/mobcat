@@ -29,5 +29,6 @@
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Message.cs" />
   </ItemGroup>
 </Project>

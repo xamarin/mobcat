@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.MobCAT.MVVM;
 using System;
@@ -69,12 +69,10 @@ namespace Communicator.ViewModels
             }
         }
 
-
-
         internal void SendMessage()
         {
             _hubConnection.InvokeAsync("BroadcastMessage",
-                "BenBtgTestApp",
+                UserName,
                 MessageText
                 );
         }
@@ -89,23 +87,23 @@ namespace Communicator.ViewModels
         public async Task ConnectToHub()
         {
             Messages.Add("Opening connection...");
+            UserName = Preferences.Get("UserName", DefaultUser);
 
-            string userName = Preferences.Get("UserName", DefaultUser);
-            if (userName == DefaultUser)
+            if (UserName == DefaultUser)
             {
-                // await Navigation.PushModalAsync(new LoginViewModel());
-            //    await Navigation.PushModalAsync(new LoginViewModel());
+                await Navigation.PushModalAsync(new LoginViewModel());
             }
-
-            try
+            else
             {
-                await _hubConnection.StartAsync();
-                Messages.Add("Connection open.");
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    await _hubConnection.StartAsync();
+                    Messages.Add("Connection open.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }

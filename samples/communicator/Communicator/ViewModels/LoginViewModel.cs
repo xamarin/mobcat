@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Microsoft.MobCAT.MVVM;
+using Xamarin.Essentials;
 
 namespace Communicator.ViewModels
 {
@@ -20,6 +21,7 @@ namespace Communicator.ViewModels
             get { return _userName; }
             set
             {
+                Preferences.Set("UserName", value);
                 RaiseAndUpdate(ref _userName, value);
             }
         }
@@ -29,6 +31,7 @@ namespace Communicator.ViewModels
             get { return _password; }
             set
             {
+                Preferences.Set("Password", value);
                 RaiseAndUpdate(ref _password, value);
             }
         }

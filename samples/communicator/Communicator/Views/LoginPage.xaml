@@ -6,11 +6,11 @@
                       x:TypeArguments="vm:LoginViewModel"
                       x:Class="Communicator.LoginPage">
     
-    <StackLayout>
+    <StackLayout VerticalOptions="CenterAndExpand" Margin="40">
        <Label Text="UserName"/>
        <Entry Text="{Binding UserName}"/> 
         <Label Text="Password"/>
-       <Entry Text="{Binding Password}"/> 
+       <Entry Text="{Binding Password}" IsPassword="true"/> 
        <Button Text="Login" Command="{Binding LoginCommand}"/>
       </StackLayout> 
 </base:BaseContentPage>
