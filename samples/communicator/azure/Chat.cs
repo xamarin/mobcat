@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
-public class Chat : Hub
+public class ChatHub : Hub
 {
     public Task SendPrivateMessage(string user, string message)
     {
@@ -13,6 +13,10 @@ public class Chat : Hub
     {
         Clients.All.SendAsync("broadcastMessage", name, message);
     }
+   public void SendReadReceipt(string name, string message)
+    {
+        Clients.All.SendAsync("MessageReceived", name, message);
+    }
 
     public async Task AddToGroup(string groupName)
     {
@@ -20,6 +24,11 @@ public class Chat : Hub
 
         await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has joined the group {groupName}.");
     }
+
+       public Task ImageMessage(ImageMessage file)
+        {
+            return Clients.All.SendAsync("ImageMessage", file);
+        }
 
     public async Task RemoveFromGroup(string groupName)
     {

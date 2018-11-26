@@ -39,7 +39,7 @@ namespace ChatRoom
             app.UseFileServer();
             app.UseAzureSignalR(routes =>
             {
-                routes.MapHub<Chat>("/chat");
+                routes.MapHub<ChatHub>("/chat");
             });
         }
     }
