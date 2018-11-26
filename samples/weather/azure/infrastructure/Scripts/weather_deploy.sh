@@ -4,33 +4,17 @@ echo ""
 echo "========== WeatherSample Provisioning started =========="
 echo ""
 
-targetTenant=""
-targetSubscription=""
-adminUpnOrObjectId=""
-openWeatherMapAppId=""
-apiKey=""
-
 # Resolve parameters
-while [ "$1" != "" ]; do
-
+for i in "$@"; do
     case $1 in
-        -t | --tenant )
-            shift
-            targetTenant=$1 ;;
-        -s | --subscription )
-            shift
-            targetSubscription=$1 ;;
-        -a | --admin )
-            shift
-            adminUpnOrObjectId=$1 ;;
-        -k | --api-key )
-            shift
-            apiKey=$1 ;;
-        -i | --openweathermap-appid )
-            shift
-            openWeatherMapAppId=$1 ;;
-        * )
-            exit
+        "" ) break ;;
+        -t | --tenant  ) targetTenant="$2"; shift ;;
+        -s | --subscription ) targetSubscription="$2"; shift ;;
+        -a | --admin ) adminUpnOrObjectId="$2"; shift ;;
+        -k | --api-key ) apiKey="$2"; shift ;;
+        -i | --openweathermap-appid ) openWeatherMapAppId="$2"; shift ;;
+        -* | --*) echo "Unknown option: '$1'"; exit 1 ;;
+        * ) echo "Unknown argument: '$1'"; exit 1 ;;
     esac
     shift
 done
