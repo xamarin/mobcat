@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatRoom
@@ -17,6 +19,10 @@ namespace ChatRoom
         {
             services.AddSignalR()
                     .AddAzureSignalR();
+            services.AddMvc();
+           // services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
+              services.AddDefaultIdentity<ApplicationUser>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,6 +32,9 @@ namespace ChatRoom
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMvc();
+
+            app.UseAuthentication();
 
             app.UseFileServer();
             app.UseAzureSignalR(routes =>

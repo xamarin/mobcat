@@ -4,11 +4,16 @@ namespace Communicator
     public class Message
     {
         public string ID;
-        public string UserName;
-        public string Text;
-        public Message()
+        public string UserName { get; set; }
+        public string MessageText { get; set; }
+        public bool IsSender { get; set; }
+        public bool IsNotification { get; set; }
+
+        public Message(string username, string text)
         {
-        
+            UserName = username;
+            MessageText = text;
         }
+
     }
 }

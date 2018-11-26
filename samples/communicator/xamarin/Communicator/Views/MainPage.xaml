@@ -4,17 +4,51 @@
              xmlns:local="clr-namespace:Communicator"
              xmlns:base="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=Microsoft.MobCAT.Forms"
              xmlns:vm="clr-namespace:Communicator.ViewModels"
+             xmlns:dt="clr-namespace:Communicator.DataTemplates"         
              x:TypeArguments="vm:MainViewModel"
              x:Class="Communicator.MainPage" Appearing="ContentPage_Appearing">
-    <ListView ItemsSource="{Binding Messages}">
-     
-        <ListView.Header>
-            
-        </ListView.Header>
+    
+
+    <ListView ItemsSource="{Binding Messages}" 
+              ItemTemplate="{StaticResource messageTemplateSelector}" >
+        <ListView.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="senderTemplate">
+                <ViewCell>
+                      <Grid  Margin="10" BackgroundColor="Blue" HorizontalOptions="End" VerticalOptions="Fill">
+                         <Label TextColor="White" Text="{Binding MessageText}" HorizontalTextAlignment="End" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
+                      </Grid>
+          
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="recieverTemplate">
+                <ViewCell>
+                   <Grid  Margin="10" BackgroundColor="Gray" HorizontalOptions="Start" VerticalOptions="Fill">
+                   <Label Text="{Binding MessageText}" HorizontalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Medium"/>
+                   </Grid>
+                </ViewCell>
+            </DataTemplate>
+             <DataTemplate x:Key="eventTemplate">
+                <ViewCell>
+                     <Grid BackgroundColor="Teal">
+                         <Label TextColor="White" Text="{Binding MessageText}" FontSize="Large" HorizontalTextAlignment="Center"  VerticalOptions="Center" />
+                      </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <dt:MessageTemplateSelector x:Key="messageTemplateSelector"
+                SenderTemplate="{StaticResource senderTemplate}"
+                RecieverTemplate="{StaticResource recieverTemplate}" 
+                EventTemplate="{StaticResource eventTemplate}"/>
+        </ResourceDictionary>
+        </ListView.Resources>
+           
         <ListView.Footer>
-          <StackLayout>
+          <StackLayout VerticalOptions="FillAndExpand">
             <Entry Text="{Binding MessageText}"/>
-            <Button Text="Send" Clicked="SendClicked"/>
+                <StackLayout>
+                  <Button Text="Send" Command="{Binding SendDirectMessageCommand}"/>
+                  <Button Text="Broadcast" Command="{Binding BroadcastMessageCommand}"/>
+                </StackLayout>
           </StackLayout>
         </ListView.Footer>
     </ListView>

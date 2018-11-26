@@ -14,17 +14,11 @@ namespace Communicator
     public partial class MainPage : BaseContentPage<MainViewModel>
 {
 
-       // MainViewModel _viewmodel;
+        // MainViewModel _viewmodel;
         public MainPage()
         {
             InitializeComponent();
-            
-           // this.BindingContext = _viewmodel = new MainViewModel();
-        }
 
-        private void SendClicked(object sender, EventArgs e)
-        {
-            ViewModel.SendMessage();
         }
 
         private async void ContentPage_Appearing(object sender, EventArgs e)

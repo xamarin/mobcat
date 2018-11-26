@@ -15,21 +15,27 @@ namespace Communicator.ViewModels
         readonly string DefaultUser = "_DefaultUser_";
         HubConnection _hubConnection;
         private string _userName;
-        private ObservableCollection<string> _messages;
+        private ObservableCollection<Message> _messages;
         private string _messageText;
         private ObservableCollection<string> _conectedUsers;
 
+        public Command BroadcastMessageCommand => new Command(() => SendBroadcastMessage());
+        public Command SendDirectMessageCommand => new Command(() => SendDirectMessage());
+        public Command AppearCommand => new Command(async () => await ConnectToHub());
+
+        private string remoteAddress = "https://mccommunicator.azurewebsites.net";
+        private string localAddrewss = "http://localhost:5000";
 
         public MainViewModel()
         {
-            Messages = new ObservableCollection<string>();
+            Messages = new ObservableCollection<Message>();
             _hubConnection = new HubConnectionBuilder()
-              .WithUrl($"https://mccommunicator.azurewebsites.net/chat")
+              .WithUrl($"{localAddrewss}/chat")
               .Build();
             _hubConnection.Closed += _hubConnection_Closed;
             _hubConnection.On<string, string>("broadcastMessage", (user, message) =>
              {
-                 Messages.Add(message);
+                Messages.Add(new Message(user,message){ IsSender = user == _userName });
              });
         }
 
@@ -42,7 +48,7 @@ namespace Communicator.ViewModels
             }
         }
 
-        public ObservableCollection<string> Messages
+        public ObservableCollection<Message> Messages
         {
             get { return _messages; }
             set
@@ -69,7 +75,7 @@ namespace Communicator.ViewModels
             }
         }
 
-        internal void SendMessage()
+        internal void SendBroadcastMessage()
         {
             _hubConnection.InvokeAsync("BroadcastMessage",
                 UserName,
@@ -77,16 +83,24 @@ namespace Communicator.ViewModels
                 );
         }
 
+        internal void SendDirectMessage()
+        {
+            _hubConnection.InvokeAsync("SendPrivateMessage",
+                UserName,
+                MessageText
+                );
+        }
+
         private async Task _hubConnection_Closed(Exception arg)
         {
-            Messages.Add("Connection closed");
+            Messages.Add(new Message("Event", "Connection closed") { IsNotification = true });
             await Task.Delay(new Random().Next(0, 5) * 1000);
             await ConnectToHub();
         }
 
         public async Task ConnectToHub()
         {
-            Messages.Add("Opening connection...");
+            Messages.Add(new Message("Event", "Opening connection...") { IsNotification = true });
             UserName = Preferences.Get("UserName", DefaultUser);
 
             if (UserName == DefaultUser)
@@ -98,7 +112,7 @@ namespace Communicator.ViewModels
                 try
                 {
                     await _hubConnection.StartAsync();
-                    Messages.Add("Connection open.");
+                    Messages.Add(new Message("Event","Connection open.") { IsNotification = true });
                 }
                 catch (Exception ex)
                 {

@@ -30,5 +30,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Message.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTemplates\MessageTemplateSelector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)DataTemplates\" />
   </ItemGroup>
 </Project>

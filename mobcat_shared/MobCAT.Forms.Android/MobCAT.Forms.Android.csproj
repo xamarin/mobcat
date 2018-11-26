@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.props" Condition="Exists('..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.props')" />
   <Import Project="..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.props" Condition="Exists('..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.props')" />
   <Import Project="..\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="..\..\samples\communicator\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.props" Condition="Exists('..\..\samples\communicator\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.props')" />
@@ -102,24 +103,19 @@
       <HintPath>..\..\samples\communicator\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2\lib\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
     </Reference>
     <Reference Include="FormsViewGroup">
-      <HintPath>..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.Android">
-      <HintPath>..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -161,4 +157,5 @@
   <Import Project="..\..\samples\communicator\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\..\samples\communicator\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets')" />
   <Import Project="..\..\samples\communicator\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.targets" Condition="Exists('..\..\samples\communicator\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.targets')" />
   <Import Project="..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.targets" Condition="Exists('..\..\samples\communicator\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.targets" Condition="Exists('..\..\samples\communicator\xamarin\packages\Xamarin.Forms.3.4.0.1008975\build\Xamarin.Forms.targets')" />
 </Project>

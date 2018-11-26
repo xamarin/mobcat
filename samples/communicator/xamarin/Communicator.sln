@@ -5,17 +5,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobCAT", "MobCAT", "{398974
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobCAT.Forms", "MobCAT.Forms", "{1C180F22-771B-4B52-AEBA-F0951E559D40}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobCAT", "..\..\mobcat_shared\MobCAT\MobCAT.shproj", "{843D62CA-BA8E-4949-B5C1-924837565EA8}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobCAT", "..\..\..\mobcat_shared\MobCAT\MobCAT.shproj", "{843D62CA-BA8E-4949-B5C1-924837565EA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Android", "..\..\mobcat_shared\MobCAT.Android\MobCAT.Android.csproj", "{BA298720-E85D-4F1B-81C0-DA8B5B024555}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Android", "..\..\..\mobcat_shared\MobCAT.Android\MobCAT.Android.csproj", "{BA298720-E85D-4F1B-81C0-DA8B5B024555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.iOS", "..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj", "{50857753-7921-4573-A414-2854F797B6B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.iOS", "..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj", "{50857753-7921-4573-A414-2854F797B6B0}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobCAT.Forms", "..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.shproj", "{2536D280-1746-4EC5-AEA8-AE9D2817049C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobCAT.Forms", "..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.shproj", "{2536D280-1746-4EC5-AEA8-AE9D2817049C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Forms.iOS", "..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj", "{BBF1EDBF-20D2-4F1D-971B-CF5BA34B5E76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Forms.iOS", "..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj", "{BBF1EDBF-20D2-4F1D-971B-CF5BA34B5E76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Forms.Android", "..\..\mobcat_shared\MobCAT.Forms.Android\MobCAT.Forms.Android.csproj", "{90117B97-BC6D-4B40-814C-0AF34C3DB7E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Forms.Android", "..\..\..\mobcat_shared\MobCAT.Forms.Android\MobCAT.Forms.Android.csproj", "{90117B97-BC6D-4B40-814C-0AF34C3DB7E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communicator.Android", "Communicator.Android\Communicator.Android.csproj", "{15548A98-CEC0-408A-BE7D-E9E8CC0D4CFC}"
 EndProject
