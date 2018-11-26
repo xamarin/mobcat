@@ -13,9 +13,9 @@ public class ChatHub : Hub
     {
         Clients.All.SendAsync("broadcastMessage", name, message);
     }
-   public void SendReadReceipt(string name, string message)
+   public void SendReadReceipt(ReadReceipt readReceipt)
     {
-        Clients.All.SendAsync("MessageReceived", name, message);
+        Clients.All.SendAsync("MessageReceived", readReceipt);
     }
 
     public async Task AddToGroup(string groupName)
