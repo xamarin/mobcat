@@ -48,6 +48,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Appearance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AccessibilityLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IValueCacheService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ValueCacheService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

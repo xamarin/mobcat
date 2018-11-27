@@ -61,6 +61,10 @@ namespace Weather.UnitTests
 
             ServiceContainer.Register<IGeocodingService>(mockGeocodingService.Object);
 
+            //Mock the value cache service
+            var mockValueCacheService = new Mock<IValueCacheService>();
+            ServiceContainer.Register<IValueCacheService>(mockValueCacheService.Object);
+
             //Init the VM
             var weatherViewModel = new WeatherViewModel();
             await weatherViewModel.InitAsync();

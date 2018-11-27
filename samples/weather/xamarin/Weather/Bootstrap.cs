@@ -24,6 +24,7 @@ namespace Weather
             ServiceContainer.Register<IGeolocationService>(() => new GeolocationService());
             ServiceContainer.Register<IGeocodingService>(() => new GeocodingService());
             ServiceContainer.Register<ITimeOfDayImageService>(() => new TimeOfDayImageService());
+            ServiceContainer.Register<IValueCacheService>(() => new ValueCacheService());
 
             platformSpecificBegin?.Invoke();
         }
