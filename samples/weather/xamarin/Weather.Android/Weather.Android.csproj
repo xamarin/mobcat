@@ -147,14 +147,6 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Android\MobCAT.Android.csproj">
-      <Project>{BA298720-E85D-4F1B-81C0-DA8B5B024555}</Project>
-      <Name>MobCAT.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms.Android\MobCAT.Forms.Android.csproj">
-      <Project>{90117B97-BC6D-4B40-814C-0AF34C3DB7E5}</Project>
-      <Name>MobCAT.Forms.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj">
       <Project>{BC919755-75C0-4E73-B231-59105D9A86A6}</Project>
       <Name>MobCAT</Name>

@@ -264,14 +264,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.iOS\MobCAT.iOS.csproj">
-      <Project>{50857753-7921-4573-A414-2854F797B6B0}</Project>
-      <Name>MobCAT.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms.iOS\MobCAT.Forms.iOS.csproj">
-      <Project>{BBF1EDBF-20D2-4F1D-971B-CF5BA34B5E76}</Project>
-      <Name>MobCAT.Forms.iOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj">
       <Project>{BC919755-75C0-4E73-B231-59105D9A86A6}</Project>
       <Name>MobCAT</Name>
