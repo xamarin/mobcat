@@ -18,7 +18,7 @@ namespace Weather.Droid
 
             Bootstrap.Begin(() =>
             {
-                // Pending registratio nof placeform-specific dependencies
+                // Pending registration of placeform-specific dependencies
             });
 
             LoadApplication(new App());
