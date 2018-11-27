@@ -29,7 +29,7 @@ e.g.
 
 ```
 [ClientSecret]
-public static readonly string SecretKey;
+public static readonly string SecretKey = string.Empty;
 ```
 
 Alternatively, you can specify the environment variable explicitly using the optional *key* parameter.  
@@ -38,7 +38,7 @@ e.g.
 
 ```
 [ClientSecret("THE_SECRET_KEY")]
-public static readonly string SecretKey;
+public static readonly string SecretKey = string.Empty;
 ```
 
 ## Indicative Output
@@ -48,7 +48,7 @@ Before build:
 public static class Config
 {
     [ClientSecret]
-    public static readonly string SecretKey;
+    public static readonly string SecretKey = string.Empty;
 }
 ```
 
