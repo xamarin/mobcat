@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading;
 using Weather.Models;
 using Microsoft.MobCAT.Services;
+using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace Weather.ViewModels
 {
@@ -46,6 +48,17 @@ namespace Weather.ViewModels
         public WeatherViewModel()
         {
             IsCelsius = true;
+
+            if (DesignMode.IsDesignModeEnabled)
+            {
+                CityName = "London";
+                IsCelsius = true;
+                WeatherDescription = "Cloudy";
+                CurrentTemp = "17";
+                HighTemp = "20";
+                LowTemp = "10";
+                WeatherImage = $"https://upload.wikimedia.org/wikipedia/commons/8/82/London_Big_Ben_Phone_box.jpg";
+            }
 
             // Timer to update time
             _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), state: null, dueTime: 100, period: 10000);

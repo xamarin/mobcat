@@ -45,7 +45,7 @@
             </controls:AccessibilityLabel>
          </StackLayout>
         <StackLayout Grid.Row="2" Margin="20">
-            <controls:AccessibilityLabel TextColor="White" FontSize="30" HorizontalOptions="StartAndExpand">
+            <controls:AccessibilityLabel x:Name="WeatherDescriptionLabel" Opacity="0" TextColor="White" FontSize="30" HorizontalOptions="StartAndExpand">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span FontFamily="{StaticResource WeatherIcons}" Text="{Binding Path=WeatherIcon, Mode=OneWay}" FontSize="25"/>
@@ -57,7 +57,7 @@
                 </Label.Behaviors>
             </controls:AccessibilityLabel>
                    
-            <controls:AccessibilityLabel TextColor="White" FontSize="25">       
+            <controls:AccessibilityLabel x:Name="TemperatureRangeLabel" TextColor="White" FontSize="25" Opacity="0">       
                <Label.FormattedText>
                     <FormattedString>
                         <Span FontFamily="{StaticResource WeatherIcons}" Text="&#xf058;" FontSize="23"/>
@@ -71,11 +71,11 @@
                     </FormattedString>
                 </Label.FormattedText>
                 <Label.Behaviors>
-                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="FormattedText"/>
                 </Label.Behaviors>
             </controls:AccessibilityLabel>
             
-            <controls:AccessibilityLabel x:Name="CurrentTemperatureLabel" FontSize="80" TextColor="White" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1">
+            <controls:AccessibilityLabel x:Name="CurrentTemperatureLabel" Opacity="0" FontSize="80" TextColor="White" FontFamily="{StaticResource OpenSansRegular}" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{Binding CurrentTemp, Mode=OneWay}"/>
@@ -83,7 +83,7 @@
                     </FormattedString>
                 </Label.FormattedText>
                  <Label.Behaviors>
-                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="FormattedText"/>
                 </Label.Behaviors>
             </controls:AccessibilityLabel>
         </StackLayout>

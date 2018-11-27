@@ -31,12 +31,9 @@ namespace Weather.Behaviors
             set { SetValue(PropertyNameProperty, value); }
         }
 
-        //add property name bp
-
         protected override void OnAttachedTo(VisualElement bindable)
         {
             base.OnAttachedTo(bindable);
-
             bindable.PropertyChanged += OnPropertyChanged;
         }
 
