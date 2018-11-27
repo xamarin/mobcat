@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="..\..\samples\weather\xamarin\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.props" Condition="Exists('..\..\samples\weather\xamarin\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -131,6 +130,10 @@
     <ProjectReference Include="..\MobCAT.Android\MobCAT.Android.csproj">
       <Project>{BA298720-E85D-4F1B-81C0-DA8B5B024555}</Project>
       <Name>MobCAT.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MobCAT.Forms\MobCAT.Forms.csproj">
+      <Project>{EBE47B69-3178-440A-894F-4493E84EFDE7}</Project>
+      <Name>MobCAT.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

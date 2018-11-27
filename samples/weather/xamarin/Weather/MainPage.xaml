@@ -53,7 +53,7 @@
                    </FormattedString>
                 </Label.FormattedText>
                 <Label.Behaviors>
-                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="Text"/>
+                    <behaviors:FadeInOnPropertyChangedBehavior PropertyName="FormattedText"/>
                 </Label.Behaviors>
             </controls:AccessibilityLabel>
                    

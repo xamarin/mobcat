@@ -72,11 +72,14 @@
       <Project>{50857753-7921-4573-A414-2854F797B6B0}</Project>
       <Name>MobCAT.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MobCAT.Forms\MobCAT.Forms.csproj">
+      <Project>{EBE47B69-3178-440A-894F-4493E84EFDE7}</Project>
+      <Name>MobCAT.Forms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\MobCAT.Forms\MobCAT.Forms.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\samples\weather\xamarin\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.targets" Condition="Exists('..\..\samples\weather\xamarin\packages\Xamarin.Forms.3.3.0.967583\build\Xamarin.Forms.targets')" />
 </Project>

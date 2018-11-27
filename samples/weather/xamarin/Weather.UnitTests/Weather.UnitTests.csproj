@@ -15,7 +15,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="Moq" Version="4.10.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
-    <PackageReference Include="Polly" Version="6.1.0" />
+    <PackageReference Include="Polly" Version="6.1.2" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
@@ -25,7 +25,9 @@
     <Compile Remove="MockServices\Geocoding.cs" />
     <Compile Remove="MappingTests.cs" />
   </ItemGroup>
-  <Import Project="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.projitems')" />
-  <Import Project="..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems" Label="Shared" Condition="Exists('..\..\..\..\mobcat_shared\MobCAT\MobCAT.projitems')" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />
+    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj" />
+  </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
 </Project>
