@@ -1,8 +1,6 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobCAT", "MobCAT", "{C4C847E4-1184-401F-883A-B91B77215D6F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Android", "Weather.Android\Weather.Android.csproj", "{A714C08C-CD85-4CA0-A03B-D1C6CDB58847}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.iOS", "Weather.iOS\Weather.iOS.csproj", "{0A503818-E0F3-4CD2-90E1-46479A454F48}"
@@ -12,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.UITests", "Weather.UITests\Weather.UITests.csproj", "{8EB656CE-5D6E-4A4E-8EE1-1C54B3E74101}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.UnitTests", "Weather.UnitTests\Weather.UnitTests.csproj", "{3FDF2068-A05B-4912-AEA6-3CDFC00DC53C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobCAT.Forms", "MobCAT.Forms", "{E840C7C3-CCF6-41AE-A17C-F8A35C699171}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT", "..\..\..\mobcat_shared\MobCAT\MobCAT.csproj", "{BC919755-75C0-4E73-B231-59105D9A86A6}"
 EndProject
@@ -129,7 +125,5 @@ Global
 		{EBE47B69-3178-440A-894F-4493E84EFDE7}.AppStore|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BC919755-75C0-4E73-B231-59105D9A86A6} = {C4C847E4-1184-401F-883A-B91B77215D6F}
-		{EBE47B69-3178-440A-894F-4493E84EFDE7} = {E840C7C3-CCF6-41AE-A17C-F8A35C699171}
 	EndGlobalSection
 EndGlobal
