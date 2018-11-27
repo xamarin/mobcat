@@ -13,7 +13,6 @@ namespace Communicator
         public LoginPage()
         {
             InitializeComponent();
-           // this.BindingContext = _viewmodel = new LoginViewModel();
         }
     }
 }

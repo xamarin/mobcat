@@ -11,8 +11,7 @@ namespace Communicator
     {
         public static void Begin(Action platformSpecificBegin = null)
         {
-
-                        var navigationService = new NavigationService();
+            var navigationService = new NavigationService();
             navigationService.RegisterViewModels(typeof(MainPage).GetTypeInfo().Assembly);
             navigationService.RegisterViewModels(typeof(LoginPage).GetTypeInfo().Assembly);
 

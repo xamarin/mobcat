@@ -25,10 +25,10 @@ public class ChatHub : Hub
         await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has joined the group {groupName}.");
     }
 
-       public Task ImageMessage(ImageMessage file)
-        {
-            return Clients.All.SendAsync("ImageMessage", file);
-        }
+    public Task ImageMessage(ImageMessage file)
+    {
+        return Clients.All.SendAsync("ImageMessage", file);
+    }
 
     public async Task RemoveFromGroup(string groupName)
     {
