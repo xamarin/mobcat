@@ -3,8 +3,28 @@ WeatherTron 9000 is a weather app sample that showcases best patterns and practi
 
 (Add Screenshots)
 
+## Prerequisites
+To run the sample successfully, the backend needs to be deployed and local app secrets need to be set up for your development environment. Please refer to the following **Backend** and **App Secrets** sections to get started.
+
 ## Backend
 The sample also comes with a [web service backend build with asp.net core](https://github.com/xamarin/mobcat/tree/dev/samples/weather/azure) which you can host to run the app. Deployment instructions can be found [here](https://github.com/xamarin/mobcat/blob/dev/samples/weather/azure/README.md)
+
+## AppCenter
+AppCenter integration is built in to the sample using the AppCenter NuGet packages for analytics and crashes. To get analytics in AppCenter, set up the iOS & Android apps and get the AppCenter secret key for each platform from the App's Overview tab. 
+
+## App Secrets
+The app secrets in Weather are protected using [mobcat_client_secrets](https://github.com/xamarin/mobcat/tree/master/mobcat_client_secrets) which gets the secret values from your local development environment variables to prevent secret keys from being committed into source code. The following app secret variables can be found in ServiceConfig.cs and have the `[ClientSecret]` attribute:
+1. WeatherServiceApiKey
+2. WeatherServiceUrl
+3. AndroidAppCenterSecret
+4. iOSAppCenterSecret
+
+### MacOS
+To set up the environment variables using Terminal on MacOS, navigate to the `build/` folder and run the following:
+```. environment.sh --api-key <Your API key> --service-endpoint <Your service endpoint> --android-appcenter-secret <Your Android AppCenter secret> --ios-appcenter-secret <Your iOS AppCenter secret>```
+
+### Windows
+TODO
 
 ## Solution Overview
 The solution consists of the following projects:
@@ -23,11 +43,8 @@ The app uses the [MVVM(Model-View-ViewModel)](https://docs.microsoft.com/en-us/x
 The MobCAT library also includes a service container to register & consume services within the app. This enables registering platform specific services and consuming them through a common interface within shared code. It also enables mock services to be registered for UI test or unit test purposes.
 
 ## Bootstrap
-Weather.Bootstrap.cs is where the app services are instantiated and registered in the ServiceContainer. Platform specific startup actions can also be invoked using the provided parameter in the Begin method.
+Bootstrap.cs is where the app services are instantiated and registered in the ServiceContainer. Platform specific startup actions can also be invoked using the provided parameter in the Begin method.
 The Begin method is called from the AppDelegate for iOS, and MainActivity for Android respectively.
 
 ## Custom Weather Font
 The custom weather icons are from https://erikflowers.github.io/weather-icons/
-
-## App Secrets
-The app secrets in Weather are protected using [mobcat_client_secrets](https://github.com/xamarin/mobcat/tree/master/mobcat_client_secrets) to prevent secret keys from being committed into source code. 
