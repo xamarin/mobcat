@@ -18,10 +18,17 @@ namespace Weather
 
         protected override void OnStart()
         {
-            // Handle when your app starts
-            AppCenter.Start($"{ServiceConfig.AndroidAppCenterSecret};" +
-                  $"{ServiceConfig.iOSAppCenterSecret}",
-                  typeof(Analytics), typeof(Crashes));
+            try
+            {
+                // Handle when your app starts
+                AppCenter.Start($"{ServiceConfig.AndroidAppCenterSecret};" +
+                      $"{ServiceConfig.iOSAppCenterSecret}",
+                      typeof(Analytics), typeof(Crashes));
+            }
+            catch (System.Exception ex)
+            {
+                 //TODO: Log
+            }
         }
 
         protected override void OnSleep()
