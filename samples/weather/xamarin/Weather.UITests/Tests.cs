@@ -2,39 +2,29 @@
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using Weather.UITests.Pages;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
 namespace Weather.UITests
 {
-    [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
-    public class Tests
+    public class Tests : BaseTestFixture
     {
-        IApp app;
-        Platform platform;
-
-        public Tests(Platform platform)
+        public Tests(Platform platform) : base(platform)
         {
-            this.platform = platform;
-        }
-
-        [SetUp]
-        public void BeforeEachTest()
-        {
-            app = AppInitializer.StartApp(platform);
         }
 
         [Test]
-        public void AppLaunches()
+        public void AllowLocationRedmond()
         {
-            app.Screenshot("First screen.");
+            app.Device.SetLocation(latitude: 47.673988, longitude: -122.121513);
+            new MainPage().AllowLocation();
         }
 
         [Test]
-        public void SetLocation()
+        public void DisallowLocation()
         {
-            //app.Device.SetLocation() //TODO: This test
+            new MainPage().DisallowLocation();
         }
     }
 }
