@@ -28,6 +28,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <AssemblyName>Weather</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -42,6 +43,7 @@
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchExtraArgs>--linkskip=Weather.iOS --linkskip=MobCAT --linkskip=MobCAT.iOS;</MtouchExtraArgs>
+    <AssemblyName>Weather</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -109,6 +111,7 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\AccessibilityLabelRendereriOS.cs" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -206,7 +209,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.1</Version>
+      <Version>11.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>0.11.0-preview</Version>
@@ -220,6 +223,9 @@
     <PackageReference Include="Xamarin.TestCloud.Agent">
       <Version>0.21.7</Version>
     </PackageReference>
+    <PackageReference Include="MobCAT.ClientSecrets.Fody">
+      <Version>1.0.0-alpha2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj">
@@ -229,10 +235,6 @@
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj">
       <Project>{EBE47B69-3178-440A-894F-4493E84EFDE7}</Project>
       <Name>MobCAT.Forms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weather\Weather.csproj">
-      <Project>{B72BAC16-61F9-4888-9492-2F24ADCF0324}</Project>
-      <Name>Weather</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -264,5 +266,6 @@
     <Folder Include="Assets.xcassets\midday4.imageset\" />
     <Folder Include="Renderers\" />
   </ItemGroup>
+  <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

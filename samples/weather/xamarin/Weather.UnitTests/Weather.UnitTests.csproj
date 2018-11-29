@@ -17,8 +17,9 @@
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Polly" Version="6.1.2" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
+    <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj" />
-    <ProjectReference Include="..\Weather\Weather.csproj" />
   </ItemGroup>
+  <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
 </Project>
