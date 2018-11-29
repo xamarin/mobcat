@@ -20,7 +20,7 @@ The app secrets in Weather are protected using [mobcat_client_secrets](https://g
 4. iOSAppCenterSecret
 
 ### MacOS
-To set up the environment variables using Terminal on MacOS, navigate to the `build/` folder and run the following:
+To set up the environment variables using Terminal on MacOS, navigate to the `/build` folder and run the following:
 ```. environment.sh --api-key <Your API key> --service-endpoint <Your service endpoint> --android-appcenter-secret <Your Android AppCenter secret> --ios-appcenter-secret <Your iOS AppCenter secret>```
 
 ### Windows
