@@ -11,35 +11,20 @@ namespace Weather.UITests.Pages
             iOS = x => x.Marked(nameof(MainPage))
         };
 
-        protected readonly Query AllowLocationButton;
-        protected readonly Query DontAllowLocationButton;
         protected readonly Query CityNameLabel;
+        protected readonly Query RedmondLabel;
 
         public MainPage()
         {
-            AllowLocationButton = x => x.Marked("Allow");
-            DontAllowLocationButton = x => x.Marked("Don't Allow");
             CityNameLabel = x => x.Marked(nameof(CityNameLabel));
+            RedmondLabel = x => x.Text("Redmond");
 
         }
 
-        public MainPage AllowLocation()
+        public MainPage SetLocationToRedmond()
         {
-            app.WaitForElement(AllowLocationButton);
-            app.Screenshot("Tapping on allow location button");
-            app.Tap(AllowLocationButton);
-            app.WaitForElement(CityNameLabel);
-            app.Screenshot("VM Initialized");
-            return this;
-        }
-
-        public MainPage DisallowLocation()
-        {
-            app.WaitForElement(DontAllowLocationButton);
-            app.Screenshot("Tapping on don't allow location button");
-            app.Tap(DontAllowLocationButton);
-            app.WaitForElement(CityNameLabel);
-            app.Screenshot("VM Initialized");
+            app.WaitForElement(RedmondLabel, timeout: TimeSpan.FromMinutes(1));
+            app.Screenshot("Location set to Redmond and VM initialized");
             return this;
         }
     }

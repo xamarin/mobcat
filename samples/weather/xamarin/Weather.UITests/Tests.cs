@@ -15,16 +15,21 @@ namespace Weather.UITests
         }
 
         [Test]
-        public void AllowLocationRedmond()
+        public void SetLocationRedmond()
         {
             app.Device.SetLocation(latitude: 47.673988, longitude: -122.121513);
-            new MainPage().AllowLocation();
+            new MainPage().SetLocationToRedmond();
         }
 
         [Test]
-        public void DisallowLocation()
+        public void Repl()
         {
-            new MainPage().DisallowLocation();
+            if (TestEnvironment.IsTestCloud)
+            {
+                Assert.Ignore("Local only");
+            }
+
+            app.Repl();
         }
     }
 }
