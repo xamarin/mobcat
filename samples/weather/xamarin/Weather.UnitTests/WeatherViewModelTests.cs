@@ -21,7 +21,7 @@ namespace Weather.UnitTests
         {
             //Mock the forecast service
             var mockForecastService = new Mock<IForecastsService>();
-            mockForecastService.Setup(a => a.GetForecastAsync(It.IsAny<string>(), It.IsAny<TemperatureUnit>(), It.IsAny<CancellationToken>()))
+            mockForecastService.Setup(a => a.GetForecastAsync(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<TemperatureUnit>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(
                 new Forecast
                 {
@@ -65,18 +65,26 @@ namespace Weather.UnitTests
             var mockValueCacheService = new Mock<IValueCacheService>();
             ServiceContainer.Register<IValueCacheService>(mockValueCacheService.Object);
 
+            //Mock the localization service
+            var mockLocalizationService = new Mock<ILocalizationService>();
+            mockLocalizationService.Setup(a => a.Translate(It.IsAny<string>()))
+                .Returns<string>(x => x); //Just return what was passed in
+            ServiceContainer.Register<ILocalizationService>(mockLocalizationService.Object);
+
             //Init the VM
             var weatherViewModel = new WeatherViewModel();
             await weatherViewModel.InitAsync();
 
             //Get expecteds for asserts
             var expectedImage = await mockImageService.Object.GetImageAsync(default(string), default(String), default(CancellationToken));
-            var expectedForecast = await mockForecastService.Object.GetForecastAsync(default(string), default(TemperatureUnit), default(CancellationToken));
+            var expectedForecast = await mockForecastService.Object.GetForecastAsync(default(double), default(double), default(TemperatureUnit), default(CancellationToken));
             var expectedPlaces = await mockGeocodingService.Object.GetPlacesAsync(default(Coordinates));
             var expectedPlaceName = expectedPlaces?.FirstOrDefault()?.CityName;
 
+            var weatherDescriptionTranslationResourceKey = expectedForecast.Overview.Trim().Replace(" ", "").ToLower();
+
             //Assert
-            Assert.Equal(expectedForecast.Overview, weatherViewModel.WeatherDescription);
+            Assert.Equal(weatherDescriptionTranslationResourceKey, weatherViewModel.WeatherDescription);
             Assert.Equal(expectedForecast.CurrentTemperature, weatherViewModel.CurrentTemp);
             Assert.Equal(expectedForecast.MaxTemperature, weatherViewModel.HighTemp);
             Assert.Equal(expectedForecast.MinTemperature, weatherViewModel.LowTemp);
