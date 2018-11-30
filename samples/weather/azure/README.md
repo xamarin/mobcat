@@ -127,7 +127,15 @@ dotnet dev-certs https --trust
 ```
 
 #### Working with KeyVault locally using MSI (Managed Service Identity)
-When running the service locally you should ensure you are signed into Azure (via the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) using the account that was used execute the script or one that has been subsequently given the same or greater [KeyVault](https://azure.microsoft.com/en-gb/services/key-vault/) permissions via **Access Policy**. Alternatively, you can use the [Azure Services Authentication](https://marketplace.visualstudio.com/items?itemName=chrismann.MicrosoftVisualStudioAsalExtension) extension for [Visual Studio 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Enterprise&rel=15). Once installed, you can go to *Tools > Options > Azure Service Authentication* to choose an account and sign in. 
+When running the service locally you should ensure you are signed into Azure (via the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) using the account that was used execute the script or one that has been subsequently given the same or greater [KeyVault](https://azure.microsoft.com/en-gb/services/key-vault/) permissions via **Access Policy**. Alternatively, you can use the [Azure Services Authentication](https://marketplace.visualstudio.com/items?itemName=chrismann.MicrosoftVisualStudioAsalExtension) extension for [Visual Studio 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Enterprise&rel=15). Once installed, you can go to *Tools > Options > Azure Service Authentication* to choose an account and sign in.  
+
+You will also need to create a file called **localsettings.json** within the **WeatherService** folder (at the same level as the **WeatherService.csproj** file). This must contain the endpoint for your [KeyVault](https://azure.microsoft.com/en-gb/services/key-vault/) resource. For example:
+
+```
+{
+  "KEYVAULT_ENDPOINT": "https://<keyvault_name>.vault.azure.net"
+}
+```
 
 If you are unable to work with [KeyVault](https://azure.microsoft.com/en-gb/services/key-vault/) directly in this way (or choose to skip this at any time), you can update **appsettings.Development.json** setting the **USE_KEYVAULT** flag to **false**. You can also edit the application settings that would be picked up at runtime when hosted on [App Service](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-overview). For example: 
 
