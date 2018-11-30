@@ -183,7 +183,7 @@ namespace Weather.ViewModels
 
                     CityName = city;
 
-                    var forecast = await forecastsService.GetForecastAsync(city);
+                    var forecast = await forecastsService.GetForecastAsync(location.Latitude, location.Longitude); //Use lat and long since the city name can be different based on localization
 
                     if (forecast != null)
                     {
@@ -200,7 +200,7 @@ namespace Weather.ViewModels
                         CurrentTemp = forecast.CurrentTemperature;
                         HighTemp = forecast.MaxTemperature;
                         LowTemp = forecast.MinTemperature;
-                        WeatherImage = await imageService.GetImageAsync(city, forecast.Overview);
+                        WeatherImage = await imageService.GetImageAsync(forecast.Name, forecast.Overview);
                     }
                 }
 

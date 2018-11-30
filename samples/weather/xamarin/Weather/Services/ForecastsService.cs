@@ -20,5 +20,10 @@ namespace Weather.Services
 
             return GetAsync<Forecast>($"forecasts/{city}?units={unit.ToString()}", cancellationToken, SetApiKeyHeader);
         }
+
+        public Task<Forecast> GetForecastAsync(double latitude, double longitude, TemperatureUnit unit = TemperatureUnit.Metric, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return GetAsync<Forecast>($"forecasts/coordinates?latitude={latitude.ToString()}&longitude={longitude.ToString()}&units={unit.ToString()}", cancellationToken, SetApiKeyHeader);
+        }
     }
 }

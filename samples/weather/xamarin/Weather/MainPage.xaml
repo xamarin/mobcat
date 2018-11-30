@@ -9,7 +9,8 @@
     xmlns:controls="clr-namespace:Weather.Controls"
     x:TypeArguments="vm:WeatherViewModel"
     x:Class="Weather.MainPage" 
-    BackgroundColor="{x:Static local:Appearance.BackgroundColor}">
+    BackgroundColor="{x:Static local:Appearance.BackgroundColor}"
+    FlowDirection="{x:Static Device.FlowDirection}">
     <Grid AutomationId="MainPage">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
