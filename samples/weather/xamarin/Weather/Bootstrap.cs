@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using Microsoft.MobCAT;
 using Microsoft.MobCAT.Forms.Services;
 using Microsoft.MobCAT.MVVM.Abstractions;
-using Weather.Models;
+using Weather.Localization;
 using Weather.Services;
 using Weather.Services.Abstractions;
-using Xamarin.Essentials;
 
 namespace Weather
 {

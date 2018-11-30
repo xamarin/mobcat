@@ -345,3 +345,5 @@ samples/weather/azure/infrastructure/Scripts/parameters\.sh
 samples/weather/xamarin/build/secrets\.sh
 
 samples/weather/xamarin/Weather/FodyWeavers\.xsd
+
+samples/weather/xamarin/Weather/Localization/AppResources\.Designer\.cs

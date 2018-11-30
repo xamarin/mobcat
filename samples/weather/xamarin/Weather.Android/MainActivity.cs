@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Microsoft.MobCAT;
+using Weather.Droid.Services;
+using Weather.Services.Abstractions;
 
 namespace Weather.Droid
 {
@@ -18,7 +21,7 @@ namespace Weather.Droid
 
             Bootstrap.Begin(() =>
             {
-                // Pending registration of placeform-specific dependencies
+                ServiceContainer.Register<ILocalizationService>(new LocalizationService());
             });
 
             LoadApplication(new App());

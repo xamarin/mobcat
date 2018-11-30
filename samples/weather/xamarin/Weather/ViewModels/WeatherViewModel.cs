@@ -28,6 +28,8 @@ namespace Weather.ViewModels
         IGeolocationService geolocationService;
         IGeocodingService geocodingService;
         IValueCacheService valueCacheService;
+        ILocalizationService localizationService;
+
         readonly Lazy<ITimeOfDayImageService> timeOfDayImageService = new Lazy<ITimeOfDayImageService>(() =>
         {
             try
@@ -161,6 +163,7 @@ namespace Weather.ViewModels
             geolocationService = ServiceContainer.Resolve<IGeolocationService>();
             geocodingService = ServiceContainer.Resolve<IGeocodingService>();
             valueCacheService = ServiceContainer.Resolve<IValueCacheService>();
+            localizationService = ServiceContainer.Resolve<ILocalizationService>();
 
             LoadWeatherState(); //load the saved weather state first
 
@@ -184,8 +187,16 @@ namespace Weather.ViewModels
 
                     if (forecast != null)
                     {
-                        WeatherDescription = forecast.Overview;
-                        WeatherIcon = WeatherIcons.Lookup(WeatherDescription);
+                        var weatherDescription = forecast.Overview;
+                        if (!string.IsNullOrEmpty(weatherDescription))
+                        {
+                            WeatherIcon = WeatherIcons.Lookup(weatherDescription);
+                            WeatherDescription = localizationService.Translate(weatherDescription.Trim().Replace(" ", "").ToLower());
+                        }
+                        else
+                        {
+                            //TODO: Show error message
+                        }
                         CurrentTemp = forecast.CurrentTemperature;
                         HighTemp = forecast.MaxTemperature;
                         LowTemp = forecast.MinTemperature;

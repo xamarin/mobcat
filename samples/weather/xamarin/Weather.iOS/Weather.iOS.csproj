@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\AccessibilityLabelRendereriOS.cs" />
     <None Include="FodyWeavers.xml" />
+    <Compile Include="Services\LocalizationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -265,6 +266,7 @@
     <Folder Include="Assets.xcassets\midday3.imageset\" />
     <Folder Include="Assets.xcassets\midday4.imageset\" />
     <Folder Include="Renderers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="..\Weather\Weather.projitems" Label="Shared" Condition="Exists('..\Weather\Weather.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -1,5 +1,9 @@
-﻿using Foundation;
+﻿using System.Globalization;
+using Foundation;
+using Microsoft.MobCAT;
 using UIKit;
+using Weather.iOS.Services;
+using Weather.Services.Abstractions;
 
 namespace Weather.iOS
 {
@@ -21,12 +25,12 @@ namespace Weather.iOS
             global::Xamarin.Forms.Forms.Init();
 
 #if ENABLE_TEST_CLOUD
-                Xamarin.Calabash.Start();
+            Xamarin.Calabash.Start();
 #endif
 
             Bootstrap.Begin(() =>
             {
-                // Pending registratio nof placeform-specific dependencies
+                ServiceContainer.Register<ILocalizationService>(new LocalizationService());
             });
 
             LoadApplication(new App());
