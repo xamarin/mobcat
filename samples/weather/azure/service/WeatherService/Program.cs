@@ -4,16 +4,23 @@ using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using System.Threading;
 
 namespace WeatherService
 {
     public class Program
     {
-        internal static IWebHost Host;
+        private static CancellationTokenSource cancellationTokenSource;
+
+        internal static void TriggerShutdown()
+        {
+            cancellationTokenSource.Cancel();
+        }
 
         public static void Main(string[] args)
         {
-            (Host = BuildWebHost(args)).Run();
+            cancellationTokenSource = new CancellationTokenSource();
+            BuildWebHost(args).RunAsync(cancellationTokenSource.Token).GetAwaiter().GetResult();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

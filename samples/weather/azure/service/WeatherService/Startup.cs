@@ -55,7 +55,17 @@ namespace WeatherService
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1.0", new Info { Title = "Weather Service", Version = "v1.0" });
+                options.SwaggerDoc("v1.0", new Info
+                {
+                    Title = "Weather Service",
+                    Version = "v1.0",
+                    Description = "ASP.NET Core service to support the Xamarin Weather app sample",
+                    Contact = new Contact
+                    {
+                        Name = "Microsoft Mobile CAT (Customer Advisory Team)",
+                        Url = "https://github.com/xamarin/mobcat"
+                    }
+                });
 
                 var securityRequirement = new Dictionary<string, IEnumerable<string>>
                 {
@@ -118,7 +128,7 @@ namespace WeatherService
             {
                 options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Weather Service v1.0");
                 options.DocumentTitle = "Weather Service Documentation";
-                options.DocExpansion(DocExpansion.None);
+                options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
             });
 
             app.UseHttpsRedirection();
@@ -127,9 +137,7 @@ namespace WeatherService
 
         private void ResetService()
         {
-            var logger = Program.Host.Services.GetService<ILogger>();
-            logger?.LogError("Force stop host as basic fallback");
-            Task.Run(async () => await Program.Host.StopAsync());
+            Program.TriggerShutdown();
         }        
     }
 }
