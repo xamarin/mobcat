@@ -50,6 +50,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IValueCacheService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ValueCacheService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\AppResources.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\PlatformCulture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BaseLocalizationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\ILocalizationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
@@ -65,5 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Models\WeatherIcons.xml" />
+    <None Include="$(MSBuildThisFileDirectory)Localization\AppResources.ms.resx" />
+    <None Include="$(MSBuildThisFileDirectory)Localization\AppResources.resx" />
   </ItemGroup>
 </Project>
