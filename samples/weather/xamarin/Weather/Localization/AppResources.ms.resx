@@ -161,7 +161,7 @@
     <data
         name="rain"
         xml:space="preserve">
-        <value>Rain</value>
+        <value>Hujan</value>
         <comment>weather condition</comment>
     </data>
     

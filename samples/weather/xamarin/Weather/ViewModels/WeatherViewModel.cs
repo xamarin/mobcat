@@ -178,10 +178,8 @@ namespace Weather.ViewModels
 
                 if (location != null)
                 {
-                    var place = await geocodingService.GetPlacesAsync(location);
-                    string city = place.FirstOrDefault()?.CityName;
-
-                    CityName = city;
+                    var places = await geocodingService.GetPlacesAsync(location);
+                    CityName = places.FirstOrDefault()?.CityName;
 
                     var forecast = await forecastsService.GetForecastAsync(location.Latitude, location.Longitude); //Use lat and long since the city name can be different based on localization
 
