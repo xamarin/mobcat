@@ -17,7 +17,7 @@ namespace Weather.UITests
         [Test]
         public void SetLocationRedmond()
         {
-            app.Device.SetLocation(latitude: 47.673988, longitude: -122.121513);
+            app.Device.SetLocation(latitude: 47.6739, longitude: -122.1215);
             new MainPage().SetLocationToRedmond();
         }
 
