@@ -52,7 +52,7 @@ echo "WeatherServiceApiKey: $WeatherServiceApiKey"
 echo "WEATHERSERVICEAPIKEY: $WEATHERSERVICEAPIKEY"
 
 echo "- WeatherServiceUrl"
-##vso[task.setvariable variable=WeatherServiceUrl;;issecret=true] $SERVICE_ENDPOINT
+##vso[task.setvariable variable=WeatherServiceUrl;;issecret=false] $SERVICE_ENDPOINT
 echo "Build_WeatherServiceUrl: $BUILD_WEATHERSERVICEURL"
 echo "WeatherServiceUrl: $WeatherServiceUrl""
 echo "WEATHERSERVICEURL: $WEATHERSERVICEURL"
