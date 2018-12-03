@@ -47,15 +47,19 @@ echo "Setting Environement Variables:"
 
 echo "- WeatherServiceApiKey"
 ##vso[task.setvariable variable=WeatherServiceApiKey;;issecret=true] $API_KEY
+echo "WeatherServiceApiKey: $(WeatherServiceApiKey)"
 
 echo "- WeatherServiceUrl"
 ##vso[task.setvariable variable=WeatherServiceUrl;;issecret=true] $SERVICE_ENDPOINT
+echo "WeatherServiceUrl: $(WeatherServiceUrl)"
 
 echo "- AndroidAppCenterSecret"
 ##vso[task.setvariable variable=AndroidAppCenterSecret;;issecret=true] $ANDROID_APP_CENTER_SECRET
+echo "AndroidAppCenterSecret: $(AndroidAppCenterSecret)"
 
 echo "- iOSAppCenterSecret"
 ##vso[task.setvariable variable=iOSAppCenterSecret;;issecret=true] $iOS_APP_CENTER_SECRET
+echo "iOSAppCenterSecret: $(iOSAppCenterSecret)"
 
 echo ""
 echo "========= WeatherSample Environment Configuration completed ========="
