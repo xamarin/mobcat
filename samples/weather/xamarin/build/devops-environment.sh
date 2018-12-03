@@ -46,7 +46,7 @@ fi
 echo "Setting Environement Variables:"
 
 echo "- WeatherServiceApiKey"
-##vso[task.setvariable variable=WeatherServiceApiKey;issecret=true] $API_KEY
+##vso[task.setvariable variable=WeatherServiceApiKey] $API_KEY
 echo "Build_WeatherServiceApiKey: $BUILD_WEATHERSERVICEAPIKEY"
 echo "WeatherServiceApiKey: $WeatherServiceApiKey"
 echo "WEATHERSERVICEAPIKEY: $WEATHERSERVICEAPIKEY"
@@ -58,13 +58,13 @@ echo "WeatherServiceUrl: $WeatherServiceUrl"
 echo "WEATHERSERVICEURL: $WEATHERSERVICEURL"
 
 echo "- AndroidAppCenterSecret"
-##vso[task.setvariable variable=AndroidAppCenterSecret;issecret=true] $ANDROID_APP_CENTER_SECRET
+##vso[task.setvariable variable=AndroidAppCenterSecret] $ANDROID_APP_CENTER_SECRET
 echo "Build_AndroidAppCenterSecret: $BUILD_ANDROIDAPPCENTERSECRET"
 echo "AndroidAppCenterSecret: $AndroidAppCenterSecret"
 echo "ANDROIDAPPCENTERSECRET: $ANDROIDAPPCENTERSECRET"
 
 echo "- iOSAppCenterSecret"
-##vso[task.setvariable variable=iOSAppCenterSecret;issecret=true] $iOS_APP_CENTER_SECRET
+##vso[task.setvariable variable=iOSAppCenterSecret] $iOS_APP_CENTER_SECRET
 echo "Build_iOSAppCenterSecret: $BUILD_IOSAPPCENTERSECRET"
 echo "iOSAppCenterSecret: $iOSAppCenterSecret"
 echo "IOSAPPCENTERSECRET: $IOSAPPCENTERSECRET"
