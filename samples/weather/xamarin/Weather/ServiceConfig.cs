@@ -11,15 +11,15 @@ namespace Weather
     public static class ServiceConfig
     {
         [ClientSecret]
-        public static readonly string WeatherServiceApiKey = string.Empty;
+        public static readonly string WEATHERSERVICEAPIKEY = string.Empty;
 
         [ClientSecret]
-        public static readonly string WeatherServiceUrl = string.Empty;
+        public static readonly string WEATHERSERVICEURL = string.Empty;
 
         [ClientSecret]
-        public static readonly string AndroidAppCenterSecret = string.Empty;
+        public static readonly string ANDROIDAPPCENTERSECRET = string.Empty;
 
         [ClientSecret]
-        public static readonly string iOSAppCenterSecret = string.Empty;
+        public static readonly string IOSAPPCENTERSECRET = string.Empty;
     }
 }
