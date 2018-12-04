@@ -301,24 +301,23 @@ az keyvault secret set \
 
 echo "Publishing API App"
 
-cd ..
-cd ..
-cd service
-cd WeatherService
+cd ../../service/WeatherService
 
-echo "Publishing API App: Creating self-contained application"
+echo "Publishing API App: Creating application"
 dotnet publish -c release 1> /dev/null
 
+cd bin/Release/netcoreapp2.1/publish
+
 echo "Publishing API App: Packaging application files"
-zip -r bin/Release/netcoreapp2.1/publish.zip \
-    bin/Release/netcoreapp2.1/publish \
-    1> /dev/null
+zip -r ../publish.zip * 1> /dev/null
+
+cd ..
 
 echo "Publishing API App: Deploying application package"
 az webapp deployment source config-zip \
     --resource-group $resourceGroupName \
     --name $apiAppName \
-    --src bin/Release/netcoreapp2.1/publish.zip \
+    --src publish.zip \
     1> /dev/null
 
 echo ""

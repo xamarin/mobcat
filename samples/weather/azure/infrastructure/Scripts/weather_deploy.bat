@@ -187,7 +187,7 @@ echo ^Publishing API App
 
 cd ../../service/WeatherService
 
-echo ^Publishing API App: Creating self-contained application
+echo ^Publishing API App: Creating application
 call dotnet publish -c release >nul 2>&1
 
 echo ^Publishing API App: Packaging application files
