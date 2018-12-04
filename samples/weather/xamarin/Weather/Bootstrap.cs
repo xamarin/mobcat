@@ -18,8 +18,8 @@ namespace Weather
             navigationService.RegisterViewModels(typeof(MainPage).GetTypeInfo().Assembly);
 
             ServiceContainer.Register<INavigationService>(navigationService);
-            ServiceContainer.Register<IForecastsService>(() => new ForecastsService(ServiceConfig.WEATHERSERVICEURL, ServiceConfig.WEATHERSERVICEAPIKEY));
-            ServiceContainer.Register<IImageService>(() => new ImageService(ServiceConfig.WEATHERSERVICEURL, ServiceConfig.WEATHERSERVICEAPIKEY));
+            ServiceContainer.Register<IForecastsService>(() => new ForecastsService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
+            ServiceContainer.Register<IImageService>(() => new ImageService(ServiceConfig.WeatherServiceUrl, ServiceConfig.WeatherServiceApiKey));
             ServiceContainer.Register<IMainThreadAsyncService>(() => new MainThreadAsyncService());
             ServiceContainer.Register<IGeolocationService>(() => new GeolocationService());
             ServiceContainer.Register<IGeocodingService>(() => new GeocodingService());
