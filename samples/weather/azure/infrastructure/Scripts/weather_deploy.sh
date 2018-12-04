@@ -307,18 +307,18 @@ cd service
 cd WeatherService
 
 echo "Publishing API App: Creating self-contained application"
-dotnet publish -c release -r win-x86 --self-contained 1> /dev/null
+dotnet publish -c release 1> /dev/null
 
 echo "Publishing API App: Packaging application files"
-zip -r bin/Release/netcoreapp2.1/win-x86/weather_deploy.zip \
-    bin/Release/netcoreapp2.1/win-x86/publish \
+zip -r bin/Release/netcoreapp2.1/publish.zip \
+    bin/Release/netcoreapp2.1/publish \
     1> /dev/null
 
 echo "Publishing API App: Deploying application package"
 az webapp deployment source config-zip \
     --resource-group $resourceGroupName \
     --name $apiAppName \
-    --src bin/Release/netcoreapp2.1/win-x86/weather_deploy.zip \
+    --src bin/Release/netcoreapp2.1/publish.zip \
     1> /dev/null
 
 echo ""
