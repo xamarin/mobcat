@@ -1,7 +1,7 @@
 ﻿using System;
-using MobCAT.ClientSecrets;
+//using MobCAT.ClientSecrets;
 
-namespace Weather
+namespace News
 {
     /// <summary>
     /// Secret key file.
@@ -11,15 +11,15 @@ namespace Weather
     public static class ServiceConfig
     {
         //[ClientSecret]
-        public static readonly string WEATHERSERVICEAPIKEY = "f186baa7-6a5a-4f89-ad1f-308a1830ab1f";
+        public static readonly string NEWSSERVICEAPIKEY = string.Empty;
 
         //[ClientSecret]
-        public static readonly string WEATHERSERVICEURL = "https://asapiaf2h4eo65ggdu.azurewebsites.net/api/";
+        public static readonly string NEWSSERVICEURL = string.Empty;
 
         //[ClientSecret]
-        public static readonly string ANDROIDAPPCENTERSECRET = "63f2cc40-8ad9-462e-92b2-b2eff4638605";
+        public static readonly string ANDROIDAPPCENTERSECRET = string.Empty;
 
         //[ClientSecret]
-        public static readonly string IOSAPPCENTERSECRET = "2d31b910-a08c-4201-b006-e0e3fec7d8da";
+        public static readonly string IOSAPPCENTERSECRET = string.Empty;
     }
 }
