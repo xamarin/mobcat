@@ -1,9 +1,9 @@
 # WeatherTron 9000
 WeatherTron 9000 is a single view sample app that demonstrates a number of recommended patterns and practices for building, testing, and deploying mobile apps using [Xamarin](https://visualstudio.microsoft.com/xamarin/), [Azure DevOps](https://azure.microsoft.com/en-us/solutions/devops/), and [AppCenter](https://appcenter.ms/).
 
-<img src="../readme_illustrations/weather_app_android.png" alt="Weather App for Android" height="350" />
+<img src="../readme_illustrations/weather_app_android.png" alt="Weather App for Android" height="350" style="display:inline-block;" />
 
-<img src="../readme_illustrations/weather_app_ios.png" alt="Weather App for iOS" height="350"/>
+<img src="../readme_illustrations/weather_app_ios.png" alt="Weather App for iOS" height="350" style="display:inline-block;" />
 
 ## Solution Overview
 The solution consists of the following projects:  
@@ -32,10 +32,6 @@ The unit test project which uses mock services using [Moq](https://github.com/mo
 
 ## Getting Started
 You must perform the following prerequisite actions in order to run this sample app:  
-
-1. Create your app in the App Center Portal to obtain an App Secret
-2. Execute the script to provision the sample weather service
-3. Set environment variables for the app secrets
 
 ### 1. Create an app in the App Center Portal
 The sample demonstrates analytics and crash reporting via [App Center](https://appcenter.ms) using the [NuGet packages](https://www.nuget.org/packages/Microsoft.AppCenter) provided.  
