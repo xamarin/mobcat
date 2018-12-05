@@ -17,9 +17,9 @@
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Polly" Version="6.1.2" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
+    <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha3" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
-    <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha2" />
   </ItemGroup>
 
   <ItemGroup>
