@@ -1,9 +1,11 @@
 # WeatherTron 9000
 WeatherTron 9000 is a single view sample app that demonstrates a number of recommended patterns and practices for building, testing, and deploying mobile apps using [Xamarin](https://visualstudio.microsoft.com/xamarin/), [Azure DevOps](https://azure.microsoft.com/en-us/solutions/devops/), and [AppCenter](https://appcenter.ms/).
 
+<p>
 <img src="../readme_illustrations/weather_app_android.png" alt="Weather App for Android" height="350" style="display:inline-block;" />
 
 <img src="../readme_illustrations/weather_app_ios.png" alt="Weather App for iOS" height="350" style="display:inline-block;" />
+</p>
 
 ## Solution Overview
 The solution consists of the following projects:  
@@ -86,3 +88,25 @@ The **Bootstrap** class facilitates the process of initializing and registering 
 
 ### BaseHttpService
 The **BaseHttpService** base class simplifies working with REST APIs by abstracting the details associated with using **HttpClient**, handling common tasks such as serialization and implementing recommended patterns such as retry and circuit breaker.
+
+### Localization
+Localization is implemented using .resx resources based on the [official Xamarin sample](https://github.com/xamarin/xamarin-forms-samples/tree/master/UsingResxLocalization). Malay (ms) and Arabic (ar) localization has been implemented with Right-to-Left language support.
+
+<p>
+<img src="../readme_illustrations/redmond_malay.png" alt="Weather App in Malay" height="350" style="display:inline-block;" />
+
+<img src="../readme_illustrations/redmond_english.png" alt="Weather App in English" height="350" style="display:inline-block;" />
+
+<img src="../readme_illustrations/redmond_arabic.png" alt="Weather App in Arabic" height="350" style="display:inline-block;" />
+</p>
+
+### Text Size Accessibility
+Accessibility text size is supported using a custom control on iOS, the AccessibilityLabel. On Android, text size accessibility is supported out of the box.
+
+<p>
+<img src="../readme_illustrations/accessibility_small.png" alt="Weather App with small text" height="350" style="display:inline-block;" />
+
+<img src="../readme_illustrations/redmond_english.png" alt="Weather App with default text size" height="350" style="display:inline-block;" />
+
+<img src="../readme_illustrations/accessibility_large.png" alt="Weather App with large text" height="350" style="display:inline-block;" />
+</p>
