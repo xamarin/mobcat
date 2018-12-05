@@ -21,8 +21,8 @@ namespace Weather
             try
             {
                 // Handle when your app starts
-                AppCenter.Start($"{ServiceConfig.ANDROIDAPPCENTERSECRET};" +
-                      $"{ServiceConfig.IOSAPPCENTERSECRET}",
+                AppCenter.Start($"{ServiceConfig.AndroidAppCenterSecret};" +
+                      $"{ServiceConfig.iOSAppCenterSecret}",
                       typeof(Analytics), typeof(Crashes));
             }
             catch (System.Exception ex)

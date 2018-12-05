@@ -23,7 +23,7 @@ The following dependencies are required in order to follow the steps outlined be
 
 You can sign up for a [free trial](https://azure.microsoft.com/free/) of Azure in order to further explore the concepts in this sample if you do not have a subscription available for these purposes.  
 
-**NOTE:** You must have permission to create **Resource Groups** on the **Azure Subscription** in order to complete the steps below.
+You must have permission to create **Resource Groups** on the **Azure Subscription** in order to complete the steps below.
 
 ## Provisioning the service
 Follow the steps below to provision the **WeatherService**, and the underlying resources, to your [Azure Subscription](https://portal.azure.com). In the interest of brevity, the term '*CMD*' applies to both the Windows **Command Prompt** and the macOS **Terminal**.  
@@ -93,7 +93,7 @@ Follow the steps below to provision the **WeatherService**, and the underlying r
     weather_deploy.bat --tenant <tenant_id> --subscription <subscription_id> --admin <account_name> --openweathermap-appid <openweathermap_key> --api-key <your_api_key>
     ```
 
-**NOTE:** The script may take upwards of 25 minutes to complete when executed for the first time. Templated deployments are incremental and subsequent executions will take significantly less time to execute.  
+**NOTE:** The script may take upwards of 25 minutes to complete when executed for the first time. Templated deployments are incremental and subsequent executions will take significantly less time to complete.  
 
 ### Reviewing the deployment
 1. Navigate to the [Azure Portal](https://portal.azure.com)
