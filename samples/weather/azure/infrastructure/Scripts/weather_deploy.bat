@@ -185,19 +185,16 @@ call az keyvault secret set --vault-name %keyVaultName% --name %openWeatherMapAp
 
 echo ^Publishing API App
 
-cd ..
-cd ..
-cd service
-cd WeatherService
+cd ../../service/WeatherService
 
-echo ^Publishing API App: Creating self-contained application
-call dotnet publish -c release -r win-x86 --self-contained true >nul 2>&1
+echo ^Publishing API App: Creating application
+call dotnet publish -c release >nul 2>&1
 
 echo ^Publishing API App: Packaging application files
-call powershell Compress-Archive -Path bin/release/netcoreapp2.1/win-x86/publish -DestinationPath bin/release/netcoreapp2.1/win-x86/weather_deploy.zip >nul 2>&1
+call powershell Compress-Archive -Path bin/release/netcoreapp2.1/publish/* -DestinationPath bin/release/netcoreapp2.1/publish.zip >nul 2>&1
 
 echo ^Publishing API App: Deploying application package
-call az webapp deployment source config-zip --resource-group %resourceGroupName% --name %apiAppName% --src bin/release/netcoreapp2.1/win-x86/weather_deploy.zip >nul 2>&1
+call az webapp deployment source config-zip --resource-group %resourceGroupName% --name %apiAppName% --src bin/release/netcoreapp2.1/publish.zip >nul 2>&1
 
 echo.
 echo ^========== WeatherSample Provisioning completed ==========

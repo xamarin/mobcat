@@ -1,18 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RuntimeIdentifiers>win-x86;win-x64;osx.10.11-x64;ubuntu.16.10-x64</RuntimeIdentifiers>
     <UserSecretsId>e1bfefca-b287-4e4e-ac63-6572d5f7c1ec</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="localsecrets.json" />
     <Content Remove="localsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

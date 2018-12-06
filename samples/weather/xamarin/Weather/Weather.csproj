@@ -16,7 +16,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
-    <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha2" />
+    <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj" />
