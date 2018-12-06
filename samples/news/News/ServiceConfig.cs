@@ -1,5 +1,5 @@
 ﻿using System;
-//using MobCAT.ClientSecrets;
+using MobCAT.ClientSecrets;
 
 namespace News
 {
@@ -10,16 +10,16 @@ namespace News
     /// </summary>
     public static class ServiceConfig
     {
-        //[ClientSecret]
+        [ClientSecret]
         public static readonly string NEWSSERVICEAPIKEY = string.Empty;
 
-        //[ClientSecret]
+        [ClientSecret]
         public static readonly string NEWSSERVICEURL = string.Empty;
 
-        //[ClientSecret]
+        [ClientSecret]
         public static readonly string ANDROIDAPPCENTERSECRET = string.Empty;
 
-        //[ClientSecret]
+        [ClientSecret]
         public static readonly string IOSAPPCENTERSECRET = string.Empty;
     }
 }
