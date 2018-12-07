@@ -78,19 +78,19 @@ To configure the environment variables:
 ## Key Concepts
 
 ### MVVM
-The app uses the [MVVM(Model-View-ViewModel)](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm) pattern to decouple business logic & presentation code. The relevant supporting components can be found in **MobCAT/MVVM**
+The app uses the [MVVM (Model-View-ViewModel)](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm) pattern to decouple business logic & presentation code. The relevant supporting components can be found in [MobCAT/MVVM](https://github.com/xamarin/mobcat/tree/dev/mobcat_shared/MobCAT/MVVM).
 
 ### Service Container
-The MobCAT library includes a simple **ServiceContainer** class. This enables both platform-specific and platform-agnostic components to be registered and subsequently resolved via a common interface within shared code. It also enables mock services to be registered for UI test or unit test purposes.
+The MobCAT library includes a **ServiceContainer** class as a light-weight and simple mechanism for implementing the [service locator](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/ff648968(v=pandp.10)) IoC (Inversion of Control) design pattern. This enables both platform-specific and platform-agnostic components to be registered and subsequently resolved via a common interface within shared code. It also enables mock services to be registered for UI test or unit test purposes.
 
 ### Bootstrap
-The **Bootstrap** class facilitates the process of initializing and registering the respective services using the **ServiceContainer** class. Platform-specific startup actions can also be invoked using the provided parameter in the Begin method. The Begin method is called from the **AppDelegate** for iOS, and **MainActivity** for Android respectively.
+The **Bootstrap** class centralizes the process of initializing and registering the respective services using the **ServiceContainer** class. Platform-specific startup actions can also be invoked using the optional **Func** parameter in the Begin method. The Begin method is called from the **AppDelegate** for iOS, and **MainActivity** for Android respectively.
 
 ### BaseHttpService
-The **BaseHttpService** base class simplifies working with REST APIs by abstracting the details associated with using **HttpClient**, handling common tasks such as serialization and implementing recommended patterns such as retry and circuit breaker.
+The **BaseHttpService** base class simplifies working with REST APIs in a reliable manner by encapsulating the [correct usage of HttpClient](https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/), handling common tasks such as serialization and implementing recommended [cloud design patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/) such as [retry](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry) and [circuit breaker](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker).
 
 ### Localization
-Localization is implemented using .resx resources based on the [official Xamarin sample](https://github.com/xamarin/xamarin-forms-samples/tree/master/UsingResxLocalization). Malay (ms) and Arabic (ar) localization has been implemented with Right-to-Left language support.
+Localization is implemented using .resx resources based on the [official Xamarin sample](https://github.com/xamarin/xamarin-forms-samples/tree/master/UsingResxLocalization). Malay (ms) and Arabic (ar) localization has been implemented with RTL (Right-to-Left) language support.
 
 <p>
 <img src="../readme_illustrations/redmond_malay.png" alt="Weather App in Malay" height="350" style="display:inline-block;" />
