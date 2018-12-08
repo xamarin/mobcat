@@ -43,12 +43,24 @@ Follow the steps below to provision the **WeatherService**, and the underlying r
     ```
     az --version
     ```
+    
+    In order to install or update the **Azure CLI** follow this [complete guide](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) or use the following instructions:
+
+    **macOS:** 
+    ```
+    brew update
+    brew install azure-cli
+    brew upgrade azure-cli
+    ```
+    **Windows:** [MSI installer](https://aka.ms/installazurecliwindows)
 
 3. Validate you have **.NET Core SDK** version *2.1* or higher
 
     ```
     dotnet --version
     ```
+
+    In order to install or update the SDK download the [.NET Core SDK Installer](https://dotnet.microsoft.com/download)
 
 ### Executing the provisioning script
 1. Open the **CMD** (if you do not have it open from the previous steps)
@@ -80,7 +92,7 @@ Follow the steps below to provision the **WeatherService**, and the underlying r
     - subscription_id
     - tenant_id
     - account_name
-7. Choose (or generate) an API key for **WeatherService**. There are a number of [guid generator](https://www.bing.com/search?q=guid+generator) tools available online which might help with this, however a passphrase would suffice for the purposes of this sample
+7. Choose (or generate) an API key for **WeatherService**. This API key will be used to prevent the **WeatherService** unauthorized access. Use it as the **your_api_key** parameter later. There are a number of [guid generator](https://www.bing.com/search?q=guid+generator) tools available online which might help with this, however a passphrase would suffice for the purposes of this sample
 8. From **CMD**, call the respective **weather_deploy** script passing in the requisite parameters. For example:
 
     **macOS:**
