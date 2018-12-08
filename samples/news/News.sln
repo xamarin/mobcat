@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News", "News\News.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT", "..\..\mobcat_shared\MobCAT\MobCAT.csproj", "{CF339104-1F1C-4EBE-A2A4-07A2B40AC282}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobCAT.Forms", "..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj", "{829DFCCA-F21D-4923-86A6-7735EEE8E326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,5 +83,17 @@ Global
 		{CF339104-1F1C-4EBE-A2A4-07A2B40AC282}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{CF339104-1F1C-4EBE-A2A4-07A2B40AC282}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{CF339104-1F1C-4EBE-A2A4-07A2B40AC282}.Release|iPhone.Build.0 = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{829DFCCA-F21D-4923-86A6-7735EEE8E326}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

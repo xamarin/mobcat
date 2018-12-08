@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using NewsAPI.Models;
 using NewsAPI;
 using NewsAPI.Constants;
-using News;
 
 namespace News.ViewModels
 {
-    public class NewsViewModel : BaseViewModel
+    /// <summary>
+    /// Base news view model which manages list of articles with lazy loading ability regardless of the data source.
+    /// </summary>
+    public class BaseNewsViewModel : BaseNavigationViewModel
     {
         public ObservableCollection<Article> Articles { get; } = new ObservableCollection<Article>();
 
-        public NewsViewModel()
+        public BaseNewsViewModel()
         {
         }
 

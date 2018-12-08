@@ -1,6 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.MobCAT.MVVM;
+using Microsoft.MobCAT.Forms.Services;
+using Microsoft.MobCAT.Forms.Pages;
+using News.Pages;
+using News.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace News
@@ -10,8 +15,15 @@ namespace News
         public App()
         {
             InitializeComponent();
+            RegisterServices();
+            MainPage = new BaseNavigationPage(new LoadingPage() { ViewModel = new LoadingViewModel() });
+        }
 
-            MainPage = new MainPage();
+        private void RegisterServices()
+        {
+            var navigationService = new NavigationService();
+            navigationService.RegisterViewModels(GetType().Assembly);
+            BaseNavigationViewModel.RegisterService(navigationService);
         }
 
         protected override void OnStart()
