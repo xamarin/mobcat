@@ -22,10 +22,10 @@ namespace News.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Lottie.Forms.iOS.Renderers.AnimationViewRenderer.Init();
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            Lottie.Forms.iOS.Renderers.AnimationViewRenderer.Init();
 
             return base.FinishedLaunching(app, options);
         }
