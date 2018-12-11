@@ -32,11 +32,19 @@ namespace Microsoft.MobCAT.MVVM.Abstractions
         Task PopModalAsync();
 
         /// <summary>
+        /// Pops all but the root page of the navigation stack.
+        /// </summary>
+        /// <returns>The Task.</returns>
+        /// <param name="animate">If set to <c>true</c> animate.</param>
+        Task PopToRootAsync(bool animate);
+
+        /// <summary>
         /// Pushs the specified view model onto the navigation stack.
         /// </summary>
         /// <returns>The Task.</returns>
         /// <param name="viewModel">View model.</param>
-        Task PushAsync(BaseNavigationViewModel viewModel);
+        /// <param name="discardCurrent">If set to <c>true</c> discard current page at the top of the navigation stack.</param>
+        Task PushAsync(BaseNavigationViewModel viewModel, bool discardCurrent = false);
 
         /// <summary>
         /// Pushs the specified view model onto the navigation stack.
@@ -44,7 +52,8 @@ namespace Microsoft.MobCAT.MVVM.Abstractions
         /// <returns>The Task.</returns>
         /// <param name="initialize">Action returning the view model to be pushed onto the navigation stack.</param>
         /// <typeparam name="T">The view model <see cref="Type"/> deriving from <see cref="BaseNavigationViewModel"/>.</typeparam>
-        Task PushAsync<T>(Action<T> initialize = null) where T : BaseNavigationViewModel;
+        /// <param name="discardCurrent">If set to <c>true</c> discard current page at the top of the navigation stack.</param>
+        Task PushAsync<T>(Action<T> initialize = null, bool discardCurrent = false) where T : BaseNavigationViewModel;
 
         /// <summary>
         /// Pushes the specified view model onto the navigation stack modally.
@@ -60,7 +69,6 @@ namespace Microsoft.MobCAT.MVVM.Abstractions
         /// <returns>The Task.</returns>
         /// <param name="viewModel">The view model <see cref="Type"/> deriving from <see cref="BaseNavigationViewModel"/>.</param>
         Task PushModalAsync(BaseNavigationViewModel viewModel);
-        Task PopToRootAsync(bool animate);
 
         /// <summary>
         /// Switches the detail page based on the <see cref="BaseNavigationViewModel"/> specified.
