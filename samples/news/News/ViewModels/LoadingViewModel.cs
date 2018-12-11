@@ -10,11 +10,16 @@ namespace News.ViewModels
     /// </summary>
     public class LoadingViewModel : BaseNavigationViewModel
     {
-        public Command ContinueCommand { get; } 
+        public AsyncCommand ContinueCommand { get; }
 
         public LoadingViewModel()
         {
-            ContinueCommand = new Command(async () => await Navigation.PushAsync(new HomeViewModel()));
+            ContinueCommand = new AsyncCommand(OnContinue);
+        }
+
+        private async Task OnContinue()
+        {
+            await Navigation.PushAsync(new HomeViewModel(), true);
         }
     }
 }

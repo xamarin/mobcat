@@ -15,19 +15,6 @@ namespace News.Pages
         public LoadingPage()
         {
             InitializeComponent();
-            //var newsViewModel = new LoadingViewModel();
-            //newsViewModel.InitAsync().HandleResult();
-            //var initViewModel = ViewModel;
-            //this.BindingContext = newsViewModel;
         }
-
-
-        //private void OnItemTapped(object sender, ItemTappedEventArgs e)
-        //{
-        //    if (e == null) 
-        //        return;
-
-        //    ((ListView)sender).SelectedItem = null;
-        //}
     }
 }

@@ -5,7 +5,8 @@
     xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" 
     xmlns:vm="clr-namespace:News.ViewModels;assembly=News"
     x:TypeArguments="vm:HomeViewModel"
-    x:Class="News.Pages.HomePage">
+    x:Class="News.Pages.HomePage"
+    NavigationPage.HasBackButton="false">
     
     <Label Text="Home Page Here" 
            VerticalOptions="Center" 

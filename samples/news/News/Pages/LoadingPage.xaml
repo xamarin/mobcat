@@ -6,7 +6,8 @@
     xmlns:vm="clr-namespace:News.ViewModels;assembly=News"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:TypeArguments="vm:LoadingViewModel"
-    x:Class="News.Pages.LoadingPage">
+    x:Class="News.Pages.LoadingPage"
+    NavigationPage.HasNavigationBar="false">
     
     <forms:AnimationView 
         Animation="LoadingAnimation.json" 
