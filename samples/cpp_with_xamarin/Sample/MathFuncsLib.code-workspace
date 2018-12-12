@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "MathFuncsLib"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/bin" : true,
+			"**/tmp" : true
+		}
+	}
+}
