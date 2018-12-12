@@ -119,7 +119,7 @@ The steps in this first-principles walkthrough are relatively simple, and it sho
 ## Creating the native library
 I have used the *MathFuncsLib* example from [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017) as the basis for our native library. The intent was to keep the C/C++ code simple with the focus being on the subsequent steps for wrapping, distributing, and consuming our library in a Xamarin.Forms app.  
 
-Depending on your background and experience, it may take some time to follow this part of the walkthrough end-to-end. You can always skip ahead to the [next step: wrapping the native library](#wrapping-the-native-library) using the [precompiled libraries](../Sample/Artefacts/PrecompiledLibs.zip) and return to complete this part at a more convenient time.  
+Depending on your background and experience, it may take some time to follow this part of the walkthrough end-to-end. You can always skip ahead to the [next step: wrapping the native library](#wrapping-the-native-library) using the [precompiled libraries](https://github.com/xamarin/mobcat/blob/master/samples/cpp_with_xamarin/Sample/Artefacts/PrecompiledLibs.zip) and return to complete this part at a more convenient time.  
 
 You will require **Visual Studio for Mac** in order to follow along with the first part of this walkthrough. You can use **Visual Studio 2017** (on **Windows**) for the subsequent steps if you prefer however the walkthrough steps will be specific to **Visual Studio for Mac**. 
 
@@ -952,7 +952,7 @@ The intent was of course to keep this part of the walkthrough simple and unopini
 Finally, compilers have various optional flags that can be used including optimizations that can be leveraged where it makes sense to do so.
 
 ## Wrapping the native library
-For this part of the walkthrough we require the outputs from the previous stage. If you were unable to complete these steps (or elected to skip it), you can [download the libraries](../Sample/Artefacts/PrecompiledLibs.zip) directly. 
+For this part of the walkthrough we require the outputs from the previous stage. If you were unable to complete these steps (or elected to skip it), you can [download the libraries](https://github.com/xamarin/mobcat/blob/master/samples/cpp_with_xamarin/Sample/Artefacts/PrecompiledLibs.zip) directly. 
 
 ### Creating the Visual Studio solution
 1. In **Visual Studio for Mac**, click **New Project** (from the *Welcome Page*) or **New Solution** (from the *File* menu)
