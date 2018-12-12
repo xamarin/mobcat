@@ -16,7 +16,13 @@ namespace News
         {
             InitializeComponent();
             RegisterServices();
-            MainPage = new BaseNavigationPage(new LoadingPage() { ViewModel = new LoadingViewModel() });
+            SetMainPage();
+        }
+
+        private void SetMainPage()
+        {
+            var startPage = new LoadingPage() { ViewModel = new LoadingViewModel() };
+            MainPage = new BaseNavigationPage(startPage);
         }
 
         private void RegisterServices()

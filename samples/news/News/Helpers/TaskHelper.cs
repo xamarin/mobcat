@@ -15,6 +15,7 @@ namespace News.Helpers
             {
                 var ex = r.Exception?.Flatten();
                 Crashes.TrackError(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }, TaskContinuationOptions.OnlyOnFaulted);
         }
     }

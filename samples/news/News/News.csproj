@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
     <PackageReference Include="MobCAT.ClientSecrets.Fody" Version="1.0.0-alpha3" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="2.7.0" />
+    <PackageReference Include="Xamarin.Forms.CarouselView" Version="2.3.0-pre2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -26,6 +27,7 @@
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
     <Folder Include="Pages\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />

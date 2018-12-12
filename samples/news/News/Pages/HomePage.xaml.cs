@@ -16,5 +16,11 @@ namespace News.Pages
         {
             InitializeComponent();
         }
+
+        void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+            // TODO: navigate to arcitle details
+        }
     }
 }
