@@ -7,7 +7,8 @@
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:TypeArguments="vm:LoadingViewModel"
     x:Class="News.Pages.LoadingPage"
-    NavigationPage.HasNavigationBar="false">
+    NavigationPage.HasNavigationBar="false"
+    NavigationPage.HasBackButton="false">
     
     <forms:AnimationView 
         Animation="LoadingAnimation.json" 

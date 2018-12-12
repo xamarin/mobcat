@@ -1,26 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" xmlns:vm="clr-namespace:News.ViewModels;assembly=News" xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" x:TypeArguments="vm:HomeViewModel" x:Class="News.Pages.HomePage" NavigationPage.HasBackButton="false">
-    <!-- <Label Text="Home Page Here" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center"/>-->
-    <Grid BackgroundColor="#484848" Padding="0" Margin="0">
+<local:BaseContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" 
+    xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
+    x:TypeArguments="vm:HomeViewModel" 
+    x:Class="News.Pages.HomePage" 
+    NavigationPage.HasNavigationBar="false" 
+    NavigationPage.HasBackButton="false"
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="#3c3c3c">
+    
+    <Label Text="{Binding SelectedCategory.Title}"
+           VerticalOptions="Start" 
+           HorizontalOptions="Start"
+           TextColor="White"
+           BackgroundColor="Purple"/>
+    
+    <Grid BackgroundColor="#484848" 
+          Padding="0" 
+          Margin="0">
+        
         <cv:CarouselView ItemsSource="{Binding Categories}">
             <cv:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#484848" Padding="0" Margin="0">
-                        <Label Text="{Binding Title}" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Center" />
-                        <ListView ItemSelected="Handle_ItemSelected" ItemsSource="{Binding Articles}">
+                    <Grid VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand" 
+                          BackgroundColor="#484848" 
+                          Padding="0" 
+                          Margin="0">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Frame VerticalOptions="FillAndExpand" 
+                               HorizontalOptions="FillAndExpand"
+                               BackgroundColor="#3C3C3C"
+                               Grid.Row="0">
+                            <Label Text="{Binding Title}" 
+                                   TextColor="White" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Start"
+                                   FontSize="33"
+                                   LineBreakMode="MiddleTruncation"
+                                   MaxLines="1"
+                                   Margin="5"/>
+                        </Frame>
+                        
+                        <ListView ItemSelected="Handle_ItemSelected"
+                                  ItemsSource="{Binding Articles}"
+                                  Grid.Row="1"
+                                  BackgroundColor="Transparent">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Label Text="{Binding Title}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="150" BackgroundColor="#3C3C3C" Margin="10,10,10,0"/>
+                                        <Label Text="{Binding Title}" 
+                                               TextColor="White" 
+                                               VerticalOptions="Start" 
+                                               HorizontalOptions="Start" 
+                                               MaxLines="3"
+                                               LineBreakMode="WordWrap"
+                                               HeightRequest="300" 
+                                               BackgroundColor="#3C3C3C"
+                                               Margin="10,10,10,0"/>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+                        
                     </Grid>
                 </DataTemplate>
             </cv:CarouselView.ItemTemplate>
         </cv:CarouselView>
+        
     </Grid>
+    
 </local:BaseContentPage>
