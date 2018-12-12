@@ -13,11 +13,6 @@
     ios:Page.UseSafeArea="true"
     BackgroundColor="#3c3c3c">
     
-    <Label Text="{Binding SelectedCategory.Title}"
-           VerticalOptions="Start" 
-           HorizontalOptions="Start"
-           TextColor="White"/>
-    
     <Grid BackgroundColor="#484848" 
           Padding="0" 
           Margin="0">
@@ -42,12 +37,12 @@
                                Grid.Row="0">
                             <Label Text="{Binding Title}" 
                                    TextColor="White" 
-                                   VerticalOptions="Center" 
-                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="End"
+                                   HorizontalTextAlignment="Start"
                                    FontSize="33"
                                    LineBreakMode="MiddleTruncation"
                                    MaxLines="1"
-                                   Margin="5"/>
+                                   Margin="0"/>
                         </Frame>
                         
                         <ListView ItemSelected="Handle_ItemSelected"
@@ -55,7 +50,7 @@
                                   Grid.Row="1"
                                   SelectionMode="Single "
                                   BackgroundColor="Transparent"
-                                  RowHeight="250"
+                                  RowHeight="230"
                                   SeparatorVisibility="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
