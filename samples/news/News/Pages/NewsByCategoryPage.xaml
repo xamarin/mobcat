@@ -37,7 +37,7 @@
                               ItemsSource="{Binding Articles}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
-                              RowHeight="230"
+                              RowHeight="250"
                               SeparatorVisibility="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>

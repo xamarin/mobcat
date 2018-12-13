@@ -11,7 +11,7 @@ namespace News.ViewModels
     /// </summary>
     public abstract class BaseNewsViewModel : BaseNavigationViewModel
     {
-        public ObservableCollection<Article> Articles { get; } = new ObservableCollection<Article>();
+        public ObservableCollection<ArticleViewModel> Articles { get; } = new ObservableCollection<ArticleViewModel>();
 
         public BaseNewsViewModel()
         {
@@ -34,6 +34,6 @@ namespace News.ViewModels
             }
         }
 
-        protected abstract Task<IEnumerable<Article>> FetchArticlesAsync();
+        protected abstract Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync();
     }
 }

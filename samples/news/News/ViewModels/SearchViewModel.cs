@@ -9,9 +9,9 @@ namespace News.ViewModels
     /// </summary>
     public class SearchViewModel : BaseNewsViewModel
     {
-        protected override Task<IEnumerable<Article>> FetchArticlesAsync()
+        protected override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
-            return Task.FromResult((IEnumerable<Article>)new Article[0]);
+            return Task.FromResult((IEnumerable<ArticleViewModel>)new ArticleViewModel[0]);
         }
     }
 }

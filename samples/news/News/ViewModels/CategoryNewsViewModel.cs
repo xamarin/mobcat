@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NewsAPI;
 using NewsAPI.Constants;
@@ -21,7 +22,7 @@ namespace News.ViewModels
             Category = category;
         }
 
-        protected async override Task<IEnumerable<Article>> FetchArticlesAsync()
+        protected async override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
             // init with your API key
             var request = new TopHeadlinesRequest
@@ -37,7 +38,11 @@ namespace News.ViewModels
             // TODO: replace with custom implementation of the data provider
             var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
             var articles = await newsApiClient.GetTopHeadlinesAsync(request);
-            return articles?.Articles;
+            var result = (IEnumerable<ArticleViewModel>)articles?.Articles?
+                .Select(a => new ArticleViewModel(a))
+                .ToList();
+
+            return result;
         }
     }
 }
