@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="News.ViewCells.ArticleViewCell">
+    <Frame BackgroundColor="#3c3c3c" 
+           HasShadow="true"
+           IsClippedToBounds="false"
+           VerticalOptions="FillAndExpand"
+           HorizontalOptions="FillAndExpand"
+           Margin="10"
+           Padding="0"
+           CornerRadius="10">
+        <Frame BackgroundColor="Transparent" 
+               HasShadow="false"
+               IsClippedToBounds="true"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               Margin="0"
+               Padding="0"
+               CornerRadius="10">
+             <Grid VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.65*"/>
+                    <RowDefinition Height="0.35*"/>
+                </Grid.RowDefinitions>
+                <Label Text="🗞️" 
+                       FontSize="60" 
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Grid.Row="0"/>
+                <Image Source="{Binding UrlToImage}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       Aspect="AspectFill"
+                       Grid.Row="0"
+                       Grid.RowSpan="2"/>
+                <Grid VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand"
+                      BackgroundColor="#e6272727"
+                      Grid.Row="1">
+                    <Label Text="{Binding Title}" 
+                           TextColor="White"
+                           MaxLines="2"
+                           FontSize="18"
+                           Margin="10,0,10,0"
+                           VerticalOptions="CenterAndExpand"
+                           LineBreakMode="TailTruncation" />
+                </Grid>
+            </Grid>
+        </Frame>
+    </Frame>
+</ViewCell>
