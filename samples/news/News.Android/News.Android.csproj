@@ -100,6 +100,22 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorites.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_news.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_sources.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_favorites.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_news.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_sources.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_favorites.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_news.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_sources.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_favorites.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_news.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_sources.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

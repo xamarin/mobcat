@@ -163,5 +163,11 @@
     <BundleResource Include="Resources\LoadingAnimation.json" />
     <BundleResource Include="Resources\ic_news%402x.png" />
     <BundleResource Include="Resources\ic_news%403x.png" />
+    <BundleResource Include="Resources\ic_sources%402x.png" />
+    <BundleResource Include="Resources\ic_sources%403x.png" />
+    <BundleResource Include="Resources\ic_favorites%402x.png" />
+    <BundleResource Include="Resources\ic_favorites%403x.png" />
+    <BundleResource Include="Resources\ic_search%402x.png" />
+    <BundleResource Include="Resources\ic_search%403x.png" />
   </ItemGroup>
 </Project>

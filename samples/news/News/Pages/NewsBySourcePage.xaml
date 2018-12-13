@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" 
+    xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
+    x:TypeArguments="vm:NewsBySourceViewModel" 
+    x:Class="News.Pages.NewsBySourcePage" 
+    Title="sources"
+    Icon="ic_sources.png">
+    
+    <Label Text="News By Source Page" 
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+    
+</local:BaseContentPage>
