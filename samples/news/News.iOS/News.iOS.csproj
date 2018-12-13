@@ -161,5 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\LoadingAnimation.json" />
+    <BundleResource Include="Resources\ic_news%402x.png" />
+    <BundleResource Include="Resources\ic_news%403x.png" />
   </ItemGroup>
 </Project>
