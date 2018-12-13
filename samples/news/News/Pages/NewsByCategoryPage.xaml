@@ -10,108 +10,93 @@
     BackgroundColor="#3c3c3c"
     Title="news"
     Icon="ic_news.png">
-    
-    <Grid BackgroundColor="#484848" 
-          Padding="0" 
-          Margin="0">
         
-        <cv:CarouselView ItemsSource="{Binding Categories}">
-            <cv:CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Grid VerticalOptions="FillAndExpand" 
-                          HorizontalOptions="FillAndExpand" 
-                          BackgroundColor="#484848" 
-                          Padding="0" 
-                          Margin="0">
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Frame VerticalOptions="FillAndExpand" 
-                               HorizontalOptions="FillAndExpand"
-                               BackgroundColor="#3C3C3C"
-                               HasShadow="true"
-                               Grid.Row="0">
-                            <Label Text="{Binding Title}" 
-                                   TextColor="White" 
-                                   VerticalTextAlignment="End"
-                                   HorizontalTextAlignment="Start"
-                                   FontSize="33"
-                                   LineBreakMode="MiddleTruncation"
-                                   MaxLines="1"
-                                   Margin="0"/>
-                        </Frame>
-                        
-                        <ListView ItemSelected="Handle_ItemSelected"
-                                  ItemsSource="{Binding Articles}"
-                                  Grid.Row="1"
-                                  SelectionMode="Single "
-                                  BackgroundColor="Transparent"
-                                  RowHeight="230"
-                                  SeparatorVisibility="None">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <Frame BackgroundColor="#3c3c3c" 
-                                               HasShadow="true"
-                                               IsClippedToBounds="false"
+    <cv:CarouselView ItemsSource="{Binding Categories}">
+        <cv:CarouselView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Orientation="Vertical"
+                             VerticalOptions="FillAndExpand" 
+                             HorizontalOptions="FillAndExpand"
+                             Padding="0" 
+                             Margin="0"
+                             Spacing="0">
+                    <Label Text="{Binding Title}" 
+                           TextColor="White" 
+                           VerticalTextAlignment="End"
+                           HorizontalTextAlignment="Start"
+                           FontSize="33"
+                           LineBreakMode="MiddleTruncation"
+                           MaxLines="1"
+                           Margin="15,30,15,10"/>
+                    <Grid VerticalOptions="Start" 
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#2c2c2c"
+                             HeightRequest="1"/>
+                    <ListView ItemSelected="Handle_ItemSelected"
+                              ItemsSource="{Binding Articles}"
+                              SelectionMode="Single"
+                              BackgroundColor="#585858"
+                              RowHeight="230"
+                              SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame BackgroundColor="#3c3c3c" 
+                                           HasShadow="true"
+                                           IsClippedToBounds="false"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           Margin="10,5"
+                                           Padding="0"
+                                           CornerRadius="10">
+                                        <Frame BackgroundColor="Transparent" 
+                                               HasShadow="false"
+                                               IsClippedToBounds="true"
                                                VerticalOptions="FillAndExpand"
                                                HorizontalOptions="FillAndExpand"
-                                               Margin="10,5"
+                                               Margin="0"
                                                Padding="0"
                                                CornerRadius="10">
-                                            <Frame BackgroundColor="Transparent" 
-                                                   HasShadow="false"
-                                                   IsClippedToBounds="true"
-                                                   VerticalOptions="FillAndExpand"
-                                                   HorizontalOptions="FillAndExpand"
-                                                   Margin="0"
-                                                   Padding="0"
-                                                   CornerRadius="10">
-                                                 <Grid VerticalOptions="FillAndExpand"
-                                                       HorizontalOptions="FillAndExpand">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="0.65*"/>
-                                                        <RowDefinition Height="0.35*"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Label Text="🗞️" 
-                                                           FontSize="60" 
+                                             <Grid VerticalOptions="FillAndExpand"
+                                                   HorizontalOptions="FillAndExpand">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.65*"/>
+                                                    <RowDefinition Height="0.35*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="🗞️" 
+                                                       FontSize="60" 
+                                                       TextColor="White"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="Center"
+                                                       Grid.Row="0"/>
+                                                <Image Source="{Binding UrlToImage}"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       Aspect="AspectFill"
+                                                       Grid.Row="0"
+                                                       Grid.RowSpan="2"/>
+                                                <Grid VerticalOptions="FillAndExpand" 
+                                                      HorizontalOptions="FillAndExpand"
+                                                      BackgroundColor="#e6272727"
+                                                      Grid.Row="1">
+                                                    <Label Text="{Binding Title}" 
                                                            TextColor="White"
-                                                           VerticalOptions="Center"
-                                                           HorizontalOptions="Center"
-                                                           Grid.Row="0"/>
-                                                    <Image Source="{Binding UrlToImage}"
-                                                           VerticalOptions="FillAndExpand"
-                                                           HorizontalOptions="FillAndExpand"
-                                                           Aspect="AspectFill"
-                                                           Grid.Row="0"
-                                                           Grid.RowSpan="2"/>
-                                                    <Grid VerticalOptions="FillAndExpand" 
-                                                          HorizontalOptions="FillAndExpand"
-                                                          BackgroundColor="#e6272727"
-                                                          Grid.Row="1">
-                                                        <Label Text="{Binding Title}" 
-                                                               TextColor="White"
-                                                               MaxLines="2"
-                                                               FontSize="18"
-                                                               Margin="10,0,10,0"
-                                                               VerticalOptions="CenterAndExpand"
-                                                               LineBreakMode="TailTruncation" />
-                                                    </Grid>
+                                                           MaxLines="2"
+                                                           FontSize="18"
+                                                           Margin="10,0,10,0"
+                                                           VerticalOptions="CenterAndExpand"
+                                                           LineBreakMode="TailTruncation" />
                                                 </Grid>
-                                            </Frame>
+                                            </Grid>
                                         </Frame>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        
-                    </Grid>
-                </DataTemplate>
-            </cv:CarouselView.ItemTemplate>
-        </cv:CarouselView>
-        
-    </Grid>
-    
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </DataTemplate>
+        </cv:CarouselView.ItemTemplate>
+    </cv:CarouselView>
+
 </local:BaseContentPage>

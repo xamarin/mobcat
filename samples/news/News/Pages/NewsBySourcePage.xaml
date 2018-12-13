@@ -6,6 +6,7 @@
     xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
     x:TypeArguments="vm:NewsBySourceViewModel" 
     x:Class="News.Pages.NewsBySourcePage" 
+    BackgroundColor="#3c3c3c"
     Title="sources"
     Icon="ic_sources.png">
     
