@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" 
+    xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
+    x:TypeArguments="vm:SearchViewModel" 
+    x:Class="News.Pages.SearchPage" 
+    BackgroundColor="#3c3c3c"
+    Title="search"
+    Icon="ic_search.png">
+    
+    <Label Text="Search is here"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+    
+</local:BaseContentPage>

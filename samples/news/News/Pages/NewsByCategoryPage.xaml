@@ -46,7 +46,7 @@
                                            IsClippedToBounds="false"
                                            VerticalOptions="FillAndExpand"
                                            HorizontalOptions="FillAndExpand"
-                                           Margin="10,5"
+                                           Margin="10"
                                            Padding="0"
                                            CornerRadius="10">
                                         <Frame BackgroundColor="Transparent" 

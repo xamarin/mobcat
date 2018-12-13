@@ -7,11 +7,11 @@ namespace News.ViewModels
     /// <summary>
     /// Favorite news view model.
     /// </summary>
-    public class FavoriteNewsViewModel : BaseNewsViewModel
+    public class FavoritesViewModel : BaseNewsViewModel
     {
         protected override Task<IEnumerable<Article>> FetchArticlesAsync()
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult((IEnumerable<Article>)new Article[0]);
         }
     }
 }

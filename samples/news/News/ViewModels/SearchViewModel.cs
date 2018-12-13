@@ -11,7 +11,7 @@ namespace News.ViewModels
     {
         protected override Task<IEnumerable<Article>> FetchArticlesAsync()
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult((IEnumerable<Article>)new Article[0]);
         }
     }
 }

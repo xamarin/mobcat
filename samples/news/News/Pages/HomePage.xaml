@@ -29,4 +29,16 @@
         </pages:NewsBySourcePage.ViewModel>
     </pages:NewsBySourcePage>
     
+    <pages:FavoritesPage>
+        <pages:FavoritesPage.ViewModel>
+            <vm:FavoritesViewModel />
+        </pages:FavoritesPage.ViewModel>
+    </pages:FavoritesPage>
+    
+     <pages:SearchPage>
+        <pages:SearchPage.ViewModel>
+            <vm:SearchViewModel />
+        </pages:SearchPage.ViewModel>
+    </pages:SearchPage>
+    
 </local:BaseTabbedPage>
