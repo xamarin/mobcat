@@ -13,16 +13,12 @@ namespace News.ViewModels
     /// </summary>
     public class NewsByCategoryViewModel : BaseNavigationViewModel
     {
-        private CategoryNewsViewModel _selectedCategory;
         private int _selectedCategoryPosition;
         private bool _isSelectNextCategoryTipEnabled;
         private bool _isSelectNextCategoryTipNotRequired;
+        private bool _isRefreshing;
 
-        public CategoryNewsViewModel SelectedCategory
-        {
-            get { return _selectedCategory; }
-            set { RaiseAndUpdate(ref _selectedCategory, value); }
-        }
+        public CategoryNewsViewModel SelectedCategory => Categories.Count > _selectedCategoryPosition ? Categories[_selectedCategoryPosition] : null;
 
         public int SelectedCategoryPosition
         {
@@ -31,6 +27,7 @@ namespace News.ViewModels
             {
                 if (RaiseAndUpdate(ref _selectedCategoryPosition, value))
                 {
+                    Raise(nameof(SelectedCategory));
                     OnSelectedCategoryPositionChanged();
                 }
             }
@@ -53,23 +50,37 @@ namespace News.ViewModels
             set { RaiseAndUpdate(ref _isSelectNextCategoryTipEnabled, value); }
         }
 
+        // TODO: move to the category view model (base)
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set 
+            {
+                if (RaiseAndUpdate(ref _isRefreshing, value))
+                {
+                    RefreshCommand.ChangeCanExecute();
+                }
+            }
+        }
+
         public Command SelectNextCategoryCommand { get; }
+        public AsyncCommand RefreshCommand { get; }
 
         public NewsByCategoryViewModel()
         {
             SelectNextCategoryCommand = new Command(OnSelectNextCategoryCommandExecuted);
+            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, ()=> !IsRefreshing);
         }
 
         public override Task InitAsync()
         {
-            SelectedCategory = Categories.FirstOrDefault();
             // TODO: init a VM only on category activation
             foreach (var item in Categories)
             {
                 item.InitAsync().HandleResult();
             }
 
-            ShowSelectNextCategoryTipIfRequired().HandleResult();
+            ShowSelectNextCategoryTipIfRequiredAsync().HandleResult();
 
             return base.InitAsync();
         }
@@ -83,7 +94,7 @@ namespace News.ViewModels
             _isSelectNextCategoryTipNotRequired = true;
         }
 
-        private async Task ShowSelectNextCategoryTipIfRequired()
+        private async Task ShowSelectNextCategoryTipIfRequiredAsync()
         {
             if (_isSelectNextCategoryTipNotRequired)
                 return;
@@ -98,13 +109,26 @@ namespace News.ViewModels
             IsSelectNextCategoryTipEnabled = true;
         }
 
-        public void OnSelectNextCategoryCommandExecuted()
+        private void OnSelectNextCategoryCommandExecuted()
         {
             var nextPosition = SelectedCategoryPosition + 1;
             if (nextPosition >= Categories.Count || nextPosition < 0)
                 nextPosition = 0;
 
             SelectedCategoryPosition = nextPosition;
+        }
+
+        private async Task OnRefreshCommandExecutedAsync()
+        {
+            try
+            {
+                IsRefreshing = true;
+                await SelectedCategory.InitAsync();
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
         }
     }
 }

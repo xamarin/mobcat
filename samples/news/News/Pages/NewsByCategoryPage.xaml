@@ -65,6 +65,10 @@
                           Grid.ColumnSpan="2"/>
                     <ListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
+                              IsPullToRefreshEnabled="true"
+                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference categoriesCarousel}}"
+                              RefreshAllowed="true"
+                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference categoriesCarousel}}}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
