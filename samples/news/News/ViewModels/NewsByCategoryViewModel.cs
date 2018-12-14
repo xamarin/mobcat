@@ -14,14 +14,25 @@ namespace News.ViewModels
     public class NewsByCategoryViewModel : BaseNavigationViewModel
     {
         private CategoryNewsViewModel _selectedCategory;
+        private int _selectedCategoryPosition;
         private bool _isSelectNextCategoryTipEnabled;
+        private bool _isSelectNextCategoryTipNotRequired;
 
         public CategoryNewsViewModel SelectedCategory
         {
             get { return _selectedCategory; }
+            set { RaiseAndUpdate(ref _selectedCategory, value); }
+        }
+
+        public int SelectedCategoryPosition
+        {
+            get { return _selectedCategoryPosition; }
             set
             {
-                RaiseAndUpdate(ref _selectedCategory, value);
+                if (RaiseAndUpdate(ref _selectedCategoryPosition, value))
+                {
+                    OnSelectedCategoryPositionChanged();
+                }
             }
         }
 
@@ -58,24 +69,42 @@ namespace News.ViewModels
                 item.InitAsync().HandleResult();
             }
 
-            OnEnableChangeCategoryTipWithDelay().HandleResult();
+            ShowSelectNextCategoryTipIfRequired().HandleResult();
 
             return base.InitAsync();
         }
 
-        private async Task OnEnableChangeCategoryTipWithDelay()
+        private void OnSelectedCategoryPositionChanged()
         {
-            // TODO: ensure we have only one instance of the tip awaiter
+            System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedCategoryPosition}");
+            IsSelectNextCategoryTipEnabled = false;
+
+            // TODO: save to preferences
+            _isSelectNextCategoryTipNotRequired = true;
+        }
+
+        private async Task ShowSelectNextCategoryTipIfRequired()
+        {
+            if (_isSelectNextCategoryTipNotRequired)
+                return;
+
             IsSelectNextCategoryTipEnabled = false;
             await Task.Delay(5000);
+
+            // Verify again if a user took an action and changed a category
+            if (_isSelectNextCategoryTipNotRequired)
+                return;
+
             IsSelectNextCategoryTipEnabled = true;
-            await Task.Delay(3000);
-            IsSelectNextCategoryTipEnabled = false;
         }
 
         public void OnSelectNextCategoryCommandExecuted()
         {
+            var nextPosition = SelectedCategoryPosition + 1;
+            if (nextPosition >= Categories.Count || nextPosition < 0)
+                nextPosition = 0;
 
+            SelectedCategoryPosition = nextPosition;
         }
     }
 }

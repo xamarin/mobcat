@@ -14,7 +14,8 @@
     Icon="ic_news.png">
         
     <cv:CarouselView x:Name="categoriesCarousel"
-                     ItemsSource="{Binding Categories}">
+                     ItemsSource="{Binding Categories}"
+                     Position="{Binding SelectedCategoryPosition}">
         <cv:CarouselView.ItemTemplate>
             <DataTemplate>
                 <Grid VerticalOptions="FillAndExpand" 
