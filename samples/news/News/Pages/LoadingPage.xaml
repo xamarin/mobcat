@@ -11,7 +11,7 @@
     NavigationPage.HasBackButton="false">
     
     <forms:AnimationView 
-        Animation="LoadingAnimation.json" 
+        Animation="lottie_loading_news.json" 
         Loop="false" 
         AutoPlay="true"
         PlaybackFinishedCommand="{Binding ContinueCommand}" 

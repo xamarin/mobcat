@@ -14,6 +14,7 @@ namespace News.ViewModels
     public class NewsByCategoryViewModel : BaseNavigationViewModel
     {
         private CategoryNewsViewModel _selectedCategory;
+        private bool _isSelectNextCategoryTipEnabled;
 
         public CategoryNewsViewModel SelectedCategory
         {
@@ -35,8 +36,17 @@ namespace News.ViewModels
             new CategoryNewsViewModel("Technology \ud83d\udc69‍\ud83d\udcbb" ,NewsAPI.Constants.Categories.Technology),
         };
 
+        public bool IsSelectNextCategoryTipEnabled
+        {
+            get { return _isSelectNextCategoryTipEnabled; }
+            set { RaiseAndUpdate(ref _isSelectNextCategoryTipEnabled, value); }
+        }
+
+        public Command SelectNextCategoryCommand { get; }
+
         public NewsByCategoryViewModel()
         {
+            SelectNextCategoryCommand = new Command(OnSelectNextCategoryCommandExecuted);
         }
 
         public override Task InitAsync()
@@ -48,7 +58,24 @@ namespace News.ViewModels
                 item.InitAsync().HandleResult();
             }
 
+            OnEnableChangeCategoryTipWithDelay().HandleResult();
+
             return base.InitAsync();
+        }
+
+        private async Task OnEnableChangeCategoryTipWithDelay()
+        {
+            // TODO: ensure we have only one instance of the tip awaiter
+            IsSelectNextCategoryTipEnabled = false;
+            await Task.Delay(5000);
+            IsSelectNextCategoryTipEnabled = true;
+            await Task.Delay(3000);
+            IsSelectNextCategoryTipEnabled = false;
+        }
+
+        public void OnSelectNextCategoryCommandExecuted()
+        {
+
         }
     }
 }

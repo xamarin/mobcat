@@ -6,21 +6,32 @@
     xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
     xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:TypeArguments="vm:NewsByCategoryViewModel" 
     x:Class="News.Pages.NewsByCategoryPage" 
     BackgroundColor="#3c3c3c"
     Title="news"
     Icon="ic_news.png">
         
-    <cv:CarouselView ItemsSource="{Binding Categories}">
+    <cv:CarouselView x:Name="categoriesCarousel"
+                     ItemsSource="{Binding Categories}">
         <cv:CarouselView.ItemTemplate>
             <DataTemplate>
-                <StackLayout Orientation="Vertical"
-                             VerticalOptions="FillAndExpand" 
-                             HorizontalOptions="FillAndExpand"
-                             Padding="0" 
-                             Margin="0"
-                             Spacing="0">
+                <Grid VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand"
+                      Padding="0" 
+                      Margin="0"
+                      RowSpacing="0"
+                      ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
                     <Label Text="{Binding Title}" 
                            TextColor="White" 
                            VerticalTextAlignment="End"
@@ -28,24 +39,44 @@
                            FontSize="33"
                            LineBreakMode="MiddleTruncation"
                            MaxLines="1"
-                           Margin="15,30,15,10"/>
+                           Margin="15,30,15,10"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <forms:AnimationView 
+                        BindingContext="{Binding BindingContext, Source={x:Reference categoriesCarousel}}"
+                        IsVisible="{Binding IsSelectNextCategoryTipEnabled}"
+                        IsEnabled="{Binding IsSelectNextCategoryTipEnabled}"
+                        IsPlaying="{Binding IsSelectNextCategoryTipEnabled}"
+                        ClickedCommand="{Binding SelectNextCategoryCommand}"
+                        AutoPlay="true"
+                        Loop="true"
+                        BackgroundColor="Transparent"
+                        Animation="lottie_swipe_left.json" 
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand"
+                        Grid.Row="0"
+                        Grid.Column="1"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
                           BackgroundColor="#2c2c2c"
-                          HeightRequest="1"/>
+                          HeightRequest="1"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="2"/>
                     <ListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
-                              SeparatorVisibility="None">
+                              SeparatorVisibility="None"
+                              Grid.Row="2"
+                              Grid.ColumnSpan="2">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <cell:ArticleViewCell />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackLayout>
+                </Grid>
             </DataTemplate>
         </cv:CarouselView.ItemTemplate>
     </cv:CarouselView>
