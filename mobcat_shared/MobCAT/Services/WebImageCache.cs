@@ -31,7 +31,7 @@ namespace Microsoft.MobCAT.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Logger.Error(ex);
                 }
             }
 

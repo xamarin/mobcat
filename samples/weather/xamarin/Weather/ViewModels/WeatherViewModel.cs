@@ -38,7 +38,7 @@ namespace Weather.ViewModels
             }
             catch (Exception ex)
             {
-                //Previewer or unregistered
+                Logger.Error(ex);
             }
             return null;
         });
@@ -193,7 +193,7 @@ namespace Weather.ViewModels
                         }
                         else
                         {
-                            //TODO: Show error message
+                            WeatherDescription = localizationService.Translate(Constants.LanguageResourceKeys.WeatherUnknownKey);
                         }
                         CurrentTemp = forecast.CurrentTemperature;
                         HighTemp = forecast.MaxTemperature;
@@ -208,16 +208,18 @@ namespace Weather.ViewModels
             {
                 // Handle not supported on device exception
                 CityName = "Unable to retrieve location - Feature not supported";
+                Logger.Error(fnsEx);
             }
             catch (PermissionException pEx)
             {
                 // Handle permission exception
                 CityName = "Unable to retrieve location - Need permission";
+                Logger.Error(pEx);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
                 // Unable to get location
+                Logger.Error(ex);
             }
             finally
             {

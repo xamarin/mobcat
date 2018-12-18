@@ -423,4 +423,11 @@
         <value>Overcast clouds</value>
         <comment>weather condition</comment>
     </data>
+    
+    <data
+        name="unknownweather"
+        xml:space="preserve">
+        <value>Unknown Weather</value>
+        <comment>unknown weather condition</comment>
+    </data>
 </root>

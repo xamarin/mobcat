@@ -423,4 +423,11 @@
         <value>Berawan</value>
         <comment>weather condition</comment>
     </data>
+    
+    <data
+        name="unknownweather"
+        xml:space="preserve">
+        <value>Cuaca Tidak Diketahui</value>
+        <comment>unknown weather condition</comment>
+    </data>
 </root>

@@ -37,4 +37,9 @@
   <ItemGroup>
     <Compile Remove="Localization\AppResources %28copy%29.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Localization\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

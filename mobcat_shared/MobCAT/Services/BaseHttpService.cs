@@ -324,6 +324,7 @@ namespace Microsoft.MobCAT.Services
                 }
                 catch (Exception ex)
                 {
+                    Logger.Error(ex);
                     throw new HttpServiceException(response?.StatusCode ?? HttpStatusCode.ServiceUnavailable, ex);
                 }
             }

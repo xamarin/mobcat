@@ -15,5 +15,10 @@ namespace Weather
             public const string IsCelsiusKey = "IsCelsiusKey";
             public const string WeatherIconKey = "WeatherIconKey";
         }
+
+        public class LanguageResourceKeys
+        {
+            public const string WeatherUnknownKey = "unknownweather";
+        }
     }
 }

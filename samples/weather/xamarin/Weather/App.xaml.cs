@@ -1,6 +1,8 @@
-﻿using Microsoft.AppCenter;
+﻿using System;
+using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.MobCAT;
 using Weather.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,9 +27,9 @@ namespace Weather
                       $"{ServiceConfig.iOSAppCenterSecret}",
                       typeof(Analytics), typeof(Crashes));
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                 //TODO: Log
+                Logger.Error(ex);
             }
         }
 

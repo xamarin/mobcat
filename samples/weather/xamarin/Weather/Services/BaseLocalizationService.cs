@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using Microsoft.MobCAT;
 using Weather.Localization;
 using Weather.Services.Abstractions;
 
@@ -11,6 +13,7 @@ namespace Weather.Services
     {
         const string ResourceId = "Weather.Localization.AppResources";
         static readonly Lazy<ResourceManager> ResourceManager = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, IntrospectionExtensions.GetTypeInfo(typeof(BaseLocalizationService)).Assembly));
+        Dictionary<string, CultureInfo> _cultureInfoCache = new Dictionary<string, CultureInfo>();
 
         public abstract CultureInfo GetCurrentCultureInfo();
 
@@ -26,14 +29,18 @@ namespace Weather.Services
             }
             catch (Exception ex)
             {
-                //TODO: Log
+                Logger.Error(ex);
             }
             return string.Empty;
         }
 
         protected CultureInfo GetCultureInfo(string netLanguage)
         {
-            // this gets called a lot - try/catch can be expensive so consider caching or something
+            if (_cultureInfoCache.ContainsKey(netLanguage))
+            {
+                return _cultureInfoCache[netLanguage];
+            }
+
             var cultureInfo = default(CultureInfo);
             try
             {
@@ -41,6 +48,7 @@ namespace Weather.Services
             }
             catch (CultureNotFoundException exception1)
             {
+                Logger.Error(exception1);
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain)
                 // fallback to first characters, in this case "en"
                 try
@@ -51,12 +59,14 @@ namespace Weather.Services
                 }
                 catch (CultureNotFoundException exception2)
                 {
+                    Logger.Error(exception2);
                     // iOS language not valid .NET culture, falling back to English
                     Console.WriteLine($"{netLanguage} couldn't be set, using 'en' ({exception2.Message})");
                     cultureInfo = new CultureInfo("en");
                 }
             }
 
+            _cultureInfoCache.Add(netLanguage, cultureInfo);
             return cultureInfo;
         }
 

@@ -111,8 +111,7 @@ namespace Microsoft.MobCAT
 
             if (parameters.Length == 1)
             {
-                var exception = parameters[0] as Exception;
-                if (exception != null)
+                if (parameters[0] is Exception exception)
                 {
                     RegisteredService.Log(logType, exception.Message, exception);
                     return;
@@ -141,8 +140,7 @@ namespace Microsoft.MobCAT
                 RegisteredService.Log(LogType.INFO, string.Format("An error occured formatting the logging message: [{0}]", format), exc);
             }
 
-            var ex = parameters[parameters.Length - 1] as Exception;
-            if (ex != null)
+            if (parameters[parameters.Length - 1] is Exception ex)
             {
                 RegisteredService.Log(logType, message, ex);
             }

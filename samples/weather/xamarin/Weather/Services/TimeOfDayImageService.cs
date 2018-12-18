@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.MobCAT;
 using Weather.Extensions;
 using Weather.Services.Abstractions;
 
@@ -69,7 +70,7 @@ namespace Weather.Services
             }
             catch (Exception ex)
             {
-                //TODO: Log
+                Logger.Error(ex);
             }
             return genericTimeImages.Random();
         }

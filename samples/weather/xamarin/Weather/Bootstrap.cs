@@ -26,6 +26,11 @@ namespace Weather
             ServiceContainer.Register<ITimeOfDayImageService>(() => new TimeOfDayImageService());
             ServiceContainer.Register<IValueCacheService>(() => new ValueCacheService());
 
+            //Log to AppCenter for release
+#if RELEASE
+            Logger.RegisterService(new AppCenterLoggingService());
+#endif
+
             platformSpecificBegin?.Invoke();
         }
     }
