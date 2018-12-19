@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.MobCAT;
 using Weather.Services.Abstractions;
 using Xamarin.Essentials;
 
@@ -19,6 +20,7 @@ namespace Weather.Services
                 }
                 catch (Exception ex)
                 {
+                    Logger.Error(ex);
                     tcs.SetException(ex);
                 }
             });

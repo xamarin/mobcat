@@ -424,4 +424,11 @@
         <value>الغيوم الملبدة</value>
         <comment>weather condition</comment>
     </data>
+    
+    <data
+        name="unknownweather"
+        xml:space="preserve">
+        <value>غير معروف</value>
+        <comment>unknown weather condition</comment>
+    </data>
 </root>
