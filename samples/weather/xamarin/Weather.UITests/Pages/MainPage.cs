@@ -25,6 +25,7 @@ namespace Weather.UITests.Pages
         public MainPage SetLocationToRedmond()
         {
             app.Device.SetLocation(latitude: 47.6739, longitude: -122.1215);
+            Thread.Sleep(TimeSpan.FromMinutes(5)); //Wait for location to be set on the phone
             app.WaitForElement(RedmondLabel, timeout: TimeSpan.FromMinutes(3), retryFrequency: TimeSpan.FromSeconds(30));
             app.Screenshot("Location set to Redmond and VM initialized");
             return this;
