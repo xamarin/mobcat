@@ -29,7 +29,7 @@ The Weather iOS specific project contains iOS assets
 The UI Test project  
 
 **Weather.UnitTests:**  
-The unit test project which uses mock services using [Moq](https://github.com/moq/moq4)
+The Unit Test project
 
 
 ## Getting Started
@@ -113,3 +113,14 @@ Accessibility text size is supported using a custom control on iOS, the Accessib
 
 <img src="../readme_illustrations/accessibility_large.png" alt="Weather App with large text" height="350" style="display:inline-block;" />
 </p>
+
+### Logging ###
+Logging is implemented using the [AppCenterLoggingService](https://github.com/xamarin/mobcat/blob/dev/samples/weather/xamarin/Weather/Services/AppCenterLoggingService.cs) which logs exceptions to AppCenter for release builds as configured in [Bootstrap.cs](https://github.com/xamarin/mobcat/blob/dev/samples/weather/xamarin/Weather/Bootstrap.cs). Non-release builds will log exceptions and warnings to the console. 
+
+### Unit Tests ###
+Unit tests are run using [XUnit](https://xunit.github.io). App service functionality is mocked using [Moq](https://github.com/moq/moq4) which highlights a benefit of using a Service Container.
+
+### UI Tests ###
+UI tests were created to adhere to the [Page Object Pattern](https://github.com/xamarin-automation-service/uitest-pop-example) using the [Page Object Pattern Library](https://www.nuget.org/packages/Xamarin.UITest.POP/) where each page has a Page Object which tests are run on.
+
+
