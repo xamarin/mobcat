@@ -44,6 +44,7 @@ namespace Weather.ViewModels
         });
 
         Timer _timer;
+        Timer _locationTimer;
 
         public WeatherViewModel()
         {
@@ -61,13 +62,21 @@ namespace Weather.ViewModels
             }
 
             // Timer to update time
-            _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), state: null, dueTime: 100, period: 10000);
+            _timer = new Timer((state) => Time = DateTime.Now.ToShortTimeString(), state: null, dueTime: TimeSpan.FromSeconds(0.1), period: TimeSpan.FromSeconds(10));
+
+            // Timer to update location
+            _locationTimer = new Timer((state) => Task.Run(RefreshCoordinates), state: null, dueTime: TimeSpan.FromSeconds(20), period: TimeSpan.FromSeconds(20)); //update the location every 20 seconds
         }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            _timer.Dispose();
+
+            _timer?.Dispose();
+            _timer = null;
+
+            _locationTimer?.Dispose();
+            _locationTimer = null;
         }
 
 
@@ -160,8 +169,6 @@ namespace Weather.ViewModels
         {
             forecastsService = ServiceContainer.Resolve<IForecastsService>();
             imageService = ServiceContainer.Resolve<IImageService>();
-            geolocationService = ServiceContainer.Resolve<IGeolocationService>();
-            geocodingService = ServiceContainer.Resolve<IGeocodingService>();
             valueCacheService = ServiceContainer.Resolve<IValueCacheService>();
             localizationService = ServiceContainer.Resolve<ILocalizationService>();
 
@@ -169,37 +176,25 @@ namespace Weather.ViewModels
 
             try
             {
-                // Use last known location for quicker response
-                var location = await geolocationService.GetLastKnownLocationAsync();
-                if (location == null)
+                var coordinates = await RefreshCoordinates();
+                var forecast = await forecastsService.GetForecastAsync(coordinates.Latitude, coordinates.Longitude); //Use lat and long since the city name can be different based on localization
+
+                if (forecast != null)
                 {
-                    location = await geolocationService.GetLocationAsync();
-                }
-
-                if (location != null)
-                {
-                    var places = await geocodingService.GetPlacesAsync(location);
-                    CityName = places.FirstOrDefault()?.CityName;
-
-                    var forecast = await forecastsService.GetForecastAsync(location.Latitude, location.Longitude); //Use lat and long since the city name can be different based on localization
-
-                    if (forecast != null)
+                    var weatherDescription = forecast.Overview;
+                    if (!string.IsNullOrEmpty(weatherDescription))
                     {
-                        var weatherDescription = forecast.Overview;
-                        if (!string.IsNullOrEmpty(weatherDescription))
-                        {
-                            WeatherIcon = WeatherIcons.Lookup(weatherDescription);
-                            WeatherDescription = localizationService.Translate(weatherDescription.Trim().Replace(" ", "").ToLower());
-                        }
-                        else
-                        {
-                            WeatherDescription = localizationService.Translate(Constants.LanguageResourceKeys.WeatherUnknownKey);
-                        }
-                        CurrentTemp = forecast.CurrentTemperature;
-                        HighTemp = forecast.MaxTemperature;
-                        LowTemp = forecast.MinTemperature;
-                        WeatherImage = await imageService.GetImageAsync(forecast.Name, forecast.Overview);
+                        WeatherIcon = WeatherIcons.Lookup(weatherDescription);
+                        WeatherDescription = localizationService.Translate(weatherDescription.Trim().Replace(" ", "").ToLower());
                     }
+                    else
+                    {
+                        WeatherDescription = localizationService.Translate(Constants.LanguageResourceKeys.WeatherUnknownKey);
+                    }
+                    CurrentTemp = forecast.CurrentTemperature;
+                    HighTemp = forecast.MaxTemperature;
+                    LowTemp = forecast.MinTemperature;
+                    WeatherImage = await imageService.GetImageAsync(forecast.Name, forecast.Overview);
                 }
 
                 SaveWeatherState();
@@ -229,6 +224,29 @@ namespace Weather.ViewModels
                     WeatherImage = valueCacheService.Load(Constants.CacheKeys.WeatherImageKey, default(string));
                 }
             }
+        }
+
+        private async Task<Coordinates> RefreshCoordinates()
+        {
+            Coordinates coordinates = null;
+            try
+            {
+                geolocationService = geolocationService ?? ServiceContainer.Resolve<IGeolocationService>();
+                geocodingService = geocodingService ?? ServiceContainer.Resolve<IGeocodingService>();
+
+                coordinates = await geolocationService.GetLocationAsync();
+
+                if (coordinates != null) //Update the city name
+                {
+                    var places = await geocodingService.GetPlacesAsync(coordinates);
+                    CityName = places.FirstOrDefault()?.CityName;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+            return coordinates;
         }
 
         private void SaveWeatherState()

@@ -17,9 +17,10 @@ namespace Weather.Services
             return location == null ? null : LocationToCoordinates(location);
         }
 
-        public async Task<Coordinates> GetLocationAsync()
+        async Task<Coordinates> IGeolocationService.GetLocationAsync()
         {
-            var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(Geolocation.GetLocationAsync);
+            var geolocationRequest = new GeolocationRequest(GeolocationAccuracy.Medium);
+            var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(()=>Geolocation.GetLocationAsync(geolocationRequest));
             return location == null ? null : LocationToCoordinates(location);
         }
 
