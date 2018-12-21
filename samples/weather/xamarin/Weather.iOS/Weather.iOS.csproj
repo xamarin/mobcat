@@ -173,6 +173,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-76%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-83.5%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-20.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhoneXSMax.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhoneXR.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhoneX.png" />
+    <ImageAsset Include="Assets.xcassets\Launch.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Launch.imageset\iPhoneX.png" />
+    <ImageAsset Include="Assets.xcassets\Launch.imageset\iPhoneXSMax.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -246,6 +252,10 @@
     <Folder Include="Assets.xcassets\midday4.imageset\" />
     <Folder Include="Renderers\" />
     <Folder Include="Services\" />
+    <Folder Include="Assets.xcassets\Launch.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
