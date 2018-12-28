@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
+using News.Helpers;
 using NewsAPI.Models;
 
 namespace News.ViewModels
@@ -20,6 +21,14 @@ namespace News.ViewModels
         public async override Task InitAsync()
         {
             await base.InitAsync();
+            await InitNewsAsync();
+        }
+
+        public async virtual Task InitNewsAsync(bool forceRefresh = false)
+        {
+            if (!Articles.IsNullOrEmpty() && !forceRefresh)
+                return;
+
             var articles = await FetchArticlesAsync();
             if (articles != null)
             {

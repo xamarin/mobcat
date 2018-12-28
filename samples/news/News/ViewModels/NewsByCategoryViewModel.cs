@@ -28,6 +28,8 @@ namespace News.ViewModels
                 if (RaiseAndUpdate(ref _selectedCategoryPosition, value))
                 {
                     Raise(nameof(SelectedCategory));
+                    Raise(nameof(IsRefreshing));
+                    RefreshCommand.ChangeCanExecute();
                     OnSelectedCategoryPositionChanged();
                 }
             }
@@ -69,29 +71,24 @@ namespace News.ViewModels
         public NewsByCategoryViewModel()
         {
             SelectNextCategoryCommand = new Command(OnSelectNextCategoryCommandExecuted);
-            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, ()=> !IsRefreshing);
+            RefreshCommand = new AsyncCommand(() => OnRefreshCommandExecutedAsync(true), () => !IsRefreshing);
         }
 
-        public override Task InitAsync()
+        public async override Task InitAsync()
         {
-            // TODO: init a VM only on category activation
-            foreach (var item in Categories)
-            {
-                item.InitAsync().HandleResult();
-            }
-
             ShowSelectNextCategoryTipIfRequiredAsync().HandleResult();
-
-            return base.InitAsync();
+            await SelectedCategory.InitNewsAsync(false);
+            await base.InitAsync();
         }
 
         private void OnSelectedCategoryPositionChanged()
         {
             System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedCategoryPosition}");
             IsSelectNextCategoryTipEnabled = false;
-
             // TODO: save to preferences
             _isSelectNextCategoryTipNotRequired = true;
+
+            SelectedCategory.InitNewsAsync(false).HandleResult();
         }
 
         private async Task ShowSelectNextCategoryTipIfRequiredAsync()
@@ -100,7 +97,7 @@ namespace News.ViewModels
                 return;
 
             IsSelectNextCategoryTipEnabled = false;
-            await Task.Delay(5000);
+            await Task.Delay(10000);
 
             // Verify again if a user took an action and changed a category
             if (_isSelectNextCategoryTipNotRequired)
@@ -118,12 +115,12 @@ namespace News.ViewModels
             SelectedCategoryPosition = nextPosition;
         }
 
-        private async Task OnRefreshCommandExecutedAsync()
+        private async Task OnRefreshCommandExecutedAsync(bool forceRefresh)
         {
             try
             {
                 IsRefreshing = true;
-                await SelectedCategory.InitAsync();
+                await SelectedCategory.InitNewsAsync(forceRefresh);
             }
             finally
             {

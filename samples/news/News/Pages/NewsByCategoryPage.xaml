@@ -13,7 +13,7 @@
     Title="news"
     Icon="ic_news.png">
         
-    <cv:CarouselView x:Name="categoriesCarousel"
+    <cv:CarouselView x:Name="carousel"
                      ItemsSource="{Binding Categories}"
                      Position="{Binding SelectedCategoryPosition}">
         <cv:CarouselView.ItemTemplate>
@@ -43,20 +43,19 @@
                            Margin="15,30,15,10"
                            Grid.Row="0"
                            Grid.Column="0"/>
-                    <forms:AnimationView 
-                        BindingContext="{Binding BindingContext, Source={x:Reference categoriesCarousel}}"
-                        IsVisible="{Binding IsSelectNextCategoryTipEnabled}"
-                        IsEnabled="{Binding IsSelectNextCategoryTipEnabled}"
-                        IsPlaying="{Binding IsSelectNextCategoryTipEnabled}"
-                        ClickedCommand="{Binding SelectNextCategoryCommand}"
-                        AutoPlay="true"
-                        Loop="true"
-                        BackgroundColor="Transparent"
-                        Animation="lottie_swipe_left.json" 
-                        VerticalOptions="FillAndExpand" 
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="0"
-                        Grid.Column="1"/>
+                    <forms:AnimationView BindingContext="{Binding BindingContext, Source={x:Reference carousel}}"
+                                         IsVisible="{Binding IsSelectNextCategoryTipEnabled}"
+                                         IsEnabled="{Binding IsSelectNextCategoryTipEnabled}"
+                                         IsPlaying="{Binding IsSelectNextCategoryTipEnabled}"
+                                         ClickedCommand="{Binding SelectNextCategoryCommand}"
+                                         AutoPlay="true"
+                                         Loop="true"
+                                         BackgroundColor="Transparent"
+                                         Animation="lottie_swipe_left.json" 
+                                         VerticalOptions="FillAndExpand" 
+                                         HorizontalOptions="FillAndExpand"
+                                         Grid.Row="0"
+                                         Grid.Column="1"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
                           BackgroundColor="#2c2c2c"
@@ -66,9 +65,9 @@
                     <ListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
                               IsPullToRefreshEnabled="true"
-                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference categoriesCarousel}}"
+                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"
                               RefreshAllowed="true"
-                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference categoriesCarousel}}}"
+                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"

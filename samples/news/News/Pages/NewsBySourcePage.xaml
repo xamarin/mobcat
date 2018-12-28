@@ -4,14 +4,65 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:Microsoft.MobCAT.Forms.Pages;assembly=MobCAT.Forms" 
     xmlns:vm="clr-namespace:News.ViewModels;assembly=News" 
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
+    xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:TypeArguments="vm:NewsBySourceViewModel" 
     x:Class="News.Pages.NewsBySourcePage" 
     BackgroundColor="#3c3c3c"
     Title="sources"
     Icon="ic_sources.png">
     
-    <Label Text="News By Source Page" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <cv:CarouselView x:Name="carousel"
+                     ItemsSource="{Binding Sources}"
+                     Position="{Binding SelectedSourcePosition}">
+        <cv:CarouselView.ItemTemplate>
+            <DataTemplate>
+                <Grid VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand"
+                      Padding="0" 
+                      Margin="0"
+                      RowSpacing="0"
+                      ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding Title}" 
+                           TextColor="White" 
+                           VerticalTextAlignment="End"
+                           HorizontalTextAlignment="Start"
+                           FontSize="33"
+                           LineBreakMode="MiddleTruncation"
+                           MaxLines="1"
+                           Margin="15,30,15,10"
+                           Grid.Row="0"/>
+                    <Grid VerticalOptions="Start" 
+                          HorizontalOptions="FillAndExpand"
+                          BackgroundColor="#2c2c2c"
+                          HeightRequest="1"
+                          Grid.Row="1"/>
+                    <ListView ItemSelected="Handle_ItemSelected"
+                              ItemsSource="{Binding Articles}"
+                              IsPullToRefreshEnabled="true"
+                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"
+                              RefreshAllowed="true"
+                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}}"
+                              SelectionMode="Single"
+                              BackgroundColor="#585858"
+                              RowHeight="250"
+                              SeparatorVisibility="None"
+                              Grid.Row="2">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <cell:ArticleViewCell />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+        </cv:CarouselView.ItemTemplate>
+    </cv:CarouselView>
     
 </local:BaseContentPage>

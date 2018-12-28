@@ -15,14 +15,14 @@ namespace News.Pages
 
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            var selectedArticle = (Article)e.SelectedItem;
+            var selectedArticle = (ArticleViewModel)e.SelectedItem;
             ((ListView)sender).SelectedItem = null;
 
             if (selectedArticle != null)
             {
                 // TODO: move to view model as a command
                 // TODO: parse and validate url
-                var validUri = new Uri(selectedArticle.Url);
+                var validUri = new Uri(selectedArticle.UrlToArticle);
                 Device.OpenUri(validUri);
             }
         }

@@ -29,6 +29,8 @@
     <Folder Include="Pages\" />
     <Folder Include="Views\" />
     <Folder Include="ViewCells\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />

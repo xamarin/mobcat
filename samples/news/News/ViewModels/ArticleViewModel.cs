@@ -65,14 +65,29 @@ namespace News.ViewModels
             }
         }
 
+        // TODO: load and save from preferences
+        private bool _isFavorite;
+        public bool IsFavorite
+        {
+            get { return _isFavorite; }
+            set { RaiseAndUpdate(ref _isFavorite, value); }
+        }
+
+        public Command SwitchFavoriteArticleCommand { get; }
+
         public ArticleViewModel(Article article)
         {
             if (article == null)
                 throw new ArgumentNullException(nameof(article));
 
             Article = article;
+            SwitchFavoriteArticleCommand = new Command(OnSwitchFavoriteArticleCommandExecuted);
         }
 
-      
+
+        private void OnSwitchFavoriteArticleCommandExecuted()
+        {
+            IsFavorite = !IsFavorite;
+        }
     }
 }

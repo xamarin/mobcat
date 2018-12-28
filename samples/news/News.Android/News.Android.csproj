@@ -116,6 +116,14 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_favorites.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_news.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_sources.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_favorite_fill.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_favorite_empty.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_favorite_fill.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_favorite_empty.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_favorite_fill.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_favorite_empty.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorite_fill.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorite_empty.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -141,6 +149,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\lottie_loading_news.json" />
     <AndroidAsset Include="Assets\lottie_swipe_left.json" />
+    <AndroidAsset Include="Assets\lottie_favorite_add.json" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

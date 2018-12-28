@@ -7,33 +7,26 @@ using NewsAPI.Models;
 
 namespace News.ViewModels
 {
-    /// <summary>
-    /// Category news view model.
-    /// </summary>
-    public class CategoryNewsViewModel : BaseNewsViewModel
+    public class SourceNewsViewModel : BaseNewsViewModel
     {
         public string Title { get; }
 
-        public Categories? Category { get; }
+        public string Source { get; }
 
-        public CategoryNewsViewModel(string title, Categories? category = null)
+        public SourceNewsViewModel(string title, string source)
         {
             Title = title;
-            Category = category;
+            Source = source;
         }
 
         protected async override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
-            System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for {Title} Category");
+            System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for {Title} Source");
 
             var request = new TopHeadlinesRequest
             {
-                //Q = "Apple",
-                Country = Countries.US,
-                //SortBy = SortBys.Popularity,
+                Sources = new List<string> { Source },
                 Language = Languages.EN,
-                Category = Category,
-                //From = DateTime.UtcNow.AddDays(-1),
             };
 
             // TODO: replace with custom implementation of the data provider

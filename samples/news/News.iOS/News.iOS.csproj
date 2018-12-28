@@ -173,6 +173,11 @@
     <BundleResource Include="Resources\ic_search%403x.png" />
     <BundleResource Include="Resources\lottie_swipe_left.json" />
     <BundleResource Include="Resources\lottie_pull_to_refresh.json" />
+    <BundleResource Include="Resources\ic_favorite_fill%403x.png" />
+    <BundleResource Include="Resources\ic_favorite_fill%402x.png" />
+    <BundleResource Include="Resources\ic_favorite_empty%402x.png" />
+    <BundleResource Include="Resources\ic_favorite_empty%403x.png" />
+    <BundleResource Include="Resources\lottie_favorite_add.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
