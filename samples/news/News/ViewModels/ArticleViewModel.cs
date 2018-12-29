@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.MobCAT.MVVM;
 using NewsAPI.Models;
+using Xamarin.Essentials;
 
 namespace News.ViewModels
 {
@@ -65,12 +66,17 @@ namespace News.ViewModels
             }
         }
 
-        // TODO: load and save from preferences
-        private bool _isFavorite;
         public bool IsFavorite
         {
-            get { return _isFavorite; }
-            set { RaiseAndUpdate(ref _isFavorite, value); }
+            get { return Preferences.Get($"Favorites.{Article.Url}", false); ; }
+            set
+            {
+                if (IsFavorite != value)
+                {
+                    Preferences.Set($"Favorites.{Article.Url}", value);
+                    Raise(nameof(IsFavorite));
+                }
+            }
         }
 
         public Command SwitchFavoriteArticleCommand { get; }
@@ -88,6 +94,8 @@ namespace News.ViewModels
         private void OnSwitchFavoriteArticleCommandExecuted()
         {
             IsFavorite = !IsFavorite;
+
+           
         }
     }
 }

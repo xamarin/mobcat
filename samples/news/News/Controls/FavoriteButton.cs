@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Lottie.Forms;
-using News.Helpers;
+﻿using Lottie.Forms;
 using Xamarin.Forms;
 
 namespace News.Controls
@@ -10,21 +7,26 @@ namespace News.Controls
     {
         #region dependency properties
 
-        public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite), typeof(bool), typeof(FavoriteButton), false, propertyChanged: OnIsFavoriteChanged);
+        public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite), typeof(bool?), typeof(FavoriteButton), null, propertyChanged: OnIsFavoriteChanged);
 
         public bool IsFavorite
         {
-            get { return (bool)GetValue(IsFavoriteProperty); }
+            get { return ((bool?)GetValue(IsFavoriteProperty) ?? false); }
             set { SetValue(IsFavoriteProperty, value); }
         }
 
         private static void OnIsFavoriteChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var button = (FavoriteButton)bindable;
-            var stateChanged = (bool)oldValue != (bool)newValue;
+            var stateChanged = (bool?)oldValue != (bool?)newValue;
             if (stateChanged)
             {
-                button.UpdateControlStateWithAnimation();
+                button.UpdateControlState();
+
+                if (oldValue != null)
+                {
+                    button.UpdateControlStateWithAnimation();
+                }
             }
         }
 
@@ -52,16 +54,20 @@ namespace News.Controls
                     AutoPlay = false,
                     IsVisible = false,
                     PlaybackFinishedCommand = new Command(UpdateControlState),
+                    Margin = new Thickness(0, 1, 1, 0),
                 };
             }
         }
 
         private void UpdateControlState()
         {
-            _animationView.IsPlaying = false;
-            _animationView.IsVisible = false;
+            if (_animationView != null)
+            {
+                _animationView.IsPlaying = false;
+                _animationView.IsVisible = false;
+            }
 
-            System.Diagnostics.Debug.WriteLine($"UpdateControlState: IsFavorite = {IsFavorite}");
+            System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlState: IsFavorite = {IsFavorite}");
             var favoriteSource = IsFavorite ? "ic_favorite_fill.png" : "ic_favorite_empty.png";
             Source = ImageSource.FromFile(favoriteSource);
         }
@@ -70,9 +76,9 @@ namespace News.Controls
         {
             if (IsFavorite)
             {
-                System.Diagnostics.Debug.WriteLine($"Add to favorites state");
+                System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Add to favorites state");
 
-                if(Parent is Layout<View> animationContainer)
+                if (Parent is Layout<View> animationContainer)
                 {
                     //await Task.Delay(1000);
                     if (!animationContainer.Children.Contains(_animationView))
@@ -88,15 +94,13 @@ namespace News.Controls
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine($"Favorite button doesn't have parent container to render animation.");
+                    System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Favorite button doesn't have parent container to render animation.");
                 }
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine($"Remove from favorites state");
+                System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Remove from favorites state, no animation.");
             }
-
-            UpdateControlState();
         }
     }
 }
