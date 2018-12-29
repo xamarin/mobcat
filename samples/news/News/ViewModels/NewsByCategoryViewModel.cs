@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
-using NewsAPI.Models;
+using Xamarin.Essentials;
 
 namespace News.ViewModels
 {
@@ -15,7 +13,6 @@ namespace News.ViewModels
     {
         private int _selectedCategoryPosition;
         private bool _isSelectNextCategoryTipEnabled;
-        private bool _isSelectNextCategoryTipNotRequired;
         private bool _isRefreshing;
 
         public CategoryNewsViewModel SelectedCategory => Categories.Count > _selectedCategoryPosition ? Categories[_selectedCategoryPosition] : null;
@@ -52,6 +49,19 @@ namespace News.ViewModels
             set { RaiseAndUpdate(ref _isSelectNextCategoryTipEnabled, value); }
         }
 
+        public bool IsSelectNextCategoryTipNotRequired
+        {
+            get { return Preferences.Get(nameof(IsSelectNextCategoryTipNotRequired), false); }
+            set
+            {
+                if (IsSelectNextCategoryTipNotRequired != value)
+                {
+                    Preferences.Set(nameof(IsSelectNextCategoryTipNotRequired), value);
+                    Raise(nameof(IsSelectNextCategoryTipNotRequired));
+                }
+            }
+        }
+
         // TODO: move to the category view model (base)
         public bool IsRefreshing
         {
@@ -85,22 +95,20 @@ namespace News.ViewModels
         {
             System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedCategoryPosition}");
             IsSelectNextCategoryTipEnabled = false;
-            // TODO: save to preferences
-            _isSelectNextCategoryTipNotRequired = true;
-
+            IsSelectNextCategoryTipNotRequired = true;
             SelectedCategory.InitNewsAsync(false).HandleResult();
         }
 
         private async Task ShowSelectNextCategoryTipIfRequiredAsync()
         {
-            if (_isSelectNextCategoryTipNotRequired)
+            if (IsSelectNextCategoryTipNotRequired)
                 return;
 
             IsSelectNextCategoryTipEnabled = false;
             await Task.Delay(10000);
 
             // Verify again if a user took an action and changed a category
-            if (_isSelectNextCategoryTipNotRequired)
+            if (IsSelectNextCategoryTipNotRequired)
                 return;
 
             IsSelectNextCategoryTipEnabled = true;
