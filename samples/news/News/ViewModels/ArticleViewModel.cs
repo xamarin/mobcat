@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text;
 using Microsoft.MobCAT.MVVM;
+using News.Services.Abstractions;
 using NewsAPI.Models;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace News.ViewModels
 {
@@ -11,6 +13,8 @@ namespace News.ViewModels
     /// </summary>
     public class ArticleViewModel : BaseNavigationViewModel
     {
+        protected IFavoritesService FavoritesService { get; } = DependencyService.Resolve<IFavoritesService>();
+
         public Article Article { get; }
 
         public string Title => Article.Title;
@@ -68,18 +72,25 @@ namespace News.ViewModels
 
         public bool IsFavorite
         {
-            get { return Preferences.Get($"Favorites.{Article.Url}", false); ; }
+            get { return FavoritesService.IsFavorite(Article); }
             set
             {
                 if (IsFavorite != value)
                 {
-                    Preferences.Set($"Favorites.{Article.Url}", value);
+                    if (value)
+                    {
+                        FavoritesService.Add(Article);
+                    }
+                    else
+                    {
+                        FavoritesService.Remove(Article);
+                    }
                     Raise(nameof(IsFavorite));
                 }
             }
         }
 
-        public Command SwitchFavoriteArticleCommand { get; }
+        public Microsoft.MobCAT.MVVM.Command SwitchFavoriteArticleCommand { get; }
 
         public ArticleViewModel(Article article)
         {
@@ -87,15 +98,13 @@ namespace News.ViewModels
                 throw new ArgumentNullException(nameof(article));
 
             Article = article;
-            SwitchFavoriteArticleCommand = new Command(OnSwitchFavoriteArticleCommandExecuted);
+            SwitchFavoriteArticleCommand = new Microsoft.MobCAT.MVVM.Command(OnSwitchFavoriteArticleCommandExecuted);
         }
 
 
         private void OnSwitchFavoriteArticleCommandExecuted()
         {
             IsFavorite = !IsFavorite;
-
-           
         }
     }
 }

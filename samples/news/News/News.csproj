@@ -32,6 +32,7 @@
     <Folder Include="ViewCells\" />
     <Folder Include="Converters\" />
     <Folder Include="Controls\" />
+    <Folder Include="Services\Abstractions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />
