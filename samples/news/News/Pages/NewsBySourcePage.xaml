@@ -46,9 +46,9 @@
                     <ListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
                               IsPullToRefreshEnabled="true"
-                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"
+                              RefreshCommand="{Binding RefreshCommand}"
                               RefreshAllowed="true"
-                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}"
+                              IsRefreshing="{Binding IsRefreshing}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
@@ -60,7 +60,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Label Text="We don't have any articles from this source." 
+                    <Label Text="We don't have any articles from this source" 
                            VerticalOptions="Center" 
                            HorizontalOptions="Center"
                            TextColor="White" 

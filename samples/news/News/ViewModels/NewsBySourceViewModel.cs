@@ -11,7 +11,6 @@ namespace News.ViewModels
     public class NewsBySourceViewModel : BaseNavigationViewModel
     {
         private int _selectedSourcePosition;
-        private bool _isRefreshing;
 
         public SourceNewsViewModel SelectedSource => Sources.Count > _selectedSourcePosition ? Sources[_selectedSourcePosition] : null;
 
@@ -23,8 +22,6 @@ namespace News.ViewModels
                 if (RaiseAndUpdate(ref _selectedSourcePosition, value))
                 {
                     Raise(nameof(SelectedSource));
-                    Raise(nameof(IsRefreshing));
-                    RefreshCommand.ChangeCanExecute();
                     OnSelectedCategoryPositionChanged();
                 }
             }
@@ -47,24 +44,8 @@ namespace News.ViewModels
             new SourceNewsViewModel("CNBC", "cnbc"),
         };
 
-        // TODO: move to the category view model (base)
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set
-            {
-                if (RaiseAndUpdate(ref _isRefreshing, value))
-                {
-                    RefreshCommand.ChangeCanExecute();
-                }
-            }
-        }
-
-        public AsyncCommand RefreshCommand { get; }
-
         public NewsBySourceViewModel()
         {
-            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
         }
 
         public async override Task InitAsync()
@@ -77,19 +58,6 @@ namespace News.ViewModels
         {
             System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedSourcePosition}");
             SelectedSource.InitNewsAsync(false).HandleResult();
-        }
-
-        private async Task OnRefreshCommandExecutedAsync()
-        {
-            try
-            {
-                IsRefreshing = true;
-                await SelectedSource.InitNewsAsync(true);
-            }
-            finally
-            {
-                IsRefreshing = false;
-            }
         }
     }
 }

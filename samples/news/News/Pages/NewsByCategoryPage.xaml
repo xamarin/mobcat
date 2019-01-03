@@ -67,9 +67,9 @@
                     <ListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
                               IsPullToRefreshEnabled="true"
-                              RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"
+                              RefreshCommand="{Binding RefreshCommand}"
                               RefreshAllowed="true"
-                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}"
+                              IsRefreshing="{Binding IsRefreshing}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
@@ -82,13 +82,14 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Label Text="We don't have any articles for the given category." 
+                    <Label Text="We don't have any articles for the given category" 
                            VerticalOptions="Center" 
                            HorizontalOptions="Center"
                            TextColor="White" 
                            IsVisible="{Binding IsEmpty}"
                            InputTransparent="true"
-                           Grid.Row="2"/>
+                           Grid.Row="2"
+                           Grid.ColumnSpan="2"/>
                 </Grid>
             </DataTemplate>
         </cv:CarouselView.ItemTemplate>

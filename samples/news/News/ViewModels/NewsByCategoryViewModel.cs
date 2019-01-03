@@ -13,7 +13,6 @@ namespace News.ViewModels
     {
         private int _selectedCategoryPosition;
         private bool _isSelectNextCategoryTipEnabled;
-        private bool _isRefreshing;
 
         public CategoryNewsViewModel SelectedCategory => Categories.Count > _selectedCategoryPosition ? Categories[_selectedCategoryPosition] : null;
 
@@ -25,8 +24,6 @@ namespace News.ViewModels
                 if (RaiseAndUpdate(ref _selectedCategoryPosition, value))
                 {
                     Raise(nameof(SelectedCategory));
-                    Raise(nameof(IsRefreshing));
-                    RefreshCommand.ChangeCanExecute();
                     OnSelectedCategoryPositionChanged();
                 }
             }
@@ -62,26 +59,11 @@ namespace News.ViewModels
             }
         }
 
-        // TODO: move to the category view model (base)
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set 
-            {
-                if (RaiseAndUpdate(ref _isRefreshing, value))
-                {
-                    RefreshCommand.ChangeCanExecute();
-                }
-            }
-        }
-
         public Command SelectNextCategoryCommand { get; }
-        public AsyncCommand RefreshCommand { get; }
 
         public NewsByCategoryViewModel()
         {
             SelectNextCategoryCommand = new Command(OnSelectNextCategoryCommandExecuted);
-            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
         }
 
         public async override Task InitAsync()
@@ -121,19 +103,6 @@ namespace News.ViewModels
                 nextPosition = 0;
 
             SelectedCategoryPosition = nextPosition;
-        }
-
-        private async Task OnRefreshCommandExecutedAsync()
-        {
-            try
-            {
-                IsRefreshing = true;
-                await SelectedCategory.InitNewsAsync(true);
-            }
-            finally
-            {
-                IsRefreshing = false;
-            }
         }
     }
 }

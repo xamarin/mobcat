@@ -11,20 +11,39 @@ namespace News.ViewModels
     /// </summary>
     public abstract class BaseNewsViewModel : BaseNavigationViewModel
     {
+        private bool _isRefreshing;
+        private bool _initialized;
+
         public ObservableCollection<ArticleViewModel> Articles { get; } = new ObservableCollection<ArticleViewModel>();
 
-        public bool IsEmpty => Articles.IsNullOrEmpty();
+        public bool IsEmpty => _initialized && Articles.IsNullOrEmpty();
 
-        public bool IsNotEmpty => !IsEmpty;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                if (RaiseAndUpdate(ref _isRefreshing, value))
+                {
+                    RefreshCommand.ChangeCanExecute();
+                }
+            }
+        }
+
+        public AsyncCommand RefreshCommand { get; }
 
         public BaseNewsViewModel()
         {
+            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
         }
 
         public async override Task InitAsync()
         {
             await base.InitAsync();
             await InitNewsAsync();
+
+            _initialized = true;
+            Raise(nameof(IsEmpty));
         }
 
         public async virtual Task InitNewsAsync(bool forceRefresh = false)
@@ -43,11 +62,23 @@ namespace News.ViewModels
                         Articles.Add(article);
                     }
                     Raise(nameof(IsEmpty));
-                    Raise(nameof(IsNotEmpty));
                 });
             }
         }
 
         protected abstract Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync();
+
+        private async Task OnRefreshCommandExecutedAsync()
+        {
+            try
+            {
+                IsRefreshing = true;
+                await InitNewsAsync(true);
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
+        }
     }
 }

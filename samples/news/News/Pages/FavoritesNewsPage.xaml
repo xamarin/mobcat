@@ -61,7 +61,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Text="You don't have any favorites." 
+        <Label Text="You don't have any favorites" 
                VerticalOptions="Center" 
                HorizontalOptions="Center"
                TextColor="White" 
