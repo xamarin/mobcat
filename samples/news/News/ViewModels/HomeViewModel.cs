@@ -11,7 +11,7 @@ namespace News.ViewModels
     /// </summary>
     public class HomeViewModel : BaseNavigationViewModel
     {
-       public HomeViewModel()
+        public HomeViewModel()
         {
 
         }

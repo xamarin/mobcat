@@ -14,14 +14,10 @@ namespace News.ViewModels
     /// </summary>
     public class FavoritesViewModel : BaseNewsViewModel
     {
-
-
         public FavoritesViewModel()
         {
            
         }
-
-     
 
         protected override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
