@@ -31,7 +31,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Text="{Binding Title}" 
                            TextColor="White" 
@@ -52,8 +52,10 @@
                                          Loop="true"
                                          BackgroundColor="Transparent"
                                          Animation="lottie_swipe_left.json" 
-                                         VerticalOptions="FillAndExpand" 
-                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="Fill" 
+                                         HorizontalOptions="Fill"
+                                         HeightRequest="70"
+                                         WidthRequest="100"
                                          Grid.Row="0"
                                          Grid.Column="1"/>
                     <Grid VerticalOptions="Start" 

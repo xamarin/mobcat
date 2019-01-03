@@ -14,11 +14,11 @@
     Icon="ic_favorites.png">
     
     <Grid VerticalOptions="FillAndExpand" 
-                      HorizontalOptions="FillAndExpand"
-                      Padding="0" 
-                      Margin="0"
-                      RowSpacing="0"
-                      ColumnSpacing="0">
+          HorizontalOptions="FillAndExpand"
+          Padding="0" 
+          Margin="0"
+          RowSpacing="0"
+          ColumnSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="1"/>

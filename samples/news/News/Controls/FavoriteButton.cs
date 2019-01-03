@@ -42,13 +42,16 @@ namespace News.Controls
 
         private void Init()
         {
+            BackgroundColor = Color.Transparent;
+            Aspect = Aspect.AspectFill;
+
             if (_animationView == null)
             {
                 _animationView = new AnimationView()
                 {
                     Animation = "lottie_favorite_add.json",
-                    VerticalOptions = LayoutOptions.FillAndExpand,
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.Fill,
+                    HorizontalOptions = LayoutOptions.Fill,
                     BackgroundColor = Color.Transparent,
                     Loop = false,
                     AutoPlay = false,
