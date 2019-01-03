@@ -121,6 +121,6 @@ Logging is implemented using the [AppCenterLoggingService](https://github.com/xa
 Unit tests are run using [XUnit](https://xunit.github.io). App service functionality is mocked using [Moq](https://github.com/moq/moq4) which highlights a benefit of using a Service Container.
 
 ### UI Tests ###
-UI tests were created to adhere to the [Page Object Pattern](https://github.com/xamarin-automation-service/uitest-pop-example) using the [Page Object Pattern Library](https://www.nuget.org/packages/Xamarin.UITest.POP/) where each page has a Page Object which tests are run on.
+UI tests were created to adhere to the [Page Object Pattern](https://github.com/xamarin-automation-service/uitest-pop-example) using the [Page Object Pattern Library](https://www.nuget.org/packages/Xamarin.UITest.POP/) where each page has a Page Object which tests are run on. [Learn more about best practices for User Interface Automation](https://channel9.msdn.com/Shows/XamarinShow/Best-Practices-for-User-Interface-Automation).
 
 

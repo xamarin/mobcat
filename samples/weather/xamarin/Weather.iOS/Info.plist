@@ -52,5 +52,7 @@
 		<string>ms</string>
 		<string>ar</string>
 	</array>
+	<key>XSLaunchImageAssets</key>
+	<string>Assets.xcassets/LaunchImage.launchimage</string>
 </dict>
 </plist>
