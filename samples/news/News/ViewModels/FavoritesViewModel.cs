@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
+using News.Helpers;
 using News.Services.Abstractions;
 using NewsAPI.Models;
 using Xamarin.Forms;

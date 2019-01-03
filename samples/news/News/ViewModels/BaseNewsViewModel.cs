@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
-using NewsAPI.Models;
 
 namespace News.ViewModels
 {
@@ -13,6 +12,10 @@ namespace News.ViewModels
     public abstract class BaseNewsViewModel : BaseNavigationViewModel
     {
         public ObservableCollection<ArticleViewModel> Articles { get; } = new ObservableCollection<ArticleViewModel>();
+
+        public bool IsEmpty => Articles.IsNullOrEmpty();
+
+        public bool IsNotEmpty => !IsEmpty;
 
         public BaseNewsViewModel()
         {
@@ -39,6 +42,8 @@ namespace News.ViewModels
                     {
                         Articles.Add(article);
                     }
+                    Raise(nameof(IsEmpty));
+                    Raise(nameof(IsNotEmpty));
                 });
             }
         }

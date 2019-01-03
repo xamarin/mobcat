@@ -61,6 +61,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Label Text="You don't have any favorites." 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               TextColor="White" 
+               IsVisible="{Binding IsEmpty}"
+               InputTransparent="true"
+               Grid.Row="2"/>
     </Grid>
     
 </local:BaseContentPage>
