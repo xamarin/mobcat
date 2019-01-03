@@ -71,8 +71,7 @@ namespace News.Controls
             }
 
             System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlState: IsFavorite = {IsFavorite}");
-            var favoriteSource = IsFavorite ? "ic_favorite_fill.png" : "ic_favorite_empty.png";
-            Source = ImageSource.FromFile(favoriteSource);
+            Source = IsFavorite ? "ic_favorite_fill.png" : "ic_favorite_empty.png";
         }
 
         private void UpdateControlStateWithAnimation()
