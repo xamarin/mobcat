@@ -44,13 +44,11 @@
               BackgroundColor="#2c2c2c"
               HeightRequest="1"
               Grid.Row="1"/>
-<!--    
-    RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"   
-    IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}}"
--->
         <ListView ItemSelected="Handle_ItemSelected"
                   ItemsSource="{Binding Articles}"
                   IsPullToRefreshEnabled="true"
+                  RefreshCommand="{Binding RefreshCommand}"   
+                  IsRefreshing="{Binding IsRefreshing}"
                   RefreshAllowed="true"
                   SelectionMode="Single"
                   BackgroundColor="#585858"

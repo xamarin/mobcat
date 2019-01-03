@@ -48,7 +48,7 @@
                               IsPullToRefreshEnabled="true"
                               RefreshCommand="{Binding BindingContext.RefreshCommand, Source={x:Reference carousel}}"
                               RefreshAllowed="true"
-                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}}"
+                              IsRefreshing="{Binding BindingContext.IsRefreshing, Source={x:Reference carousel}}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"

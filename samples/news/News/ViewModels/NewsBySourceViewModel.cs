@@ -64,7 +64,7 @@ namespace News.ViewModels
 
         public NewsBySourceViewModel()
         {
-            RefreshCommand = new AsyncCommand(() => OnRefreshCommandExecutedAsync(true), () => !IsRefreshing);
+            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
         }
 
         public async override Task InitAsync()
@@ -79,12 +79,12 @@ namespace News.ViewModels
             SelectedSource.InitNewsAsync(false).HandleResult();
         }
 
-        private async Task OnRefreshCommandExecutedAsync(bool forceRefresh)
+        private async Task OnRefreshCommandExecutedAsync()
         {
             try
             {
                 IsRefreshing = true;
-                await SelectedSource.InitNewsAsync(forceRefresh);
+                await SelectedSource.InitNewsAsync(true);
             }
             finally
             {

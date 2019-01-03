@@ -81,7 +81,7 @@ namespace News.ViewModels
         public NewsByCategoryViewModel()
         {
             SelectNextCategoryCommand = new Command(OnSelectNextCategoryCommandExecuted);
-            RefreshCommand = new AsyncCommand(() => OnRefreshCommandExecutedAsync(true), () => !IsRefreshing);
+            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
         }
 
         public async override Task InitAsync()
@@ -123,12 +123,12 @@ namespace News.ViewModels
             SelectedCategoryPosition = nextPosition;
         }
 
-        private async Task OnRefreshCommandExecutedAsync(bool forceRefresh)
+        private async Task OnRefreshCommandExecutedAsync()
         {
             try
             {
                 IsRefreshing = true;
-                await SelectedCategory.InitNewsAsync(forceRefresh);
+                await SelectedCategory.InitNewsAsync(true);
             }
             finally
             {
