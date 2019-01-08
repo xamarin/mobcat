@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
+using News.Services.Abstractions;
+using Xamarin.Forms;
 
 namespace News.ViewModels
 {
@@ -13,6 +15,8 @@ namespace News.ViewModels
     {
         private bool _isRefreshing;
         private bool _initialized;
+
+        public INewsDataService NewsDataService { get; } = DependencyService.Resolve<INewsDataService>();
 
         public ObservableCollection<ArticleViewModel> Articles { get; } = new ObservableCollection<ArticleViewModel>();
 

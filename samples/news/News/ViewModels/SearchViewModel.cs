@@ -26,25 +26,12 @@ namespace News.ViewModels
 
         protected async override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
-            System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for [{SearchTerm}] Search Term");
-
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return new List<ArticleViewModel>();
 
-            var request = new TopHeadlinesRequest
-            {
-                Q = SearchTerm,
-                Language = Languages.EN,
-                Country = Countries.US,
-            };
-
-            // TODO: replace with custom implementation of the data provider
-            var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
-            var articles = await newsApiClient.GetTopHeadlinesAsync(request);
-            var result = (IEnumerable<ArticleViewModel>)articles?.Articles?
-                .Select(a => new ArticleViewModel(a))
-                .ToList();
-
+            System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for [{SearchTerm}] Search Term");
+            var articles = await NewsDataService.FetchArticlesBySearchQuery(SearchTerm);
+            var result = articles.Select(a => new ArticleViewModel(a)).ToList();
             return result;
         }
     }

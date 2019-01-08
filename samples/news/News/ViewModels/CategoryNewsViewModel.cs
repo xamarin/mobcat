@@ -25,24 +25,8 @@ namespace News.ViewModels
         protected async override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
         {
             System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for {Title} Category");
-
-            var request = new TopHeadlinesRequest
-            {
-                //Q = "Apple",
-                Country = Countries.US,
-                //SortBy = SortBys.Popularity,
-                Language = Languages.EN,
-                Category = Category,
-                //From = DateTime.UtcNow.AddDays(-1),
-            };
-
-            // TODO: replace with custom implementation of the data provider
-            var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
-            var articles = await newsApiClient.GetTopHeadlinesAsync(request);
-            var result = (IEnumerable<ArticleViewModel>)articles?.Articles?
-                .Select(a => new ArticleViewModel(a))
-                .ToList();
-
+            var articles = await NewsDataService.FetchArticlesByCategory(Category);
+            var result = articles.Select(a => new ArticleViewModel(a)).ToList();
             return result;
         }
     }

@@ -30,8 +30,8 @@ namespace News.ViewModels
         // TODO: Load full list via API and add lazy initialization
         public ObservableCollection<SourceNewsViewModel> Sources { get; } = new ObservableCollection<SourceNewsViewModel>()
         {
-            new SourceNewsViewModel("The New York Times", "the-new-york-times"),
             new SourceNewsViewModel("CNN", "cnn"),
+            new SourceNewsViewModel("The New York Times", "the-new-york-times"),
             new SourceNewsViewModel("ABC News", "abc-news"),
             new SourceNewsViewModel("The Washington Post", "the-washington-post"),
             new SourceNewsViewModel("Fox News", "fox-news"),
