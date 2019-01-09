@@ -59,6 +59,8 @@
     <None Remove="Services\FakeNews\category.science.json" />
     <None Remove="Services\FakeNews\category.sports.json" />
     <None Remove="Services\FakeNews\category.technology.json" />
+    <None Remove="Services\FakeNews\search.obama.json" />
+    <None Remove="Services\FakeNews\search.trump.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\FakeNews\source.the-new-york-times.json" />
@@ -80,5 +82,7 @@
     <EmbeddedResource Include="Services\FakeNews\category.science.json" />
     <EmbeddedResource Include="Services\FakeNews\category.sports.json" />
     <EmbeddedResource Include="Services\FakeNews\category.technology.json" />
+    <EmbeddedResource Include="Services\FakeNews\search.bitcoin.json" />
+    <EmbeddedResource Include="Services\FakeNews\search.trump.json" />
   </ItemGroup>
 </Project>
