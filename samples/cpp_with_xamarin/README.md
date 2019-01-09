@@ -117,7 +117,7 @@ The steps in this first-principles walkthrough are relatively simple, and it sho
 **NOTE:** You must have an active [Apple Developer Account](https://developer.apple.com) in order to download the - [Command Line Tools for Xcode](https://developer.apple.com/download/more/) and deploy apps to an iPhone.   
 
 ## Creating the native library
-I have used the *MathFuncsLib* example from [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017) as the basis for our native library. The intent was to keep the C/C++ code simple with the focus being on the subsequent steps for wrapping, distributing, and consuming our library in a Xamarin.Forms app.  
+I have used the *MathFuncsLib* example from [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017) as the basis for our native library functionality. The intent was to keep the C/C++ code simple with the focus being on the subsequent steps for wrapping, distributing, and consuming our library in a Xamarin.Forms app.  
 
 Depending on your background and experience, it may take some time to follow this part of the walkthrough end-to-end. You can always skip ahead to the [next step: wrapping the native library](#wrapping-the-native-library) using the [precompiled libraries](https://github.com/xamarin/mobcat/blob/master/samples/cpp_with_xamarin/Sample/Artefacts/PrecompiledLibs.zip) and return to complete this part at a more convenient time.  
 
@@ -1061,6 +1061,42 @@ At this point, the **libs** folder should appear as follows:
 ### Writing the managed library code
 We can now write the code enabling us to use our native library. The goal here is to hide any underlying complexity and remove the need for any working knowledge of the native library (or P/Invoke concepts).  
 
+#### Creating a SafeHandle
+
+1. **CONTROL + CLICK** on the **MathFuncs.Shared** project, then choose **Add File...** from the **Add** menu. 
+2. Choose **Empty Class** from the **New File** window, name it **MyMathFuncsSafeHandle** and then click **New**
+3. Implement the **MyMathFuncsSafeHandle** class:
+
+    ```
+    using System;
+    using System.Runtime.ConstrainedExecution;
+    using Microsoft.Win32.SafeHandles;
+
+    namespace MathFuncs
+    {
+        internal class MyMathFuncsSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
+        {
+            public MyMathFuncsSafeHandle() : base(true) { }
+
+            public MyMathFuncsSafeHandle(IntPtr handle) : base(true)
+            {
+                SetHandle(handle);
+            }
+
+            public IntPtr Ptr => this.handle;
+
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+            protected override bool ReleaseHandle()
+            {
+                // TODO: Release the handle here
+                return true;
+            }
+        }
+    }
+    ```
+
+    **NOTE:** A [SafeHandle](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) is the preferred way to work with unmanaged resources in managed code. This abstracts away a lot of boilerplate code removing the need to implement the full [Disposable pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose) requiring only the code to release the handle itself. Deriving from the **SafeHandleZeroOrMinusOneIsInvalid** instead of **SafeHandle** will treat handles with values of **0** or **-1** as being invalid further reducing the code we need to write ourselves.
+
 #### Creating the internal wrapper class
 
 1. Open **MyMathFuncsWrapper.cs**, changing it to an internal static class
@@ -1096,10 +1132,10 @@ We can now write the code enabling us to use our native library. The goal here i
 
     ```
     [DllImport(DllName, EntryPoint = "CreateMyMathFuncsClass")]
-    internal static extern IntPtr CreateMyMathFuncs();
+    internal static extern MyMathFuncsSafeHandle CreateMyMathFuncs();
 
     [DllImport(DllName, EntryPoint = "DisposeMyMathFuncsClass")]
-    internal static extern void DisposeMyMathFuncs(IntPtr ptr);
+    internal static extern void DisposeMyMathFuncs(MyMathFuncsSafeHandle ptr);
     ```
 
     **NOTE:** We are passing in our constant **DllName** to the **DllImport** attribute along with the **EntryPoint** which explicitly tells the .NET runtime the name of the function to call within that library. Technically, we do not need to provide the **EntryPoint** value if our managed method names were identical to the unmanaged one we're trying to call. If one is not provided, the managed method name would be used as the **EntryPoint** instead. However, it is better to be explicit.  
@@ -1108,24 +1144,23 @@ We can now write the code enabling us to use our native library. The goal here i
 
     ```
     [DllImport(DllName, EntryPoint = "MyMathFuncsAdd")]
-    internal static extern double Add(IntPtr ptr, double a, double b);
+    internal static extern double Add(MyMathFuncsSafeHandle ptr, double a, double b);
 
     [DllImport(DllName, EntryPoint = "MyMathFuncsSubtract")]
-    internal static extern double Subtract(IntPtr ptr, double a, double b);
+    internal static extern double Subtract(MyMathFuncsSafeHandle ptr, double a, double b);
 
     [DllImport(DllName, EntryPoint = "MyMathFuncsMultiply")]
-    internal static extern double Multiply(IntPtr ptr, double a, double b);
+    internal static extern double Multiply(MyMathFuncsSafeHandle ptr, double a, double b);
 
     [DllImport(DllName, EntryPoint = "MyMathFuncsDivide")]
-    internal static extern double Divide(IntPtr ptr, double a, double b);
+    internal static extern double Divide(MyMathFuncsSafeHandle ptr, double a, double b);
     ```
 
-    **NOTE:** We're using simple types for the parameters in this example. Since marshalling is a bitwise-copy in this case it requires no additional work on our part.
+    **NOTE:** We're using simple types for the parameters in this example. Since marshalling is a bitwise-copy in this case it requires no additional work on our part. Also notice the use of the **MyMathFuncsSafeHandle** class instead of the standard **IntPtr**. The **IntPtr** is automatically mapped to the **SafeHandle** as part of the marshalling process.
 
 6. Verify that the finished **MyMathFuncsWrapper** class appears as below:
 
     ```
-    using System;
     using System.Runtime.InteropServices;
 
     namespace MathFuncs
@@ -1139,24 +1174,35 @@ We can now write the code enabling us to use our native library. The goal here i
             #endif
 
             [DllImport(DllName, EntryPoint = "CreateMyMathFuncsClass")]
-            internal static extern IntPtr CreateMyMathFuncs();
+            internal static extern MyMathFuncsSafeHandle CreateMyMathFuncs();
 
             [DllImport(DllName, EntryPoint = "DisposeMyMathFuncsClass")]
-            internal static extern void DisposeMyMathFuncs(IntPtr ptr);
+            internal static extern void DisposeMyMathFuncs(MyMathFuncsSafeHandle ptr);
 
             [DllImport(DllName, EntryPoint = "MyMathFuncsAdd")]
-            internal static extern double Add(IntPtr ptr, double a, double b);
+            internal static extern double Add(MyMathFuncsSafeHandle ptr, double a, double b);
 
             [DllImport(DllName, EntryPoint = "MyMathFuncsSubtract")]
-            internal static extern double Subtract(IntPtr ptr, double a, double b);
+            internal static extern double Subtract(MyMathFuncsSafeHandle ptr, double a, double b);
 
             [DllImport(DllName, EntryPoint = "MyMathFuncsMultiply")]
-            internal static extern double Multiply(IntPtr ptr, double a, double b);
+            internal static extern double Multiply(MyMathFuncsSafeHandle ptr, double a, double b);
 
             [DllImport(DllName, EntryPoint = "MyMathFuncsDivide")]
-            internal static extern double Divide(IntPtr ptr, double a, double b);
+            internal static extern double Divide(MyMathFuncsSafeHandle ptr, double a, double b);
         }
     }
+    ```
+
+#### Completing the MyMathFuncsSafeHandle class
+1. Open the **MyMathFuncsSafeHandle** class, navinging to the placeholder **TODO** comment within the **ReleaseHandle** method:
+    ```
+    // TODO: Release the handle here
+    ```
+2. Replace the **TODO** line with the following code:
+
+    ```
+    MyMathFuncsWrapper.DisposeMyMathFuncs(this);
     ```
 
 #### Writing the MyMathFuncs class
@@ -1167,8 +1213,7 @@ Now we have our wrapper, we can create the **MyMathFuncs** class that will wrap 
 3. Add the following members to the **MyMathFuncs** class:
 
     ```
-    private bool disposedValue = false;
-    private readonly IntPtr ptr = (IntPtr)0;
+    readonly MyMathFuncsSafeHandle handle;
     ```
 
 4. Implement the constructor for the class so it creates and stores a pointer to the native **MyMathFuncs** object when the class is instantiated:
@@ -1176,63 +1221,48 @@ Now we have our wrapper, we can create the **MyMathFuncs** class that will wrap 
     ```
     public MyMathFuncs()
     {
-        ptr = MyMathFuncsWrapper.CreateMyMathFuncs();
+        handle = MyMathFuncsWrapper.CreateMyMathFuncs();
     }
     ```
 
-5. Adopt the **[Disposable pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose)** to ensure we are releasing our unmanaged resource by implementing the **IDisposable** interface using the following code:
+5. Implement the **IDisposable** interface using the following code:
 
     ```
-    protected virtual void Dispose(bool disposing)
+    public class MyMathFuncs : IDisposable
     {
-        if (!disposedValue)
+        ...
+
+        public void Dispose()
         {
-            try
-            {
-                MyMathFuncsWrapper.DisposeMyMathFuncs(ptr);
-            }
-            finally
-            {
-                disposedValue = true;
-            }
+            if (handle != null && !handle.IsInvalid)
+                handle.Dispose();
         }
-    }
 
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    ~MyMathFuncs()
-    {
-        Dispose(false);
+        ...
     }
     ```
-
-    **NOTE:** The **Dispose pattern** requires two **Dispose** methods be implemented, the parameterless public non-virtual (required by the **IDisposable** interface), and a protected virtual with a single boolean parameter. The public **Dispose** method handles the object cleanup and so the garbage collector no longer needs to call the **Finalize** method. We therefore prevent this by calling **SupressFinalize(true)**. Our unmanaged resource is cleaned up in our second **Dispose** method (with the **disposing** overload). We also override the **Finalizer** to ensure that the unmanaged resource is still disposed in the event that **Dispose** is not called by the consumer. This could be greatly simplified using the newer [SafeHandle](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) wrapper class, however I wanted to stick to the traditional approach for now to avoid going too far off-topic whilst highlighting some key considerations. The use of **SafeHandle** over the approach above is recommended so well worth some further reading.
 
 6. Implement the **MyMathFuncs** methods using the **MyMathFuncsWrapper** class to perform the real work under the hood by passing in the pointer we have stored to the underlying unmanaged object. The code should be as follows:
 
     ```
     public double Add(double a, double b)
     {
-        return MyMathFuncsWrapper.Add(ptr, a, b);
+        return MyMathFuncsWrapper.Add(handle, a, b);
     }
 
     public double Subtract(double a, double b)
     {
-        return MyMathFuncsWrapper.Subtract(ptr, a, b);
+        return MyMathFuncsWrapper.Subtract(handle, a, b);
     }
 
     public double Multiply(double a, double b)
     {
-        return MyMathFuncsWrapper.Multiply(ptr, a, b);
+        return MyMathFuncsWrapper.Multiply(handle, a, b);
     }
 
     public double Divide(double a, double b)
     {
-        return MyMathFuncsWrapper.Divide(ptr, a, b);
+        return MyMathFuncsWrapper.Divide(handle, a, b);
     }
     ```
 
@@ -1476,7 +1506,7 @@ Now we have a reference to the **MathFuncs** package in each of our projects, we
         var addResult = myMathFuncs.Add(numberA, numberB);
 
         // Test Subtract function
-        var substractResult = myMathFuncs.Subtract(numberA, numberB);
+        var subtractResult = myMathFuncs.Subtract(numberA, numberB);
 
         // Test Multiply function
         var multiplyResult = myMathFuncs.Multiply(numberA, numberB);
@@ -1486,7 +1516,7 @@ Now we have a reference to the **MathFuncs** package in each of our projects, we
 
         // Output results
         Debug.WriteLine($"{numberA} + {numberB} = {addResult}");
-        Debug.WriteLine($"{numberA} - {numberB} = {substractResult}");
+        Debug.WriteLine($"{numberA} - {numberB} = {subtractResult}");
         Debug.WriteLine($"{numberA} * {numberB} = {multiplyResult}");
         Debug.WriteLine($"{numberA} / {numberB} = {divideResult}");
     }

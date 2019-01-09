@@ -35,7 +35,7 @@ namespace MathFuncsApp
             var addResult = myMathFuncs.Add(numberA, numberB);
 
             // Test Subtract function
-            var substractResult = myMathFuncs.Subtract(numberA, numberB);
+            var subtractResult = myMathFuncs.Subtract(numberA, numberB);
 
             // Test Multiply function
             var multiplyResult = myMathFuncs.Multiply(numberA, numberB);
@@ -45,7 +45,7 @@ namespace MathFuncsApp
 
             // Output results
             Debug.WriteLine($"{numberA} + {numberB} = {addResult}");
-            Debug.WriteLine($"{numberA} - {numberB} = {substractResult}");
+            Debug.WriteLine($"{numberA} - {numberB} = {subtractResult}");
             Debug.WriteLine($"{numberA} * {numberB} = {multiplyResult}");
             Debug.WriteLine($"{numberA} / {numberB} = {divideResult}");
         }

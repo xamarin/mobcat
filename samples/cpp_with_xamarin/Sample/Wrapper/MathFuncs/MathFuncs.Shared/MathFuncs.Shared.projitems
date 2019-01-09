@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)MyMathFuncsWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyMathFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyMathFuncsSafeHandle.cs" />
   </ItemGroup>
 </Project>
