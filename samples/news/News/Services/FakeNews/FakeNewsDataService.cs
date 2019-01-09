@@ -20,10 +20,20 @@ namespace News.Services.FakeNews
         {
         }
 
-        public Task<IEnumerable<Article>> FetchArticlesByCategory(Categories? category = null)
+        public async Task<IEnumerable<Article>> FetchArticlesByCategory(Categories? category = null)
         {
-            // TODO: implement
-            return new NewsDataService().FetchArticlesByCategory(category);
+            // Simulate network request
+            await Task.Delay(500);
+            var result = new List<Article>();
+            var resourceName = $"{GetType().Namespace}.category.{category?.ToString().ToLower() ?? "all"}.json";
+            var prestoredResponseContent = await resourceName.ReadResourceContent();
+            if (!string.IsNullOrWhiteSpace(prestoredResponseContent))
+            {
+                var articles = JsonConvert.DeserializeObject<ArticlesResult>(prestoredResponseContent);
+                result = articles?.Articles ?? new List<Article>();
+            }
+
+            return result;
         }
 
         public async Task<IEnumerable<Article>> FetchArticlesBySource(string source)

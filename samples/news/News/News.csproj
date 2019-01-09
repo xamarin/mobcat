@@ -52,6 +52,13 @@
     <None Remove="Services\FakeNews\source.cbs-news.json" />
     <None Remove="Services\FakeNews\source.bloomberg.json" />
     <None Remove="Services\FakeNews\source.abc-news.json" />
+    <None Remove="Services\FakeNews\category.all.json" />
+    <None Remove="Services\FakeNews\category.business.json" />
+    <None Remove="Services\FakeNews\category.entertainment.json" />
+    <None Remove="Services\FakeNews\category.health.json" />
+    <None Remove="Services\FakeNews\category.science.json" />
+    <None Remove="Services\FakeNews\category.sports.json" />
+    <None Remove="Services\FakeNews\category.technology.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\FakeNews\source.the-new-york-times.json" />
@@ -66,5 +73,12 @@
     <EmbeddedResource Include="Services\FakeNews\source.cbs-news.json" />
     <EmbeddedResource Include="Services\FakeNews\source.bloomberg.json" />
     <EmbeddedResource Include="Services\FakeNews\source.abc-news.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.all.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.business.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.entertainment.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.health.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.science.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.sports.json" />
+    <EmbeddedResource Include="Services\FakeNews\category.technology.json" />
   </ItemGroup>
 </Project>
