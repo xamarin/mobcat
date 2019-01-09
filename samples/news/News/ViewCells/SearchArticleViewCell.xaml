@@ -73,7 +73,7 @@
                TextColor="#ccffffff"
                MaxLines="1"
                FontSize="Small"
-               Margin="5,1,5,0"
+               Margin="5,7,5,0"
                LineBreakMode="MiddleTruncation"/>
     </StackLayout>
 </ViewCell>
