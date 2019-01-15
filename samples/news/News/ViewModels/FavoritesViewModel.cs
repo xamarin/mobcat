@@ -6,6 +6,7 @@ using News.Helpers;
 using News.Services.Abstractions;
 using NewsAPI.Models;
 using Xamarin.Forms;
+using News.Models;
 
 namespace News.ViewModels
 {
@@ -16,17 +17,24 @@ namespace News.ViewModels
     {
         public FavoritesViewModel()
         {
-           
+
         }
 
-        protected override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
+        protected override Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize)
         {
+            var result = new FetchArticlesResult(pageNumber, pageSize);
             var favoritesService = DependencyService.Resolve<IFavoritesService>();
             var favorites = favoritesService.Get()
                 .Select(f => new ArticleViewModel(f))
                 .ToList();
 
-            return Task.FromResult<IEnumerable<ArticleViewModel>>(favorites);
+            if (favorites != null)
+            {
+                result.Articles = favorites;
+                result.TotalCount = favorites.Count;
+            };
+
+            return Task.FromResult(result);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
+using News.Models;
 using News.Services.Abstractions;
 using Xamarin.Forms;
 
@@ -14,11 +15,12 @@ namespace News.ViewModels
     public abstract class BaseNewsViewModel : BaseNavigationViewModel
     {
         private bool _isRefreshing;
+        private bool _isLoadingMore;
         private bool _initialized;
 
         public INewsDataService NewsDataService { get; } = DependencyService.Resolve<INewsDataService>();
 
-        public ObservableCollection<ArticleViewModel> Articles { get; } = new ObservableCollection<ArticleViewModel>();
+        public VirtualCollection<ArticleViewModel> Articles { get; } = new VirtualCollection<ArticleViewModel>();
 
         public bool IsEmpty => _initialized && Articles.IsNullOrEmpty();
 
@@ -29,6 +31,20 @@ namespace News.ViewModels
             {
                 if (RaiseAndUpdate(ref _isRefreshing, value))
                 {
+                    LoadMoreCommand.ChangeCanExecute();
+                    RefreshCommand.ChangeCanExecute();
+                }
+            }
+        }
+
+        public bool IsLoadingMore
+        {
+            get { return _isLoadingMore; }
+            set
+            {
+                if (RaiseAndUpdate(ref _isLoadingMore, value))
+                {
+                    LoadMoreCommand.ChangeCanExecute();
                     RefreshCommand.ChangeCanExecute();
                 }
             }
@@ -36,9 +52,12 @@ namespace News.ViewModels
 
         public AsyncCommand RefreshCommand { get; }
 
+        public AsyncCommand LoadMoreCommand { get; }
+
         public BaseNewsViewModel()
         {
-            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing);
+            RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing && !IsLoadingMore);
+            LoadMoreCommand = new AsyncCommand(OnLoadMoreCommandExecuted, () => !IsRefreshing && !IsLoadingMore && !Articles.FullyLoaded);
         }
 
         public async override Task InitAsync()
@@ -61,16 +80,41 @@ namespace News.ViewModels
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     Articles.Clear();
-                    foreach (var article in articles)
-                    {
-                        Articles.Add(article);
-                    }
-                    Raise(nameof(IsEmpty));
+                    LoadArticlesPage(articles);
                 });
             }
         }
 
-        protected abstract Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync();
+        public async virtual Task LoadMoreAsync()
+        {
+            if (Articles.FullyLoaded)
+                return;
+                
+            var articles = await FetchArticlesAsync(Articles.VirtualPage + 1, Articles.VirtualPageSize);
+            if (articles?.Articles != null)
+            {
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    LoadArticlesPage(articles);
+                });
+            }
+        }
+
+        private void LoadArticlesPage(FetchArticlesResult articles)
+        {
+            var nextPage = Articles.VirtualPage + 1;
+            if (nextPage != articles.PageNumber)
+            {
+                // Already loaded, discarding the result
+                return;
+            }
+
+            Articles.AddPage(articles.Articles, articles.TotalCount, articles.PageNumber, articles.PageSize);
+            LoadMoreCommand.ChangeCanExecute();
+            Raise(nameof(IsEmpty));
+        }
+
+        protected abstract Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
 
         private async Task OnRefreshCommandExecutedAsync()
         {
@@ -82,6 +126,19 @@ namespace News.ViewModels
             finally
             {
                 IsRefreshing = false;
+            }
+        }
+
+        private async Task OnLoadMoreCommandExecuted()
+        {
+            try
+            {
+                IsLoadingMore = true;
+                await LoadMoreAsync();
+            }
+            finally
+            {
+                IsLoadingMore = false;
             }
         }
     }

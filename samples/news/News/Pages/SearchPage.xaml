@@ -7,6 +7,7 @@
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
     xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mobcat="clr-namespace:News.Controls;assembly=News"
     x:TypeArguments="vm:SearchViewModel" 
     x:Class="News.Pages.SearchPage" 
     BackgroundColor="#3c3c3c"
@@ -67,24 +68,26 @@
               HeightRequest="1"
               Grid.Row="2"
               Grid.ColumnSpan="2"/>
-        <ListView ItemSelected="Handle_ItemSelected"
+        <mobcat:InfiniteListView ItemSelected="Handle_ItemSelected"
                   ItemsSource="{Binding Articles}"
                   IsPullToRefreshEnabled="true"
                   RefreshCommand="{Binding RefreshCommand}"   
                   IsRefreshing="{Binding IsRefreshing}"
                   RefreshAllowed="true"
+                  LoadMoreCommand="{Binding LoadMoreCommand}"
+                  IsLoadingMore="{Binding IsLoadingMore}"
                   SelectionMode="Single"
                   BackgroundColor="#585858"
                   RowHeight="150"
                   SeparatorVisibility="None"
                   Grid.Row="3"
                   Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
+            <mobcat:InfiniteListView.ItemTemplate>
                 <DataTemplate>
                     <cell:SearchArticleViewCell />
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </mobcat:InfiniteListView.ItemTemplate>
+        </mobcat:InfiniteListView>
         <Label Text="No search results" 
                VerticalOptions="Center" 
                HorizontalOptions="Center"

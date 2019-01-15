@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using News.Models;
+using News.Helpers;
 
 namespace News.ViewModels
 {
@@ -19,11 +21,16 @@ namespace News.ViewModels
             Source = source;
         }
 
-        protected async override Task<IEnumerable<ArticleViewModel>> FetchArticlesAsync()
+        protected async override Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize)
         {
             System.Diagnostics.Debug.WriteLine($"{GetType().Name} FetchArticlesAsync for {Title} Source");
+            var result = new FetchArticlesResult(pageNumber, pageSize);
             var articles = await NewsDataService.FetchArticlesBySource(Source);
-            var result = articles.Select(a => new ArticleViewModel(a)).ToList();
+            if (articles?.Articles != null)
+            {
+                result.Articles = articles.Articles.Select(a => new ArticleViewModel(a)).ToList();
+                result.TotalCount = articles.TotalCount;
+            }
             return result;
         }
     }

@@ -7,6 +7,7 @@
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
     xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mobcat="clr-namespace:News.Controls;assembly=News"
     x:TypeArguments="vm:NewsByCategoryViewModel" 
     x:Class="News.Pages.NewsByCategoryPage" 
     BackgroundColor="#3c3c3c"
@@ -64,24 +65,26 @@
                           HeightRequest="1"
                           Grid.Row="1"
                           Grid.ColumnSpan="2"/>
-                    <ListView ItemSelected="Handle_ItemSelected"
+                    <mobcat:InfiniteListView ItemSelected="Handle_ItemSelected"
                               ItemsSource="{Binding Articles}"
                               IsPullToRefreshEnabled="true"
                               RefreshCommand="{Binding RefreshCommand}"
                               RefreshAllowed="true"
                               IsRefreshing="{Binding IsRefreshing}"
+                              LoadMoreCommand="{Binding LoadMoreCommand}"
+                              IsLoadingMore="{Binding IsLoadingMore}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
                               SeparatorVisibility="None"
                               Grid.Row="2"
                               Grid.ColumnSpan="2">
-                        <ListView.ItemTemplate>
+                        <mobcat:InfiniteListView.ItemTemplate>
                             <DataTemplate>
                                 <cell:ArticleViewCell />
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </mobcat:InfiniteListView.ItemTemplate>
+                    </mobcat:InfiniteListView>
                     <Label Text="We don't have any articles for the given category" 
                            VerticalOptions="Center" 
                            HorizontalOptions="Center"

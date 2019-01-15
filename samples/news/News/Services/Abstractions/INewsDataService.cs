@@ -2,13 +2,15 @@
 using System.Threading.Tasks;
 using NewsAPI.Constants;
 using NewsAPI.Models;
+using News.Helpers;
+using News.Models;
 
 namespace News.Services.Abstractions
 {
     public interface INewsDataService
     {
-        Task<IEnumerable<Article>> FetchArticlesByCategory(Categories? category = null);
-        Task<IEnumerable<Article>> FetchArticlesBySource(string source);
-        Task<IEnumerable<Article>> FetchArticlesBySearchQuery(string query);
+        Task<FetchArticlesResponse> FetchArticlesByCategory(Categories? category = null, int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
+        Task<FetchArticlesResponse> FetchArticlesBySource(string source, int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
+        Task<FetchArticlesResponse> FetchArticlesBySearchQuery(string query, int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
     }
 }

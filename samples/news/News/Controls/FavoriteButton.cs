@@ -70,7 +70,6 @@ namespace News.Controls
                 _animationView.IsVisible = false;
             }
 
-            System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlState: IsFavorite = {IsFavorite}");
             Source = IsFavorite ? "ic_favorite_fill.png" : "ic_favorite_empty.png";
         }
 
@@ -78,8 +77,6 @@ namespace News.Controls
         {
             if (IsFavorite)
             {
-                System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Add to favorites state");
-
                 if (Parent is Layout<View> animationContainer)
                 {
                     //await Task.Delay(1000);
@@ -96,12 +93,8 @@ namespace News.Controls
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Favorite button doesn't have parent container to render animation.");
+                    System.Diagnostics.Debug.WriteLine($"Favorite button doesn't have parent container to render animation.");
                 }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine($"{GetHashCode()} | UpdateControlStateWithAnimation: Remove from favorites state, no animation.");
             }
         }
     }
