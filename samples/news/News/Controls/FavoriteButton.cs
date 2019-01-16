@@ -89,7 +89,6 @@ namespace News.Controls
                     _animationView.AbortAnimation(GetHashCode().ToString());
                     _animationView.IsVisible = true;
                     _animationView.Play();
-                    return;
                 }
                 else
                 {
