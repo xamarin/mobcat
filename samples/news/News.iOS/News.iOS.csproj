@@ -181,6 +181,7 @@
     <BundleResource Include="Resources\ic_favorite_empty%402x.png" />
     <BundleResource Include="Resources\ic_favorite_empty%403x.png" />
     <BundleResource Include="Resources\lottie_favorite_add.json" />
+    <BundleResource Include="Resources\lottie_load_more.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
