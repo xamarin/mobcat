@@ -28,7 +28,6 @@
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
     <Folder Include="Pages\" />
-    <Folder Include="Views\" />
     <Folder Include="ViewCells\" />
     <Folder Include="Converters\" />
     <Folder Include="Controls\" />
