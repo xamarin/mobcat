@@ -27,7 +27,7 @@ namespace News.Services.FakeNews
             System.Diagnostics.Debug.WriteLine($"FakeNewsDataService.FetchArticlesByCategory: categrory {category}, page {pageNumber}, pageSize {pageSize}");
 
             // Simulate network request
-            await Task.Delay(500);
+            await Task.Delay(1500);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             var resourceName = $"{GetType().Namespace}.category.{category?.ToString().ToLower() ?? "all"}.json";
             var prestoredResponseContent = await resourceName.ReadResourceContent();
@@ -55,7 +55,7 @@ namespace News.Services.FakeNews
             System.Diagnostics.Debug.WriteLine($"FakeNewsDataService.FetchArticlesBySource: source {source}, page {pageNumber}, pageSize {pageSize}");
 
             // Simulate network request
-            await Task.Delay(500);
+            await Task.Delay(1500);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             var resourceName = $"{GetType().Namespace}.source.{source}.json";
             var prestoredResponseContent = await resourceName.ReadResourceContent();
@@ -87,7 +87,7 @@ namespace News.Services.FakeNews
                 query = "bitcoin";
 
             // Simulate network request
-            await Task.Delay(500);
+            await Task.Delay(1500);
             var resourceName = $"{GetType().Namespace}.search.{query}.json";
             var prestoredResponseContent = await resourceName.ReadResourceContent();
             if (!string.IsNullOrWhiteSpace(prestoredResponseContent))

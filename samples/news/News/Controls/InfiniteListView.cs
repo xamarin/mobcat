@@ -16,13 +16,11 @@ namespace News.Controls
 
         private static void HandleIsLoadingMoreChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            System.Diagnostics.Debug.WriteLine($"LoadingMore is changing from {oldValue} to {newValue}");
             ((InfiniteListView)bindable).UpdateLoadingMoreAnimationState((bool)oldValue != (bool)newValue);
         }
 
         private static void HandleIsEmptyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            System.Diagnostics.Debug.WriteLine($"IsEmpty is changing from {oldValue} to {newValue}");
             ((InfiniteListView)bindable).UpdateIsEmptyState((bool)oldValue != (bool)newValue);
         }
 
