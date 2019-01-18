@@ -70,6 +70,7 @@
               Grid.ColumnSpan="2"/>
         <mobcat:InfiniteListView ItemSelected="Handle_ItemSelected"
                   ItemsSource="{Binding Articles}"
+                  ItemSelectedCommand="{Binding ArticleSelectedCommand}"
                   IsPullToRefreshEnabled="true"
                   RefreshCommand="{Binding RefreshCommand}"   
                   IsRefreshing="{Binding IsRefreshing}"
