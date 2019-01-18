@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
 using News.Models;
@@ -52,10 +53,13 @@ namespace News.ViewModels
 
         public AsyncCommand LoadMoreCommand { get; }
 
+        public Microsoft.MobCAT.MVVM.Command<ArticleViewModel> ArticleSelectedCommand { get; }
+
         public BaseNewsViewModel()
         {
             RefreshCommand = new AsyncCommand(OnRefreshCommandExecutedAsync, () => !IsRefreshing && !IsLoadingMore);
             LoadMoreCommand = new AsyncCommand(OnLoadMoreCommandExecuted, () => !IsRefreshing && !IsLoadingMore && !Articles.FullyLoaded);
+            ArticleSelectedCommand = new Microsoft.MobCAT.MVVM.Command<ArticleViewModel>(OnArticleSelectedCommandExecuted);
         }
 
         public async override Task InitAsync()
@@ -134,6 +138,18 @@ namespace News.ViewModels
             {
                 IsLoadingMore = false;
             }
+        }
+
+        private void OnArticleSelectedCommandExecuted(ArticleViewModel selectedArticle)
+        {
+            if (selectedArticle == null)
+            {
+                return;
+            }
+
+            // TODO: parse and validate url, do not trust API
+            var validUri = new Uri(selectedArticle.UrlToArticle);
+            Device.OpenUri(validUri);
         }
 
         protected abstract Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
