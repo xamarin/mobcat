@@ -9,6 +9,7 @@ namespace News.Controls
     {
         #region dependency properties
 
+        public static readonly BindableProperty ItemSelectedCommandProperty = BindableProperty.Create(nameof(ItemSelectedCommandProperty), typeof(ICommand), typeof(InfiniteListView), null);
         public static readonly BindableProperty LoadMoreCommandProperty = BindableProperty.Create(nameof(LoadMoreCommandProperty), typeof(ICommand), typeof(InfiniteListView), null);
         public static readonly BindableProperty IsLoadingMoreProperty = BindableProperty.Create(nameof(IsLoadingMoreProperty), typeof(bool), typeof(InfiniteListView), false, propertyChanged: new BindableProperty.BindingPropertyChangedDelegate(HandleIsLoadingMoreChanged));
         public static readonly BindableProperty IsEmptyProperty = BindableProperty.Create(nameof(IsEmptyProperty), typeof(bool), typeof(InfiniteListView), false, propertyChanged: new BindableProperty.BindingPropertyChangedDelegate(HandleIsEmptyChanged));
@@ -22,6 +23,12 @@ namespace News.Controls
         private static void HandleIsEmptyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             ((InfiniteListView)bindable).UpdateIsEmptyState((bool)oldValue != (bool)newValue);
+        }
+
+        public ICommand ItemSelectedCommand
+        {
+            get { return (ICommand)GetValue(ItemSelectedCommandProperty); }
+            set { SetValue(ItemSelectedCommandProperty, value); }
         }
 
         public ICommand LoadMoreCommand
@@ -56,6 +63,7 @@ namespace News.Controls
         public InfiniteListView()
         {
             ItemAppearing += InfiniteListView_ItemAppearing;
+            ItemSelected += InfiniteListView_ItemSelected;
 
             Init();
             UpdateLoadingMoreAnimationState(true);
@@ -80,18 +88,32 @@ namespace News.Controls
                 };
             }
         }
+
         private void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             if (IsLoadingMore)
                 return;
 
-            var items = ItemsSource as IList;
-            if (items != null && e.Item == items[items.Count - 1])
+            if (ItemsSource is IList items && e.Item == items[items.Count - 1])
             {
                 if (LoadMoreCommand != null && LoadMoreCommand.CanExecute(null))
                 {
                     LoadMoreCommand.Execute(null);
                 }
+            }
+        }
+
+        private void InfiniteListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+            {
+                // Ignore item deselected events
+                return;
+            }
+
+            if (ItemSelectedCommand != null && ItemSelectedCommand.CanExecute(null))
+            {
+                ItemSelectedCommand.Execute(e.SelectedItem);
             }
         }
 
