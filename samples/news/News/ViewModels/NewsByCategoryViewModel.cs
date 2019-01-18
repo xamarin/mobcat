@@ -69,7 +69,7 @@ namespace News.ViewModels
         public async override Task InitAsync()
         {
             ShowSelectNextCategoryTipIfRequiredAsync().HandleResult();
-            await SelectedCategory.InitNewsAsync(false);
+            await SelectedCategory.InitAsync();
             await base.InitAsync();
         }
 
@@ -78,7 +78,7 @@ namespace News.ViewModels
             System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedCategoryPosition}");
             IsSelectNextCategoryTipEnabled = false;
             IsSelectNextCategoryTipNotRequired = true;
-            SelectedCategory.InitNewsAsync(false).HandleResult();
+            SelectedCategory.InitAsync().HandleResult();
         }
 
         private async Task ShowSelectNextCategoryTipIfRequiredAsync()

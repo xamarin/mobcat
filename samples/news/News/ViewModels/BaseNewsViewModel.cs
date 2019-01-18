@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
 using News.Models;
@@ -64,12 +62,10 @@ namespace News.ViewModels
         {
             await base.InitAsync();
             await InitNewsAsync();
-
             _initialized = true;
-            Raise(nameof(IsEmpty));
         }
 
-        public async virtual Task InitNewsAsync(bool forceRefresh = false)
+        private async Task InitNewsAsync(bool forceRefresh = false)
         {
             if (!Articles.IsNullOrEmpty() && !forceRefresh)
                 return;
@@ -85,7 +81,7 @@ namespace News.ViewModels
             }
         }
 
-        public async virtual Task LoadMoreAsync()
+        private async Task LoadMoreAsync()
         {
             if (Articles.FullyLoaded)
                 return;
@@ -114,8 +110,6 @@ namespace News.ViewModels
             Raise(nameof(IsEmpty));
         }
 
-        protected abstract Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
-
         private async Task OnRefreshCommandExecutedAsync()
         {
             try
@@ -141,5 +135,7 @@ namespace News.ViewModels
                 IsLoadingMore = false;
             }
         }
+
+        protected abstract Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
     }
 }

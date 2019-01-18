@@ -50,14 +50,14 @@ namespace News.ViewModels
 
         public async override Task InitAsync()
         {
-            await SelectedSource.InitNewsAsync(false);
+            await SelectedSource.InitAsync();
             await base.InitAsync();
         }
 
         private void OnSelectedCategoryPositionChanged()
         {
             System.Diagnostics.Debug.WriteLine($"SelectedCategoryPosition changed to {SelectedSourcePosition}");
-            SelectedSource.InitNewsAsync(false).HandleResult();
+            SelectedSource.InitAsync().HandleResult();
         }
     }
 }
