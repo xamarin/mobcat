@@ -33,6 +33,7 @@
     <Folder Include="Controls\" />
     <Folder Include="Services\Abstractions\" />
     <Folder Include="Services\FakeNews\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />
