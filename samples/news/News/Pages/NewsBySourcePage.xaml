@@ -52,6 +52,7 @@
                               IsRefreshing="{Binding IsRefreshing}"
                               LoadMoreCommand="{Binding LoadMoreCommand}"
                               IsLoadingMore="{Binding IsLoadingMore}"
+                              IsEmpty="{Binding IsEmpty}"
                               SelectionMode="Single"
                               BackgroundColor="#585858"
                               RowHeight="250"
@@ -62,14 +63,17 @@
                                 <cell:ArticleViewCell />
                             </DataTemplate>
                         </mobcat:InfiniteListView.ItemTemplate>
+                        <mobcat:InfiniteListView.EmptyTemplate>
+                            <DataTemplate>
+                                 <Label Text="We don't have any articles from this source 🤷"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     TextColor="Silver"
+                                     InputTransparent="true"
+                                     FontSize="Large"/>
+                            </DataTemplate>
+                        </mobcat:InfiniteListView.EmptyTemplate>
                     </mobcat:InfiniteListView>
-                    <Label Text="We don't have any articles from this source" 
-                           VerticalOptions="Center" 
-                           HorizontalOptions="Center"
-                           TextColor="White" 
-                           IsVisible="{Binding IsEmpty}"
-                           InputTransparent="true"
-                           Grid.Row="2"/>
                 </Grid>
             </DataTemplate>
         </cv:CarouselView.ItemTemplate>

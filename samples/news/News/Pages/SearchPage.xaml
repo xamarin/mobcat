@@ -76,6 +76,7 @@
                   RefreshAllowed="true"
                   LoadMoreCommand="{Binding LoadMoreCommand}"
                   IsLoadingMore="{Binding IsLoadingMore}"
+                  IsEmpty="{Binding IsEmpty}"
                   SelectionMode="Single"
                   BackgroundColor="#585858"
                   RowHeight="150"
@@ -87,15 +88,17 @@
                     <cell:SearchArticleViewCell />
                 </DataTemplate>
             </mobcat:InfiniteListView.ItemTemplate>
+            <mobcat:InfiniteListView.EmptyTemplate>
+                <DataTemplate>
+                     <Label Text="No search results 🤷"
+                         VerticalTextAlignment="Center"
+                         HorizontalTextAlignment="Center"
+                         TextColor="Silver"
+                         InputTransparent="true"
+                         FontSize="Large"/>
+                </DataTemplate>
+            </mobcat:InfiniteListView.EmptyTemplate>
         </mobcat:InfiniteListView>
-        <Label Text="No search results" 
-               VerticalOptions="Center" 
-               HorizontalOptions="Center"
-               TextColor="White" 
-               IsVisible="{Binding IsEmpty}"
-               InputTransparent="true"
-               Grid.Row="3"
-               Grid.ColumnSpan="2"/>
     </Grid>
     
 </local:BaseContentPage>
