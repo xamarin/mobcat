@@ -1077,6 +1077,7 @@ The process of adding and updating the native libraries in our wrapper solution 
 
     - arm64-v8a
     - armeabi-v7a
+    - x86
     - x86_64  
 
     **NOTE:** In this example, we are creating a FAT/universal wrapper and so the seperate architecture-specific libraries we created earlier will reside under a directory whose name matches the ABI for which it was built. For a more detailed overview, see the [Architectures and CPUs](https://developer.android.com/ndk/guides/arch) topic from the [NDK developer guide](https://developer.android.com/ndk/guides/), specificically the section on addressing [native code in app packages](https://developer.android.com/ndk/guides/abis#native-code-in-app-packages)
