@@ -27,13 +27,13 @@ Let's cover off some important terminology and concepts before moving on. If you
 An IDE can be thought of as a single tool from which all development tasks can be performed such as code authoring, compiling, linking, deploying, debugging, executing tests and so on. It could be considered an orchestrator of multiple unrelated tools reducing the need to manually configure the individual components involved in the process, otherwise known as a toolchain. It is actually common to use an IDE of choice (such as [Microsoft Visual Studio](https://visualstudio.microsoft.com)) to perform code authoring along with local debugging and testing but have a separate automated build and release process managed via build scripts or a make file.   
 
 **Compiling and Linking**  
-Compilation is the process of translating source code files into object files where an object file is created for each source file typically output using the same name. Linking subsequently turns the individual object files into a single library or executable. In many cases, this also involves linking with other libraries outside of the source code. Cross compilers, such as [GCC](https://gcc.gnu.org), enable the separation between a given build environment and the target platform allowing us to compile our common code for multiple platforms from a single build agent. However, we would require separate build agents to build libraries or executables that target both iOS and Windows. For example we can compile apps and libraries for Android from a Mac or Windows workstation, however certain iOS toolchain components are proprietary and can be executed on macOS environments only so we require separate build agents in order to build libraries or executables that target both iOS and Windows.  
+Compilation is the process of translating source code files into object files where an object file is created for each source file typically output using the same name. Linking subsequently turns the individual object files into a single library or executable. In many cases, this also involves linking with other libraries outside of the source code. Cross compilers, such as [GCC](https://gcc.gnu.org), enable the separation between a given build environment and the target platform allowing us to compile our common code for multiple platforms from a single build agent. However, we would require separate build agents to build libraries or executables that target both iOS and Windows. For example we can compile apps and libraries for Android from a Mac or Windows workstation, however certain iOS and Windows toolchain components are proprietary and can be executed on those respective environments only so we require separate build agents in order to build libraries or executables that target both iOS and Windows.  
 
 **Target Architectures**  
 The term 'target architecture' is principally the CPU (and Operating System) for which the machine code is intended to run on. Code compiled on Windows for x86_64 will not work on the iOS simulator simply because they share the same CPU architecture. Platform vendors provide their own compilers, command-line utilities, symbolic links (a.k.a. soft links) and other configurations required to build for each supported target. These are often command-line compatible with cross compilers such as [GCC](https://gcc.gnu.org). For example, if you run *g++ --version* from Terminal, then assuming you have Xcode and the command-line tools installed, it will indicate that it has been configured to use the Xcode toolchain by default. You can also browse to the [Android NDK directory](https://docs.microsoft.com/en-us/xamarin/android/troubleshooting/questions/android-sdk-location?tabs=macos) to find the analogous Android toolchain components.  
 
 **Static vs. Dynamic Libraries**  
-Libraries are often used to encapsulate a set of related functionality enabling sharing and distribution of code across multiple external libraries or executables in a modular fashion. A static library is resolved at compile-time and ultimately becomes part of the resulting consuming library or executable. A dynamic library is resolved at runtime by being copied into memory and bound to the respective process although the exact behaviour is platform-specific. Both of these approaches have their advantages and disadvantages along with implementation nuisances. It is often a case of choosing the most appropriate option given the situation and so further reading is certainly beneficial if you are unfamilier with this concept.  
+Libraries are often used to encapsulate a set of related functionality enabling sharing and distribution of code across multiple external libraries or executables in a modular fashion. A static library is resolved at compile-time and ultimately becomes part of the resulting consuming library or executable. A dynamic library is resolved at runtime by being copied into memory and bound to the respective process although the exact behaviour is platform-specific. Both of these approaches have their advantages and disadvantages along with implementation nuisances. It is often a case of choosing the most appropriate option given the situation and so further reading is certainly beneficial if you are unfamilier with this concept. An important consideration is that Apple do not support the [use of dynamic libraries that are not packaged as a framework](https://developer.apple.com/library/archive/technotes/tn2435/_index.html#//apple_ref/doc/uid/DTS40017543-CH1-TROUBLESHOOTING). Use of dynamic libraries is technically possible but apps that follow this approach will be rejected when they are submitted to the public App Store.    
 
 **Name Mangling and Extern C**  
 In order to ensure function, variable and type names are unique within a given namespace, C++ encodes them during compilation in a process referred to as name mangling. This behaviour makes it more challenging to consume the library in scenarios such as ours. Whilst it is possible to determine the generated names using tools such as nm (included with Xcode Command Line Tools) or [dumpbin](https://msdn.microsoft.com/en-us/library/b06ww5dd.aspx) (for Windows), this is not ideal since the generated names might change depending on the compiler being used and when things invariably change in our code. The solution in this case is to prevent this by applying the *extern "C"* linkage specifier to the respective declarations. This can be done explicitly for each declaration or for multiple declarations using a block.  
@@ -42,7 +42,7 @@ In order to ensure function, variable and type names are unique within a given n
 CMAKE is an open-source software tool for managing the build process in a platform (and Operating System) agnostic manner. It can support multiple builds from the same source code using a single configuration. The tool does not compile anything itself, but rather helps to orchestrate the process and with creating the build environment required for each target. 
 
 **P/Invoke**  
-P/Invoke (short for platform invoke) enables .NET code to call unmanaged code. This is done by associating the DllImport attribute with a given managed method specifying the library to be loaded into the process memory and optionally the entry point depending upon the calling convention being used. That is, it will use the name of the managed method to lookup and resolve the function if no explicit entry point is specified. The DllImport attribute has other parameters to denote how the underlying method signature is defined and resolved, however this is sufficient background at this time.  
+P/Invoke (short for platform invoke) is a feature of the CLI that enables .NET code to call unmanaged code. This is done by associating the DllImport attribute with a given managed method (that is marked as external), specifying the library to be loaded into the process memory and optionally the entry point depending upon the calling convention being used. That is, it will use the name of the managed method to lookup and resolve the function if no explicit entry point is specified. The DllImport attribute has other parameters to denote how the underlying method signature is defined and resolved, however this is sufficient background at this time.  
 
 **Marshalling**  
 This is the process in which method arguments and return values are transformed into a suitable format so they can be passed between managed and unmanaged memory. Where data types have common representations in both managed and unmanaged memory the marshalling service is able to handle the conversion of those types automatically. It is possible to specify explicitly how the a given type should be marshalled such as when a type does not have a common or unambiguous representation. Marshalling and unmarshalling has been compared to how serialization and deserialization works for example converting a given object into a common string format that can then be used to create a new object from that state. 
@@ -60,7 +60,7 @@ This process is comprised of 4 stages:
 4. Consuming the NuGet package from a Xamarin app
 
 ## Compiling the C/C++ source code into platform-specific native libraries
-The ultimate goal of this stage is to output the native libraries so that they can be used by the C# callable wrapper. This involves orchestrating the appropriate toolchains for each platform to create the binaries for each target architecture. For simplicity, we'll target x86_64 and arm/arm64 only. For iOS, we can then use the lipo utility to create a single fat binary from the individual architecture-specific binaries. In this walkthrough we'll be using dynamic libraries however you could use static libraries with some minor modifications. The resulting binaries will have a .so extension for Android and .dylib for iOS.  
+The ultimate goal of this stage is to output the native libraries so that they can be used by the C# callable wrapper. This involves orchestrating the appropriate toolchains for each platform to create the binaries for each target architecture. For simplicity, we'll target a subset of architectures only. For iOS, we can then use the lipo utility to create a single fat binary from the individual architecture-specific binaries. In this walkthrough we'll be using dynamic libraries for Android and a static library for iOS. The resulting binaries will have a .so extension for Android and .a for iOS.  
 
 We will be writing the C/C++ code using Visual Studio Code as our code editor of choice and will create a basic shell script for handling our build process. The idea is to stay unopinionated about this part of the flow and to keep everything as first-principles as possible whilst bringing to life some of the key concepts. Our primary focus is on the latter stages as this initial part of the process is well-established and separate teams have their own tools and processes of choice in our scenario. 
 
@@ -262,44 +262,42 @@ Next we'll be writing the code for our native library. The original source code 
     ```
     #include "MyMathFuncsWrapper.h"
 
-    extern "C" {
-        MyMathFuncs* CreateMyMathFuncsClass()
-        {
-            return new MyMathFuncs();
-        }
+    MyMathFuncs* CreateMyMathFuncsClass()
+    {
+        return new MyMathFuncs();
+    }
 
-        void DisposeMyMathFuncsClass(MyMathFuncs* ptr)
+    void DisposeMyMathFuncsClass(MyMathFuncs* ptr)
+    {
+        if (ptr != nullptr)
         {
-            if (ptr != nullptr)
-            {
-                delete ptr;
-                ptr = nullptr;
-            }
+            delete ptr;
+            ptr = nullptr;
         }
+    }
 
-        double MyMathFuncsAdd(MyMathFuncs *ptr, double a, double b)
-        {
-            return ptr->Add(a, b);
-        }
+    double MyMathFuncsAdd(MyMathFuncs *ptr, double a, double b)
+    {
+        return ptr->Add(a, b);
+    }
 
-        double MyMathFuncsSubtract(MyMathFuncs *ptr, double a, double b)
-        {
-            return ptr->Subtract(a, b);
-        }
+    double MyMathFuncsSubtract(MyMathFuncs *ptr, double a, double b)
+    {
+        return ptr->Subtract(a, b);
+    }
 
-        double MyMathFuncsMultiply(MyMathFuncs *ptr, double a, double b)
-        {
-            return ptr->Multiply(a, b);
-        }
+    double MyMathFuncsMultiply(MyMathFuncs *ptr, double a, double b)
+    {
+        return ptr->Multiply(a, b);
+    }
 
-        double MyMathFuncsDivide(MyMathFuncs *ptr, double a, double b)
-        {
-            return ptr->Divide(a, b);
-        }
+    double MyMathFuncsDivide(MyMathFuncs *ptr, double a, double b)
+    {
+        return ptr->Divide(a, b);
     }
     ```
 
-   **NOTE:** We are effectively exposing wrapper functions that our .NET consumer can use to create, dispose and interact with the underlying native *MyMathFuncs* class which avoids changing the *MyMathFuncs* class from its original definition. We'll overlook type safety and exception handling considerations at this stage as this is not the main focus of the walkthrough.
+   **NOTE:** We are effectively exposing wrapper functions that our .NET consumer can use to create, dispose and interact with the underlying native *MyMathFuncs* class which avoids changing the *MyMathFuncs* class from its original definition. We'll overlook validation and exception handling considerations at this stage as this is not the main focus of the walkthrough.
 
 ### Orchestrating the toolchains
 We need to update our build script to turn our library code into platform-specific libraries using the following high-level process:
@@ -320,7 +318,7 @@ android-ndk-r15c
 **iOS SDK Version:**  
 12.1  
 
-You should __**ensure that you have the above components (and matching versions) installed now. or update the script to use the SDKs that you do have installed**__. You can quickly determine which versions you have installed by opening **Terminal** and executing the following commands:  
+You should __**ensure that you have the above components (and matching versions) installed now or update the script to use the SDKs that you do have installed**__. You can quickly determine which versions you have installed by opening **Terminal** and executing the following commands:  
 
 **Android:**  
 ```
@@ -367,13 +365,14 @@ xcodebuild -showsdks
 2. In the same file, add the following variables to define the target archiectures, the name of the library to output along with the target NDK and API/SDK versions for Android and iOS respectively. We will use these later.
 
     ```
-    declare -a AndroidArchitectures=("x86_64" "arm" "arm64")
-    declare -a iOSArchitectures=("x86_64" "arm64")
+    declare -a AndroidArchitectures=("x86" "x86_64" "arm" "arm64")
+    declare -a iOSArchitectures=("x86_64" "arm64" "arm64e")
 
     LibraryName="MathFuncs"
     Android_NDK_Target="android-ndk-r15c"
     Android_Minimum_Api_Version="21"
     iOS_SDK_Version="12.1"
+    iOS_SDK_Min_Version="8.0"
     ```
 
     If you do not have the exact same versions of the Android/iOS toolchain components (as referenced in the script above) then you should **__update the script to use the versions that you have installed__** as described at the [start of this section](#orchestrating-the-toolchains). 
@@ -408,7 +407,10 @@ Try executing a build (**SHIFT + CMD + B**) and validate the script has created 
         mkdir ../bin/Android/$i  
         mkdir Android/build   
 
-        if [ $i == "x86_64" ]
+        if [ $i == "x86" ]
+        then
+            CxxTarget="i686-linux-android-g++"
+        elif [ $i == "x86_64" ]
         then
             CxxTarget="x86_64-linux-android-g++"
         elif [ $i == "arm" ]
@@ -489,6 +491,7 @@ Try executing a build (**SHIFT + CMD + B**) and validate the script has created 
     } &> /dev/null
 
     rm -rf Android/*
+    echo ""
     ```
 
 8. Verify that the completed Android section of the script appears as follows:
@@ -510,7 +513,10 @@ Try executing a build (**SHIFT + CMD + B**) and validate the script has created 
             mkdir ../bin/Android/$i     
             mkdir Android/build      
 
-            if [ $i == "x86_64" ]
+            if [ $i == "x86" ]
+            then
+                CxxTarget="i686-linux-android-g++"
+            elif [ $i == "x86_64" ]
             then
                 CxxTarget="x86_64-linux-android-g++"
             elif [ $i == "arm" ]
@@ -521,8 +527,7 @@ Try executing a build (**SHIFT + CMD + B**) and validate the script has created 
             fi
 
             echo "Installing customized toolchain"
-            
-            $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force        
+            $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force 
 
             export CXX=$CxxTarget
             
@@ -551,11 +556,11 @@ Try executing a build (**SHIFT + CMD + B**) and validate the script has created 
 
             echo ""
 
-        done
+    done
 
     cd ..
     echo "** BUILD SUCCEEDED (Android) **"
-    echo ""   
+    echo ""
     ```
 
 Run the completed Android build to validate that it is successfully creating the libraries (in the **bin/Android** folder for expected targets). The output should appear as follows:
@@ -566,6 +571,11 @@ Run the completed Android build to validate that it is successfully creating the
 Preparing working files and directories
 
 === BUILD TARGET (Android) ===
+
+Build for x86:
+Installing customized toolchain
+Compiling and linking (output as dynamic library)
+Copying libMathFuncs.so to bin/Android/x86
 
 Build for x86_64:
 Installing customized toolchain
@@ -592,7 +602,6 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     ```
     echo ""
-
     echo "=== BUILD TARGET (iOS) ==="
     echo ""
 
@@ -601,20 +610,22 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     **NOTE:** As with Android, we change directory to the **tmp** folder. 
 
-2. Update the script to perform a loop over the target architectures (defined in the [previous step](#preparing-to-build)), exporting the *SDKROOT* and *IPHONEOS_DEPLOYMENT_TARGET* environment variables. These will be used by the underlying compiler provided by Xcode:
+2. Update the script to perform a loop over the target architectures (defined in the [previous step](#preparing-to-build)), exporting the requisite environment variables:
 
     ```
     for i in "${iOSArchitectures[@]}"
     do
-        SdkRootValue="iphoneos$iOS_SDK_Version"
+        SdkRootValue="iPhoneOS"
         echo "Build for $i:"
         if [ $i == "x86_64" ]
         then
-            SdkRootValue="iphonesimulator$iOS_SDK_Version"
+            SdkRootValue="iPhoneSimulator"
         fi
 
-        export SDKROOT=$SdkRootValue
+        export DEVROOT=/Applications/Xcode.app/Contents/Developer/Platforms/$SdkRootValue.platform/Developer
         export IPHONEOS_DEPLOYMENT_TARGET=$iOS_SDK_Version
+        export SDKROOT=$DEVROOT/SDKs/$SdkRootValue.sdk
+        export CFLAGS="-std=c++0x -arch $i -pipe -no-cpp-precomp -fembed-bitcode -isysroot $SDKROOT 
 
         echo "SDK: $SDKROOT, TARGET: $IPHONEOS_DEPLOYMENT_TARGET"
     done
@@ -634,17 +645,31 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
     === BUILD TARGET (iOS) ===
 
     Build for x86_64:
-    SDK: iphonesimulator12.1, TARGET: 12.1
+    SDK: iPhoneSimulator, TARGET: 12.1
     Build for arm64:
-    SDK: iphoneos12.1, TARGET: 12.1
+    SDK: iPhoneOS, TARGET: 12.1
+    Build for arm64e:
+    SDK: iPhoneOS, TARGET: 12.1
     ** BUILD SUCCEEDED (iOS) **
     ```
 
 4. Replace the line **echo "SDK: $SDKROOT, TARGET: $IPHONEOS_DEPLOYMENT_TARGET"** with the following code:
 
     ```
-    echo "Compiling and linking (output as dynamic library)"
-    g++ -dynamiclib sourceFiles/*.cpp -arch $i -std=c++0x -o iOS/${LibraryName}_${i}.dylib
+    echo "Compiling and linking (output as static library)"
+
+    cd sourceFiles
+    g++ -c *.cpp $CFLAGS
+    cd ..
+
+    {
+        ar ru iOS/${LibraryName}_${i}.a sourceFiles/*.o
+    } &> /dev/null    
+
+    cd sourceFiles
+    find . -name "*.o" -type f -delete
+    cd ..
+
     echo ""
     ```
 
@@ -654,7 +679,7 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     ```
     echo "Build universal library:"
-    lipo iOS/*.dylib -output iOS/lib$LibraryName.dylib -create
+    lipo iOS/*.a -output iOS/lib$LibraryName.a -create
     ```
 
     **NOTE:** Be sure to add this outside the for loop i.e. once all architecture-specific libraries have been created. This should be after **done** and before the last **cd ..** line
@@ -662,9 +687,9 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 6. To wrap up the iOS build, add the following script to copy the resulting **.dylib** library to the respective **bin** folder:
 
     ```
-    echo "Copying lib${LibraryName}.dylib to bin/iOS"
+    echo "Copying lib${LibraryName}.a to bin/iOS"
     {
-        find iOS -name "lib${LibraryName}.dylib" -exec cp {} ../bin/iOS \;
+        find iOS -name "lib${LibraryName}.a" -exec cp {} ../bin/iOS \;
     } &> /dev/null
     ```
 
@@ -672,7 +697,6 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     ```
     echo ""
-
     echo "=== BUILD TARGET (iOS) ==="
     echo ""
 
@@ -680,34 +704,48 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     for i in "${iOSArchitectures[@]}"
     do
-        SdkRootValue="iphoneos$iOS_SDK_Version"
+        SdkRootValue="iPhoneOS"
         echo "Build for $i:"
         if [ $i == "x86_64" ]
         then
-            SdkRootValue="iphonesimulator$iOS_SDK_Version"
+            SdkRootValue="iPhoneSimulator"
         fi
 
-        export SDKROOT=$SdkRootValue
+        export DEVROOT=/Applications/Xcode.app/Contents/Developer/Platforms/$SdkRootValue.platform/Developer
         export IPHONEOS_DEPLOYMENT_TARGET=$iOS_SDK_Version
+        export SDKROOT=$DEVROOT/SDKs/$SdkRootValue.sdk
+        export CFLAGS="-std=c++0x -arch $i -pipe -no-cpp-precomp -fembed-bitcode -isysroot $SDKROOT -miphoneos-version-min=$iOS_SDK_Min_Version -I$SDKROOT/usr/include/"
 
-        echo "Compiling and linking (output as dynamic library)"
-        g++ -dynamiclib sourceFiles/*.cpp -arch $i -std=c++0x -o iOS/${LibraryName}_${i}.dylib
+        echo "Compiling and linking (output as static library)"
+
+        cd sourceFiles
+        g++ -c *.cpp $CFLAGS
+        cd ..
+
+        {
+            ar ru iOS/${LibraryName}_${i}.a sourceFiles/*.o
+        } &> /dev/null    
+
+        cd sourceFiles
+        find . -name "*.o" -type f -delete
+        cd ..
+
         echo ""
-        
     done
 
     echo "Build universal library:"
-    lipo iOS/*.dylib -output iOS/lib$LibraryName.dylib -create
+    lipo iOS/*.a -output iOS/lib$LibraryName.a -create
 
-    echo "Copying lib${LibraryName}.dylib to bin/iOS"
+    echo "Copying lib${LibraryName}.a to bin/iOS"
     {
-        find iOS -name "lib${LibraryName}.dylib" -exec cp {} ../bin/iOS \;
+        find iOS -name "lib${LibraryName}.a" -exec cp {} ../bin/iOS \;
     } &> /dev/null
 
     cd ..
+
     echo ""
     echo "** BUILD SUCCEEDED (iOS) **"
-    echo ""  
+    echo "" 
     ```
 
 Run the completed iOS build to validate that it is successfully creating a universal library (in the **bin/iOS** folder). The output should appear as follows:
@@ -720,13 +758,16 @@ Preparing working files and directories
 === BUILD TARGET (iOS) ===
 
 Build for x86_64:
-Compiling and linking (output as dynamic library)
+Compiling and linking (output as static library)
 
 Build for arm64:
-Compiling and linking (output as dynamic library)
+Compiling and linking (output as static library)
+
+Build for arm64e:
+Compiling and linking (output as static library)
 
 Build universal library:
-Copying libMathFuncs.dylib to bin/iOS
+Copying libMathFuncs.a to bin/iOS
 
 ** BUILD SUCCEEDED (iOS) **
 ```    
@@ -777,13 +818,14 @@ echo "Preparing working files and directories"
     find . -name "*.h" -exec cp {} tmp/sourceFiles \;
 } &> /dev/null
 
-declare -a AndroidArchitectures=("x86_64" "arm" "arm64")
-declare -a iOSArchitectures=("x86_64" "arm64")
+declare -a AndroidArchitectures=("x86" "x86_64" "arm" "arm64")
+declare -a iOSArchitectures=("x86_64" "arm64" "arm64e")
 
 LibraryName="MathFuncs"
 Android_NDK_Target="android-ndk-r15c"
 Android_Minimum_Api_Version="21"
 iOS_SDK_Version="12.1"
+iOS_SDK_Min_Version="8.0"
 
 echo ""
 echo "=== BUILD TARGET (Android) ==="
@@ -801,7 +843,10 @@ for i in "${AndroidArchitectures[@]}"
         mkdir ../bin/Android/$i     
         mkdir Android/build      
 
-        if [ $i == "x86_64" ]
+        if [ $i == "x86" ]
+        then
+            CxxTarget="i686-linux-android-g++"
+        elif [ $i == "x86_64" ]
         then
             CxxTarget="x86_64-linux-android-g++"
         elif [ $i == "arm" ]
@@ -812,7 +857,7 @@ for i in "${AndroidArchitectures[@]}"
         fi
 
         echo "Installing customized toolchain"
-        $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force        
+        $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force 
 
         export CXX=$CxxTarget
         
@@ -841,14 +886,13 @@ for i in "${AndroidArchitectures[@]}"
 
         echo ""
 
-    done
+done
 
 cd ..
 echo "** BUILD SUCCEEDED (Android) **"
 echo ""     
 
 echo ""
-
 echo "=== BUILD TARGET (iOS) ==="
 echo ""
 
@@ -856,28 +900,41 @@ cd tmp
 
 for i in "${iOSArchitectures[@]}"
 do
-    SdkRootValue="iphoneos$iOS_SDK_Version"
+    SdkRootValue="iPhoneOS"
     echo "Build for $i:"
     if [ $i == "x86_64" ]
     then
-        SdkRootValue="iphonesimulator$iOS_SDK_Version"
+        SdkRootValue="iPhoneSimulator"
     fi
 
-    export SDKROOT=$SdkRootValue
+    export DEVROOT=/Applications/Xcode.app/Contents/Developer/Platforms/$SdkRootValue.platform/Developer
     export IPHONEOS_DEPLOYMENT_TARGET=$iOS_SDK_Version
+    export SDKROOT=$DEVROOT/SDKs/$SdkRootValue.sdk
+    export CFLAGS="-std=c++0x -arch $i -pipe -no-cpp-precomp -fembed-bitcode -isysroot $SDKROOT -miphoneos-version-min=$iOS_SDK_Min_Version -I$SDKROOT/usr/include/"
 
-    echo "Compiling and linking (output as dynamic library)"
-    g++ -dynamiclib sourceFiles/*.cpp -arch $i -std=c++0x -o iOS/${LibraryName}_${i}.dylib
+    echo "Compiling and linking (output as static library)"
+
+    cd sourceFiles
+    g++ -c *.cpp $CFLAGS
+    cd ..
+
+    {
+        ar ru iOS/${LibraryName}_${i}.a sourceFiles/*.o
+    } &> /dev/null    
+
+    cd sourceFiles
+    find . -name "*.o" -type f -delete
+    cd ..
+
     echo ""
-
 done
 
 echo "Build universal library:"
-lipo iOS/*.dylib -output iOS/lib$LibraryName.dylib -create
+lipo iOS/*.a -output iOS/lib$LibraryName.a -create
 
-echo "Copying lib${LibraryName}.dylib to bin/iOS"
+echo "Copying lib${LibraryName}.a to bin/iOS"
 {
-    find iOS -name "lib${LibraryName}.dylib" -exec cp {} ../bin/iOS \;
+    find iOS -name "lib${LibraryName}.a" -exec cp {} ../bin/iOS \;
 } &> /dev/null
 
 cd ..
@@ -906,6 +963,11 @@ Preparing working files and directories
 
 === BUILD TARGET (Android) ===
 
+Build for x86:
+Installing customized toolchain
+Compiling and linking (output as dynamic library)
+Copying libMathFuncs.so to bin/Android/x86
+
 Build for x86_64:
 Installing customized toolchain
 Compiling and linking (output as dynamic library)
@@ -927,10 +989,13 @@ Copying libMathFuncs.so to bin/Android/arm64
 === BUILD TARGET (iOS) ===
 
 Build for x86_64:
-Compiling and linking (output as dynamic library)
+Compiling and linking (output as static library)
 
 Build for arm64:
-Compiling and linking (output as dynamic library)
+Compiling and linking (output as static library)
+
+Build for arm64e:
+Compiling and linking (output as static library)
 
 Build universal library:
 Copying libMathFuncs.dylib to bin/iOS
@@ -940,7 +1005,7 @@ Copying libMathFuncs.dylib to bin/iOS
 ========== Build All completed ==========
 ```
 
-At this point in our walkthrough, we should have 4 binaries which we can use in the next stage of the process; a single universal binary for iOS and 3 separate binaries for Android (one for each target architecture).
+At this point in our walkthrough, we should have 5 binaries which we can use in the next stage of the process; a single universal binary for iOS and 4 separate binaries for Android (one for each target architecture).
 
 ### Further considerations
 The intent was of course to keep this part of the walkthrough simple and unopinionated whilst bringing to life some of the key concepts described. We have consciously ignored key aspects such as debugging, unit testing and linking to other existing libraries as part of this process. These topics are beyond the scope of this walkthrough, however here are some links to further reading to aid in extending this example.
@@ -987,7 +1052,7 @@ For this part of the walkthrough we require the outputs from the previous stage.
     | **PROJECT NAME**  | **TEMPLATE NAME** | **NEW PROJECT MENU**   |       
     |-------------------| ------------------| -----------------------|
     | MathFuncs.Android | Class Library     | Android > Library      |
-    | MathFuncs.iOS     | Class Library     | iOS > Library          |
+    | MathFuncs.iOS     | Binding Library     | iOS > Library          |
 
 19. From **Solution Explorer**, double-click on the **MathFuncs.Android** project, then navigate to the **Compiler** settings
 
@@ -1021,8 +1086,9 @@ The process of adding and updating the native libraries in our wrapper solution 
     ```
     - lib
         - arm64-v8a
-        - armeabi-v7a
-        - x86_64 
+        - armeabi-v7a 
+        - x86
+        - x86_64
     ```
 
 4. Add the corresponding **.so** libraries to each of the **ABI** folders based on the following mapping:
@@ -1032,6 +1098,9 @@ The process of adding and updating the native libraries in our wrapper solution 
 
     **armeabi-v7a:**  
     bin/Android/arm  
+
+    **x86:**  
+    bin/Android/x86 
 
     **x86_64:**  
     bin/Android/x86_64  
@@ -1048,15 +1117,28 @@ At this point, the **libs** folder should appear as follows:
         - libMathFuncs.so
     - armeabi-v7a
         - libMathFuncs.so
+    - x86  
+        - libMathFuncs.so
     - x86_64 
         - libMathFuncs.so
 ```
 
 #### Native references for MathFuncs.iOS
 
-1. **CONTROL + CLICK** on the **MathFuncs.iOS** project, then choose **Add Files...** from the **Add** menu. 
-2. Choose the **libMathFuncs.dylib** library (from our **MathFuncsLib** workspace bin directory) then click **Open** and then click **OK** leaving the default option to *Copy the file to the directory*
-3. **CONTROL + CLICK** on the **.dylib** file, then choose the **Content** option from the **Build Action** menu
+1. **CONTROL + CLICK** on the **MathFuncs.iOS** project, then choose **Add Native Reference** from the **Add** menu. 
+2. Choose the **libMathFuncs.a** library (from our **MathFuncsLib** workspace bin directory) then click **Open** 
+3. **CONTROL + CLICK** on the **libMathFuncs** file (within the **Native References** folder, then choose the **Properties** option from the menu  
+4. Configure the **Native Reference** properties so they are checked (showing a tick icon):
+        
+    - Force Load
+    - Is C++
+    - Smart Link 
+
+    **NOTE:** Using a binding library project type along with a [native reference](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/native-references) gives us the ability to embed the static library and have it automatically linked into the Xamarin.iOS app that references it (even when it is included via a NuGet package). 
+
+5. Open **ApiDefinition.cs**, deleting the templated commented code (leaving only the **MathFuncs** namespace), then perform the same step for **Structs.cs** 
+
+    **NOTE:** A Binding library project requires these files (or those with the *ObjCBindingApiDefinition* and *ObjCBindingCoreSource* build actions) in order to build. However, we will create the code required to call our native library in code that is shared between both Android and iOS library targets using standard P/Invoke.
 
 ### Writing the managed library code
 We can now write the code enabling us to use our native library. The goal here is to hide any underlying complexity and remove the need for any working knowledge of the native library (or P/Invoke concepts).  
@@ -1069,7 +1151,6 @@ We can now write the code enabling us to use our native library. The goal here i
 
     ```
     using System;
-    using System.Runtime.ConstrainedExecution;
     using Microsoft.Win32.SafeHandles;
 
     namespace MathFuncs
@@ -1078,14 +1159,8 @@ We can now write the code enabling us to use our native library. The goal here i
         {
             public MyMathFuncsSafeHandle() : base(true) { }
 
-            public MyMathFuncsSafeHandle(IntPtr handle) : base(true)
-            {
-                SetHandle(handle);
-            }
-
             public IntPtr Ptr => this.handle;
 
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             protected override bool ReleaseHandle()
             {
                 // TODO: Release the handle here
@@ -1095,7 +1170,7 @@ We can now write the code enabling us to use our native library. The goal here i
     }
     ```
 
-    **NOTE:** A [SafeHandle](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) is the preferred way to work with unmanaged resources in managed code. This abstracts away a lot of boilerplate code removing the need to implement the full [Disposable pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose) requiring only the code to release the handle itself. Deriving from the **SafeHandleZeroOrMinusOneIsInvalid** instead of **SafeHandle** will treat handles with values of **0** or **-1** as being invalid further reducing the code we need to write ourselves.
+    **NOTE:** A [SafeHandle](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) is the preferred way to work with unmanaged resources in managed code. This abstracts away a lot of boilerplate code related to critical finalization and object lifecycle. The owner of this handle can subsequently treat it like any other managed resource and will not have to implement the full [Disposable pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose). 
 
 #### Creating the internal wrapper class
 
@@ -1116,11 +1191,11 @@ We can now write the code enabling us to use our native library. The goal here i
     #if Android
         const string DllName = "libMathFuncs.so";
     #else
-        const string DllName = "MathFuncs";
+        const string DllName = "__Internal";
     #endif
     ```
 
-    **NOTE:** This sets the **DllName** constant value based on whether the library is being built for **Android** or **iOS** targets addressesing the different naming conventions used by each respective platform. In this case, Android expects a filename including extension and iOS expects the filename without the **lib** prefix and without extension.
+    **NOTE:** This sets the **DllName** constant value based on whether the library is being built for **Android** or **iOS**. This is to address the different naming conventions used by each respective platform but also the type of library being used in this case. Android is using a dynamic library and so expects a filename including extension. For iOS, '*__Internal*' is required since we are using a static library.
 
 3. Add a reference to **System.Runtime.InteropServices** at the top of the **MyMathFuncsWrapper.cs** file
 
@@ -1170,7 +1245,7 @@ We can now write the code enabling us to use our native library. The goal here i
             #if Android
                 const string DllName = "libMathFuncs.so";
             #else
-                const string DllName = "MathFuncs";
+                const string DllName = "__Internal";
             #endif
 
             [DllImport(DllName, EntryPoint = "CreateMyMathFuncsClass")]
@@ -1232,10 +1307,16 @@ Now we have our wrapper, we can create the **MyMathFuncs** class that will wrap 
     {
         ...
 
-        public void Dispose()
+        protected virtual void Dispose(bool disposing)
         {
             if (handle != null && !handle.IsInvalid)
                 handle.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         ...
@@ -1537,7 +1618,7 @@ Now we have a reference to the **MathFuncs** package in each of our projects, we
     1 / 2 = 0.5
     ```
 
-    **NOTE:** If you encounter a '*DLLNotFoundException*', be sure to check that the CPU architecture of the device/emulator/simulator you are using is compatible with the subset that we chose to support.  
+    **NOTE:** If you encounter a '*DLLNotFoundException*' when testing on Android, or a build error on iOS, be sure to check that the CPU architecture of the device/emulator/simulator you are using is compatible with the subset that we chose to support.  
 
 # Wrapping up
 We should now have a basic Xamarin.Forms app that can leverage the functionality provided by our native libraries through a common .NET wrapper distributed via a NuGet package. The example provided in this walkthrough is of course intentionally very simplistic to more easily demonstrate the approach at a high-level. It's likely that you'd need to address exception handling, callbacks, the marshalling of more complex types, and linking with other dependency libraries amongst other things. A key consideration is how to handle subsequent code changes and keeping the wrapper in sync which may depend on whether one or both of those concerns are the responsibility of a single team. Either way, automation is a real benefit here. Below are some resources providing further reading around some of the key concepts touched upon here along with the relevant downloads.  

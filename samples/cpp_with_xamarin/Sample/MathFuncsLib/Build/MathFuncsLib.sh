@@ -76,9 +76,7 @@ for i in "${AndroidArchitectures[@]}"
 
         ${PWD}/$CXX -shared -o ../../build/lib${LibraryName}.so ../../build/*.o
 
-        cd ..
-        cd ..
-        cd ..
+        cd ../../..
 
         echo "Copying lib${LibraryName}.so to bin/Android/$i"
         {
@@ -96,7 +94,6 @@ echo "** BUILD SUCCEEDED (Android) **"
 echo ""     
 
 echo ""
-
 echo "=== BUILD TARGET (iOS) ==="
 echo ""
 
