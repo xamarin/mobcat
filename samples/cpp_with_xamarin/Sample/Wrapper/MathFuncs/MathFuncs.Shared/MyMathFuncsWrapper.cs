@@ -7,7 +7,7 @@ namespace MathFuncs
 #if Android
         const string DllName = "libMathFuncs.so";
 #else
-        const string DllName = "MathFuncs";
+        const string DllName = "__Internal";
 #endif
 
         [DllImport(DllName, EntryPoint = "CreateMyMathFuncsClass")]

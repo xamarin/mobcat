@@ -19,13 +19,14 @@ echo "Preparing working files and directories"
     find . -name "*.h" -exec cp {} tmp/sourceFiles \;
 } &> /dev/null
 
-declare -a AndroidArchitectures=("x86_64" "arm" "arm64")
-declare -a iOSArchitectures=("x86_64" "arm64")
+declare -a AndroidArchitectures=("x86" "x86_64" "arm" "arm64")
+declare -a iOSArchitectures=("x86_64" "arm64" "arm64e")
 
 LibraryName="MathFuncs"
 Android_NDK_Target="android-ndk-r15c"
 Android_Minimum_Api_Version="21"
 iOS_SDK_Version="12.1"
+iOS_SDK_Min_Version="8.0"
 
 echo ""
 echo "=== BUILD TARGET (Android) ==="
@@ -43,7 +44,10 @@ for i in "${AndroidArchitectures[@]}"
         mkdir ../bin/Android/$i     
         mkdir Android/build      
 
-        if [ $i == "x86_64" ]
+        if [ $i == "x86" ]
+        then
+            CxxTarget="i686-linux-android-g++"
+        elif [ $i == "x86_64" ]
         then
             CxxTarget="x86_64-linux-android-g++"
         elif [ $i == "arm" ]
@@ -54,7 +58,7 @@ for i in "${AndroidArchitectures[@]}"
         fi
 
         echo "Installing customized toolchain"
-        $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force        
+        $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force 
 
         export CXX=$CxxTarget
         
@@ -85,7 +89,7 @@ for i in "${AndroidArchitectures[@]}"
 
         echo ""
 
-    done
+done
 
 cd ..
 echo "** BUILD SUCCEEDED (Android) **"
@@ -100,27 +104,41 @@ cd tmp
 
 for i in "${iOSArchitectures[@]}"
 do
-    SdkRootValue="iphoneos$iOS_SDK_Version"
+    SdkRootValue="iPhoneOS"
     echo "Build for $i:"
     if [ $i == "x86_64" ]
     then
-        SdkRootValue="iphonesimulator$iOS_SDK_Version"
+        SdkRootValue="iPhoneSimulator"
     fi
 
-    export SDKROOT=$SdkRootValue
+    export DEVROOT=/Applications/Xcode.app/Contents/Developer/Platforms/$SdkRootValue.platform/Developer
     export IPHONEOS_DEPLOYMENT_TARGET=$iOS_SDK_Version
+    export SDKROOT=$DEVROOT/SDKs/$SdkRootValue.sdk
+    export CFLAGS="-std=c++0x -arch $i -pipe -no-cpp-precomp -fembed-bitcode -isysroot $SDKROOT -miphoneos-version-min=$iOS_SDK_Min_Version -I$SDKROOT/usr/include/"
 
-    echo "Compiling and linking (output as dynamic library)"
-    g++ -dynamiclib sourceFiles/*.cpp -arch $i -std=c++0x -o iOS/${LibraryName}_${i}.dylib
+    echo "Compiling and linking (output as static library)"
+
+    cd sourceFiles
+    g++ -c *.cpp $CFLAGS
+    cd ..
+
+    {
+        ar ru iOS/${LibraryName}_${i}.a sourceFiles/*.o
+    } &> /dev/null    
+
+    cd sourceFiles
+    find . -name "*.o" -type f -delete
+    cd ..
+
     echo ""
 done
 
 echo "Build universal library:"
-lipo iOS/*.dylib -output iOS/lib$LibraryName.dylib -create
+lipo iOS/*.a -output iOS/lib$LibraryName.a -create
 
-echo "Copying lib${LibraryName}.dylib to bin/iOS"
+echo "Copying lib${LibraryName}.a to bin/iOS"
 {
-    find iOS -name "lib${LibraryName}.dylib" -exec cp {} ../bin/iOS \;
+    find iOS -name "lib${LibraryName}.a" -exec cp {} ../bin/iOS \;
 } &> /dev/null
 
 cd ..
