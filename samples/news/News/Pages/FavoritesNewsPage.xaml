@@ -8,6 +8,7 @@
     xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mobcat="clr-namespace:News.Controls;assembly=News"
+    xmlns:behaviors="clr-namespace:News.Behaviors;assembly=News"
     x:TypeArguments="vm:FavoritesViewModel" 
     x:Class="News.Pages.FavoritesPage" 
     BackgroundColor="#3c3c3c"
@@ -45,21 +46,21 @@
               BackgroundColor="#2c2c2c"
               HeightRequest="1"
               Grid.Row="1"/>
-        <mobcat:InfiniteListView ItemSelected="Handle_ItemSelected"
-                  ItemsSource="{Binding Articles}"
-                  ItemSelectedCommand="{Binding ArticleSelectedCommand}"
-                  IsPullToRefreshEnabled="true"
-                  RefreshCommand="{Binding RefreshCommand}"   
-                  IsRefreshing="{Binding IsRefreshing}"
-                  RefreshAllowed="true"
-                  LoadMoreCommand="{Binding LoadMoreCommand}"
-                  IsLoadingMore="{Binding IsLoadingMore}"
-                  IsEmpty="{Binding IsEmpty}"
-                  SelectionMode="Single"
-                  BackgroundColor="#585858"
-                  RowHeight="250"
-                  SeparatorVisibility="None"
-                  Grid.Row="2">
+        <mobcat:InfiniteListView
+            ItemsSource="{Binding Articles}"
+            ItemSelectedCommand="{Binding ArticleSelectedCommand}"
+            IsPullToRefreshEnabled="true"
+            RefreshCommand="{Binding RefreshCommand}"   
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshAllowed="true"
+            LoadMoreCommand="{Binding LoadMoreCommand}"
+            IsLoadingMore="{Binding IsLoadingMore}"
+            IsEmpty="{Binding IsEmpty}"
+            SelectionMode="Single"
+            BackgroundColor="#585858"
+            RowHeight="250"
+            SeparatorVisibility="None"
+            Grid.Row="2">
             <mobcat:InfiniteListView.ItemTemplate>
                 <DataTemplate>
                     <cell:ArticleViewCell />
@@ -75,6 +76,9 @@
                          FontSize="Large"/>
                 </DataTemplate>
             </mobcat:InfiniteListView.EmptyTemplate>
+            <mobcat:InfiniteListView.Behaviors>
+                <behaviors:ClearListViewSelectionBehavior />
+            </mobcat:InfiniteListView.Behaviors>
         </mobcat:InfiniteListView>
     </Grid>
     
