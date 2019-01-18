@@ -684,7 +684,7 @@ At this stage, you should have 3 libraries in the **bin** folder under **Android
 
     **NOTE:** Be sure to add this outside the for loop i.e. once all architecture-specific libraries have been created. This should be after **done** and before the last **cd ..** line
 
-6. To wrap up the iOS build, add the following script to copy the resulting **.dylib** library to the respective **bin** folder:
+6. To wrap up the iOS build, add the following script to copy the resulting **.a** library to the respective **bin** folder:
 
     ```
     echo "Copying lib${LibraryName}.a to bin/iOS"
@@ -772,7 +772,7 @@ Copying libMathFuncs.a to bin/iOS
 ** BUILD SUCCEEDED (iOS) **
 ```    
 
-The iOS **.dylib** should be visible within the **Explorer** view alongside our source code, build, and environment setting files. 
+The iOS **.a** should be visible within the **Explorer** view alongside our source code, build, and environment setting files. 
 
 ### Cleaning up the working directory
 1. Add the following to the bottom of the script to denote that we are complete:
@@ -998,7 +998,7 @@ Build for arm64e:
 Compiling and linking (output as static library)
 
 Build universal library:
-Copying libMathFuncs.dylib to bin/iOS
+Copying libMathFuncs.a to bin/iOS
 
 ** BUILD SUCCEEDED (iOS) **
 
