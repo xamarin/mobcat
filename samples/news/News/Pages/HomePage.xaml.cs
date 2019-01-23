@@ -10,16 +10,5 @@ namespace News.Pages
         {
             InitializeComponent();
         }
-
-        protected override void OnCurrentPageChanged()
-        {
-            base.OnCurrentPageChanged();
-
-            // TODO: implement with the based tabbed page
-            if (CurrentPage is FavoritesPage favoritesPage)
-            {
-                favoritesPage.ViewModel.InitAsync().HandleResult();
-            }
-        }
     }
 }

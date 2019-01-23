@@ -54,6 +54,27 @@ namespace Microsoft.MobCAT.Forms.Pages
             base.OnDisappearing();
         }
 
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+
+            if (CurrentPage is IViewFor viewForPage 
+                && viewForPage.ViewModel is BaseNavigationViewModel viewModelForPage)
+            {
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        await viewModelForPage.InitAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.Message);
+                    }
+                });
+            }
+        }
+
         object IViewFor.ViewModel
         {
             get
