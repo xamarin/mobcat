@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using News.Services.Abstractions;
 using News.Services.FakeNews;
-using NewsAPI.Constants;
-using NewsAPI.Models;
 using Xamarin.Forms;
 using News.Helpers;
 using Newtonsoft.Json;

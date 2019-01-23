@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using News.Models;
-using NewsAPI;
-using NewsAPI.Constants;
-using NewsAPI.Models;
 using News.Helpers;
 
 namespace News.ViewModels

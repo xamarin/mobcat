@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using NewsAPI.Constants;
-using NewsAPI.Models;
+﻿using System.Threading.Tasks;
 using News.Helpers;
 using News.Models;
 

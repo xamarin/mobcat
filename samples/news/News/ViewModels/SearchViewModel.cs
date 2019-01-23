@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using NewsAPI;
-using NewsAPI.Constants;
-using NewsAPI.Models;
 using News.Helpers;
 using News.Models;
 

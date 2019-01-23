@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
 using News.Helpers;
+using News.Models;
 using Xamarin.Essentials;
 
 namespace News.ViewModels
@@ -32,12 +33,12 @@ namespace News.ViewModels
         public ObservableCollection<CategoryNewsViewModel> Categories { get; } = new ObservableCollection<CategoryNewsViewModel>
         {
             new CategoryNewsViewModel("Top News \ud83d\udd25"),
-            new CategoryNewsViewModel("Business \ud83d\udcbc", NewsAPI.Constants.Categories.Business),
-            new CategoryNewsViewModel("Entertainment \ud83d\udc83\ud83d\udd7a", NewsAPI.Constants.Categories.Entertainment),
-            new CategoryNewsViewModel("Health \ud83e\uddec", NewsAPI.Constants.Categories.Health),
-            new CategoryNewsViewModel("Science \ud83d\udd2c", NewsAPI.Constants.Categories.Science),
-            new CategoryNewsViewModel("Sports \ud83e\udd3c", NewsAPI.Constants.Categories.Sports),
-            new CategoryNewsViewModel("Technology \ud83d\udc69‍\ud83d\udcbb" ,NewsAPI.Constants.Categories.Technology),
+            new CategoryNewsViewModel("Business \ud83d\udcbc", News.Models.Categories.Business),
+            new CategoryNewsViewModel("Entertainment \ud83d\udc83\ud83d\udd7a", News.Models.Categories.Entertainment),
+            new CategoryNewsViewModel("Health \ud83e\uddec", News.Models.Categories.Health),
+            new CategoryNewsViewModel("Science \ud83d\udd2c", News.Models.Categories.Science),
+            new CategoryNewsViewModel("Sports \ud83e\udd3c", News.Models.Categories.Sports),
+            new CategoryNewsViewModel("Technology \ud83d\udc69‍\ud83d\udcbb" ,News.Models.Categories.Technology),
         };
 
         public bool IsSelectNextCategoryTipEnabled

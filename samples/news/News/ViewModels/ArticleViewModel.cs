@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Text;
 using Microsoft.MobCAT.MVVM;
+using News.Models;
 using News.Services.Abstractions;
-using NewsAPI.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace News.ViewModels

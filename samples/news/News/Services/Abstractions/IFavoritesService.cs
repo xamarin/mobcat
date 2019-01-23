@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NewsAPI.Models;
+using News.Models;
 
 namespace News.Services.Abstractions
 {

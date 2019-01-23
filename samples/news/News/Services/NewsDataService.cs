@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using News.Services.Abstractions;
-using News.Services;
-using NewsAPI;
-using NewsAPI.Constants;
-using NewsAPI.Models;
-using Xamarin.Forms;
-using News.Models;
+using Microsoft.MobCAT.Services;
 using News.Helpers;
+using News.Models;
+using News.Services;
+using News.Services.Abstractions;
+using Xamarin.Forms;
 
 #if !DEBUG
 [assembly: Dependency(typeof(NewsDataService))]
 #endif
 namespace News.Services
 {
-    public class NewsDataService : INewsDataService
+    public class NewsDataService : BaseHttpService, INewsDataService
     {
+        public NewsDataService() 
+            : base(ServiceConfig.NEWSSERVICEURL, null)
+        {
+            Serializer = new NewtonsoftJsonSerializer();
+        }
+
         public async Task<FetchArticlesResponse> FetchArticlesByCategory(Categories? category = null, int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize)
         {
             var request = new TopHeadlinesRequest
@@ -28,9 +32,15 @@ namespace News.Services
                 PageSize = pageSize,
             };
 
-            // TODO: replace with custom implementation of the data provider
-            var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
-            var articles = await newsApiClient.GetTopHeadlinesAsync(request);
+            var actionUrl = "/top-headlines?" +
+                $"country={request.Country}&" +
+                $"language={request.Language}&" +
+                $"category={request.Category}&" +
+                $"page={request.Page}&" +
+                $"pageSize={request.PageSize}&" +
+                $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
+
+            var articles = await GetAsync<ArticlesResult>(actionUrl);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             if (articles?.Articles != null)
             {
@@ -54,9 +64,14 @@ namespace News.Services
                 PageSize = pageSize,
             };
 
-            // TODO: replace with custom implementation of the data provider
-            var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
-            var articles = await newsApiClient.GetTopHeadlinesAsync(request);
+            var actionUrl = "/top-headlines?" +
+               $"sources={string.Join(",", request.Sources)}&" +
+               $"language={request.Language}&" +
+               $"page={request.Page}&" +
+               $"pageSize={request.PageSize}&" +
+               $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
+
+            var articles = await GetAsync<ArticlesResult>(actionUrl);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             if (articles?.Articles != null)
             {
@@ -76,15 +91,21 @@ namespace News.Services
             var request = new TopHeadlinesRequest
             {
                 Q = query,
-                Language = Languages.EN,
                 Country = Countries.US,
+                Language = Languages.EN,
                 Page = pageNumber,
                 PageSize = pageSize,
             };
 
-            // TODO: replace with custom implementation of the data provider
-            var newsApiClient = new NewsApiClient(ServiceConfig.NEWSSERVICEAPIKEY);
-            var articles = await newsApiClient.GetTopHeadlinesAsync(request);
+            var actionUrl = "/top-headlines?" +
+               $"q={request.Q}&" +
+               $"country={request.Country}&" +
+               $"language={request.Language}&" +
+               $"page={request.Page}&" +
+               $"pageSize={request.PageSize}&" +
+               $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
+
+            var articles = await GetAsync<ArticlesResult>(actionUrl);
             if (articles?.Articles != null)
             {
                 result.Articles = articles.Articles;

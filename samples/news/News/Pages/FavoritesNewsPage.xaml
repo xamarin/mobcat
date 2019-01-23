@@ -68,7 +68,7 @@
             </mobcat:InfiniteListView.ItemTemplate>
             <mobcat:InfiniteListView.EmptyTemplate>
                 <DataTemplate>
-                     <Label Text="You don't have any favorites 🤷 Try to hit that little Start button to add some."
+                     <Label Text="You don't have favorites 🤷 Try to hit that little ⭐ button to add some."
                          VerticalOptions="Center"
                          HorizontalOptions="Center"
                          TextColor="Silver"

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using News.Helpers;
+using News.Models;
 using News.Services;
 using News.Services.Abstractions;
-using NewsAPI.Models;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
