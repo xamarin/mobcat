@@ -143,14 +143,19 @@ namespace News.ViewModels
 
         private void OnArticleSelectedCommandExecuted(ArticleViewModel selectedArticle)
         {
-            if (selectedArticle == null)
+            if (string.IsNullOrWhiteSpace(selectedArticle?.UrlToArticle))
             {
                 return;
             }
 
-            // TODO: parse and validate url, do not trust API
-            var validUri = new Uri(selectedArticle.UrlToArticle);
-            Device.OpenUri(validUri);
+            if (Uri.TryCreate(selectedArticle.UrlToArticle, UriKind.Absolute, out Uri validUri))
+            {
+                Device.OpenUri(validUri);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Unable to parse urlToArticle provided: {selectedArticle.UrlToArticle}");
+            }
         }
 
         protected abstract Task<FetchArticlesResult> FetchArticlesAsync(int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize);
