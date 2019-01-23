@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.MVVM;
+using MobCAT.MVVM;
 using News.Helpers;
 using News.Models;
 using News.Services.Abstractions;

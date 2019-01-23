@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace News.Helpers
+namespace MobCAT.MVVM
 {
     public class VirtualCollection<TItem> : ObservableCollection<TItem>
     {
