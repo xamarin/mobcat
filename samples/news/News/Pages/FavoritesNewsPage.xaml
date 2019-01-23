@@ -46,7 +46,7 @@
               BackgroundColor="#2c2c2c"
               HeightRequest="1"
               Grid.Row="1"/>
-        <mobcat:InfiniteListView
+        <mobcat:NewsInfiniteListView
             ItemsSource="{Binding Articles}"
             ItemSelectedCommand="{Binding ArticleSelectedCommand}"
             IsPullToRefreshEnabled="true"
@@ -61,12 +61,12 @@
             RowHeight="250"
             SeparatorVisibility="None"
             Grid.Row="2">
-            <mobcat:InfiniteListView.ItemTemplate>
+            <mobcat:NewsInfiniteListView.ItemTemplate>
                 <DataTemplate>
                     <cell:ArticleViewCell />
                 </DataTemplate>
-            </mobcat:InfiniteListView.ItemTemplate>
-            <mobcat:InfiniteListView.EmptyTemplate>
+            </mobcat:NewsInfiniteListView.ItemTemplate>
+            <mobcat:NewsInfiniteListView.EmptyTemplate>
                 <DataTemplate>
                      <Label Text="You don't have favorites 🤷 Try to hit that little ⭐ button to add some."
                          VerticalOptions="Center"
@@ -75,11 +75,11 @@
                          InputTransparent="true"
                          FontSize="Large"/>
                 </DataTemplate>
-            </mobcat:InfiniteListView.EmptyTemplate>
-            <mobcat:InfiniteListView.Behaviors>
+            </mobcat:NewsInfiniteListView.EmptyTemplate>
+            <mobcat:NewsInfiniteListView.Behaviors>
                 <behaviors:ClearListViewSelectionBehavior />
-            </mobcat:InfiniteListView.Behaviors>
-        </mobcat:InfiniteListView>
+            </mobcat:NewsInfiniteListView.Behaviors>
+        </mobcat:NewsInfiniteListView>
     </Grid>
     
 </local:BaseContentPage>

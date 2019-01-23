@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Windows.Input;
-using Lottie.Forms;
 using Xamarin.Forms;
 
-namespace News.Controls
+namespace MobCAT.Forms.Controls
 {
     public class InfiniteListView : ListView
     {
@@ -17,12 +16,20 @@ namespace News.Controls
 
         private static void HandleIsLoadingMoreChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((InfiniteListView)bindable).UpdateLoadingMoreAnimationState((bool)oldValue != (bool)newValue);
+            var stateChanged = (bool)oldValue != (bool)newValue;
+            if (stateChanged)
+            {
+                ((InfiniteListView)bindable).OnIsLoadingMoreChanged();
+            }
         }
 
         private static void HandleIsEmptyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((InfiniteListView)bindable).UpdateIsEmptyState((bool)oldValue != (bool)newValue);
+            var stateChanged = (bool)oldValue != (bool)newValue;
+            if (stateChanged)
+            {
+                ((InfiniteListView)bindable).OnIsEmptyChanged();
+            }
         }
 
         public ICommand ItemSelectedCommand
@@ -57,36 +64,19 @@ namespace News.Controls
 
         #endregion
 
-        private AnimationView _animationView;
         private View _emptyTemplateView;
 
         public InfiniteListView()
         {
             ItemAppearing += InfiniteListView_ItemAppearing;
             ItemSelected += InfiniteListView_ItemSelected;
-
             Init();
-            UpdateLoadingMoreAnimationState(true);
-            UpdateIsEmptyState(true);
         }
 
         private void Init()
         {
-            if (_animationView == null)
-            {
-                _animationView = new AnimationView()
-                {
-                    Animation = "lottie_load_more.json",
-                    VerticalOptions = LayoutOptions.EndAndExpand,
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                    BackgroundColor = Color.Transparent,
-                    Loop = true,
-                    AutoPlay = false,
-                    IsVisible = false,
-                    HeightRequest = 220,
-                    Margin = new Thickness(0),
-                };
-            }
+            OnIsLoadingMoreChanged();
+            OnIsEmptyChanged();
         }
 
         private void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
@@ -117,36 +107,14 @@ namespace News.Controls
             }
         }
 
-        private void UpdateLoadingMoreAnimationState(bool stateChanged = false)
+        protected virtual void OnIsLoadingMoreChanged()
         {
-            if (!stateChanged || _animationView == null)
-            {
-                return;
-            }
-
-            if (IsLoadingMore)
-            {
-                if (Footer == null)
-                {
-                    Footer = _animationView;
-                }
-
-                _animationView.AbortAnimation(GetHashCode().ToString());
-                _animationView.IsVisible = true;
-                _animationView.Play();
-            }
-            else
-            {
-                _animationView.AbortAnimation(GetHashCode().ToString());
-                _animationView.IsPlaying = false;
-                _animationView.IsVisible = false;
-                Footer = null;
-            }
+            // Do nothing
         }
 
-        private void UpdateIsEmptyState(bool stateChanged = false)
+        protected virtual void OnIsEmptyChanged()
         {
-            if (!stateChanged || EmptyTemplate == null)
+            if (EmptyTemplate == null)
             {
                 return;
             }

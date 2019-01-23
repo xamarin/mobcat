@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MobCAT\MobCAT.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
 </Project>
