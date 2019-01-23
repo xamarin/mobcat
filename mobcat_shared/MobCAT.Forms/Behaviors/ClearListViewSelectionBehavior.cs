@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace News.Behaviors
+namespace MobCAT.Behaviors
 {
     public class ClearListViewSelectionBehavior : Behavior<ListView>
     {

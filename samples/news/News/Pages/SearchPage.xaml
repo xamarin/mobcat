@@ -8,7 +8,7 @@
     xmlns:cell="clr-namespace:News.ViewCells;assembly=News"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mobcat="clr-namespace:News.Controls;assembly=News"
-    xmlns:behaviors="clr-namespace:News.Behaviors;assembly=News"
+    xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
     x:TypeArguments="vm:SearchViewModel" 
     x:Class="News.Pages.SearchPage" 
     BackgroundColor="#3c3c3c"
