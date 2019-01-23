@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.Services;
 using News.Helpers;
@@ -15,7 +16,7 @@ namespace News.Services
 {
     public class NewsDataService : BaseHttpService, INewsDataService
     {
-        public NewsDataService() 
+        public NewsDataService()
             : base(ServiceConfig.NEWSSERVICEURL, null)
         {
             Serializer = new NewtonsoftJsonSerializer();
@@ -23,7 +24,7 @@ namespace News.Services
 
         public async Task<FetchArticlesResponse> FetchArticlesByCategory(Categories? category = null, int pageNumber = 1, int pageSize = Constants.DefaultArticlesPageSize)
         {
-            var request = new TopHeadlinesRequest
+            var request = new ArticlesRequest
             {
                 Country = Countries.US,
                 Language = Languages.EN,
@@ -32,14 +33,7 @@ namespace News.Services
                 PageSize = pageSize,
             };
 
-            var actionUrl = "/top-headlines?" +
-                $"country={request.Country}&" +
-                $"language={request.Language}&" +
-                $"category={request.Category}&" +
-                $"page={request.Page}&" +
-                $"pageSize={request.PageSize}&" +
-                $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
-
+            var actionUrl = ToActionRelativeUrl("top-headlines", request);
             var articles = await GetAsync<ArticlesResult>(actionUrl);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             if (articles?.Articles != null)
@@ -56,7 +50,7 @@ namespace News.Services
             if (string.IsNullOrWhiteSpace(source))
                 throw new ArgumentNullException(nameof(source));
 
-            var request = new TopHeadlinesRequest
+            var request = new ArticlesRequest
             {
                 Sources = new List<string> { source },
                 Language = Languages.EN,
@@ -64,13 +58,7 @@ namespace News.Services
                 PageSize = pageSize,
             };
 
-            var actionUrl = "/top-headlines?" +
-               $"sources={string.Join(",", request.Sources)}&" +
-               $"language={request.Language}&" +
-               $"page={request.Page}&" +
-               $"pageSize={request.PageSize}&" +
-               $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
-
+            var actionUrl = ToActionRelativeUrl("top-headlines", request);
             var articles = await GetAsync<ArticlesResult>(actionUrl);
             var result = new FetchArticlesResponse(pageNumber, pageSize);
             if (articles?.Articles != null)
@@ -88,23 +76,16 @@ namespace News.Services
             if (string.IsNullOrWhiteSpace(query))
                 return result;
 
-            var request = new TopHeadlinesRequest
+            var request = new ArticlesRequest
             {
-                Q = query,
+                Query = query,
                 Country = Countries.US,
                 Language = Languages.EN,
                 Page = pageNumber,
                 PageSize = pageSize,
             };
 
-            var actionUrl = "/top-headlines?" +
-               $"q={request.Q}&" +
-               $"country={request.Country}&" +
-               $"language={request.Language}&" +
-               $"page={request.Page}&" +
-               $"pageSize={request.PageSize}&" +
-               $"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}";
-
+            var actionUrl = ToActionRelativeUrl("top-headlines", request);
             var articles = await GetAsync<ArticlesResult>(actionUrl);
             if (articles?.Articles != null)
             {
@@ -113,6 +94,55 @@ namespace News.Services
             }
 
             return result;
+        }
+
+        private string ToActionRelativeUrl(string action, ArticlesRequest requestParams = null)
+        {
+            if (string.IsNullOrWhiteSpace(action))
+                throw new ArgumentNullException(nameof(action));
+
+            var actionUrlBuilder = new StringBuilder($"/{action}?");
+            if (requestParams != null)
+            {
+                if (!string.IsNullOrWhiteSpace(requestParams.Query))
+                {
+                    actionUrlBuilder.Append($"q={requestParams.Query}&");
+                }
+
+                if (requestParams.Country != null)
+                {
+                    actionUrlBuilder.Append($"country={requestParams.Country}&");
+                }
+
+                if (requestParams.Language != null)
+                {
+                    actionUrlBuilder.Append($"language={requestParams.Language}&");
+                }
+
+                if (requestParams.Category != null)
+                {
+                    actionUrlBuilder.Append($"category={requestParams.Category}&");
+                }
+
+                if (requestParams.Sources != null && requestParams.Sources.Count > 0)
+                {
+                    actionUrlBuilder.Append($"sources={string.Join(",", requestParams.Sources)}&");
+                }
+
+                if (requestParams.Page > 0)
+                {
+                    actionUrlBuilder.Append($"page={requestParams.Page}&");
+                }
+
+                if (requestParams.PageSize > 0)
+                {
+                    actionUrlBuilder.Append($"pageSize={requestParams.PageSize}&");
+                }
+            }
+
+            actionUrlBuilder.Append($"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}");
+            var actionUrl = actionUrlBuilder.ToString();
+            return actionUrl;
         }
     }
 }

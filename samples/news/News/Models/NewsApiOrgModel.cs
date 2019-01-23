@@ -275,9 +275,9 @@ namespace News.Models
         Technology
     }
 
-    public class TopHeadlinesRequest
+    public class ArticlesRequest
     {
-        public string Q { get; set; }
+        public string Query { get; set; }
         public Countries? Country { get; set; }
         public Languages? Language { get; set; }
         public Categories? Category { get; set; }
