@@ -23,6 +23,12 @@ namespace News.Models
         public string Content { get; set; }
     }
 
+    public class FavoriteEntry
+    {
+        public Article Article { get; set; }
+        public DateTime FavoritedAt { get; set; }
+    }
+
     public class ArticlesResult
     {
         public string Status { get; set; }

@@ -27,7 +27,9 @@ namespace News.ViewModels
             }
         }
 
-        // TODO: Load full list via API and add lazy initialization
+        /// <summary>
+        /// Preselected popular list of available sources
+        /// </summary>
         public ObservableCollection<SourceNewsViewModel> Sources { get; } = new ObservableCollection<SourceNewsViewModel>()
         {
             new SourceNewsViewModel("CNN", "cnn"),

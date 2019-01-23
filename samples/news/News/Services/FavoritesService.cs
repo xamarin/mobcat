@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using News.Helpers;
@@ -14,7 +15,7 @@ namespace News.Services
 {
     public class FavoritesService : IFavoritesService
     {
-        private readonly ConcurrentDictionary<string, Article> _favorites = new ConcurrentDictionary<string, Article>();
+        private readonly ConcurrentDictionary<string, FavoriteEntry> _favorites = new ConcurrentDictionary<string, FavoriteEntry>();
 
         public FavoritesService()
         {
@@ -30,7 +31,8 @@ namespace News.Services
         public void Add(Article article)
         {
             var key = BuildArticleKey(article);
-            if (_favorites.TryAdd(key, article))
+            var favEntry = new FavoriteEntry { Article = article, FavoritedAt = DateTime.UtcNow };
+            if (_favorites.TryAdd(key, favEntry))
             {
                 SaveFavorites();
             }
@@ -39,7 +41,7 @@ namespace News.Services
         public void Remove(Article article)
         {
             var key = BuildArticleKey(article);
-            if (_favorites.TryRemove(key, out Article removed))
+            if (_favorites.TryRemove(key, out FavoriteEntry removed))
             {
                 SaveFavorites();
             }
@@ -47,8 +49,10 @@ namespace News.Services
 
         public IEnumerable<Article> Get()
         {
-            // TODO: save the `add` date and sort by it
-            return _favorites.Values.ToList();
+            return _favorites.Values
+                .OrderByDescending(f => f.FavoritedAt)
+                .Select(f => f.Article)
+                .ToList();
         }
 
         private string BuildArticleKey(Article article)
@@ -61,7 +65,7 @@ namespace News.Services
 
         private void SaveFavorites()
         {
-            var state = JsonConvert.SerializeObject(_favorites.Values);
+            var state = JsonConvert.SerializeObject(_favorites);
             Preferences.Set(GetType().FullName, state);
         }
 
@@ -71,11 +75,14 @@ namespace News.Services
             if (string.IsNullOrWhiteSpace(state))
                 return;
 
-            var favoritesState = JsonConvert.DeserializeObject<List<Article>>(state);
+            var favoritesState = JsonConvert.DeserializeObject<Dictionary<string, FavoriteEntry>>(state);
             if (!favoritesState.IsNullOrEmpty())
             {
                 _favorites.Clear();
-                favoritesState.ForEach(Add);
+                foreach (var entry in favoritesState)
+                {
+                    _favorites.TryAdd(entry.Key, entry.Value);
+                }
             }
         }
     }

@@ -1,9 +1,6 @@
 ﻿using Microsoft.MobCAT.Forms.Pages;
-using Microsoft.MobCAT.Forms.Services.Abstractions;
-using Microsoft.MobCAT.MVVM;
 using News.Helpers;
 using News.ViewModels;
-using Xamarin.Forms;
 
 namespace News.Pages
 {
