@@ -2,7 +2,11 @@
 
 News-Man 9000 2.0 a news app sample that showcases best patterns and practices for building, testing, and deploying mobile apps using [Xamarin](https://visualstudio.microsoft.com/xamarin/), [Azure DevOps](https://azure.microsoft.com/en-us/solutions/devops/), and [AppCenter](https://appcenter.ms/)
 
-(Add Screenshots)
+<img src="readme_illustrations/News.CategoryTab.png" alt="New App - Category Tab" height="350" style="display:inline-block;" />
+<img src="readme_illustrations/News.FavoritesTab.png" alt="New App - Favorites Tab" height="350" style="display:inline-block;" />
+<img src="readme_illustrations/News.SearchTab.png" alt="New App - Search Tab" height="350" style="display:inline-block;" />
+<img src="readme_illustrations/News.ListView.Refresh.png" alt="New App - ListView - Refresh Tab" height="350" style="display:inline-block;" />
+<img src="readme_illustrations/News.ListView.LoadMore.png" alt="New App - ListView - LoadMore Tab" height="350" style="display:inline-block;" />
 
 ## Prerequisites
 
