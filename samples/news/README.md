@@ -44,7 +44,6 @@ The solution consists of the following projects:
 - News.Android: The News Android specific project contains Android assets
 - News.iOS: The News iOS specific project contains iOS assets
 - News.UITests: The UI Test project
-- News.UnitTests: The unit test project which uses mock services using [Moq](https://github.com/moq/moq4)
 
 ## MVVM
 
