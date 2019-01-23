@@ -1,5 +1,4 @@
 ﻿using Microsoft.MobCAT.Forms.Pages;
-using News.Helpers;
 using News.ViewModels;
 
 namespace News.Pages

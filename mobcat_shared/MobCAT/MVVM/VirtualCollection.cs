@@ -9,7 +9,7 @@ namespace MobCAT.MVVM
 {
     public class VirtualCollection<TItem> : ObservableCollection<TItem>
     {
-        public int VirtualPage => Count > 0 ? ((( Count - 1) / VirtualPageSize) + 1) : 0;
+        public int VirtualPage => Count > 0 ? (((Count - 1) / VirtualPageSize) + 1) : 0;
 
         public bool FullyLoaded => Count >= VirtualCount;
 
@@ -19,7 +19,7 @@ namespace MobCAT.MVVM
             get { return _virtualPageSize; }
             set
             {
-                if(value <= 0)
+                if (value <= 0)
                 {
                     throw new ArgumentException($"Unable to set {nameof(VirtualPageSize)} smaller than 0");
                 }
@@ -36,11 +36,11 @@ namespace MobCAT.MVVM
         public int VirtualCount
         {
             get { return _virtualCount; }
-            set 
+            set
             {
                 // We cannot set new Virtual count lower than number of already loaded items
                 var newValue = Math.Max(value, Count);
-                if(RaiseAndUpdate(ref _virtualCount, newValue))
+                if (RaiseAndUpdate(ref _virtualCount, newValue))
                 {
                     Raise(nameof(VirtualPage));
                     Raise(nameof(FullyLoaded));
@@ -50,17 +50,16 @@ namespace MobCAT.MVVM
 
         public VirtualCollection()
         {
-            
+
         }
 
-        public VirtualCollection(IEnumerable<TItem> collection) 
+        public VirtualCollection(IEnumerable<TItem> collection)
             : base(collection)
         {
         }
 
         public void AddPage(IEnumerable<TItem> collection, int? virtualCount = null, int? pageNumber = null, int? pageSize = null)
         {
-            // TODO: load one by one without raising the collection changed event
             foreach (var article in collection)
             {
                 this.Add(article);
@@ -110,7 +109,7 @@ namespace MobCAT.MVVM
             if (!string.IsNullOrEmpty(propertyName))
             {
                 OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-            } 
+            }
         }
     }
 }
