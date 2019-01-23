@@ -10,7 +10,15 @@ News-Man 9000 2.0 a news app sample that showcases best patterns and practices f
 
 ## Prerequisites
 
-To run the sample successfully, local app secrets need to be set up for your development environment. Please refer to the following **App Secrets** sections to get started.
+There are two configruation available to run this sample application: Debug and Release. The the Debug configuration will run the app without additional actions and you will be able to access all pages of the app. In the Release configuration additional actions are required to run the sample in order to fetch real data from the real API source.
+
+### Debug Configuration
+
+The Debug configuration uses conditional compilation in order to inject the offline news data service. As a result, the real news feed is not required, all the data is prestored and available via the offline data service, including news by category, news by source and search. In order to run the app using this configuration you should select the Debug from the build configuration dropdown (selected by default) and run the sample source code.
+
+### Release Configuration
+
+The Release configuration replaces the offline data service with the online data service. To run the sample against the real news data feed, local app secrets need to be set up for your development environment. Please refer to the following **App Secrets** sections to get started.
 
 ## Backend
 
@@ -29,15 +37,22 @@ The app secrets in News are protected using [mobcat_client_secrets](https://gith
 3. AndroidAppCenterSecret
 4. iOSAppCenterSecret
 
-### MacOS
+    **MacOS**
 
-To set up the environment variables using Terminal on MacOS, navigate to the `/build` folder and run the following:
+    To set up the environment variables using Terminal on MacOS, navigate to the `/build` folder and run the following:
 
-```. environment.sh --api-key <Your API key> --service-endpoint <Your service endpoint> --android-appcenter-secret <Your Android AppCenter secret> --ios-appcenter-secret <Your iOS AppCenter secret>```
+    ```
+    . environment.sh --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter secret> --ios-appcenter-secret <iOS AppCenter secret>
+    ```
 
-### Windows
+    **Windows:**
+    ```
+    environment.bat --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter App Secret> --ios-appcenter-secret <iOS AppCenter App Secret>
+    ```
 
-TODO
+    **NOTE:** You must restart **Visual Studio for Mac** in order for changes to these environment variables to be recognized (if it was open at the time these were set). If you need to update the value after it was initially set, please run the script again, restart the **Visual Studio for Mac** and rebuild the solution to apply the recent changes
+
+    **NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
 
 ## Solution Overview
 
