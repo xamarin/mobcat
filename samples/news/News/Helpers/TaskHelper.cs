@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AppCenter.Crashes;
+﻿using System.Threading.Tasks;
+using Microsoft.MobCAT;
 
 namespace News.Helpers
 {
@@ -14,7 +13,7 @@ namespace News.Helpers
             source.ContinueWith(r =>
             {
                 var ex = r.Exception?.Flatten();
-                Crashes.TrackError(ex);
+                Logger.Error(ex);
                 System.Diagnostics.Debug.WriteLine(ex);
             }, TaskContinuationOptions.OnlyOnFaulted);
         }
