@@ -1,7 +1,7 @@
 # Introduction 
 This sample demonstrates the basic steps involved with incorporating a precompiled native C/C++ library as part of a Xamarin solution. It was created for use on the Xamarin show as a quick introduction to the topic with a focus on getting started with [P/Invoke](https://docs.microsoft.com/cpp/dotnet/calling-native-functions-from-managed-code?view=vs-2017) concepts.  
 
-![Sample App and Unit Test Runner](Illustrations/cpp_xam_xs.jpg "Sample App and Unit Test Runner")
+![Sample App and Unit Test Runner](illustrations/cpp_xam_xs.jpg "Sample App and Unit Test Runner")
 
 The solution is comprised of 3 high-level areas:  
 
