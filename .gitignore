@@ -329,3 +329,8 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+**.xcuserstate
+devsettings\.plist
+contents\.xcworkspacedata
+UserInterfaceState\.xcuserstate
