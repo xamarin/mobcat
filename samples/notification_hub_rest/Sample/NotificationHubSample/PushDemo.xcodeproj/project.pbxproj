@@ -38,7 +38,6 @@
 		E5A17F342093495900613D49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5A17F372093495900613D49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E5A17F392093495900613D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5A17F6120934DF900613D49 /* Foundation_Notifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Foundation_Notifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5A17F672093518900613D49 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		E5C78B972093606100384800 /* NotificationHubSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationHubSample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,7 +122,6 @@
 			children = (
 				E597F85D20F366E700984137 /* StoreKit.framework */,
 				E597F85B20F366E000984137 /* GameKit.framework */,
-				E5A17F6120934DF900613D49 /* Foundation_Notifications.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

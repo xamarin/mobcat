@@ -679,11 +679,11 @@ The quickest way to test that we can now receive notifications is to navigate to
 4. Enter **12345** for the **Send to Tag Expression** (we had specified this tag in our instalation)
 5. Optionally, edit the **message** in the JSON payload
     
-    ![Notification Hub Test Send](Illustrations/HubTestSend.png "Notification Hub Test Send UI")
+    ![Notification Hub Test Send](Illustrations/HubTestSend.PNG "Notification Hub Test Send UI")
 
 6. Click **Send** and the portal should indicate whether this was sent to the device successfully
 
-    ![Notification Hub Test Send Results](Illustrations/HubTestSendResult.png "Notification Hub Test Send Results UI")
+    ![Notification Hub Test Send Results](Illustrations/HubTestSendResult.PNG "Notification Hub Test Send Results UI")
 
 We should also get a notification appear in **Notification Center** on our device (assuming the app is not running in the foreground). Tapping on the notification should open the app and show the alert containing our message.  
 
