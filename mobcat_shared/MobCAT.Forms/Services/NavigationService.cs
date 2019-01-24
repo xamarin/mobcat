@@ -143,10 +143,16 @@ namespace Microsoft.MobCAT.Forms.Services
         #region Push
 
         /// <inheritdoc />
-        public async Task PushAsync(BaseNavigationViewModel viewModel)
+        public async Task PushAsync(BaseNavigationViewModel viewModel, bool discardCurrent = false)
         {
+            var currentPage = FormsNavigation.NavigationStack.LastOrDefault();
             var view = InstantiateView(viewModel);
             await FormsNavigation.PushAsync((Page)view);
+
+            if (discardCurrent && currentPage != null)
+            {
+                FormsNavigation.RemovePage(currentPage);
+            }
         }
 
         /// <inheritdoc />
@@ -160,15 +166,21 @@ namespace Microsoft.MobCAT.Forms.Services
         }
 
         /// <inheritdoc />
-        public async Task PushAsync<T>(Action<T> initialize = null) where T : BaseNavigationViewModel
+        public async Task PushAsync<T>(Action<T> initialize = null, bool discardCurrent = false) where T : BaseNavigationViewModel
         {
             T viewModel;
 
+            var currentPage = FormsNavigation.NavigationStack.LastOrDefault();
             // Instantiate the view model & invoke the initialize method, if any
             viewModel = Activator.CreateInstance<T>();
             initialize?.Invoke(viewModel);
 
             await PushAsync(viewModel);
+
+            if (discardCurrent && currentPage != null)
+            {
+                FormsNavigation.RemovePage(currentPage);
+            }
         }
 
         /// <inheritdoc />
