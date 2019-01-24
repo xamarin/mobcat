@@ -5,7 +5,7 @@ Xamarin enables developers to create cross-platform native mobile apps from a si
 
 Existing platform components, such as those written in the languages and tools native to those platforms, can be brought to bear via bindings. However, there are situations where Xamarin apps need to work with existing codebases written in C/C++, such as when porting a large well-tested and highly optimized codebase to C# is cost prohibitive, or there is insufficient time and/or lack of available skills in order to do so. 
 
-Microsoft has used C/C++ and Xamarin to deliver apps such as [Hyperlapse Mobile](https://www.microsoft.com/en-us/p/hyperlapse-mobile/9wzdncrd1prw?from=http%3a%2f%2fresearch.microsoft.com%2fen-us%2fum%2fredmond%2fprojects%2fhyperlapseapps%2f&activetab=pivot:overviewtab) and [Pix Camera](https://www.microsoft.com/en-us/microsoftpix) in order to leverage investments in an existing C/C++ codebase whilst maximizing code sharing from a client application perspective. Tools such as [Visual C++ for cross-platform mobile development](https://docs.microsoft.com/en-gb/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development) enable the C/C++ and C# code to be built as part of the same solution offering many advantages including a unified debugging experience.  
+Microsoft has used C/C++ and Xamarin to deliver apps such as [Hyperlapse Mobile](https://www.microsoft.com/p/hyperlapse-mobile/9wzdncrd1prw?from=http%3a%2f%2fresearch.microsoft.com%2fum%2fredmond%2fprojects%2fhyperlapseapps%2f&activetab=pivot:overviewtab) and [Pix Camera](https://www.microsoft.com/microsoftpix) in order to leverage investments in an existing C/C++ codebase whilst maximizing code sharing from a client application perspective. Tools such as [Visual C++ for cross-platform mobile development](https://docs.microsoft.com/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development) enable the C/C++ and C# code to be built as part of the same solution offering many advantages including a unified debugging experience.  
 
 However, in some cases there is a strong desire (or requirement) to keep existing native tools and processes in place as well as keeping the library (and its release schedule) decoupled from the application itself. In these situations, the focus is not only on how to expose the relevant members to C# but on managing that library as a dependency. And of course, automating as much of this process as possible.    
 
@@ -14,7 +14,7 @@ The goal of this document is to outline a high-level approach for addressing thi
 # Background
 C/C++ is considered a cross-platform language on the basis that the same source code can be compiled for every major mobile platform using the compiler provided by each respective vendor. However, great care must be taken to ensure that the source code is indeed cross-platform. That is, it uses standard C/C++ (supported by all target compilers) containing no platform or compiler specific code. Code can of course be included conditionally, however it is ideal to avoid this if possible to reduce complexity. 
 
-In situations where the codebase has been written for a specific platform, additional work will likely be required in order to replace platform-specific headers, APIs and type definitions with their cross-platform counterparts. For example, code written with Windows may have platform-specific types such as DWORD which would need changing to use the standard 'C' type (a [32-bit unsigned integer](https://msdn.microsoft.com/en-us/library/cc230318.aspx) known as an [unsigned long](https://en.cppreference.com/w/cpp/language/types)) in order to make it cross-platform compatible.  
+In situations where the codebase has been written for a specific platform, additional work will likely be required in order to replace platform-specific headers, APIs and type definitions with their cross-platform counterparts. For example, code written with Windows may have platform-specific types such as DWORD which would need changing to use the standard 'C' type (a [32-bit unsigned integer](https://msdn.microsoft.com/library/cc230318.aspx) known as an [unsigned long](https://en.cppreference.com/w/cpp/language/types)) in order to make it cross-platform compatible.  
 
 Enforcing standards compliance through the various compiler options and through the removal of any platform-specific headers will no doubt result in lots of compiler errors. Resolving these can be a very frustrating process involving lots of web searches and iteration.  
 
@@ -30,13 +30,13 @@ An IDE can be thought of as a single tool from which all development tasks can b
 Compilation is the process of translating source code files into object files where an object file is created for each source file typically output using the same name. Linking subsequently turns the individual object files into a single library or executable. In many cases, this also involves linking with other libraries outside of the source code. Cross compilers, such as [GCC](https://gcc.gnu.org), enable the separation between a given build environment and the target platform allowing us to compile our common code for multiple platforms from a single build agent. However, we would require separate build agents to build libraries or executables that target both iOS and Windows. For example we can compile apps and libraries for Android from a Mac or Windows workstation, however certain iOS and Windows toolchain components are proprietary and can be executed on those respective environments only so we require separate build agents in order to build libraries or executables that target both iOS and Windows.  
 
 **Target Architectures**  
-The term 'target architecture' is principally the CPU (and Operating System) for which the machine code is intended to run on. Code compiled on Windows for x86_64 will not work on the iOS simulator simply because they share the same CPU architecture. Platform vendors provide their own compilers, command-line utilities, symbolic links (a.k.a. soft links) and other configurations required to build for each supported target. These are often command-line compatible with cross compilers such as [GCC](https://gcc.gnu.org). For example, if you run *g++ --version* from Terminal, then assuming you have Xcode and the command-line tools installed, it will indicate that it has been configured to use the Xcode toolchain by default. You can also browse to the [Android NDK directory](https://docs.microsoft.com/en-us/xamarin/android/troubleshooting/questions/android-sdk-location?tabs=macos) to find the analogous Android toolchain components.  
+The term 'target architecture' is principally the CPU (and Operating System) for which the machine code is intended to run on. Code compiled on Windows for x86_64 will not work on the iOS simulator simply because they share the same CPU architecture. Platform vendors provide their own compilers, command-line utilities, symbolic links (a.k.a. soft links) and other configurations required to build for each supported target. These are often command-line compatible with cross compilers such as [GCC](https://gcc.gnu.org). For example, if you run *g++ --version* from Terminal, then assuming you have Xcode and the command-line tools installed, it will indicate that it has been configured to use the Xcode toolchain by default. You can also browse to the [Android NDK directory](https://docs.microsoft.com/xamarin/android/troubleshooting/questions/android-sdk-location?tabs=macos) to find the analogous Android toolchain components.  
 
 **Static vs. Dynamic Libraries**  
 Libraries are often used to encapsulate a set of related functionality enabling sharing and distribution of code across multiple external libraries or executables in a modular fashion. A static library is resolved at compile-time and ultimately becomes part of the resulting consuming library or executable. A dynamic library is resolved at runtime by being copied into memory and bound to the respective process although the exact behaviour is platform-specific. Both of these approaches have their advantages and disadvantages along with implementation nuisances. It is often a case of choosing the most appropriate option given the situation and so further reading is certainly beneficial if you are unfamilier with this concept. An important consideration is that Apple do not support the [use of dynamic libraries that are not packaged as a framework](https://developer.apple.com/library/archive/technotes/tn2435/_index.html#//apple_ref/doc/uid/DTS40017543-CH1-TROUBLESHOOTING). Use of dynamic libraries is technically possible but apps that follow this approach will be rejected when they are submitted to the public App Store.    
 
 **Name Mangling and Extern C**  
-In order to ensure function, variable and type names are unique within a given namespace, C++ encodes them during compilation in a process referred to as name mangling. This behaviour makes it more challenging to consume the library in scenarios such as ours. Whilst it is possible to determine the generated names using tools such as nm (included with Xcode Command Line Tools) or [dumpbin](https://msdn.microsoft.com/en-us/library/b06ww5dd.aspx) (for Windows), this is not ideal since the generated names might change depending on the compiler being used and when things invariably change in our code. The solution in this case is to prevent this by applying the *extern "C"* linkage specifier to the respective declarations. This can be done explicitly for each declaration or for multiple declarations using a block.  
+In order to ensure function, variable and type names are unique within a given namespace, C++ encodes them during compilation in a process referred to as name mangling. This behaviour makes it more challenging to consume the library in scenarios such as ours. Whilst it is possible to determine the generated names using tools such as nm (included with Xcode Command Line Tools) or [dumpbin](https://msdn.microsoft.com/library/b06ww5dd.aspx) (for Windows), this is not ideal since the generated names might change depending on the compiler being used and when things invariably change in our code. The solution in this case is to prevent this by applying the *extern "C"* linkage specifier to the respective declarations. This can be done explicitly for each declaration or for multiple declarations using a block.  
 
 **CMAKE**  
 CMAKE is an open-source software tool for managing the build process in a platform (and Operating System) agnostic manner. It can support multiple builds from the same source code using a single configuration. The tool does not compile anything itself, but rather helps to orchestrate the process and with creating the build environment required for each target. 
@@ -69,7 +69,7 @@ In any case, the following tools are worth considering:
 **[SWIG (Simplified Wrapper and Interface Generator)](https://www.swig.org)**  
 Open-source tool for parsing C/C++ interfaces to generate wrappers making it easier to invoke from a CLI application using languages such as C#. 
 
-**[Visual C++ for cross-platform mobile development](https://docs.microsoft.com/en-gb/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development)**  
+**[Visual C++ for cross-platform mobile development](https://docs.microsoft.com/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development)**  
 Installable option for Visual Studio 2017 enabling the authoring, unified debugging and testing of C++ using Visual Studio for building cross-platform (Android, iOS, Windows) mobile apps and libraries. This is relatively straight forward to set up and handles the orchestration of the underlying native toolchains. At time of writing, the tools (and build) can be used on Windows only using a paired build agent to handle the iOS steps. A great option for those familiar with Visual Studio and its rich features even when used in a standalone capacity separate to the Xamarin solution.  
 
 The key takeaway here is that there is no perfect solution, only approaches. Key considerations include keeping the C/C++ codebase in sync with any native wrapper code (if this is maintained in separate codebases and/or by separate teams) and ensuring there is sufficient unit testing in place. Having as much of this process automated (and documented) is also ideal. 
@@ -102,14 +102,14 @@ This walkthrough is structured based on the [high-level approach](#high-level-ap
 In order to follow along, you will need:
 - [Android NDK](https://developer.android.com/ndk/downloads/)
 - [Command Line Tools for Xcode](https://developer.apple.com/download/more/)
-- [NuGet Command Line (CLI)](https://docs.microsoft.com/en-us/nuget/tools/nuget-exe-cli-reference#macoslinux)
+- [NuGet Command Line (CLI)](https://docs.microsoft.com/nuget/tools/nuget-exe-cli-reference#macoslinux)
 - [Microsoft C/C++ Extension (for VS Code)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [Visual Studio Code](https://code.visualstudio.com) 
 - [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
 
 The steps in this first-principles walkthrough are relatively simple, and it should be possible to follow along without prior experience. However, familiarity with the following concepts will be beneficial:  
 
-- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) and [C/C++](http://www.cplusplus.com) languages
+- [C#](https://docs.microsoft.com/dotnet/csharp/) and [C/C++](http://www.cplusplus.com) languages
 - Familiarity with basic [Shell scripting](https://developer.apple.com/library/archive/documentation/OpenSource/Conceptual/ShellScripting/shell_scripts/shell_scripts.html) concepts
 - Using [compiler toolchains for C/C++]((http://www.cplusplus.com/doc/tutorial/introduction/)) via command line  
 - Developing Android and iOS apps with [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) using [Xamarin](https://visualstudio.microsoft.com/xamarin/)
@@ -117,7 +117,7 @@ The steps in this first-principles walkthrough are relatively simple, and it sho
 **NOTE:** You must have an active [Apple Developer Account](https://developer.apple.com) in order to download the - [Command Line Tools for Xcode](https://developer.apple.com/download/more/) and deploy apps to an iPhone.   
 
 ## Creating the native library
-I have used the *MathFuncsLib* example from [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017) as the basis for our native library functionality. The intent was to keep the C/C++ code simple with the focus being on the subsequent steps for wrapping, distributing, and consuming our library in a Xamarin.Forms app.  
+I have used the *MathFuncsLib* example from [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017) as the basis for our native library functionality. The intent was to keep the C/C++ code simple with the focus being on the subsequent steps for wrapping, distributing, and consuming our library in a Xamarin.Forms app.  
 
 Depending on your background and experience, it may take some time to follow this part of the walkthrough end-to-end. You can always skip ahead to the [next step: wrapping the native library](#wrapping-the-native-library) using the [precompiled libraries](https://github.com/xamarin/mobcat/blob/master/samples/cpp_with_xamarin/Sample/Artefacts/PrecompiledLibs.zip) and return to complete this part at a more convenient time.  
 
@@ -192,7 +192,7 @@ At this stage, we have a bare-bones workspace we can start adding files to. Whil
 10. Test the build task using **SHIFT + CMD + B** (or Tasks > Run Build Task). You should see the text *'Build Succeeded'* appear in the **Integrated Terminal**
 
 ### Writing the library code
-Next we'll be writing the code for our native library. The original source code for the **MyMathFuncs** files can be found in the [Walkthrough: Creating and using a static library](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017#to-add-a-class-to-the-static-library) document on which this is based.
+Next we'll be writing the code for our native library. The original source code for the **MyMathFuncs** files can be found in the [Walkthrough: Creating and using a static library](https://docs.microsoft.com/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017#to-add-a-class-to-the-static-library) document on which this is based.
 
 1. In the **Explorer** view, **CONTROL + CLICK** on the **Source** folder, then choose **Add File** naming it **MyMathFuncs.h**
 2. Open **MyMathFuncs.h**, and add the following code:
@@ -1135,7 +1135,7 @@ At this point, the **libs** folder should appear as follows:
     - Is C++
     - Smart Link 
 
-    **NOTE:** Using a binding library project type along with a [native reference](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/native-references) gives us the ability to embed the static library and have it automatically linked into the Xamarin.iOS app that references it (even when it is included via a NuGet package). 
+    **NOTE:** Using a binding library project type along with a [native reference](https://docs.microsoft.com/xamarin/cross-platform/macios/native-references) gives us the ability to embed the static library and have it automatically linked into the Xamarin.iOS app that references it (even when it is included via a NuGet package). 
 
 5. Open **ApiDefinition.cs**, deleting the templated commented code (leaving only the **MathFuncs** namespace), then perform the same step for **Structs.cs** 
 
@@ -1171,7 +1171,7 @@ We can now write the code enabling us to use our native library. The goal here i
     }
     ```
 
-    **NOTE:** A [SafeHandle](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) is the preferred way to work with unmanaged resources in managed code. This abstracts away a lot of boilerplate code related to critical finalization and object lifecycle. The owner of this handle can subsequently treat it like any other managed resource and will not have to implement the full [Disposable pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose). 
+    **NOTE:** A [SafeHandle](https://docs.microsoft.com/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2) is the preferred way to work with unmanaged resources in managed code. This abstracts away a lot of boilerplate code related to critical finalization and object lifecycle. The owner of this handle can subsequently treat it like any other managed resource and will not have to implement the full [Disposable pattern](https://docs.microsoft.com/dotnet/standard/garbage-collection/implementing-dispose). 
 
 #### Creating the internal wrapper class
 
@@ -1370,7 +1370,7 @@ In order to have our library packaged and distributed via NuGet, we will create 
     </package>
     ```
 
-    **NOTE:** See the [nuspec reference](https://docs.microsoft.com/en-us/nuget/reference/nuspec) document for further detail on the schema used for this manifest.
+    **NOTE:** See the [nuspec reference](https://docs.microsoft.com/nuget/reference/nuspec) document for further detail on the schema used for this manifest.
 
 5. Add a <**files**> element as a child of the <**package**> element (just below <**metadata**>) enabling us to identify each file with a separate <**file**> element in aid of our [bait and switch](https://log.paulbetts.org/the-bait-and-switch-pcl-trick/) approach:
 
@@ -1467,9 +1467,9 @@ In order to quickly test our process, we'll create a local directory to serve as
 4. Validate that **MathFuncs.1.0.0.nupkg** has been created in the **local-nuget-feed** directory
 
 ### [OPTIONAL] Using a private NuGet feed with Azure DevOps
-If you would prefer, you can following the steps outlined in [Get started with NuGet packages in Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/artifacts/get-started-nuget?view=vsts&tabs=new-nav#publish-a-package), to create your own private feed and push the package (generated in the previous step) to that feed. You can then use the information provided under *Artifacts > Connect to Feed* to use that feed as part of the next section instead of the local directory. 
+If you would prefer, you can following the steps outlined in [Get started with NuGet packages in Azure DevOps](https://docs.microsoft.com/azure/devops/artifacts/get-started-nuget?view=vsts&tabs=new-nav#publish-a-package), to create your own private feed and push the package (generated in the previous step) to that feed. You can then use the information provided under *Artifacts > Connect to Feed* to use that feed as part of the next section instead of the local directory. 
 
-It is of course ideal to have this workflow fully automated, for example using [Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/index?view=vsts). See [Get started with Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/index?view=vsts) for more information.
+It is of course ideal to have this workflow fully automated, for example using [Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/index?view=vsts). See [Get started with Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/get-started/index?view=vsts) for more information.
 
 ## Consuming the .NET wrapper from a Xamarin.Forms app
 To complete the walkthrough, we'll now create a **Xamarin.Forms** app to consume the package we just published to our local **NuGet** feed. 
@@ -1627,7 +1627,7 @@ We should now have a basic Xamarin.Forms app that can leverage the functionality
 **Downloads:**
 - [Android NDK](https://developer.android.com/ndk/downloads/)
 - [Command Line Tools for Xcode](https://developer.apple.com/download/more/)
-- [NuGet Command Line (CLI) tools](https://docs.microsoft.com/en-us/nuget/tools/nuget-exe-cli-reference#macoslinux)
+- [NuGet Command Line (CLI) tools](https://docs.microsoft.com/nuget/tools/nuget-exe-cli-reference#macoslinux)
 - [Microsoft C/C++ Extension (for VS Code)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [Visual Studio](https://visualstudio.microsoft.com/vs)
 - [Visual Studio Code](https://code.visualstudio.com) 
@@ -1642,46 +1642,46 @@ We should now have a basic Xamarin.Forms app that can leverage the functionality
 - [Android NDK Developer Guide](https://developer.android.com/ndk/guides/)
 - [Apple Developer Account](https://developer.apple.com/)
 - [Bait and Switch](https://log.paulbetts.org/the-bait-and-switch-pcl-trick/)
-- [Binding an Eclipse Library Project](https://docs.microsoft.com/en-us/xamarin/android/platform/binding-java-library/binding-a-library-project)
-- [Binding a Java Library](https://docs.microsoft.com/en-us/xamarin/android/platform/binding-java-library/)
-- [Binding Objective-C libraries and CocoaPods](https://docs.microsoft.com/en-us/xamarin/ios/platform/binding-objective-c/index)
-- [Binding Objective-C Reference Guide](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/index)
-- [Bindings with Objective Sharpie](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/objective-sharpie/) 
-- [Build .NET Core projects with Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core?view=vsts&tabs=yaml)
-- [Build Xamarin with Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/xamarin?view=vsts)
+- [Binding an Eclipse Library Project](https://docs.microsoft.com/xamarin/android/platform/binding-java-library/binding-a-library-project)
+- [Binding a Java Library](https://docs.microsoft.com/xamarin/android/platform/binding-java-library/)
+- [Binding Objective-C libraries and CocoaPods](https://docs.microsoft.com/xamarin/ios/platform/binding-objective-c/index)
+- [Binding Objective-C Reference Guide](https://docs.microsoft.com/xamarin/cross-platform/macios/binding/index)
+- [Bindings with Objective Sharpie](https://docs.microsoft.com/xamarin/cross-platform/macios/binding/objective-sharpie/) 
+- [Build .NET Core projects with Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core?view=vsts&tabs=yaml)
+- [Build Xamarin with Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin?view=vsts)
 - [C++ unit testing with Google Test](https://github.com/google/googletest)
-- [Calling Native Functions from Managed Code (P/Invoke)](https://msdn.microsoft.com/en-us/library/ms235282.aspx)
+- [Calling Native Functions from Managed Code (P/Invoke)](https://msdn.microsoft.com/library/ms235282.aspx)
 - [Compiler Toolchains for C/C++](http://www.cplusplus.com/doc/tutorial/introduction)
 - [CMake](https://cmake.org)
 - [CMake Tutorial](https://cmake.org/cmake-tutorial/)
 - [Debugging with VS Code](https://code.visualstudio.com/docs/editor/debugging)
-- [Dispose Pattern](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose)
-- [Dumpbin](https://msdn.microsoft.com/en-us/library/b06ww5dd.aspx)
+- [Dispose Pattern](https://docs.microsoft.com/dotnet/standard/garbage-collection/implementing-dispose)
+- [Dumpbin](https://msdn.microsoft.com/library/b06ww5dd.aspx)
 - [Extending VS Code with tasks](https://code.visualstudio.com/docs/editor/tasks)
 - [Framework Programming Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html)
 - [GCC](https://gcc.gnu.org/)
-- [Get started with Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/index?view=vsts)
-- [Get started with NuGet packages in Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/artifacts/get-started-nuget?view=vsts&tabs=new-nav#publish-a-package)
+- [Get started with Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/get-started/index?view=vsts)
+- [Get started with NuGet packages in Azure DevOps](https://docs.microsoft.com/azure/devops/artifacts/get-started-nuget?view=vsts&tabs=new-nav#publish-a-package)
 - [Interop with Native Libraries](https://www.mono-project.com/docs/advanced/pinvoke/)
-- [Marshaling in C++](https://msdn.microsoft.com/en-us/library/bb384865.aspx)
+- [Marshaling in C++](https://msdn.microsoft.com/library/bb384865.aspx)
 - [Microsoft C/C++ Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [Native code in Android App Packages](https://developer.android.com/ndk/guides/abis#native-code-in-app-packages)
-- [NuGet Command Line (CLI)](https://docs.microsoft.com/en-us/nuget/tools/nuget-exe-cli-reference)
-- [NuSpec Reference](https://docs.microsoft.com/en-us/nuget/reference/nuspec)
-- [Publish to NuGet feeds with Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/targets/nuget?view=vsts&tabs=designer)
-- [The C# Language](https://docs.microsoft.com/en-us/dotnet/csharp/)
+- [NuGet Command Line (CLI)](https://docs.microsoft.com/nuget/tools/nuget-exe-cli-reference)
+- [NuSpec Reference](https://docs.microsoft.com/nuget/reference/nuspec)
+- [Publish to NuGet feeds with Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/targets/nuget?view=vsts&tabs=designer)
+- [The C# Language](https://docs.microsoft.com/dotnet/csharp/)
 - [The C++ Language](http://www.cplusplus.com/)
-- [SafeHandle Class](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2)
-- [Setting the Android SDK/NDK Locations](https://docs.microsoft.com/en-us/xamarin/android/troubleshooting/questions/android-sdk-location?tabs=macos)
+- [SafeHandle Class](https://docs.microsoft.com/dotnet/api/system.runtime.interopservices.safehandle?view=netframework-4.7.2)
+- [Setting the Android SDK/NDK Locations](https://docs.microsoft.com/xamarin/android/troubleshooting/questions/android-sdk-location?tabs=macos)
 - [Shell Scripting](https://developer.apple.com/library/archive/documentation/OpenSource/Conceptual/ShellScripting/shell_scripts/shell_scripts.html)
 - [SWIG](https://www.swig.org/)
-- [Unit Testing in .NET](https://docs.microsoft.com/en-us/dotnet/core/testing/)
-- [Using Native Libraries (Xamarin.Android)](https://docs.microsoft.com/en-gb/xamarin/android/platform/native-libraries)
-- [Using Native Libraries (Xamarin.iOS)](https://docs.microsoft.com/en-us/xamarin/ios/platform/native-interop)
+- [Unit Testing in .NET](https://docs.microsoft.com/dotnet/core/testing/)
+- [Using Native Libraries (Xamarin.Android)](https://docs.microsoft.com/xamarin/android/platform/native-libraries)
+- [Using Native Libraries (Xamarin.iOS)](https://docs.microsoft.com/xamarin/ios/platform/native-interop)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Visual C++ for cross-platform mobile development](https://docs.microsoft.com/en-gb/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development)
-- [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017)
+- [Visual C++ for cross-platform mobile development](https://docs.microsoft.com/visualstudio/cross-platform/visual-cpp-for-cross-platform-mobile-development)
+- [Walkthrough: Creating and Using a Static Library (C++)](https://docs.microsoft.com/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017)
 - [Xamarin](https://visualstudio.microsoft.com/xamarin/)
 
 The source code and supporting artefacts can be found on the [MobCAT GitHub](https://github.com/xamarin/mobcat/tree/master/samples/cpp_with_xamarin/Sample).
