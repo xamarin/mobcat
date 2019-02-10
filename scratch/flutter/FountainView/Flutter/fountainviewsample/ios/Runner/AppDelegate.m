@@ -14,6 +14,7 @@
                                             methodChannelWithName:@"fountain.mobcat/fountainlib"
                                             binaryMessenger:controller];
     __weak typeof(self) weakSelf = self;
+    
     [fountainChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
         // TODO
         if ([@"ConvertToHtml" isEqualToString:call.method]) {

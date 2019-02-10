@@ -17,5 +17,9 @@ A new flutter plugin project.
   s.dependency 'Flutter'
 
   s.ios.deployment_target = '8.0'
+  
+  s.frameworks = 'FountainLib.iOS'
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '../Frameworks' }
+  s.vendored_frameworks = 'FountainLib.iOS.framework'
 end
 
