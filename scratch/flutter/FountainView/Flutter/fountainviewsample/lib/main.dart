@@ -89,8 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: 
-            Html(data:'$_fountainText',
-            ),
+            Html(data:'$_fountainText'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _convertToHtml,
