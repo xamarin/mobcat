@@ -13,13 +13,13 @@ A new flutter plugin project.
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
-  s.public_header_files = 'Classes/**/*.h'
+  s.public_header_files = 'Classes/**/*.h','FountainLibiOS.framework/Headers/*.h'
   s.dependency 'Flutter'
 
   s.ios.deployment_target = '8.0'
   
-  s.frameworks = 'FountainLib.iOS'
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '../Frameworks' }
-  s.vendored_frameworks = 'FountainLib.iOS.framework'
+  s.frameworks = 'FountainLibiOS'
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '../' }
+  s.vendored_frameworks = 'FountainLibiOS.framework'
 end
 

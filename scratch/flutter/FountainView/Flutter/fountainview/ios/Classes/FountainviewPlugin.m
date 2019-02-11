@@ -1,5 +1,5 @@
 #import "FountainviewPlugin.h"
-#import "FountainLib.iOS/FountainLib.iOS.h"
+#import "FountainLibiOS/FountainLibiOS.h"
 
 @implementation FountainviewPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -15,7 +15,7 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"ConvertToHtml" isEqualToString:call.method]) {
-    result([weakSelf convertToHtml]);
+    result([self convertToHtml]);
   } else {
     result(FlutterMethodNotImplemented);
   }
