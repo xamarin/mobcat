@@ -17,28 +17,12 @@
     BackgroundColor="#3c3c3c"
     BarBackgroundColor="#3c3c3c">
     
-    <pages:NewsByCategoryPage>
-        <pages:NewsByCategoryPage.ViewModel>
-            <vm:NewsByCategoryViewModel />
-        </pages:NewsByCategoryPage.ViewModel>
-    </pages:NewsByCategoryPage>
+    <pages:NewsByCategoryPage />
     
-    <pages:NewsBySourcePage>
-        <pages:NewsBySourcePage.ViewModel>
-            <vm:NewsBySourceViewModel />
-        </pages:NewsBySourcePage.ViewModel>
-    </pages:NewsBySourcePage>
+    <pages:NewsBySourcePage/>
     
-    <pages:FavoritesPage>
-        <pages:FavoritesPage.ViewModel>
-            <vm:FavoritesViewModel />
-        </pages:FavoritesPage.ViewModel>
-    </pages:FavoritesPage>
+    <pages:FavoritesPage/>
     
-     <pages:SearchPage>
-        <pages:SearchPage.ViewModel>
-            <vm:SearchViewModel />
-        </pages:SearchPage.ViewModel>
-    </pages:SearchPage>
+     <pages:SearchPage />
     
 </local:BaseTabbedPage>

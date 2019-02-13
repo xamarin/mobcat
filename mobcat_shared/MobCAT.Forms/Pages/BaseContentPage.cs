@@ -38,10 +38,7 @@ namespace Microsoft.MobCAT.Forms.Pages
 
         protected BaseContentPage()
         {
-            if (DesignMode.IsDesignModeEnabled) //create a viewmodel for design-time data
-            {
-                ViewModel = Activator.CreateInstance(typeof(T)) as T;
-            }
+            ViewModel = Activator.CreateInstance(typeof(T)) as T;
         }
 
         protected override void OnAppearing()
