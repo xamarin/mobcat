@@ -17,10 +17,10 @@ echo "Environment '$APP_ENVIRONMENT'"
 
 # Variables
 APP_ENVIRONMENT=$(echo $APP_ENVIRONMENT | tr '[:upper:]' '[:lower:]' | sed "s/_/./g")
-MANIFEST_FILE=$PWD/samples/weather/xamarin/Weather.Android/Properties/AndroidManifest.xml
-INFO_PLIST=$PWD/samples/weather/xamarin/Weather.iOS/Info.plist
-IOS_ICONS=$PWD/samples/weather/xamarin/Weather.iOS/Assets.xcassets/AppIcon.appiconset/
-ANDROID_ICONS=$PWD/samples/weather/xamarin/Weather.Android/Resources/
+MANIFEST_FILE=$PWD/samples/news/News.Android/Properties/AndroidManifest.xml
+INFO_PLIST=$PWD/samples/news/News.iOS/Info.plist
+IOS_ICONS=$PWD/samples/news/News.iOS/Assets.xcassets/AppIcon.appiconset/
+ANDROID_ICONS=$PWD/samples/news/News.Android/Resources/
 TARGET_ANDROID_ICONS=$PWD/Android/$APP_ENVIRONMENT/.
 TARGET_IOS_ICONS=$PWD/iOS/$APP_ENVIRONMENT/AppIcon.appiconset/.
 
