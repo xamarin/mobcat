@@ -349,5 +349,3 @@ samples/weather/xamarin/Weather/FodyWeavers\.xsd
 samples/weather/xamarin/Weather/Localization/AppResources\.Designer\.cs
 
 *.aar
-
-scratch/flutter/FountainView/
