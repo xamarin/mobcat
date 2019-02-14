@@ -31,4 +31,11 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+    aaptOptions {
+        noCompress 'dll'
+    }
+}
+
+dependencies {
+    implementation files('libs/FountainSharpWrapperDroid.aar')
 }

@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		087FF4362211B82B009E235B /* FountainSharpWrapperIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087FF4352211B82B009E235B /* FountainSharpWrapperIOS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		087FF4372211B94D009E235B /* FountainSharpWrapperIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087FF4352211B82B009E235B /* FountainSharpWrapperIOS.framework */; };
+		087FF4382211B94D009E235B /* FountainSharpWrapperIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 087FF4352211B82B009E235B /* FountainSharpWrapperIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		088362FE21FF2A2500DD24B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 088362FD21FF2A2500DD24B6 /* AppDelegate.m */; };
 		0883630121FF2A2500DD24B6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0883630021FF2A2500DD24B6 /* ViewController.m */; };
 		0883630421FF2A2500DD24B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0883630221FF2A2500DD24B6 /* Main.storyboard */; };
 		0883630621FF2A2600DD24B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0883630521FF2A2600DD24B6 /* Assets.xcassets */; };
 		0883630921FF2A2600DD24B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0883630721FF2A2600DD24B6 /* LaunchScreen.storyboard */; };
 		0883630C21FF2A2600DD24B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0883630B21FF2A2600DD24B6 /* main.m */; };
-		0883631321FF837800DD24B6 /* FountainLib.iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0883631221FF837800DD24B6 /* FountainLib.iOS.framework */; };
-		0883631521FF83CA00DD24B6 /* FountainLib.iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0883631221FF837800DD24B6 /* FountainLib.iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0883631521FF83CA00DD24B6 /* FountainLib.iOS.framework in Embed Frameworks */,
+				087FF4382211B94D009E235B /* FountainSharpWrapperIOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		087FF4352211B82B009E235B /* FountainSharpWrapperIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FountainSharpWrapperIOS.framework; sourceTree = "<group>"; };
 		088362F921FF2A2500DD24B6 /* FountainView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FountainView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088362FC21FF2A2500DD24B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		088362FD21FF2A2500DD24B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,7 +44,6 @@
 		0883630821FF2A2600DD24B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0883630A21FF2A2600DD24B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0883630B21FF2A2600DD24B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0883631221FF837800DD24B6 /* FountainLib.iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FountainLib.iOS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0883631321FF837800DD24B6 /* FountainLib.iOS.framework in Frameworks */,
+				087FF4362211B82B009E235B /* FountainSharpWrapperIOS.framework in Frameworks */,
+				087FF4372211B94D009E235B /* FountainSharpWrapperIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +62,7 @@
 		088362F021FF2A2500DD24B6 = {
 			isa = PBXGroup;
 			children = (
-				0883631221FF837800DD24B6 /* FountainLib.iOS.framework */,
+				087FF4352211B82B009E235B /* FountainSharpWrapperIOS.framework */,
 				088362FB21FF2A2500DD24B6 /* FountainView */,
 				088362FA21FF2A2500DD24B6 /* Products */,
 			);
