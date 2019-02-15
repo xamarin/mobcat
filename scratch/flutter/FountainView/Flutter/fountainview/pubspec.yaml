@@ -1,8 +1,8 @@
 name: fountainview
-description: A new flutter plugin project.
+description: FountainView is a Flutter Plugin created using a Xamarin library written in F#. The purpose is to demonstrate the use of Embedinatior 4000 to create a native libraries written in Xamarin that can be reused in a Flutter application.
 version: 0.0.1
-author:
-homepage:
+author: Ben Buttigieg <benbtg@gmail.com>
+homepage: https://github.com/xamarin/mobcat/tree/FountainView/scratch/flutter/FountainView
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
