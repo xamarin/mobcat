@@ -42,7 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
+      <HintPath>..\packages\FSharp.Core.4.6.2\lib\netstandard1.6\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="FountainSharp.Parse">
       <HintPath>..\packages\FountainSharp.1.0.0-pre30\lib\portable-net45+win8+wpa81+wp8\FountainSharp.Parse.dll</HintPath>

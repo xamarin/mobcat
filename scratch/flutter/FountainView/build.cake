@@ -15,9 +15,9 @@ var configuration = Argument("configuration", "Release");
 
 var solutionFile = File("Xamarin/FountainSharpWrapper/FountainSharpWrapper.sln");
 var androidProject = File("Xamarin/FountainSharpWrapper/FountainSharpWrapperDroid/FountainSharpWrapperDroid.csproj");
-var androidBin = Directory("bin/Droid") + Directory(configuration);
+var androidBin = Directory("../bin/Droid") + Directory(configuration);
 var iOSProject = File("Xamarin/FountainSharpWrapper/FountainSharpWrapperIOS/FountainSharpWrapperIOS.csproj");
-var iOSBin = Directory("bin/iPhone") + Directory(configuration);
+var iOSBin = Directory("../bin/iPhone") + Directory(configuration);
 // --------------------------------------------------------------------------------
 // PREPARATION
 // --------------------------------------------------------------------------------
@@ -46,7 +46,8 @@ Task("Build Android")
 {
  	MSBuild(androidProject, settings =>
         settings.SetConfiguration(configuration)
-        .WithTarget("SignAndroidPackage"));
+        .WithTarget("SignAndroidPackage")
+        .WithProperty("OutputPath", $"{androidBin}"));
 });
 
 // --------------------------------------------------------------------------------
@@ -61,7 +62,7 @@ Task("Build iOS")
     MSBuild (iOSProject, settings => 
 	    settings.SetConfiguration(configuration)
     		.WithProperty("Platform", "iPhone")
-    		.WithProperty("OutputPath", $"bin/iPhone/{configuration}/"));
+    		.WithProperty("OutputPath", $"{iOSBin}"));
 });
 
 // --------------------------------------------------------------------------------
