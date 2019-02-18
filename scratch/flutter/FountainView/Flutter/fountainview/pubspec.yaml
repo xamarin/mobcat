@@ -1,7 +1,7 @@
 name: fountainview
 description: Flutter Plugin for viewing Fountain markup documents on Android and iOS.
-version: 1.0.2
-author: Ben Buttigieg <benbtg@gmail.com>
+version: 1.0.5
+author: Ben Buttigieg <benbtg+fv@gmail.com>
 homepage: https://github.com/xamarin/mobcat/tree/FountainView/scratch/flutter/FountainView
 
 environment:
