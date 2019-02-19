@@ -309,3 +309,5 @@ DerivedData/
 
 FountainSharpWrapperIOS.framework/
 FountainSharpWrapperDroid.framework/
+
+/tools
