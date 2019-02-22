@@ -2,9 +2,9 @@
 
 [![Build Status](https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/MobCAT-CI?branchName=master)](https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=60&branchName=master)
 
-MobCAT is a toolbox created by our team to highlight best practices and good architecture pattersn in [Xamarin.Forms]() and [Xamarin.iOS]() and [Xamarin.Android]() apps. These projects provide a basis which can be adopted into your Xamarin solutions to have optimized performance and promote maximum amount of code share. 
+MobCAT is a toolbox created by our team to highlight best practices and good architecture pattersn in [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/),[Xamarin.Android](https://docs.microsoft.com/en-us/xamarin/#pivot=platforms&panel=Android) and [Xamarin.iOS](https://docs.microsoft.com/en-us/xamarin/#pivot=platforms&panel=iOS) apps. These projects provide a basis which can be adopted into your Xamarin solutions to have optimized performance and promote maximum amount of code share. 
 
-The project themselves are .NET standard Portable libraries. The source can be cloned and the projects can be added to your solution. Please take a look at the [sample projects](https://github.com/xamarin/mobcat/tree/master/samples) to get a better understanding of their usage.
+The project themselves are .NET Standard Portable projects. The source can be cloned and the projects can be added to your solution. Please take a look at the [sample projects](https://github.com/xamarin/mobcat/tree/master/samples) to get a better understanding of their usage.
 
 ## Sections
 

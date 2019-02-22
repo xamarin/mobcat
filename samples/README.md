@@ -6,7 +6,7 @@ This repository contains sample projects that use the MobCAT [framework](https:/
 |                               | __master__ | __dev__ |
 |:-----------------------------:|:---------:|:--------:|
 | __Weathertron 9000__             | * | [![x64test][weathericon]][weatherlink]
-| __News-Man 2.0__             | * | [![x86test][newsicon]][newslink]
+| __News-Man 9000 2.0__             | * | [![x86test][newsicon]][newslink]
 
 [weathericon]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
 [weatherlink]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
