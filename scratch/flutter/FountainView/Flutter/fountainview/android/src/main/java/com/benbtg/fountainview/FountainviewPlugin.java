@@ -6,6 +6,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
+import fountainsharpwrapperdroid.fountainsharpwrapperdroid.FountainSharpWrapper;
+
 /** FountainviewPlugin */
 public class FountainviewPlugin implements MethodCallHandler {
   /** Plugin registration. */
@@ -16,8 +18,10 @@ public class FountainviewPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
+    if (call.method.equals("ConvertToHtml")) {
+      String sampleText = call.argument("fountainText");
+      String fountainText = FountainSharpWrapper.convertToHtml(sampleText);
+      result.success(fountainText);
     } else {
       result.notImplemented();
     }

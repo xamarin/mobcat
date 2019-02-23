@@ -330,22 +330,7 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-samples/weather/xamarin/Weather\.Android/Resources/Resource\.designer\.cs
-
-samples/weather/xamarin/Weather/ServiceConfig\.cs
-
-samples/weather/xamarin/build/secrets-cleanup\.sh
-
-samples/weather/xamarin/build/secrets\.sh
-
-samples/weather/azure/infrastructure/Scripts/parameters\.bat
-
-samples/weather/azure/infrastructure/Scripts/parameters\.sh
-
-samples/weather/xamarin/build/secrets\.sh
-
-samples/weather/xamarin/Weather/FodyWeavers\.xsd
-
-samples/weather/xamarin/Weather/Localization/AppResources\.Designer\.cs
-
-*.aar
+**.xcuserstate
+devsettings\.plist
+contents\.xcworkspacedata
+UserInterfaceState\.xcuserstate

@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fountainview/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  fountainview: bd7e0c03686e7b78712633ccb84b7c7a7d3d737b
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  fountainview: 81a6af54b0c99357a79a90543d0b0ba88ccb885f
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0

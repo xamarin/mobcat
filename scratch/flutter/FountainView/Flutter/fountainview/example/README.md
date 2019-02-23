@@ -1,16 +1,24 @@
-# fountainview_example
+# fountainview example
 
-Demonstrates how to use the fountainview plugin.
+    import 'package:flutter/material.dart';
+    import 'package:fountainview/fountainview.dart';
 
-## Getting Started
+    void main()
+    {
+    runApp(MaterialApp(
+        title: "FountainView Example",
+        home: MyApp()
+    ));
+    }
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+    class MyApp extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+            title: const Text('FountainView example app'),
+            ),
+            body: new FountainView("Title: Big Fish\nCredit: written by\nAuthor: John August\nSource: based on the novel by Daniel Wallace"),
+        );
+    }
+    }

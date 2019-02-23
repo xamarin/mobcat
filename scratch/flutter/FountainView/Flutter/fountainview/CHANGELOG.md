@@ -1,3 +1,7 @@
+## 1.0.1
+
+* First stable release
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+ * Initial published draft
