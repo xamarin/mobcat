@@ -9,15 +9,15 @@
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mobcat="clr-namespace:News.Controls;assembly=News"
     xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
-    x:TypeArguments="vm:NewsByCategoryViewModel" 
-    x:Class="News.Pages.NewsByCategoryPage" 
+    x:TypeArguments="vm:NewsBySourceViewModel" 
+    x:Class="News.Pages.NewsBySourcePage" 
     Style="{DynamicResource navBarStyle}"
-    Title="news"
-    Icon="ic_news.png">
-        
+    Title="sources"
+    Icon="ic_sources.png">
+    
     <cv:CarouselView x:Name="carousel"
-                     ItemsSource="{Binding Categories}"
-                     Position="{Binding SelectedCategoryPosition}">
+                     ItemsSource="{Binding Sources}"
+                     Position="{Binding SelectedSourcePosition}">
         <cv:CarouselView.ItemTemplate>
             <DataTemplate>
                 <Grid VerticalOptions="FillAndExpand" 
@@ -31,10 +31,6 @@
                         <RowDefinition Height="1"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
                     <Label Text="{Binding Title}" 
                            Style="{DynamicResource labelStyle}"
                            VerticalTextAlignment="End"
@@ -43,31 +39,13 @@
                            LineBreakMode="MiddleTruncation"
                            MaxLines="1"
                            Margin="15,30,15,10"
-                           Grid.Row="0"
-                           Grid.Column="0"/>
-                    <forms:AnimationView BindingContext="{Binding BindingContext, Source={x:Reference carousel}}"
-                                         IsVisible="{Binding IsSelectNextCategoryTipEnabled}"
-                                         IsEnabled="{Binding IsSelectNextCategoryTipEnabled}"
-                                         IsPlaying="{Binding IsSelectNextCategoryTipEnabled}"
-                                         ClickedCommand="{Binding SelectNextCategoryCommand}"
-                                         AutoPlay="true"
-                                         Loop="true"
-                                         BackgroundColor="Transparent"
-                                         Animation="lottie_swipe_left.json" 
-                                         VerticalOptions="Fill" 
-                                         HorizontalOptions="Fill"
-                                         HeightRequest="70"
-                                         WidthRequest="100"
-                                         Grid.Row="0"
-                                         Grid.Column="1"/>
+                           Grid.Row="0"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
                           Style="{DynamicResource separatorStyle}"
                           HeightRequest="1"
-                          Grid.Row="1"
-                          Grid.ColumnSpan="2"/>
+                          Grid.Row="1"/>
                     <mobcat:NewsInfiniteListView
-                        Style="{DynamicResource infiniteListViewStyle}"
                         ItemsSource="{Binding Articles}"
                         ItemSelectedCommand="{Binding ArticleSelectedCommand}"
                         IsPullToRefreshEnabled="true"
@@ -78,10 +56,10 @@
                         IsLoadingMore="{Binding IsLoadingMore}"
                         IsEmpty="{Binding IsEmpty}"
                         SelectionMode="Single"
+                        Style="{DynamicResource infiniteListViewStyle}"
                         RowHeight="250"
                         SeparatorVisibility="None"
-                        Grid.Row="2"
-                        Grid.ColumnSpan="2">
+                        Grid.Row="2">
                         <mobcat:NewsInfiniteListView.ItemTemplate>
                             <DataTemplate>
                                 <cell:ArticleViewCell />
@@ -89,12 +67,12 @@
                         </mobcat:NewsInfiniteListView.ItemTemplate>
                         <mobcat:NewsInfiniteListView.EmptyTemplate>
                             <DataTemplate>
-                                 <Label Text="We don't have any articles for the given category 🤷"
+                                 <Label Text="We don't have any articles from this source 🤷"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
                                         Style="{DynamicResource labelStyle}"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Center"
-                                        InputTransparent="true"
-                                        FontSize="Large"/>
+                                     InputTransparent="true"
+                                     FontSize="Large"/>
                             </DataTemplate>
                         </mobcat:NewsInfiniteListView.EmptyTemplate>
                         <mobcat:NewsInfiniteListView.Behaviors>
@@ -105,5 +83,5 @@
             </DataTemplate>
         </cv:CarouselView.ItemTemplate>
     </cv:CarouselView>
-
+    
 </local:BaseContentPage>

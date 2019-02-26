@@ -32,6 +32,7 @@
                     <Label Style="{DynamicResource labelStyle}" 
                            Text="🗞️" 
                            FontSize="60" 
+                           Style="{DynamicResource labelStyle}" 
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
                            Grid.Row="0"/>
@@ -39,8 +40,19 @@
                            VerticalOptions="FillAndExpand"
                            HorizontalOptions="FillAndExpand"
                            Aspect="AspectFill"
-                           Grid.Row="0"
-                           Grid.RowSpan="2"/>
+                           Grid.Column="0"/>
+                    <Grid VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand"
+                          Style="{DynamicResource articleBackgroundStyle}"
+                          Grid.Column="1" >
+                        <Label Text="{Binding Title}"
+                               Style="{DynamicResource labelStyle}"
+                               MaxLines="4"
+                               FontSize="18"
+                               Margin="10,10,25,10"
+                               VerticalOptions="StartAndExpand"
+                               LineBreakMode="TailTruncation" />
+                    </Grid>
                     <Grid VerticalOptions="Start"
                           HorizontalOptions="End">
                         <ctrl:FavoriteButton IsFavorite="{Binding IsFavorite}"
