@@ -11,7 +11,7 @@
     xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
     x:TypeArguments="vm:NewsBySourceViewModel" 
     x:Class="News.Pages.NewsBySourcePage" 
-    BackgroundColor="#3c3c3c"
+    Style="{DynamicResource navBarStyle}"
     Title="sources"
     Icon="ic_sources.png">
     
@@ -32,7 +32,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Text="{Binding Title}" 
-                           TextColor="White" 
+                           Style="{DynamicResource labelStyle}"
                            VerticalTextAlignment="End"
                            HorizontalTextAlignment="Start"
                            FontSize="33"
@@ -42,7 +42,7 @@
                            Grid.Row="0"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
-                          BackgroundColor="#2c2c2c"
+                          Style="{DynamicResource separatorStyle}"
                           HeightRequest="1"
                           Grid.Row="1"/>
                     <mobcat:NewsInfiniteListView
@@ -56,7 +56,7 @@
                         IsLoadingMore="{Binding IsLoadingMore}"
                         IsEmpty="{Binding IsEmpty}"
                         SelectionMode="Single"
-                        BackgroundColor="#585858"
+                        Style="{DynamicResource infiniteListViewStyle}"
                         RowHeight="250"
                         SeparatorVisibility="None"
                         Grid.Row="2">
@@ -70,7 +70,7 @@
                                  <Label Text="We don't have any articles from this source 🤷"
                                      VerticalOptions="Center"
                                      HorizontalOptions="Center"
-                                     TextColor="Silver"
+                                        Style="{DynamicResource labelStyle}"
                                      InputTransparent="true"
                                      FontSize="Large"/>
                             </DataTemplate>

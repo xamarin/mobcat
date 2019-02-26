@@ -91,10 +91,10 @@
                             <DataTemplate>
                                  <Label Text="We don't have any articles for the given category 🤷"
                                         Style="{DynamicResource labelStyle}"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center"
-                                     InputTransparent="true"
-                                     FontSize="Large"/>
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        InputTransparent="true"
+                                        FontSize="Large"/>
                             </DataTemplate>
                         </mobcat:NewsInfiniteListView.EmptyTemplate>
                         <mobcat:NewsInfiniteListView.Behaviors>
