@@ -14,8 +14,7 @@
     ios:Page.UseSafeArea="true"
     android:TabbedPage.IsSwipePagingEnabled="false"
     android:TabbedPage.ToolbarPlacement="Bottom"
-    BackgroundColor="#3c3c3c"
-    BarBackgroundColor="#3c3c3c">
+    Style="{DynamicResource tabBarStyle}">
     
     <pages:NewsByCategoryPage />
     
@@ -23,6 +22,8 @@
     
     <pages:FavoritesPage/>
     
-     <pages:SearchPage />
+    <pages:SearchPage />
+    
+    <pages:SettingsPage />
     
 </local:BaseTabbedPage>

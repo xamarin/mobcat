@@ -39,7 +39,9 @@ namespace News.iOS.Controls
         private void SetupRefreshControl()
         {
             var tableViewController = (UITableViewController)ViewController;
-            _refreshControlView = new NewsPullToRefreshView(tableViewController.RefreshControl);
+            var refreshControl = tableViewController.RefreshControl;
+            refreshControl.BackgroundColor = UIColor.Clear; //Fixes bug where Animation view layout is independent of tableview
+            _refreshControlView = new NewsPullToRefreshView(refreshControl);
         }
     }
 }

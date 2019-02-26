@@ -11,7 +11,7 @@
     xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
     x:TypeArguments="vm:NewsByCategoryViewModel" 
     x:Class="News.Pages.NewsByCategoryPage" 
-    BackgroundColor="#3c3c3c"
+    Style="{DynamicResource navBarStyle}"
     Title="news"
     Icon="ic_news.png">
         
@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Text="{Binding Title}" 
-                           TextColor="White" 
+                           Style="{DynamicResource labelStyle}"
                            VerticalTextAlignment="End"
                            HorizontalTextAlignment="Start"
                            FontSize="33"
@@ -62,11 +62,12 @@
                                          Grid.Column="1"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
-                          BackgroundColor="#2c2c2c"
+                          Style="{DynamicResource separatorStyle}"
                           HeightRequest="1"
                           Grid.Row="1"
                           Grid.ColumnSpan="2"/>
                     <mobcat:NewsInfiniteListView
+                        Style="{DynamicResource infiniteListViewStyle}"
                         ItemsSource="{Binding Articles}"
                         ItemSelectedCommand="{Binding ArticleSelectedCommand}"
                         IsPullToRefreshEnabled="true"
@@ -77,7 +78,6 @@
                         IsLoadingMore="{Binding IsLoadingMore}"
                         IsEmpty="{Binding IsEmpty}"
                         SelectionMode="Single"
-                        BackgroundColor="#585858"
                         RowHeight="250"
                         SeparatorVisibility="None"
                         Grid.Row="2"
@@ -90,11 +90,11 @@
                         <mobcat:NewsInfiniteListView.EmptyTemplate>
                             <DataTemplate>
                                  <Label Text="We don't have any articles for the given category 🤷"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center"
-                                     TextColor="Silver"
-                                     InputTransparent="true"
-                                     FontSize="Large"/>
+                                        Style="{DynamicResource labelStyle}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        InputTransparent="true"
+                                        FontSize="Large"/>
                             </DataTemplate>
                         </mobcat:NewsInfiniteListView.EmptyTemplate>
                         <mobcat:NewsInfiniteListView.Behaviors>

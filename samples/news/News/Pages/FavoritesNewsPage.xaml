@@ -11,7 +11,7 @@
     xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
     x:TypeArguments="vm:FavoritesViewModel" 
     x:Class="News.Pages.FavoritesPage" 
-    BackgroundColor="#3c3c3c"
+    Style="{DynamicResource navBarStyle}"
     Title="favorites"
     Icon="ic_favorites.png">
     
@@ -33,7 +33,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Text="Favorites" 
-               TextColor="White" 
+               Style="{DynamicResource labelStyle}" 
                VerticalTextAlignment="End"
                HorizontalTextAlignment="Start"
                FontSize="33"
@@ -43,7 +43,7 @@
                Grid.Row="0"/>
         <Grid VerticalOptions="Start" 
               HorizontalOptions="FillAndExpand"
-              BackgroundColor="#2c2c2c"
+              Style="{DynamicResource separatorStyle}"
               HeightRequest="1"
               Grid.Row="1"/>
         <mobcat:NewsInfiniteListView
@@ -57,7 +57,7 @@
             IsLoadingMore="{Binding IsLoadingMore}"
             IsEmpty="{Binding IsEmpty}"
             SelectionMode="Single"
-            BackgroundColor="#585858"
+            Style="{DynamicResource infiniteListViewStyle}"
             RowHeight="250"
             SeparatorVisibility="None"
             Grid.Row="2">
@@ -69,11 +69,11 @@
             <mobcat:NewsInfiniteListView.EmptyTemplate>
                 <DataTemplate>
                      <Label Text="You don't have favorites 🤷 Try to hit that little ⭐ button to add some."
-                         VerticalOptions="Center"
-                         HorizontalOptions="Center"
-                         TextColor="Silver"
-                         InputTransparent="true"
-                         FontSize="Large"/>
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Style="{DynamicResource labelStyle}"
+                            InputTransparent="true"
+                            FontSize="Large"/>
                 </DataTemplate>
             </mobcat:NewsInfiniteListView.EmptyTemplate>
             <mobcat:NewsInfiniteListView.Behaviors>

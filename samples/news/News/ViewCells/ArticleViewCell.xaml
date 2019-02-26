@@ -29,9 +29,9 @@
                         <RowDefinition Height="0.7*"/>
                         <RowDefinition Height="0.3*"/>
                     </Grid.RowDefinitions>
-                    <Label Text="🗞️" 
+                    <Label Style="{DynamicResource labelStyle}" 
+                           Text="🗞️" 
                            FontSize="60" 
-                           TextColor="White"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
                            Grid.Row="0"/>
@@ -52,10 +52,10 @@
                     </Grid>
                     <Grid VerticalOptions="FillAndExpand" 
                           HorizontalOptions="FillAndExpand"
-                          BackgroundColor="#e6272727"
+                          Style="{DynamicResource articleBackgroundStyle}"
                           Grid.Row="1">
-                        <Label Text="{Binding Title}" 
-                               TextColor="White"
+                        <Label Style="{DynamicResource labelStyle}"
+                               Text="{Binding Title}" 
                                MaxLines="2"
                                FontSize="18"
                                Margin="10,0,10,0"
@@ -68,7 +68,7 @@
         <Label HorizontalOptions="End"
                VerticalOptions="Start"
                Text="{Binding Footer}"
-               TextColor="#ccffffff"
+               Style="{DynamicResource accentLabelStyle}"
                MaxLines="1"
                FontSize="Small"
                Margin="5,7,5,0"

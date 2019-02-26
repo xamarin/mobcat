@@ -11,7 +11,7 @@
     xmlns:behaviors="clr-namespace:MobCAT.Behaviors;assembly=MobCAT.Forms"
     x:TypeArguments="vm:SearchViewModel" 
     x:Class="News.Pages.SearchPage" 
-    BackgroundColor="#3c3c3c"
+    Style="{DynamicResource navBarStyle}"
     Title="search"
     Icon="ic_search.png">
     
@@ -38,7 +38,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Text="Search" 
-               TextColor="White" 
+               Style="{DynamicResource labelStyle}"
                VerticalTextAlignment="End"
                HorizontalTextAlignment="Start"
                FontSize="33"
@@ -49,8 +49,7 @@
                Grid.ColumnSpan="2"/>
         <Entry Text="{Binding SearchTerm, Mode=TwoWay}"
                FontSize="20"
-               TextColor="White"
-               BackgroundColor="#585858"
+               Style="{DynamicResource entryStyle}"
                Grid.Row="1"
                Margin="15,0,0,15" />
         <Button Text="Find" 
@@ -65,7 +64,7 @@
                 HorizontalOptions="Center"/>
         <Grid VerticalOptions="Start" 
               HorizontalOptions="FillAndExpand"
-              BackgroundColor="#2c2c2c"
+              Style="{DynamicResource separatorStyle}"
               HeightRequest="1"
               Grid.Row="2"
               Grid.ColumnSpan="2"/>
@@ -80,7 +79,7 @@
             IsLoadingMore="{Binding IsLoadingMore}"
             IsEmpty="{Binding IsEmpty}"
             SelectionMode="Single"
-            BackgroundColor="#585858"
+            Style="{DynamicResource infiniteListViewStyle}"
             RowHeight="150"
             SeparatorVisibility="None"
             Grid.Row="3"
@@ -93,11 +92,11 @@
             <mobcat:NewsInfiniteListView.EmptyTemplate>
                 <DataTemplate>
                      <Label Text="No search results 🤷"
-                         VerticalTextAlignment="Center"
-                         HorizontalTextAlignment="Center"
-                         TextColor="Silver"
-                         InputTransparent="true"
-                         FontSize="Large"/>
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            Style="{DynamicResource labelStyle}"
+                            InputTransparent="true"
+                            FontSize="Large"/>
                 </DataTemplate>
             </mobcat:NewsInfiniteListView.EmptyTemplate>
             <mobcat:NewsInfiniteListView.Behaviors>
