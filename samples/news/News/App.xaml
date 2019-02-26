@@ -14,6 +14,7 @@
             <Color x:Key="articleBackgroundColor">#E6272727</Color>
             <Color x:Key="separatorColor">#2C2C2C</Color>
             <Color x:Key="navBarColor">#3C3C3C</Color>
+            <Color x:Key="entryColor">#585858</Color>
             <Color x:Key="textColor">#FFFFFF</Color>
             <Color x:Key="accentTextColor">#CCFFFF</Color>
             
@@ -54,6 +55,12 @@
                 <Setter Property="BackgroundColor" Value="{DynamicResource navBarColor}"/>
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource navBarColor}"/>
             </Style>
+            
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{DynamicResource entryColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource textColor}"/>
+            </Style>
+                   
         </ResourceDictionary>
     </Application.Resources>
 </Application>
