@@ -21,6 +21,7 @@ namespace News.Services
                         {Constants.Style.ArticleBackgroundColorKey, Constants.Style.ArticleBackgroundLightThemeColor },
                         {Constants.Style.SeparatorColorKey, Constants.Style.SeparatorLightThemeColor },
                         {Constants.Style.NavBarColorKey, Constants.Style.NavBarLightThemeColor },
+                        {Constants.Style.EntryColorKey, Constants.Style.EntryLightThemeColor },
                         {Constants.Style.TextColorKey, Constants.Style.TextLightThemeColor },
                         {Constants.Style.AccentTextColorKey, Constants.Style.AccentTextLightThemeColor }
                     }},
@@ -30,6 +31,7 @@ namespace News.Services
                         {Constants.Style.ArticleBackgroundColorKey, Constants.Style.ArticleBackgroundDarkThemeColor },
                         {Constants.Style.SeparatorColorKey, Constants.Style.SeparatorDarkThemeColor },
                         {Constants.Style.NavBarColorKey, Constants.Style.NavBarDarkThemeColor },
+                        {Constants.Style.EntryColorKey, Constants.Style.EntryDarkThemeColor },
                         {Constants.Style.TextColorKey, Constants.Style.TextDarkThemeColor },
                         {Constants.Style.AccentTextColorKey, Constants.Style.AccentTextDarkThemeColor }
                     }}
@@ -63,6 +65,7 @@ namespace News.Services
             Application.Current.Resources[Constants.Style.AccentTextColorKey] = themeColors[Constants.Style.AccentTextColorKey].ToColor();
             Application.Current.Resources[Constants.Style.NavBarColorKey] = themeColors[Constants.Style.NavBarColorKey].ToColor();
             Application.Current.Resources[Constants.Style.SeparatorColorKey] = themeColors[Constants.Style.SeparatorColorKey].ToColor();
+            Application.Current.Resources[Constants.Style.EntryColorKey] = themeColors[Constants.Style.EntryColorKey].ToColor();
 
             Preferences.Set(nameof(VisualTheme), value: theme.ToString());
         }
