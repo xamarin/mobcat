@@ -8,7 +8,8 @@
     Style="{DynamicResource navBarStyle}"
     x:Class="News.Pages.SettingsPage"
     Title="settings"
-    Icon="ic_settings.png">
+    Icon="ic_settings.png"
+    AutomationId="SettingsPage">
  <Grid VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand"
           Padding="0" 
@@ -50,7 +51,8 @@
                 <!-- Theme Switch -->
                 <Label Style="{DynamicResource labelStyle}"
                        Text="Light Mode"/>
-                <Switch Grid.Column="1"
+                <Switch AutomationId="LightModeSwitch"
+                        Grid.Column="1"
                         IsToggled="{Binding IsLightMode}"/>
             </Grid>
     </Grid>

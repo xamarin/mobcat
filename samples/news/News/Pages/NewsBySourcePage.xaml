@@ -13,7 +13,8 @@
     x:Class="News.Pages.NewsBySourcePage" 
     Style="{DynamicResource navBarStyle}"
     Title="sources"
-    Icon="ic_sources.png">
+    Icon="ic_sources.png"
+    AutomationId="SourcesPage">
     
     <cv:CarouselView x:Name="carousel"
                      ItemsSource="{Binding Sources}"

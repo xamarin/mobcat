@@ -1,37 +1,75 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using News.UITests.Pages;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
 namespace News.UITests
 {
-    [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
-    public class Tests
+    public class Tests : BaseTestFixture
     {
-        IApp app;
-        Platform platform;
-
-        public Tests(Platform platform)
+        public Tests(Platform platform) : base(platform)
         {
-            this.platform = platform;
-        }
-
-        [SetUp]
-        public void BeforeEachTest()
-        {
-            app = AppInitializer.StartApp(platform);
         }
 
         [Test]
-        public void WelcomeTextIsDisplayed()
+        public void ViewEachTabInDarkModeAndLightMode()
         {
-            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin.Forms!"));
-            app.Screenshot("Welcome screen.");
+            var homePage = new HomePage();
+            homePage.ShowNewsTab();
+            homePage.ShowSourcesTab();
+            homePage.ShowFavoritesTab();
+            homePage.ShowSearchTab();
+            homePage.ShowSettingsTab()
+            .SetLightMode();
 
-            Assert.IsTrue(results.Any());
+            homePage.ShowNewsTab();
+            homePage.ShowSourcesTab();
+            homePage.ShowFavoritesTab();
+            homePage.ShowSearchTab();
+        }
+
+        [Test]
+        public void SearchForMicrosoftNews()
+        {
+            new HomePage()
+                .ShowSearchTab()
+                .Search("Microsoft");
+        }
+
+        [Test]
+        public void AddAndRemoveFavorite()
+        {
+            var homePage = new HomePage();
+
+            homePage
+            .ShowNewsTab()
+            .AddFavorite();
+
+            homePage
+            .ShowFavoritesTab()
+            .RemoveFavorite();
+        }
+
+        [Test]
+        public void SetLightMode()
+        {
+            new HomePage()
+                .ShowSettingsTab()
+                .SetLightMode();
+        }
+
+
+        [Test]
+        [Ignore]
+        public void Repl()
+        {
+            if (TestEnvironment.IsTestCloud)
+                Assert.Ignore("Local only");
+
+            app.Repl();
         }
     }
 }
