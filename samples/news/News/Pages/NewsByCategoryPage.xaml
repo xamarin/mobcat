@@ -13,7 +13,8 @@
     x:Class="News.Pages.NewsByCategoryPage" 
     Style="{DynamicResource navBarStyle}"
     Title="news"
-    Icon="ic_news.png">
+    Icon="ic_news.png"
+    AutomationId="NewsPage">
         
     <cv:CarouselView x:Name="carousel"
                      ItemsSource="{Binding Categories}"

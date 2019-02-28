@@ -10,7 +10,7 @@ namespace News.ViewModels
     /// </summary>
     public class SearchViewModel : BaseNewsViewModel
     {
-        private string _searchTerm = "trump";
+        private string _searchTerm;
 
         public string SearchTerm
         {

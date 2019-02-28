@@ -13,7 +13,8 @@
     x:Class="News.Pages.FavoritesPage" 
     Style="{DynamicResource navBarStyle}"
     Title="favorites"
-    Icon="ic_favorites.png">
+    Icon="ic_favorites.png"
+    AutomationId="FavoritesPage">
     
     <Grid VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand"

@@ -36,6 +36,7 @@ namespace News.Controls
 
         public FavoriteButton()
         {
+            AutomationId = "FavoriteButton";
             Init();
             UpdateControlState();
         }
