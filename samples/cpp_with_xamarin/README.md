@@ -1201,6 +1201,7 @@ We can now write the code enabling us to use our native library. The goal here i
 3. Add a reference to **System.Runtime.InteropServices** at the top of the **MyMathFuncsWrapper.cs** file
 
     ```
+    using System;
     using System.Runtime.InteropServices;
     ```
 
@@ -1211,7 +1212,7 @@ We can now write the code enabling us to use our native library. The goal here i
     internal static extern MyMathFuncsSafeHandle CreateMyMathFuncs();
 
     [DllImport(DllName, EntryPoint = "DisposeMyMathFuncsClass")]
-    internal static extern void DisposeMyMathFuncs(MyMathFuncsSafeHandle ptr);
+    internal static extern void DisposeMyMathFuncs(IntPtr ptr);
     ```
 
     **NOTE:** We are passing in our constant **DllName** to the **DllImport** attribute along with the **EntryPoint** which explicitly tells the .NET runtime the name of the function to call within that library. Technically, we do not need to provide the **EntryPoint** value if our managed method names were identical to the unmanaged one we're trying to call. If one is not provided, the managed method name would be used as the **EntryPoint** instead. However, it is better to be explicit.  
@@ -1237,6 +1238,7 @@ We can now write the code enabling us to use our native library. The goal here i
 6. Verify that the finished **MyMathFuncsWrapper** class appears as below:
 
     ```
+    using System;
     using System.Runtime.InteropServices;
 
     namespace MathFuncs
@@ -1253,7 +1255,7 @@ We can now write the code enabling us to use our native library. The goal here i
             internal static extern MyMathFuncsSafeHandle CreateMyMathFuncs();
 
             [DllImport(DllName, EntryPoint = "DisposeMyMathFuncsClass")]
-            internal static extern void DisposeMyMathFuncs(MyMathFuncsSafeHandle ptr);
+            internal static extern void DisposeMyMathFuncs(IntPtr ptr);
 
             [DllImport(DllName, EntryPoint = "MyMathFuncsAdd")]
             internal static extern double Add(MyMathFuncsSafeHandle ptr, double a, double b);
@@ -1278,7 +1280,7 @@ We can now write the code enabling us to use our native library. The goal here i
 2. Replace the **TODO** line with the following code:
 
     ```
-    MyMathFuncsWrapper.DisposeMyMathFuncs(this);
+    MyMathFuncsWrapper.DisposeMyMathFuncs(handle);
     ```
 
 #### Writing the MyMathFuncs class
