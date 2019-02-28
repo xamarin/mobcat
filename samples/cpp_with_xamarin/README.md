@@ -595,7 +595,7 @@ Copying libMathFuncs.so to bin/Android/arm64
 ** BUILD SUCCEEDED (Android) **
 ```
 
-At this stage, you should have 3 libraries in the **bin** folder under **Android/{target_architecture}**. These should be visible within the **Explorer** view alongside our source code, build, and environment setting files. We will address this later.
+At this stage, you should have 4 libraries in the **bin** folder under **Android/{target_architecture}**. These should be visible within the **Explorer** view alongside our source code, build, and environment setting files. We will address this later.
 
 #### Building for iOS
 1. To denote the start of the iOS build, add the following code to the script:

@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace MathFuncs
 {
@@ -14,7 +15,7 @@ namespace MathFuncs
         internal static extern MyMathFuncsSafeHandle CreateMyMathFuncs();
 
         [DllImport(DllName, EntryPoint = "DisposeMyMathFuncsClass")]
-        internal static extern void DisposeMyMathFuncs(MyMathFuncsSafeHandle ptr);
+        internal static extern void DisposeMyMathFuncs(IntPtr ptr);
 
         [DllImport(DllName, EntryPoint = "MyMathFuncsAdd")]
         internal static extern double Add(MyMathFuncsSafeHandle ptr, double a, double b);
