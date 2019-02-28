@@ -13,7 +13,8 @@
     x:Class="News.Pages.SearchPage" 
     Style="{DynamicResource navBarStyle}"
     Title="search"
-    Icon="ic_search.png">
+    Icon="ic_search.png"
+    AutomationId="SearchPage">
     
     <Grid VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand"
@@ -51,7 +52,9 @@
                FontSize="20"
                Style="{DynamicResource entryStyle}"
                Grid.Row="1"
-               Margin="15,0,0,15" />
+               Placeholder="Search..."
+               Margin="15,0,0,15"
+               AutomationId="SearchEntry"/>
         <Button Text="Find" 
                 Command="{Binding RefreshCommand}"
                 Grid.Row="1"
@@ -61,7 +64,8 @@
                 TextColor="White"
                 Padding="10,0"
                 VerticalOptions="Fill"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                AutomationId="FindButton"/>
         <Grid VerticalOptions="Start" 
               HorizontalOptions="FillAndExpand"
               Style="{DynamicResource separatorStyle}"
