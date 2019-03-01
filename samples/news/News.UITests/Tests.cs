@@ -40,6 +40,7 @@ namespace News.UITests
         }
 
         [Test]
+        [Ignore] //Remove ignore tag after client secrets are implemented on DevOps
         public void AddAndRemoveFavorite()
         {
             var homePage = new HomePage();
