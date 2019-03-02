@@ -8,12 +8,12 @@ namespace News
     /// </summary>
     public static class ServiceConfig
     {
-        public static readonly string NEWSSERVICEAPIKEY = string.Empty;
+        public static readonly string NewsServiceApiKey = "news_service_api_key";
 
-        public static readonly string NEWSSERVICEURL = string.Empty;
+        public static readonly string NewsServiceUrl = "news_service_url";
 
-        public static readonly string ANDROIDAPPCENTERSECRET = string.Empty;
+        public static readonly string AndroidAppCenterSecret = "android_appcenter_secret";
 
-        public static readonly string IOSAPPCENTERSECRET = string.Empty;
+        public static readonly string iOSAppCenterSecret = "ios_appcenter_secret";
     }
 }

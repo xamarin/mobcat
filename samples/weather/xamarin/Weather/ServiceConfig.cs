@@ -8,12 +8,12 @@ namespace Weather
     /// </summary>
     public static class ServiceConfig
     {
-        public static readonly string WeatherServiceApiKey = "<weather_service_api_key>";
+        public static readonly string WeatherServiceApiKey = "blah test value";
 
-        public static readonly string WeatherServiceUrl = "<weather_service_url>";
+        public static readonly string WeatherServiceUrl = "weather_service_url";
 
-        public static readonly string AndroidAppCenterSecret = "<android_appcenter_secret>";
+        public static readonly string AndroidAppCenterSecret = "android_appcenter_secret";
 
-        public static readonly string iOSAppCenterSecret = "<ios_appcenter_secret>";
+        public static readonly string iOSAppCenterSecret = "ios_appcenter_secret";
     }
 }
