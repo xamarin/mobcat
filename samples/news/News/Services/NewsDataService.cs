@@ -17,7 +17,7 @@ namespace News.Services
     public class NewsDataService : BaseHttpService, INewsDataService
     {
         public NewsDataService()
-            : base(ServiceConfig.NEWSSERVICEURL, null)
+            : base(ServiceConfig.NewsServiceUrl, null)
         {
             Serializer = new NewtonsoftJsonSerializer();
         }
@@ -140,7 +140,7 @@ namespace News.Services
                 }
             }
 
-            actionUrlBuilder.Append($"apiKey={ServiceConfig.NEWSSERVICEAPIKEY}");
+            actionUrlBuilder.Append($"apiKey={ServiceConfig.NewsServiceApiKey}");
             var actionUrl = actionUrlBuilder.ToString();
             return actionUrl;
         }

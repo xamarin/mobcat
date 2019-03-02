@@ -10,7 +10,7 @@ namespace News
     {
         public static readonly string NewsServiceApiKey = "news_service_api_key";
 
-        public static readonly string NewsServiceUrl = "news_service_url";
+        public static readonly string NewsServiceUrl = "https://newsapi.org/v2/";
 
         public static readonly string AndroidAppCenterSecret = "android_appcenter_secret";
 

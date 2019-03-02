@@ -22,7 +22,9 @@ The Release configuration replaces the offline data service with the online data
 
 ## Backend
 
-The sample uses the [News API](https://newsapi.org/) backend, where you can register and generate a developer key which is required to run this sample.
+The sample uses the [News API](https://newsapi.org/) backend, where you can register and generate a developer key which is required to run this sample. Keep this value safe to be used later.
+
+- **API Endpoint URL** *https://newsapi.org/v2/* has already been setup in the solution. 
 
 ## AppCenter
 
@@ -32,14 +34,11 @@ AppCenter integration is built in to the sample using the AppCenter NuGet packag
 
 The following app secrets are defined in the **ServiceConfig** class and need to be replaced with the values generated in the steps above.
 
-1. WeatherServiceApiKey
-2. WeatherServiceUrl
-3. AndroidAppCenterSecret
-4. iOSAppCenterSecret
+1. NewsServiceApiKey
+2. AndroidAppCenterSecret
+3. iOSAppCenterSecret
 
 Be sure to configure the variables before deploying the app to avoid runtime errors. 
-
-**NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
 
 ## Solution Overview
 
