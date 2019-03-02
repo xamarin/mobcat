@@ -8,7 +8,7 @@ namespace Weather
     /// </summary>
     public static class ServiceConfig
     {
-        public static readonly string WeatherServiceApiKey = "blah test value";
+        public static readonly string WeatherServiceApiKey = "weather_service_api_key";
 
         public static readonly string WeatherServiceUrl = "weather_service_url";
 
