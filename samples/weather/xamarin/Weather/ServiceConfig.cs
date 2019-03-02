@@ -1,25 +1,19 @@
 ﻿using System;
-using MobCAT.ClientSecrets;
 
 namespace Weather
 {
     /// <summary>
     /// Secret key file.
-    /// Secrets are replaced environment variables using MobCAT.ClientSecrets: https://github.com/xamarin/mobcat/tree/master/mobcat_client_secrets
-    /// Run build/environment.sh with the variable flags to set your environment variables
+    /// Replace these values with your API Key values
     /// </summary>
     public static class ServiceConfig
     {
-        [ClientSecret]
-        public static readonly string WeatherServiceApiKey = string.Empty;
+        public static readonly string WeatherServiceApiKey = "<weather_service_api_key>";
 
-        [ClientSecret]
-        public static readonly string WeatherServiceUrl = string.Empty;
+        public static readonly string WeatherServiceUrl = "<weather_service_url>";
 
-        [ClientSecret]
-        public static readonly string AndroidAppCenterSecret = string.Empty;
+        public static readonly string AndroidAppCenterSecret = "<android_appcenter_secret>";
 
-        [ClientSecret]
-        public static readonly string iOSAppCenterSecret = string.Empty;
+        public static readonly string iOSAppCenterSecret = "<ios_appcenter_secret>";
     }
 }

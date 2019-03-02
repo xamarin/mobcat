@@ -30,29 +30,16 @@ AppCenter integration is built in to the sample using the AppCenter NuGet packag
 
 ## App Secrets
 
-The app secrets in News are protected using [mobcat_client_secrets](https://github.com/xamarin/mobcat/tree/master/mobcat_client_secrets) which gets the secret values from your local development environment variables to prevent secret keys from being committed into source code. The following app secret variables can be found in ServiceConfig.cs and have the `[ClientSecret]` attribute:
+The following app secrets are defined in the **ServiceConfig** class and need to be replaced with the values generated in the steps above.
 
-1. NewsServiceApiKey
-2. NewsServiceUrl
+1. WeatherServiceApiKey
+2. WeatherServiceUrl
 3. AndroidAppCenterSecret
 4. iOSAppCenterSecret
 
-    **MacOS**
+Be sure to configure the variables before deploying the app to avoid runtime errors. 
 
-    To set up the environment variables using Terminal on MacOS, navigate to the `/build` folder and run the following:
-
-    ```
-    . environment.sh --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter secret> --ios-appcenter-secret <iOS AppCenter secret>
-    ```
-
-    **Windows:**
-    ```
-    environment.bat --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter App Secret> --ios-appcenter-secret <iOS AppCenter App Secret>
-    ```
-
-    **NOTE:** You must restart **Visual Studio for Mac** in order for changes to these environment variables to be recognized (if it was open at the time these were set). If you need to update the value after it was initially set, please run the script again, restart the **Visual Studio for Mac** and rebuild the solution to apply the recent changes
-
-    **NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
+**NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
 
 ## Solution Overview
 

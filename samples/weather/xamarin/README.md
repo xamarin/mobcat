@@ -49,34 +49,17 @@ The sample is underpinned by a [web service](https://github.com/xamarin/mobcat/t
 - **API Endpoint URL** e.g. *https://<app_name>.azurewebsites.net/api/*
 
 ### 3. Set Environment Variables for the app secrets
-App secrets are resolved and set at built-time using our [MobCAT.ClientSecrets.Fody](https://github.com/xamarin/mobcat/tree/master/mobcat_client_secrets) add-in keeping the secrets out of the source code.
 
-The following app secrets are defined in the **ServiceConfig** class and are decorated by the `[ClientSecret]` attribute to denote that they will be set using an environment variable by the same name:
+The following app secrets are defined in the **ServiceConfig** class and need to be replaced with the values generated in the steps above.
 
 1. WeatherServiceApiKey
 2. WeatherServiceUrl
 3. AndroidAppCenterSecret
 4. iOSAppCenterSecret
 
-To configure the environment variables:
+Be sure to configure the variables before deploying the app to avoid runtime errors. 
 
-1. Open **Command Prompt/Terminal**
-2. Change directory to the **mobcat/samples/weather/xamarin/build** folder
-3. Execute the **environment** script passing in the requisite parameters. For example:
-
-    **macOS:**  
-    ```
-    ./environment.sh --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter App Secret> --ios-appcenter-secret <iOS AppCenter App Secret>
-    ```  
-
-    **Windows:**
-    ```
-    environment.bat --api-key <API Key> --service-endpoint <API Endpoint URL> --android-appcenter-secret <Android AppCenter App Secret> --ios-appcenter-secret <iOS AppCenter App Secret>
-    ```
-
-    **NOTE:** You must restart **Visual Studio for Mac** in order for changes to these environment variables to be recognized (if it was open at the time these were set). If you need to update the value after it was initially set, please run the script again, restart the **Visual Studio for Mac** and rebuild the solution to apply the recent changes
-
-    **NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
+**NOTE:** Make sure the **API Endpoint URL** ends with **/api/**
 
 ## Key Concepts
 
