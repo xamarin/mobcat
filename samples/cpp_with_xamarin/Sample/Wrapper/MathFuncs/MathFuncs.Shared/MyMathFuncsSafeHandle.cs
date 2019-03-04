@@ -11,7 +11,7 @@ namespace MathFuncs
 
         protected override bool ReleaseHandle()
         {
-            MyMathFuncsWrapper.DisposeMyMathFuncs(this);
+            MyMathFuncsWrapper.DisposeMyMathFuncs(handle);
             return true;
         }
     }
