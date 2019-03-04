@@ -204,9 +204,6 @@
     <PackageReference Include="Xamarin.TestCloud.Agent">
       <Version>0.21.7</Version>
     </PackageReference>
-    <PackageReference Include="MobCAT.ClientSecrets.Fody">
-      <Version>1.0.0-alpha3</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj">
