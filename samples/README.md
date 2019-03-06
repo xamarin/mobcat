@@ -5,13 +5,18 @@ This repository contains sample projects that use the MobCAT [framework](https:/
 
 |                               | __master__ | __dev__ |
 |:-----------------------------:|:---------:|:--------:|
-| __Weathertron 9000__             | * | [![x64test][weathericon]][weatherlink]
-| __News-Man 9000 2.0__             | * | [![x86test][newsicon]][newslink]
+| __Weathertron 9000__             | [![weathericon_release]][weatherlink_release] | [![weathericon_dev]][weatherlink_dev]
+| __News-Man 9000 2.0__             | [![newsicon_release]][newslink_release] | [![newsicon_dev]][newslink_dev]
 
-[weathericon]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
-[weatherlink]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
-[newsicon]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Dev?branchName=dev
-[newslink]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=70&branchName=dev
+[weathericon_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
+[weatherlink_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
+[weathericon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-Release?branchName=dev
+[weatherlink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=73&branchName=dev
+
+[newsicon_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Dev?branchName=dev
+[newslink_dev]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=70&branchName=dev
+[newsicon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Release?branchName=dev
+[newslink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=74&branchName=dev
 
 ## Directory 
 [weather](https://github.com/xamarin/mobcat/tree/master/samples/weather)  
