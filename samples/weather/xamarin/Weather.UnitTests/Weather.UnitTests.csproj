@@ -1,37 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-    
-   <PropertyGroup>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1;UNITTEST</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Moq" Version="4.10.0" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
-    <PackageReference Include="Polly" Version="6.1.2" />
-    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="MockServices\Geocoding.cs" />
-    <Compile Remove="MappingTests.cs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT\MobCAT.csproj" />
-    <ProjectReference Include="..\..\..\..\mobcat_shared\MobCAT.Forms\MobCAT.Forms.csproj" />
-    <ProjectReference Include="..\Weather\Weather.csproj" />
-  </ItemGroup>
+
 </Project>
