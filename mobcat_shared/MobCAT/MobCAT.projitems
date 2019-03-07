@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{843D62CA-BA8E-4949-B5C1-924837565EA8}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Microsoft.MobCAT</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\AsyncCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseCollectionViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\Abstractions\IValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BaseHttpService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsoleLoggingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\HttpServiceException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IAppService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\ILoggingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\IRuntimeEnvironmentService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Abstractions\ISecureStorageService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ISerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\IStreamSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\JsonSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WebImageCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseNavigationViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\Abstractions\INavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\BaseWatcherViewModel.cs" />
+  </ItemGroup>
+</Project>

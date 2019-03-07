@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "osx" : {
+        "tasks": [
+            {
+                "label": "execute-osx",
+                "type": "shell",
+                "command": "Scripts/vscode_deploy.sh",
+                "args":[ 
+                ],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                }
+            }
+        ]
+    },
+    "windows" : {
+        "tasks": [
+            {
+                "label": "execute-windows",
+                "type": "shell",
+                "command": "Scripts/vscode_deploy.bat",
+                "args":[ 
+                ],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                }
+            }
+        ]
+    }
+}
