@@ -10,13 +10,13 @@ This repository contains sample projects that use the MobCAT [framework](https:/
 
 [weathericon_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
 [weatherlink_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-dev?branchName=dev
-[weathericon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-Release?branchName=dev
-[weatherlink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=73&branchName=dev
+[weathericon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/Weather/MobCAT-Weather-Release?branchName=master
+[weatherlink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=73&branchName=master
 
 [newsicon_dev]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Dev?branchName=dev
 [newslink_dev]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=70&branchName=dev
-[newsicon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Release?branchName=dev
-[newslink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=74&branchName=dev
+[newsicon_release]: https://dotnetcst.visualstudio.com/MobCAT/_apis/build/status/News/MobCAT-News-Release?branchName=master
+[newslink_release]: https://dotnetcst.visualstudio.com/MobCAT/_build/latest?definitionId=74&branchName=master
 
 ## Directory 
 [weather](https://github.com/xamarin/mobcat/tree/master/samples/weather)  
