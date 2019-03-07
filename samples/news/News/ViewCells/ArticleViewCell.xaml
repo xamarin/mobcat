@@ -32,7 +32,10 @@
                     <Label Style="{DynamicResource labelStyle}" 
                            Text="🗞️" 
                            FontSize="60" 
+<<<<<<< HEAD
                            Style="{DynamicResource labelStyle}" 
+=======
+>>>>>>> 1686abab9f6e6e6fe00b3c56b8bc591f8a4de5d6
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
                            Grid.Row="0"/>
