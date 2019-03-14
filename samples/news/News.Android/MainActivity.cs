@@ -16,6 +16,7 @@ namespace News.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             Lottie.Forms.Droid.AnimationViewRenderer.Init();
+            News.Bootstrap.Begin();
         }
     }
 }
