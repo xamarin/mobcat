@@ -12,6 +12,7 @@ namespace News.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             Lottie.Forms.iOS.Renderers.AnimationViewRenderer.Init();
+            News.Bootstrap.Begin();
 
             return base.FinishedLaunching(app, options);
         }

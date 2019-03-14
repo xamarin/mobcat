@@ -15,7 +15,6 @@ namespace News
         public App()
         {
             InitializeComponent();
-            RegisterServices();
             SetMainPage();
         }
 
@@ -23,13 +22,6 @@ namespace News
         {
             var startPage = new LoadingPage() { ViewModel = new LoadingViewModel() };
             MainPage = new BaseNavigationPage(startPage);
-        }
-
-        private void RegisterServices()
-        {
-            var navigationService = new NavigationService();
-            navigationService.RegisterViewModels(GetType().Assembly);
-            BaseNavigationViewModel.RegisterService(navigationService);
         }
 
         protected override void OnStart()
