@@ -42,18 +42,19 @@
               HeightRequest="1"
               Grid.Row="1"/>
             
-            <Grid Grid.Row="2" Padding="15" Style="{DynamicResource backgroundStyle}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <!-- Theme Switch -->
-                <Label Style="{DynamicResource labelStyle}"
-                       Text="Light Mode"/>
-                <Switch AutomationId="LightModeSwitch"
-                        Grid.Column="1"
-                        IsToggled="{Binding IsLightMode}"/>
-            </Grid>
+        <Grid Grid.Row="2" Padding="15" Style="{DynamicResource backgroundStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Theme Switch -->
+            <Label Style="{DynamicResource labelStyle}"
+                   Text="Light Mode"/>
+            <Switch AutomationId="LightModeSwitch"
+                    Grid.Column="1"
+                    VerticalOptions="Start"
+                    IsToggled="{Binding IsLightMode}"/>
+        </Grid>
     </Grid>
 </local:BaseContentPage>
