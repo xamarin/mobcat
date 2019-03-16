@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
 
 namespace News.UITests.Pages
@@ -12,17 +13,43 @@ namespace News.UITests.Pages
         };
 
         protected readonly Query FavoriteButton;
+        protected readonly Query EmptyLabel;
+        protected readonly Query NewsInfiniteListView;
 
         public FavoritesPage()
         {
             FavoriteButton = x => x.Marked(nameof(FavoriteButton));
+            NewsInfiniteListView = x => x.Marked(nameof(NewsInfiniteListView));
+            EmptyLabel = x => x.Marked(nameof(EmptyLabel));
         }
 
-        public void RemoveFavorite()
+        public FavoritesPage VerifyThatEmpty()
+        {
+            app.WaitForElement(EmptyLabel);
+            app.Screenshot("Verified that favorite is empty");
+            return this;
+        }
+
+        public FavoritesPage VerifyThatNotEmpty()
+        {
+            app.WaitForNoElement(EmptyLabel);
+            app.Screenshot("Verified that favorite is not empty");
+            return this;
+        }
+
+        public FavoritesPage RefreshFavorites()
+        {
+            app.WaitForElement(NewsInfiniteListView);
+            var newsList = app.Query(NewsInfiniteListView).First();
+            app.DragCoordinates(newsList.Rect.X, newsList.Rect.Y, newsList.Rect.X, newsList.Rect.CenterY);
+            return this;
+        }
+
+        public FavoritesPage RemoveFavorite()
         {
             app.WaitForElement(FavoriteButton);
             app.Tap(FavoriteButton);
-            app.Screenshot("Removed favorite article");
+            return this;
         }
     }
 }

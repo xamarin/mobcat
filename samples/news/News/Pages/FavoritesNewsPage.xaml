@@ -74,7 +74,8 @@
                             HorizontalOptions="Center"
                             Style="{DynamicResource labelStyle}"
                             InputTransparent="true"
-                            FontSize="Large"/>
+                            FontSize="Large"
+                            AutomationId="EmptyLabel"/>
                 </DataTemplate>
             </mobcat:NewsInfiniteListView.EmptyTemplate>
             <mobcat:NewsInfiniteListView.Behaviors>
