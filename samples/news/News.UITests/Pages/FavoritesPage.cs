@@ -23,17 +23,19 @@ namespace News.UITests.Pages
             EmptyLabel = x => x.Marked(nameof(EmptyLabel));
         }
 
-        public FavoritesPage VerifyThatEmpty()
+        public FavoritesPage WaitToBecomeEmpty()
         {
+            app.Screenshot("Wait to become empty");
             app.WaitForElement(EmptyLabel);
-            app.Screenshot("Verified that favorite is empty");
+            app.Screenshot("Favorites are empty");
             return this;
         }
 
-        public FavoritesPage VerifyThatNotEmpty()
+        public FavoritesPage WaitToBecomeNotEmpty()
         {
+            app.Screenshot("Wait to become not empty");
             app.WaitForNoElement(EmptyLabel);
-            app.Screenshot("Verified that favorite is not empty");
+            app.Screenshot("Favorites are not empty");
             return this;
         }
 

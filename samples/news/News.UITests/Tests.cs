@@ -50,11 +50,11 @@ namespace News.UITests
 
             homePage
                 .ShowFavoritesTab()
-                .VerifyThatNotEmpty()
+                .WaitToBecomeNotEmpty()
                 .RemoveFavorite()
-                .VerifyThatNotEmpty()
+                .WaitToBecomeNotEmpty()
                 .RefreshFavorites()
-                .VerifyThatEmpty();
+                .WaitToBecomeEmpty();
         }
 
         [Test]
