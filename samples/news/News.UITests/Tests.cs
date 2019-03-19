@@ -42,13 +42,11 @@ namespace News.UITests
         [Test]
         public void AddAndRemoveFavorite()
         {
-            var homePage = new HomePage();
-
-            homePage
+            new HomePage()
                 .ShowNewsTab()
                 .AddFavorite();
 
-            homePage
+            new HomePage()
                 .ShowFavoritesTab()
                 .WaitToBecomeNotEmpty()
                 .RemoveFavorite()
