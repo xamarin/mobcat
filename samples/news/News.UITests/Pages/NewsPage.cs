@@ -39,12 +39,13 @@ namespace News.UITests.Pages
             app.Screenshot($"Swiped to the next available category");
         }
 
-        public void ValidateCategory(string category)
+        public NewsPage ValidateCategory(string category)
         {
             app.Screenshot($"Validate category ${category}");
             app.WaitForElement(CategoryLabel);
             var categoryLabel = app.Query(CategoryLabel).First();
             Assert.AreEqual(categoryLabel.Text, category);
+            return this;
         }
     }
 }

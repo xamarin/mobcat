@@ -65,13 +65,13 @@ namespace News.UITests
         [Test]
         public void SwipeThroughEachCategory()
         {
-            var homePage = new HomePage();
-            var newsPage = homePage.ShowNewsTab();
+            new HomePage().ShowNewsTab();
 
-            foreach (var selectedCategory in newsPage.SupportedCategories)
+            foreach (var selectedCategory in new NewsPage().SupportedCategories)
             {
-                newsPage.ValidateCategory(selectedCategory);
-                newsPage.ShowNextCategory();
+                new NewsPage()
+                    .ValidateCategory(selectedCategory)
+                    .ShowNextCategory();
             }
         }
 
