@@ -78,13 +78,13 @@ namespace News.UITests
         [Test]
         public void SwipeThroughEachSource()
         {
-            var homePage = new HomePage();
-            var sourcesPage = homePage.ShowSourcesTab();
+            new HomePage().ShowSourcesTab();
 
-            foreach (var selectedSource in sourcesPage.SupportedSources)
+            foreach (var selectedSource in new SourcesPage().SupportedSources)
             {
-                sourcesPage.ValidateSource(selectedSource);
-                sourcesPage.ShowNextSource();
+                new SourcesPage()
+                    .ValidateSource(selectedSource)
+                    .ShowNextSource();
             }
         }
 

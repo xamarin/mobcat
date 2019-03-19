@@ -30,12 +30,13 @@ namespace News.UITests.Pages
             app.Screenshot($"Swiped to the next available source");
         }
 
-        public void ValidateSource(string source)
+        public SourcesPage ValidateSource(string source)
         {
             app.Screenshot($"Validate source ${source}");
             app.WaitForElement(SourceLabel);
             var sourceLabel = app.Query(SourceLabel).First();
             Assert.AreEqual(sourceLabel.Text, source);
+            return this;
         }
     }
 }
