@@ -32,13 +32,13 @@ namespace News.ViewModels
 
         public ObservableCollection<CategoryNewsViewModel> Categories { get; } = new ObservableCollection<CategoryNewsViewModel>
         {
-            new CategoryNewsViewModel("Top News \ud83d\udd25"),
-            new CategoryNewsViewModel("Business \ud83d\udcbc", News.Models.Categories.Business),
-            new CategoryNewsViewModel("Entertainment \ud83d\udc83\ud83d\udd7a", News.Models.Categories.Entertainment),
-            new CategoryNewsViewModel("Health \ud83e\uddec", News.Models.Categories.Health),
-            new CategoryNewsViewModel("Science \ud83d\udd2c", News.Models.Categories.Science),
-            new CategoryNewsViewModel("Sports \ud83e\udd3c", News.Models.Categories.Sports),
-            new CategoryNewsViewModel("Technology \ud83d\udc69‍\ud83d\udcbb" ,News.Models.Categories.Technology),
+            new CategoryNewsViewModel(Constants.Categories.TopNews),
+            new CategoryNewsViewModel(Constants.Categories.Business, News.Models.Categories.Business),
+            new CategoryNewsViewModel(Constants.Categories.Entertainment, News.Models.Categories.Entertainment),
+            new CategoryNewsViewModel(Constants.Categories.Health, News.Models.Categories.Health),
+            new CategoryNewsViewModel(Constants.Categories.Science, News.Models.Categories.Science),
+            new CategoryNewsViewModel(Constants.Categories.Sports, News.Models.Categories.Sports),
+            new CategoryNewsViewModel(Constants.Categories.Technology ,News.Models.Categories.Technology),
         };
 
         public bool IsSelectNextCategoryTipEnabled

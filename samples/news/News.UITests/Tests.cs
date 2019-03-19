@@ -62,6 +62,32 @@ namespace News.UITests
                 .SetLightMode();
         }
 
+        [Test]
+        public void SwipeThroughEachCategory()
+        {
+            var homePage = new HomePage();
+            var newsPage = homePage.ShowNewsTab();
+
+            foreach (var selectedCategory in newsPage.SupportedCategories)
+            {
+                newsPage.ValidateCategory(selectedCategory);
+                newsPage.ShowNextCategory();
+            }
+        }
+
+        [Test]
+        [Ignore]
+        public void SwipeThroughEachSource()
+        {
+            var homePage = new HomePage();
+            var sourcesPage = homePage.ShowSourcesTab();
+
+            foreach (var selectedSource in sourcesPage.SupportedSources)
+            {
+                sourcesPage.ValidateSource(selectedSource);
+                sourcesPage.ShowNextSource();
+            }
+        }
 
         [Test]
         [Ignore]
