@@ -18,11 +18,12 @@ namespace News.UITests.Pages
             LightModeSwitch = x => x.Marked(nameof(LightModeSwitch));
         }
 
-        public void SetLightMode()
+        public SettingsPage SetLightMode()
         {
             app.WaitForElement(LightModeSwitch);
             app.Tap(LightModeSwitch);
             app.Screenshot("Toggled light mode");
+            return this;
         }
     }
 }

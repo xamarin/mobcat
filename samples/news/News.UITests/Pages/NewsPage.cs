@@ -26,17 +26,19 @@ namespace News.UITests.Pages
             CategoryLabel = x => x.Marked(nameof(CategoryLabel));
         }
 
-        public void AddFavorite()
+        public NewsPage AddFavorite()
         {
             app.WaitForElement(FavoriteButton);
             app.Tap(FavoriteButton);
             app.Screenshot("Added favorite article");
+            return this;
         }
 
-        public void ShowNextCategory()
+        public NewsPage ShowNextCategory()
         {
             app.SwipeRightToLeft(swipeSpeed: 1000);
             app.Screenshot($"Swiped to the next available category");
+            return this;
         }
 
         public NewsPage ValidateCategory(string category)

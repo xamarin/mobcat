@@ -18,11 +18,12 @@ namespace News.UITests.Pages
             FavoriteButton = x => x.Marked(nameof(FavoriteButton));
         }
 
-        public void RemoveFavorite()
+        public FavoritesPage RemoveFavorite()
         {
             app.WaitForElement(FavoriteButton);
             app.Tap(FavoriteButton);
             app.Screenshot("Removed favorite article");
+            return this;
         }
     }
 }

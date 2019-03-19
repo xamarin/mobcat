@@ -24,10 +24,11 @@ namespace News.UITests.Pages
             SourceLabel = x => x.Marked(nameof(SourceLabel));
         }
 
-        public void ShowNextSource()
+        public SourcesPage ShowNextSource()
         {
             app.SwipeRightToLeft(swipeSpeed: 1000);
             app.Screenshot($"Swiped to the next available source");
+            return this;
         }
 
         public SourcesPage ValidateSource(string source)

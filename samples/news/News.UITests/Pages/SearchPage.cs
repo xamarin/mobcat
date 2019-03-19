@@ -20,7 +20,7 @@ namespace News.UITests.Pages
             FindButton = x => x.Marked(nameof(FindButton));
         }
 
-        public void Search(string query)
+        public SearchPage Search(string query)
         {
             app.WaitForElement(SearchEntry);
             app.Tap(SearchEntry);
@@ -29,6 +29,7 @@ namespace News.UITests.Pages
             app.WaitForElement(FindButton);
             app.Tap(FindButton);
             app.Screenshot($"Searched for {query}");
+            return this;
         }
     }
 }
