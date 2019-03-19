@@ -76,7 +76,6 @@ namespace News.UITests
         }
 
         [Test]
-        [Ignore]
         public void SwipeThroughEachSource()
         {
             var homePage = new HomePage();
