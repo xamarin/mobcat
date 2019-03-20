@@ -40,7 +40,8 @@
                            LineBreakMode="MiddleTruncation"
                            MaxLines="1"
                            Margin="15,30,15,10"
-                           Grid.Row="0"/>
+                           Grid.Row="0"
+                           AutomationId="SourceLabel"/>
                     <Grid VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand"
                           Style="{DynamicResource separatorStyle}"

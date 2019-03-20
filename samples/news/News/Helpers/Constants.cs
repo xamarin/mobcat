@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace News.Helpers
 {
@@ -34,6 +35,60 @@ namespace News.Helpers
             public const string EntryLightThemeColor = "#A7A7A7";
             public const string TextLightThemeColor = "#000000";
             public const string AccentTextLightThemeColor = "#272727";
+        }
+
+        public static class Categories
+        {
+            public const string TopNews = "Top News \ud83d\udd25";
+            public const string Business = "Business \ud83d\udcbc";
+            public const string Entertainment = "Entertainment \ud83d\udc83\ud83d\udd7a";
+            public const string Health = "Health \ud83e\uddec";
+            public const string Science = "Science \ud83d\udd2c";
+            public const string Sports = "Sports \ud83e\udd3c";
+            public const string Technology = "Technology \ud83d\udc69‍\ud83d\udcbb";
+
+            public static List<string> All { get; } = new List<string>
+            {
+                TopNews,
+                Business,
+                Entertainment,
+                Health,
+                Science,
+                Sports,
+                Technology,
+            };
+        }
+
+        public static class Sources
+        {
+            public const string CNN = "CNN";
+            public const string TheNewYorkTimes = "The New York Times";
+            public const string ABCNews = "ABC News";
+            public const string TheWashingtonPost = "The Washington Post";
+            public const string FoxNews = "Fox News";
+            public const string CBSNews = "CBS News";
+            public const string NBCNews = "NBC News";
+            public const string Reuters = "Reuters";
+            public const string USAToday = "USA Today";
+            public const string Bloomberg = "Bloomberg";
+            public const string Wired = "Wired";
+            public const string CNBC = "CNBC";
+
+            public static List<string> All { get; } = new List<string>
+            {
+                CNN,
+                TheNewYorkTimes,
+                ABCNews,
+                TheWashingtonPost,
+                FoxNews,
+                CBSNews,
+                NBCNews,
+                Reuters,
+                USAToday,
+                Bloomberg,
+                Wired,
+                CNBC,
+            };
         }
     }
 }

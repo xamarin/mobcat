@@ -6,6 +6,8 @@ namespace News.UITests.Pages
 {
     public class FavoritesPage : BasePage
     {
+        protected readonly Query FavoriteButton;
+
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked(nameof(FavoritesPage)),
@@ -51,6 +53,7 @@ namespace News.UITests.Pages
         {
             app.WaitForElement(FavoriteButton);
             app.Tap(FavoriteButton);
+            app.Screenshot("Removed favorite article");
             return this;
         }
     }

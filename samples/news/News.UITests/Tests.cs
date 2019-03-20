@@ -17,25 +17,42 @@ namespace News.UITests
         [Test]
         public void ViewEachTabInDarkModeAndLightMode()
         {
-            var homePage = new HomePage();
-            homePage.ShowNewsTab();
-            homePage.ShowSourcesTab();
-            homePage.ShowFavoritesTab();
-            homePage.ShowSearchTab();
-            homePage.ShowSettingsTab()
-            .SetLightMode();
 
-            homePage.ShowNewsTab();
-            homePage.ShowSourcesTab();
-            homePage.ShowFavoritesTab();
-            homePage.ShowSearchTab();
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Sources);
+
+            new SourcesPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Favorites);
+
+            new FavoritesPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Search);
+
+            new SearchPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Settings);
+
+            new SettingsPage()
+                .SetTheme(Themes.light)
+                .SelectTabOption(BasePage.NavigationTabOption.News);
+
+            new NewsPage()
+               .SelectTabOption(BasePage.NavigationTabOption.Sources);
+
+            new SourcesPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Favorites);
+
+            new FavoritesPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Search);
+
+            new SearchPage();
         }
 
         [Test]
         public void SearchForMicrosoftNews()
         {
-            new HomePage()
-                .ShowSearchTab()
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Search);
+
+            new SearchPage()
                 .Search("Microsoft");
         }
 
@@ -58,14 +75,39 @@ namespace News.UITests
         [Test]
         public void SetLightMode()
         {
-            new HomePage()
-                .ShowSettingsTab()
-                .SetLightMode();
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Settings);
+
+            new SettingsPage()
+                .SetTheme(Themes.light);
         }
 
+        [Test]
+        public void SwipeThroughEachCategory()
+        {
+            foreach (var selectedCategory in new NewsPage().SupportedCategories)
+            {
+                new NewsPage()
+                    .ValidateCategory(selectedCategory)
+                    .ShowNextCategory();
+            }
+        }
 
         [Test]
-        [Ignore]
+        public void SwipeThroughEachSource()
+        {
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Sources);
+
+            foreach (var selectedSource in new SourcesPage().SupportedSources)
+            {
+                new SourcesPage()
+                    .ValidateSource(selectedSource)
+                    .ShowNextSource();
+            }
+        }
+
+        [Test]
         public void Repl()
         {
             if (TestEnvironment.IsTestCloud)
