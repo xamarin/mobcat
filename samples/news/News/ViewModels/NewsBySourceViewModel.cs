@@ -32,18 +32,18 @@ namespace News.ViewModels
         /// </summary>
         public ObservableCollection<SourceNewsViewModel> Sources { get; } = new ObservableCollection<SourceNewsViewModel>()
         {
-            new SourceNewsViewModel("CNN", "cnn"),
-            new SourceNewsViewModel("The New York Times", "the-new-york-times"),
-            new SourceNewsViewModel("ABC News", "abc-news"),
-            new SourceNewsViewModel("The Washington Post", "the-washington-post"),
-            new SourceNewsViewModel("Fox News", "fox-news"),
-            new SourceNewsViewModel("CBS News", "cbs-news"),
-            new SourceNewsViewModel("NBC News", "nbc-news"),
-            new SourceNewsViewModel("Reuters", "reuters"),
-            new SourceNewsViewModel("USA Today", "usa-today"),
-            new SourceNewsViewModel("Bloomberg", "bloomberg"),
-            new SourceNewsViewModel("Wired", "wired"),
-            new SourceNewsViewModel("CNBC", "cnbc"),
+            new SourceNewsViewModel(Constants.Sources.CNN, "cnn"),
+            new SourceNewsViewModel(Constants.Sources.TheNewYorkTimes, "the-new-york-times"),
+            new SourceNewsViewModel(Constants.Sources.ABCNews, "abc-news"),
+            new SourceNewsViewModel(Constants.Sources.TheWashingtonPost, "the-washington-post"),
+            new SourceNewsViewModel(Constants.Sources.FoxNews, "fox-news"),
+            new SourceNewsViewModel(Constants.Sources.CBSNews, "cbs-news"),
+            new SourceNewsViewModel(Constants.Sources.NBCNews, "nbc-news"),
+            new SourceNewsViewModel(Constants.Sources.Reuters, "reuters"),
+            new SourceNewsViewModel(Constants.Sources.USAToday, "usa-today"),
+            new SourceNewsViewModel(Constants.Sources.Bloomberg, "bloomberg"),
+            new SourceNewsViewModel(Constants.Sources.Wired, "wired"),
+            new SourceNewsViewModel(Constants.Sources.CNBC, "cnbc"),
         };
 
         public NewsBySourceViewModel()

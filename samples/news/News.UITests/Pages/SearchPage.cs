@@ -5,14 +5,14 @@ namespace News.UITests.Pages
 {
     public class SearchPage : BasePage
     {
+        protected readonly Query FindButton;
+        protected readonly Query SearchEntry;
+
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked(nameof(SearchPage)),
             iOS = x => x.Marked(nameof(SearchPage))
         };
-
-        protected readonly Query SearchEntry;
-        protected readonly Query FindButton;
 
         public SearchPage()
         {
@@ -20,7 +20,7 @@ namespace News.UITests.Pages
             FindButton = x => x.Marked(nameof(FindButton));
         }
 
-        public void Search(string query)
+        public SearchPage Search(string query)
         {
             app.WaitForElement(SearchEntry);
             app.Tap(SearchEntry);
@@ -29,6 +29,7 @@ namespace News.UITests.Pages
             app.WaitForElement(FindButton);
             app.Tap(FindButton);
             app.Screenshot($"Searched for {query}");
+            return this;
         }
     }
 }
