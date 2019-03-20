@@ -5,13 +5,13 @@ namespace News.UITests.Pages
 {
     public class FavoritesPage : BasePage
     {
+        protected readonly Query FavoriteButton;
+
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked(nameof(FavoritesPage)),
             iOS = x => x.Marked(nameof(FavoritesPage))
         };
-
-        protected readonly Query FavoriteButton;
 
         public FavoritesPage()
         {

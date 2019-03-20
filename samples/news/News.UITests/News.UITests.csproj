@@ -58,7 +58,6 @@
     <Compile Include="Tests.cs" />
     <Compile Include="BaseTestFixture.cs" />
     <Compile Include="AppManager.cs" />
-    <Compile Include="Pages\HomePage.cs" />
     <Compile Include="BasePage.cs" />
     <Compile Include="PlatformQuery.cs" />
     <Compile Include="Pages\NewsPage.cs" />
@@ -66,9 +65,11 @@
     <Compile Include="Pages\FavoritesPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Pages\SettingsPage.cs" />
+    <Compile Include="Enums\Themes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

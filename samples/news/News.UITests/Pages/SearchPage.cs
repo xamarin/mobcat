@@ -5,14 +5,14 @@ namespace News.UITests.Pages
 {
     public class SearchPage : BasePage
     {
+        protected readonly Query FindButton;
+        protected readonly Query SearchEntry;
+
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked(nameof(SearchPage)),
             iOS = x => x.Marked(nameof(SearchPage))
         };
-
-        protected readonly Query SearchEntry;
-        protected readonly Query FindButton;
 
         public SearchPage()
         {

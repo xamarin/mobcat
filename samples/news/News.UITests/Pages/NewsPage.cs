@@ -9,44 +9,41 @@ namespace News.UITests.Pages
 {
     public class NewsPage : BasePage
     {
+        protected readonly Func<int, Query> FavoriteButton;
+        public List<string> SupportedCategories => Constants.Categories.All;
+
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked(nameof(NewsPage)),
             iOS = x => x.Marked(nameof(NewsPage))
         };
 
-        protected readonly Query FavoriteButton;
-        protected readonly Query CategoryLabel;
-
-        public List<string> SupportedCategories => Constants.Categories.All;
-
         public NewsPage()
         {
-            FavoriteButton = x => x.Marked(nameof(FavoriteButton));
-            CategoryLabel = x => x.Marked(nameof(CategoryLabel));
+            FavoriteButton = index => x => x.Marked(nameof(FavoriteButton)).Index(index);
         }
 
-        public NewsPage AddFavorite()
+        public NewsPage AddFavorite(int articleIndex)
         {
-            app.WaitForElement(FavoriteButton);
-            app.Tap(FavoriteButton);
-            app.Screenshot("Added favorite article");
+            app.WaitForElement(FavoriteButton(articleIndex));
+            app.Tap(FavoriteButton(articleIndex));
+            app.Screenshot($"Added favorite article at index: {articleIndex}");
             return this;
         }
 
         public NewsPage ShowNextCategory()
         {
             app.SwipeRightToLeft(swipeSpeed: 1000);
-            app.Screenshot($"Swiped to the next available category");
+            app.Screenshot("Swiped to the next available category");
             return this;
         }
 
         public NewsPage ValidateCategory(string category)
         {
-            app.Screenshot($"Validate category ${category}");
-            app.WaitForElement(CategoryLabel);
-            var categoryLabel = app.Query(CategoryLabel).First();
-            Assert.AreEqual(categoryLabel.Text, category);
+            app.WaitForElement(category);
+            Assert.NotNull(app.Query(x => x.Marked(category)));
+
+            app.Screenshot($"Validated category ${category}");
             return this;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Xamarin.UITest;
+using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
 
 namespace News.UITests
 {
@@ -48,5 +49,44 @@ namespace News.UITests
         // For example, you could add a method here to open a side menu that is accesible from all pages.
         // To keep things more organized, consider subclassing BasePage and including common page actions there.
         // For some examples check out https://github.com/xamarin-automation-service/uitest-pop-example/wiki
+
+        public void SelectTabOption(NavigationTabOption item)
+        {
+            app.Screenshot($"Selecting Tab {item.Current.GetType().Name}");
+            app.Tap(item.Current);
+        }
+
+        public class NavigationTabOption : PlatformQuery
+        {
+            public static readonly NavigationTabOption News = new NavigationTabOption
+            {
+                Android = x => x.Marked("news"),
+                iOS = x => x.Marked("news")
+            };
+
+            public static readonly NavigationTabOption Sources = new NavigationTabOption
+            {
+                Android = x => x.Marked("sources"),
+                iOS = x => x.Marked("sources")
+            };
+
+            public static readonly NavigationTabOption Favorites = new NavigationTabOption
+            {
+                Android = x => x.Marked("favorites"),
+                iOS = x => x.Marked("favorites")
+            };
+
+            public static readonly NavigationTabOption Search = new NavigationTabOption
+            {
+                Android = x => x.Marked("search"),
+                iOS = x => x.Marked("search")
+            };
+
+            public static readonly NavigationTabOption Settings = new NavigationTabOption
+            {
+                Android = x => x.Marked("settings"),
+                iOS = x => x.Marked("settings")
+            };
+        }
     }
 }
