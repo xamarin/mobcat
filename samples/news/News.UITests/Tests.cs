@@ -59,14 +59,15 @@ namespace News.UITests
         [Test]
         public void AddAndRemoveFavorite()
         {
-            new HomePage()
-                .ShowNewsTab()
-                .AddFavorite();
+            new NewsPage()
+                .AddFavorite(articleIndex: 0);
 
-            new HomePage()
-                .ShowFavoritesTab()
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Favorites);
+
+            new FavoritesPage()
                 .WaitToBecomeNotEmpty()
-                .RemoveFavorite()
+                .RemoveFavorite(favoriteIndex: 0)
                 .WaitToBecomeNotEmpty()
                 .RefreshFavorites()
                 .WaitToBecomeEmpty();

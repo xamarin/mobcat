@@ -6,7 +6,9 @@ namespace News.UITests.Pages
 {
     public class FavoritesPage : BasePage
     {
-        protected readonly Query FavoriteButton;
+        protected readonly Func<int,Query> FavoriteCell;
+        protected readonly Query NewsInfiniteListView;
+        protected readonly Func<int, Query> FavoriteButton;
 
         protected override PlatformQuery Trait => new PlatformQuery
         {
@@ -14,21 +16,26 @@ namespace News.UITests.Pages
             iOS = x => x.Marked(nameof(FavoritesPage))
         };
 
-        protected readonly Query FavoriteButton;
-        protected readonly Query EmptyLabel;
-        protected readonly Query NewsInfiniteListView;
-
         public FavoritesPage()
         {
-            FavoriteButton = x => x.Marked(nameof(FavoriteButton));
-            NewsInfiniteListView = x => x.Marked(nameof(NewsInfiniteListView));
-            EmptyLabel = x => x.Marked(nameof(EmptyLabel));
+            FavoriteButton = index => x => x.Marked(nameof(FavoriteButton)).Index(index);
+
+            if(OnAndroid)
+            {
+                NewsInfiniteListView = x => x.Class("ListView");
+                FavoriteCell = index => x => x.Class("ViewCellRenderer_ViewCellContainer").Index(index);
+            }
+            if(OniOS)
+            {
+                NewsInfiniteListView = x => x.Class("UITableView");
+                FavoriteCell = index => x => x.Class("Xamarin_Forms_Platform_iOS_ViewCellRenderer_ViewTableCell").Index(index);
+            }
         }
 
         public FavoritesPage WaitToBecomeEmpty()
         {
             app.Screenshot("Wait to become empty");
-            app.WaitForElement(EmptyLabel);
+            app.WaitForNoElement(FavoriteCell(0));
             app.Screenshot("Favorites are empty");
             return this;
         }
@@ -36,7 +43,7 @@ namespace News.UITests.Pages
         public FavoritesPage WaitToBecomeNotEmpty()
         {
             app.Screenshot("Wait to become not empty");
-            app.WaitForNoElement(EmptyLabel);
+            app.WaitForElement(FavoriteCell(0));
             app.Screenshot("Favorites are not empty");
             return this;
         }
@@ -49,10 +56,10 @@ namespace News.UITests.Pages
             return this;
         }
 
-        public FavoritesPage RemoveFavorite()
+        public FavoritesPage RemoveFavorite(int favoriteIndex)
         {
-            app.WaitForElement(FavoriteButton);
-            app.Tap(FavoriteButton);
+            app.WaitForElement(FavoriteButton(favoriteIndex));
+            app.Tap(FavoriteButton(favoriteIndex));
             app.Screenshot("Removed favorite article");
             return this;
         }
