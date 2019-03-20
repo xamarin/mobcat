@@ -42,6 +42,8 @@ namespace News.UITests
 
             new FavoritesPage()
                 .SelectTabOption(BasePage.NavigationTabOption.Search);
+
+            new SearchPage();
         }
 
         [Test]
