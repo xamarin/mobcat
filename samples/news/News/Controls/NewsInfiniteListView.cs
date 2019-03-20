@@ -8,6 +8,11 @@ namespace News.Controls
     {
         private AnimationView _animationView;
 
+        public NewsInfiniteListView()
+        {
+            AutomationId = nameof(NewsInfiniteListView);
+        }
+
         protected override void OnIsLoadingMoreChanged()
         {
             InitializeLoadingMoreAnimation();

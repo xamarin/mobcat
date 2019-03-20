@@ -42,8 +42,6 @@ namespace News.UITests
 
             new FavoritesPage()
                 .SelectTabOption(BasePage.NavigationTabOption.Search);
-
-            new SearchPage();
         }
 
         [Test]
@@ -57,18 +55,20 @@ namespace News.UITests
         }
 
         [Test]
-        [Ignore] //Remove ignore tag after client secrets are implemented on DevOps
         public void AddAndRemoveFavorite()
         {
-            //var homePage = new HomePage();
+            new NewsPage()
+                .AddFavorite(articleIndex: 0);
 
-            //homePage
-            //.ShowNewsTab()
-            //.AddFavorite();
+            new NewsPage()
+                .SelectTabOption(BasePage.NavigationTabOption.Favorites);
 
-            //homePage
-            //.ShowFavoritesTab()
-            //.RemoveFavorite();
+            new FavoritesPage()
+                .WaitToBecomeNotEmpty()
+                .RemoveFavorite(favoriteIndex: 0)
+                .WaitToBecomeNotEmpty()
+                .RefreshFavorites()
+                .WaitToBecomeEmpty();
         }
 
         [Test]
@@ -107,6 +107,7 @@ namespace News.UITests
         }
 
         [Test]
+        [Ignore]
         public void Repl()
         {
             if (TestEnvironment.IsTestCloud)
