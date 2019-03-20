@@ -21,7 +21,15 @@ namespace News.UITests.Pages
         public SettingsPage SetTheme(Themes theme)
         {
             app.WaitForElement(LightModeSwitch);
-            var state = app.Query(x => x.Id(nameof(LightModeSwitch)).Invoke("isOn"))[0].ToString();
+            var state = "";
+            if (OnAndroid)
+            {
+                state = app.Query(x => x.Marked("LightModeSwitch").Invoke("isChecked"))[0].ToString();
+                state = string.Equals(state, "true") ? "1" : "0";
+            }
+            if(OniOS)
+                state = app.Query(x => x.Id(nameof(LightModeSwitch)).Invoke("isOn"))[0].ToString();
+
 
             switch (theme)
             {
