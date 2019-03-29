@@ -13,6 +13,12 @@ namespace Weather.UITests
         }
 
         [Test]
+        public void LaunchApp()
+        {
+            //Test app launch
+        }
+
+        [Test]
         public void SetLocationRedmond()
         {
             //Set location before testing the page
