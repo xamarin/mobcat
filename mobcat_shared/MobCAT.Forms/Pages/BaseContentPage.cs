@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.MobCAT.Forms.Services.Abstractions;
 using Microsoft.MobCAT.MVVM;
@@ -6,6 +7,7 @@ using Xamarin.Forms;
 
 namespace Microsoft.MobCAT.Forms.Pages
 {
+    //[DesignTimeVisible(true)]
     public abstract class BaseContentPage<T> : ContentPage, IViewFor<T> where T : BaseNavigationViewModel, new()
     {
         private T _viewModel;

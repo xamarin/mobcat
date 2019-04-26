@@ -1,29 +1,23 @@
-﻿namespace Microsoft.MobCat.Services
+﻿namespace Microsoft.MobCAT.Services
 {
     public interface IFileSystemService
     {
         /// <summary>
-        /// Gets the document storage service.
+        /// Gets the document storage folder path.
         /// </summary>
-        /// <value>The document storage service.</value>
-        IFileStorageService DocumentStorage { get; }
+        /// <value>The document storage path.</value>
+        string DocumentStorage { get; }
 
         /// <summary>
-        /// Gets the settings storage service.
+        /// Gets the settings storage.
         /// </summary>
-        /// <value>The settings storage service.</value>
-        IFileStorageService SettingsStorage { get; }
+        /// <value>The settings storage path.</value>
+        string SettingsStorage { get; }
 
         /// <summary>
-        /// Gets the temp storage service.
+        /// Gets the temp storage path.
         /// </summary>
-        /// <value>The temp storage service.</value>
-        IFileStorageService TempStorage { get; }
-
-        /// <summary>
-        /// Gets the name for a temp file.
-        /// </summary>
-        /// <returns>The name for a temp file.</returns>
-        string GetTempFileName();
+        /// <value>The temp storage path.</value>
+        string TempStorage { get; }
     }
 }
