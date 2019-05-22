@@ -38,8 +38,14 @@ namespace Microsoft.MobCAT.MVVM
         /// <inheritdoc />
         public bool CanExecute(object parameter)
         {
+            if (_canExecute == null)
+            {
+                return true;
+            }
             if (_task == null)
-                return _canExecute == null ? true : _canExecute(parameter);
+            {
+                return _canExecute(parameter);
+            }
 
             return _canExecute(parameter) && _task.IsCompleted;
         }
