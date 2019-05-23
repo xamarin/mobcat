@@ -6,7 +6,7 @@ using MobCATShell.Forms.Views;
 
 namespace MobCATShell.Forms.ViewModels
 {
-    public class NestedNavigationVM : BaseShellViewModel
+    public class NestedNavigationViewModel : BaseShellViewModel
     {
         private IRouteService _routeService;
         private IRouteService RouteService => _routeService ?? (_routeService = ServiceContainer.Resolve<IRouteService>());
@@ -19,19 +19,19 @@ namespace MobCATShell.Forms.ViewModels
 
         public AsyncCommand NavigateToACommand => new AsyncCommand(() =>
         {
-            return Navigation.PushAsync(new NestedAVM());
+            return Navigation.PushAsync(new NestedAViewModel());
         });
 
         public AsyncCommand NavigateToBCommand => new AsyncCommand(() =>
         {
-            return Navigation.PushAsync(new NestedBVM());
+            return Navigation.PushAsync(new NestedBViewModel());
         });
 
         public AsyncCommand NavigateToDetailsCommand => new AsyncCommand(() =>
         {
-            return Navigation.PushAsync(new DetailsPageVM
+            return Navigation.PushAsync(new DetailsPageViewModel
             {
-                Title = $"Navigated from {nameof(NestedNavigationVM)}"
+                Title = $"Navigated from {nameof(NestedNavigationViewModel)}"
             });
         });
 

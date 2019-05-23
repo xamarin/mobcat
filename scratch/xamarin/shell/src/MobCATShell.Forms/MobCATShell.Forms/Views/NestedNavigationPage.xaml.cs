@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MobCATShell.Forms.Views
 {
-    public partial class NestedNavigationPage : BaseContentPage<NestedNavigationVM>
+    public partial class NestedNavigationPage : BaseContentPage<NestedNavigationViewModel>
     {
         public NestedNavigationPage()
         {

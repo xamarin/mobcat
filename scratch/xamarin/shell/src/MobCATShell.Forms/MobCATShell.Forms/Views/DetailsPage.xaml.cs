@@ -8,7 +8,7 @@ namespace MobCATShell.Forms.Views
 {
     [QueryProperty(nameof(RoutedTitle), nameof(RoutedTitle))]
     [QueryProperty(nameof(RoutedDismissButtonVisibility), nameof(RoutedDismissButtonVisibility))]
-    public partial class DetailsPage : BaseContentPage<DetailsPageVM>
+    public partial class DetailsPage : BaseContentPage<DetailsPageViewModel>
     {
         public DetailsPage()
         {

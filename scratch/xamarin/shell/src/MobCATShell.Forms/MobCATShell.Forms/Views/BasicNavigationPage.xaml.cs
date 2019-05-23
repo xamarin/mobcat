@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MobCATShell.Forms.Views
 {
-    public partial class BasicNavigationPage : BaseContentPage<BasicNavigationVM>
+    public partial class BasicNavigationPage : BaseContentPage<BasicNavigationViewModel>
     {
         public BasicNavigationPage()
         {

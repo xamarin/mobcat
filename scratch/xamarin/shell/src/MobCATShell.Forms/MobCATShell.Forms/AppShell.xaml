@@ -54,15 +54,15 @@
         FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Basic Nav"
-            Route="BasicNavigationVM"
+            Route="BasicNavigationViewModel"
             ContentTemplate="{DataTemplate local:BasicNavigationPage}" />
         <ShellContent
             Title="Nested Nav"
-            Route="NestedNavigationVM"
+            Route="NestedNavigationViewModel"
             ContentTemplate="{DataTemplate local:NestedNavigationPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Shell Details"
-        Route="DetailsPageVM"
+        Route="DetailsPageViewModel"
         ContentTemplate="{DataTemplate local:DetailsPage}" />
 </Shell>

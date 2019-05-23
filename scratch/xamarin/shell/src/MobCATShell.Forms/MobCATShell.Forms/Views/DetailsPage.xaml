@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace: Microsoft.MobCAT.Forms.Pages"
     xmlns:vm="clr-namespace:MobCATShell.Forms.ViewModels"
     x:Class="MobCATShell.Forms.Views.DetailsPage"
-    x:TypeArguments="vm:DetailsPageVM">
+    x:TypeArguments="vm:DetailsPageViewModel">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center"
                      VerticalOptions="Center">

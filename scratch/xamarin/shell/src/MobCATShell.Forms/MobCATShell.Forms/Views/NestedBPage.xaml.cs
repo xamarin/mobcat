@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MobCATShell.Forms.Views
 {
-    public partial class NestedBPage : BaseContentPage<NestedBVM>
+    public partial class NestedBPage : BaseContentPage<NestedBViewModel>
     {
         public NestedBPage()
         {

@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace: Microsoft.MobCAT.Forms.Pages"
     xmlns:vm="clr-namespace:MobCATShell.Forms.ViewModels"
     x:Class="MobCATShell.Forms.Views.NestedNavigationPage"
-    x:TypeArguments="vm:NestedNavigationVM">
+    x:TypeArguments="vm:NestedNavigationViewModel">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="Center"

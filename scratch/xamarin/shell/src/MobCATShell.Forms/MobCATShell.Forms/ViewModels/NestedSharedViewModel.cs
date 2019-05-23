@@ -3,9 +3,9 @@ using Microsoft.MobCAT.MVVM;
 
 namespace MobCATShell.Forms.ViewModels
 {
-    public class NestedSharedVM : BaseShellViewModel
+    public class NestedSharedViewModel : BaseShellViewModel
     {
-        public NestedSharedVM()
+        public NestedSharedViewModel()
         {
         }
     }

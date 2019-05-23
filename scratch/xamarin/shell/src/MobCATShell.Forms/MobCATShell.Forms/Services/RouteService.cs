@@ -26,20 +26,20 @@ namespace MobCATShell.Forms.Services
         {
             _random = new Random();
 
-            BasicNavTabRoute = $"//{nameof(BasicNavigationVM)}";
-            NestedNavTabRoute = $"//{nameof(NestedNavigationVM)}";
-            ShellDetailsRoute = $"//{nameof(DetailsPageVM)}";
+            BasicNavTabRoute = $"//{nameof(BasicNavigationViewModel)}";
+            NestedNavTabRoute = $"//{nameof(NestedNavigationViewModel)}";
+            ShellDetailsRoute = $"//{nameof(DetailsPageViewModel)}";
 
-            NestedARoute = $"{nameof(NestedNavigationVM)}/{nameof(NestedAVM)}";
+            NestedARoute = $"{nameof(NestedNavigationViewModel)}/{nameof(NestedAViewModel)}";
             Routing.RegisterRoute(NestedARoute, typeof(NestedAPage));
 
-            NestedBRoute = $"{nameof(NestedNavigationVM)}/{nameof(NestedBVM)}";
+            NestedBRoute = $"{nameof(NestedNavigationViewModel)}/{nameof(NestedBViewModel)}";
             Routing.RegisterRoute(NestedBRoute, typeof(NestedBPage));
 
-            ADetailsRoute = $"{nameof(NestedAVM)}/{nameof(DetailsPageVM)}";
+            ADetailsRoute = $"{nameof(NestedAViewModel)}/{nameof(DetailsPageViewModel)}";
             Routing.RegisterRoute(ADetailsRoute, typeof(DetailsPage));
 
-            BDetailsRoute = $"{nameof(NestedBVM)}/{nameof(DetailsPageVM)}";
+            BDetailsRoute = $"{nameof(NestedBViewModel)}/{nameof(DetailsPageViewModel)}";
             Routing.RegisterRoute(BDetailsRoute, typeof(DetailsPage));
 
             _routes = new List<string>

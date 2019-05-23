@@ -6,7 +6,7 @@ using MobCATShell.Forms.Views;
 
 namespace MobCATShell.Forms.ViewModels
 {
-    public class DetailsPageVM : BaseShellViewModel
+    public class DetailsPageViewModel : BaseShellViewModel
     {
         public AsyncCommand DismissCommand => new AsyncCommand(Dismiss);
 
