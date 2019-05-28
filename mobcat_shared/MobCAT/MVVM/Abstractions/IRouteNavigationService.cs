@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.MobCAT.MVVM.Abstractions
 {
-    public interface IShellNavigationService : INavigationService
+    public interface IRoutelNavigationService : INavigationService
     {
         Task GoToRouteAsync(string route);
 

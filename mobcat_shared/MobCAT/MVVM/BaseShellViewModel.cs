@@ -6,27 +6,23 @@ namespace Microsoft.MobCAT.MVVM
 {
     public class BaseShellViewModel : BaseNavigationViewModel
     {
-        private IShellNavigationService _shellNavigationService;
-        protected IShellNavigationService ShellNavigationService
+        private IRoutelNavigationService _registeredService;
+        private static Func<IRoutelNavigationService> _registeredServiceFunc;
+        protected new IRoutelNavigationService Navigation
         {
             get
             {
-                if (_shellNavigationService == null)
+
+                if (_registeredService == null)
                 {
-                    _shellNavigationService = Navigation as IShellNavigationService;
+                    _registeredService = _registeredServiceFunc?.Invoke() ?? ServiceContainer.Resolve<IRoutelNavigationService>(true);
+
+                    if (_registeredService == null)
+                        Logger.Warn($"No {nameof(IRoutelNavigationService)} implementation has been registered.");
                 }
-                return _shellNavigationService;
+
+                return _registeredService;
             }
-        }
-
-        protected Task GoToRouteAsync(string route)
-        {
-            return ShellNavigationService?.GoToRouteAsync(route);
-        }
-
-        protected Task GoToRouteAsync(Uri route)
-        {
-            return ShellNavigationService?.GoToRouteAsync(route);
         }
     }
 }

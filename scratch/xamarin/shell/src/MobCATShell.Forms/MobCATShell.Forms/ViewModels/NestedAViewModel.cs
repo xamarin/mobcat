@@ -26,7 +26,7 @@ namespace MobCATShell.Forms.ViewModels
             var route = RouteService.ADetailsRoute;
             var query = $"{nameof(DetailsPage.RoutedTitle)}=Routed using {nameof(RouteService.ADetailsRoute)}" +
             $"&{nameof(DetailsPage.RoutedDismissButtonVisibility)}={true.ToString()}";
-            return GoToRouteAsync($"{route}?{query}");
+            return Navigation.GoToRouteAsync($"{route}?{query}");
         });
     }
 }

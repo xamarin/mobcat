@@ -14,7 +14,7 @@ namespace MobCATShell.Forms.ViewModels
         public AsyncCommand RandomRouteCommand => new AsyncCommand(() =>
         {
             var route = RouteService.GetRandomRoute();
-            return GoToRouteAsync(route);
+            return Navigation.GoToRouteAsync(route);
         });
 
         public AsyncCommand NavigateToACommand => new AsyncCommand(() =>
@@ -37,12 +37,12 @@ namespace MobCATShell.Forms.ViewModels
 
         public AsyncCommand RouteToACommand => new AsyncCommand(() =>
         {
-            return GoToRouteAsync(RouteService.NestedARoute);
+            return Navigation.GoToRouteAsync(RouteService.NestedARoute);
         });
 
         public AsyncCommand RouteToBCommand => new AsyncCommand(() =>
         {
-            return GoToRouteAsync(RouteService.NestedBRoute);
+            return Navigation.GoToRouteAsync(RouteService.NestedBRoute);
         });
 
         public AsyncCommand RouteToADetailsCommand => new AsyncCommand(() =>
@@ -50,7 +50,7 @@ namespace MobCATShell.Forms.ViewModels
             var route = RouteService.ADetailsRoute;
             var query = $"{nameof(DetailsPage.RoutedTitle)}=Routed using {nameof(RouteService.ADetailsRoute)}" +
             $"&{nameof(DetailsPage.RoutedDismissButtonVisibility)}={true.ToString()}";
-            return GoToRouteAsync($"{route}?{query}");
+            return Navigation.GoToRouteAsync($"{route}?{query}");
         });
 
         public AsyncCommand RouteToBDetailsCommand => new AsyncCommand(() =>
@@ -58,13 +58,13 @@ namespace MobCATShell.Forms.ViewModels
             var route = RouteService.ADetailsRoute;
             var query = $"{nameof(DetailsPage.RoutedTitle)}=Routed using {nameof(RouteService.BDetailsRoute)}" +
             $"&{nameof(DetailsPage.RoutedDismissButtonVisibility)}={true.ToString()}";
-            return GoToRouteAsync($"{route}?{query}");
+            return Navigation.GoToRouteAsync($"{route}?{query}");
         });
 
         public AsyncCommand RouteToBasicNavTabCommand => new AsyncCommand(() =>
         {
             var route = RouteService.BasicNavTabRoute;
-            return GoToRouteAsync(route);
+            return Navigation.GoToRouteAsync(route);
         });
     }
 }
