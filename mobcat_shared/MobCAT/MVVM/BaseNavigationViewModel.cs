@@ -21,10 +21,12 @@ namespace Microsoft.MobCAT.MVVM
             {
                 if (_registeredService == null)
                 {
-                    _registeredService = _registeredServiceFunc?.Invoke() ?? ServiceContainer.Resolve<INavigationService>(true);
+                    _registeredService = _registeredServiceFunc?.Invoke() ??
+                        ServiceContainer.Resolve<INavigationService>(nullIsAcceptable: true) ??
+                        ServiceContainer.Resolve<IRouteNavigationService>(nullIsAcceptable: true) as INavigationService;
 
                     if (_registeredService == null)
-                        Logger.Warn($"No {nameof(INavigationService)} implementation has been registered.");
+                        Logger.Warn($"No {nameof(INavigationService)} or {nameof(IRouteNavigationService)} implementation has been registered.");
                 }
 
                 return _registeredService;

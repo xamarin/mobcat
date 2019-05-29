@@ -14,7 +14,7 @@ namespace MobCATShell.Forms
         {
             var shellNavigationService = new ShellNavigationService();
             shellNavigationService.RegisterViewModels(typeof(BasicNavigationPage).Assembly);
-            ServiceContainer.Register<IRoutelNavigationService>(shellNavigationService);
+            ServiceContainer.Register<IRouteNavigationService>(shellNavigationService);
             ServiceContainer.Register<IRouteService>(new RouteService());
             platformSpecificBegin?.Invoke();
         }

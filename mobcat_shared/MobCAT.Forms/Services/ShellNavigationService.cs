@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MobCAT.Forms.Services
 {
-    public class ShellNavigationService : NavigationService, IRoutelNavigationService
+    public class ShellNavigationService : NavigationService, IRouteNavigationService
     {
         public Task GoToRouteAsync(string route)
         {
