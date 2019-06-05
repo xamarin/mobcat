@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net;
 using Polly;
+using Polly.Retry;
 
 namespace Microsoft.MobCAT.Services
 {
@@ -44,7 +45,7 @@ namespace Microsoft.MobCAT.Services
             }
         }
 
-        protected virtual Policy GetRetryPolicy()
+        protected virtual RetryPolicy GetRetryPolicy()
         {
             return Policy
                 .Handle<Exception>()

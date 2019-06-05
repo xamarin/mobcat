@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MobCATShell.Forms.Views"
+    xmlns:vm="clr-namespace:MobCATShell.Forms.ViewModels"
+    Title="MobCATShell.Forms"
+    x:Class="MobCATShell.Forms.AppShell">
+    <!-- 
+        Styles and Resources 
+    -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="NavigationPrimary">#2196F3</Color>
+            <Style
+                x:Key="BaseStyle"
+                TargetType="Element">
+                <Setter
+                    Property="Shell.BackgroundColor"
+                    Value="{StaticResource NavigationPrimary}" />
+                <Setter
+                    Property="Shell.ForegroundColor"
+                    Value="White" />
+                <Setter
+                    Property="Shell.TitleColor"
+                    Value="White" />
+                <Setter
+                    Property="Shell.DisabledColor"
+                    Value="#B4FFFFFF" />
+                <Setter
+                    Property="Shell.UnselectedColor"
+                    Value="#95FFFFFF" />
+                <Setter
+                    Property="Shell.TabBarBackgroundColor"
+                    Value="{StaticResource NavigationPrimary}" />
+                <Setter
+                    Property="Shell.TabBarForegroundColor"
+                    Value="White" />
+                <Setter
+                    Property="Shell.TabBarUnselectedColor"
+                    Value="#95FFFFFF" />
+                <Setter
+                    Property="Shell.TabBarTitleColor"
+                    Value="White" />
+            </Style>
+            <Style
+                TargetType="ShellItem"
+                BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    <FlyoutItem
+        Title="Flyout Title"
+        FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Basic Nav"
+            Route="BasicNavigationViewModel"
+            ContentTemplate="{DataTemplate local:BasicNavigationPage}" />
+        <ShellContent
+            Title="Nested Nav"
+            Route="NestedNavigationViewModel"
+            ContentTemplate="{DataTemplate local:NestedNavigationPage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Shell Details"
+        Route="DetailsPageViewModel"
+        ContentTemplate="{DataTemplate local:DetailsPage}" />
+</Shell>
