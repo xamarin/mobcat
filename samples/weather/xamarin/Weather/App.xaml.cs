@@ -15,7 +15,7 @@ namespace Weather
         public App()
         {
             InitializeComponent();
-            MainPage = new MainPage { ViewModel = new WeatherViewModel() };
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
