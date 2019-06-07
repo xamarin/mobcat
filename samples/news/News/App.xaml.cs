@@ -20,7 +20,7 @@ namespace News
 
         private void SetMainPage()
         {
-            var startPage = new LoadingPage() { ViewModel = new LoadingViewModel() };
+            var startPage = new LoadingPage();
             MainPage = new BaseNavigationPage(startPage);
         }
 

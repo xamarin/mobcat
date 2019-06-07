@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using CarouselView.FormsPlugin.Android;
 
 namespace News.Droid
 {
@@ -14,6 +15,7 @@ namespace News.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
             Lottie.Forms.Droid.AnimationViewRenderer.Init();
             News.Bootstrap.Begin();

@@ -109,7 +109,7 @@ namespace News.UITests
         }
 
         [Test]
-        [Ignore]
+        [Ignore(reason:"Local only")]
         public void Repl()
         {
             if (TestEnvironment.IsTestCloud)
