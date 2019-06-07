@@ -57,14 +57,22 @@
     <Folder Include="libs\" />
     <Folder Include="libs\arm64-v8a\" />
     <Folder Include="libs\armeabi-v7a\" />
-    <Folder Include="libs\x86_64\" />
     <Folder Include="libs\x86\" />
+    <Folder Include="libs\x86_64\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedNativeLibrary Include="libs\arm64-v8a\libMathFuncs.so" />
-    <EmbeddedNativeLibrary Include="libs\armeabi-v7a\libMathFuncs.so" />
-    <EmbeddedNativeLibrary Include="libs\x86_64\libMathFuncs.so" />
-    <EmbeddedNativeLibrary Include="libs\x86\libMathFuncs.so" />
+    <EmbeddedNativeLibrary Include="..\..\..\Artefacts\PrecompiledLibs\lib\android\arm64\libMathFuncs.so">
+      <Link>libs\arm64-v8a\libMathFuncs.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\..\..\Artefacts\PrecompiledLibs\lib\android\arm\libMathFuncs.so">
+      <Link>libs\armeabi-v7a\libMathFuncs.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\..\..\Artefacts\PrecompiledLibs\lib\android\x86_64\libMathFuncs.so">
+      <Link>libs\x86_64\libMathFuncs.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\..\..\Artefacts\PrecompiledLibs\lib\android\x86\libMathFuncs.so">
+      <Link>libs\x86\libMathFuncs.so</Link>
+    </EmbeddedNativeLibrary>
   </ItemGroup>
   <Import Project="..\MathFuncs.Shared\MathFuncs.Shared.projitems" Label="Shared" Condition="Exists('..\MathFuncs.Shared\MathFuncs.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
