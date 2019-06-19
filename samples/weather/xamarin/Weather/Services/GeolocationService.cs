@@ -20,7 +20,7 @@ namespace Weather.Services
         async Task<Coordinates> IGeolocationService.GetLocationAsync()
         {
             var geolocationRequest = new GeolocationRequest(GeolocationAccuracy.Medium);
-            var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(()=>Geolocation.GetLocationAsync(geolocationRequest));
+            var location = await mainThreadAsyncService.Value.RunOnMainThreadAsync(async () => await Geolocation.GetLocationAsync(geolocationRequest));
             return location == null ? null : LocationToCoordinates(location);
         }
 

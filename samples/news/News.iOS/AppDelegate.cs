@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using CarouselView.FormsPlugin.iOS;
+using Foundation;
 using UIKit;
 
 namespace News.iOS
@@ -10,6 +11,7 @@ namespace News.iOS
         {
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
             Lottie.Forms.iOS.Renderers.AnimationViewRenderer.Init();
             News.Bootstrap.Begin();
