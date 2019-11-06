@@ -21,7 +21,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>12.1</string>
+	<string>12.2</string>
 	<key>CFBundleDisplayName</key>
 	<string>MathFuncsApp</string>
 	<key>CFBundleIdentifier</key>
