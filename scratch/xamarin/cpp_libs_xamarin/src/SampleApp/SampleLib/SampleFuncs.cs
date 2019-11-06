@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace SampleLib
 {
     public class SampleFuncs : IDisposable
     {
+
         readonly SampleFuncsSafeHandle handle;
         bool disposed;
 
@@ -15,28 +15,9 @@ namespace SampleLib
             handle = SampleFuncsWrapper.CreateSampleFuncs();
         }
 
-        public Task<IEnumerable<int>> GetFibonacciAsync(int n)
-        {
-            TaskCompletionSource<IEnumerable<int>> tcs = new TaskCompletionSource<IEnumerable<int>>();
+        public Task<IEnumerable<int>> GetFibonacciAsync(int n) => SampleFuncsWrapper.GetFibonacciAsync(handle, n);
 
-            Task.Run(() =>
-            {
-                SampleFuncsWrapper.GetFibonacci(handle, n, (numberPtr, size) => 
-                {
-                    int[] numbersArray = new int[size];
-                    Marshal.Copy(numberPtr, numbersArray, 0, size);
-
-                    tcs.SetResult(new List<int>(numbersArray));
-                });
-            });
-
-            return tcs.Task;
-        }
-
-        public IEnumerable<int> GetFibonacci(int n)
-        {
-            return GetFibonacciAsync(n).GetAwaiter().GetResult();
-        }
+        public IEnumerable<int> GetFibonacci(int n) => GetFibonacciAsync(n).GetAwaiter().GetResult();
 
         public void Dispose()
         {

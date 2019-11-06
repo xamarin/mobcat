@@ -23,9 +23,10 @@ declare -a AndroidArchitectures=("x86" "x86_64" "arm" "arm64")
 declare -a iOSArchitectures=("x86_64" "arm64" "arm64e")
 
 LibraryName="MathFuncs"
-Android_NDK_Target="android-ndk-r15c"
+Android_NDK_Host_Name="macosx"
+Android_NDK_Host_Tag="darwin-x86_64"
 Android_Minimum_Api_Version="21"
-iOS_SDK_Version="12.1"
+iOS_SDK_Version="12.2"
 iOS_SDK_Min_Version="8.0"
 
 echo ""
@@ -36,58 +37,62 @@ cd tmp
 
 LibPath=${PWD}/sourceFiles
 
-export ANDROID_NDK_HOME="/Users/$USER/Library/Developer/Xamarin/android-ndk/$Android_NDK_Target"
+if [ -z "${ANDROID_NDK_HOME}" ]
+then
+    export ANDROID_NDK_HOME="/Users/$USER/Library/Developer/Xamarin/android-sdk-$Android_NDK_Host_Name/ndk-bundle"
+fi
 
 for i in "${AndroidArchitectures[@]}"
     do
         echo "Build for $i:"
-        mkdir ../bin/Android/$i     
-        mkdir Android/build      
+
+        ABI_Folder_Name=$i
+
+        if [ $i == "arm" ]
+        then
+            ABI_Folder_Name="armeabi-v7a"
+        elif [ $i == "arm64" ]
+        then
+            ABI_Folder_Name="arm64-v8a"
+        fi
+
+        mkdir ../bin/Android/$ABI_Folder_Name     
 
         if [ $i == "x86" ]
         then
-            CxxTarget="i686-linux-android-g++"
+            CxxTarget="i686-linux-android"
         elif [ $i == "x86_64" ]
         then
-            CxxTarget="x86_64-linux-android-g++"
+            CxxTarget="x86_64-linux-android"
         elif [ $i == "arm" ]
         then
-            CxxTarget="arm-linux-androideabi-g++"
+            CxxTarget="armv7a-linux-androideabi"
         else
-            CxxTarget="aarch64-linux-android-g++"
+            CxxTarget="aarch64-linux-android"
         fi
 
-        echo "Installing customized toolchain"
-        $ANDROID_NDK_HOME/build/tools/make_standalone_toolchain.py --api $Android_Minimum_Api_Version --arch $i --install-dir=${PWD}/Android/droid-toolchain --force 
+        CxxTarget="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/$Android_NDK_Host_Tag/bin/$CxxTarget$Android_Minimum_Api_Version-clang++"   
 
         export CXX=$CxxTarget
-        
-        cd Android
-        cd droid-toolchain
-        cd bin
 
         echo "Compiling and linking (output as dynamic library)"
 
         for i2 in $LibPath/*.cpp; do
             ShortName="${i2##*/}"
             OutputName="${ShortName/cpp/o}"
-            ${PWD}/$CXX -c $i2 -std=c++0x -o ../../build/$OutputName
+            $CXX -c $i2 -std=c++0x -fPIC -o ${PWD}/sourceFiles/$OutputName
         done
 
-        ${PWD}/$CXX -shared -o ../../build/lib${LibraryName}.so ../../build/*.o
+        $CXX -shared -static-libstdc++ -o ${PWD}/sourceFiles/lib${LibraryName}.so ${PWD}/sourceFiles/*.o
 
-        cd ../../..
-
-        echo "Copying lib${LibraryName}.so to bin/Android/$i"
+        echo "Copying lib${LibraryName}.so to bin/Android/$ABI_Folder_Name"
         {
-            find Android/build -name "*.so" -exec cp {} ../bin/Android/$i \;
+            find sourceFiles -name "*.so" -exec cp {} ../bin/Android/$ABI_Folder_Name \;
         } &> /dev/null
-
-        rm -rf Android/* 
 
         echo ""
 
-done
+    done
 
 cd ..
 echo "** BUILD SUCCEEDED (Android) **"
