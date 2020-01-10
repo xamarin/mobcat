@@ -1,3 +1,0 @@
-﻿namespace SampleLib.iOS
-{
-}

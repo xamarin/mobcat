@@ -1,1 +1,0 @@
-Native iOS and Android Samples demonstrating use of the embeddinator generated library.
